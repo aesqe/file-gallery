@@ -1,25 +1,15 @@
-=== File Gallery ===
-Contributors: aesqe
-Donate link: http://skyphe.org/donate/
-Tags: attachment, attachments, gallery, galleries, template, templates, shortcode, file, files, attach, detach, unattach, copy, media, tags, library, custom, custom fields, custom fields for attachments, attachment custom fields, drag drop upload
-Requires at least: 3.1
-Tested up to: 3.5
-Stable tag: 1.7.7
-
-File Gallery extends WordPress media (attachments) capabilities 
-by adding a new gallery shortcode handler with templating support 
-(and much more).
+# File Gallery #
 
 
-
-== Description ==
+## Description ##
 
 "File Gallery" extends WordPress' media (attachments) capabilities 
 by adding a new gallery shortcode handler with templating support, 
 a new interface for attachment handling when editing posts, and much 
 more... Here's the full list of features:
 
-**Features:**
+
+## Features:##
 
 1.  multiple galleries per post with custom attachment order
 2.  a flexible templating system (PHP, CSS, JS) - choose a different 
@@ -50,24 +40,7 @@ more... Here's the full list of features:
 15. please see the help file for complete list of features :)
 
 
-
-== Screenshots ==
-
-1.  File Gallery main box on editing screen
-2.  Edit attachment data
-3.  Copy all attachments from another post
-4.  Deleting attachments that have copies
-5.  Build a gallery by choosing media tags
-6.  Settings page
-7.  Post thumb and number of attachments as extras in this view
-8.  Copying attachments from media library
-9.  With "WPML Multilingual CMS" plugin istalled, you'll be able to copy 
-    all attachments from the original post to translated one in two clicks
-10. Custom fields for attachments
-
-
-
-== Installation == 
+## Installation ##
 
 1.	Place the whole 'file-gallery' folder into your WordPress 
 	installation folder (usually under 'wp-content\plugins').
@@ -76,8 +49,7 @@ more... Here's the full list of features:
 3.	You're done - go edit or add a new post to see how it works :)
 
 
-
-== FAQ ==
+## FAQ ##
 
 Coming soon.
 
@@ -85,7 +57,8 @@ For additional information, please see the File Gallery help file.
 It's included with the installation, but you can also view it online here: 
 <a href="http://skyphe.org/wp-content/plugins/file-gallery/help/index.html">http://skyphe.org/wp-content/plugins/file-gallery/help/index.html</a>
 
-**Full list of filters within File Gallery**
+
+## Full list of filters within File Gallery ##
 
 file_gallery_templates_folder_abspath
 file_gallery_templates_folder_url
@@ -116,8 +89,7 @@ file_gallery_output
 file_gallery_get_file_type
 
 
-
-== More info ==
+## More info ##
 
 This plugin uses icons from the awesome famfamfam Silk icon set by 
 Mark James :)
@@ -129,8 +101,7 @@ Plugin settings are integrated into media settings page.
 Help file is included, you'll find it in the "help" subfolder :)
 
 
-
-== Translation Credits ==
+## Translation Credits ##
 
 Hebrew:
 * **Maor Barazany** - http://www.maorb.info/
@@ -152,15 +123,13 @@ Polish:
 * **Michał Budzik** - http://www.mindborn.pl/en/
 
 
-
-== Thanks goes out to... ==
+## Thanks goes out to... ##
 
 * All the translators, and people leaving comments, bug reports and 
   suggestions on the official page and in the WordPress.org forums
 
 
-
-== Changelog ==
+## Changelog ##
 
 = 1.7.7 =
 * December 16th, 2012
@@ -681,35 +650,3 @@ Polish:
 = 1.1 =
 * December 12th, 2009
 * Rewritten a lot of stuff for better WordPress compliance :)
-  
-  
-== Plans for the next versions ==
-
-sooner:
-
-- manage media tags for all selected attachments
-- audio and video preview on editing screens
-
-later:
-
-- phpdoc all the functions
-- more detailed description for file_gallery_shortcode function 
-  (what can be used in 'orderby', what do 'columns' mean) for beginner programmers
-- yoxview lightbox http://www.yellow-llama.com/yoxview-gallery-wordpress-plugin/
-
-maybe:
-
-- show attachments' Custom Fields in the main page of Media Library (custom column)
-- media library sort by file size or picture dimensions
-
-probably not, but who knows:
-
-- watermarking - probably in another plugin...
-- when detaching / deleting attachments, just remove them from DOM
-  without refreshing the entire file gallery box, but take care of 
-  originals and copies
-
-
-And thank you for reading this :)
-
-aesqe
