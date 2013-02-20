@@ -58,37 +58,6 @@ It's included with the installation, but you can also view it online here:
 <a href="http://skyphe.org/wp-content/plugins/file-gallery/help/index.html">http://skyphe.org/wp-content/plugins/file-gallery/help/index.html</a>
 
 
-## Full list of filters within File Gallery ##
-
-file_gallery_templates_folder_abspath
-file_gallery_templates_folder_url
-file_gallery_content_templates_folder_abspath
-file_gallery_content_templates_folder_url
-file_gallery_default_template_url
-file_gallery_default_template_abspath
-file_gallery_default_template_name
-file_gallery_crystal_url
-file_gallery_admin_css_location
-file_gallery_admin_rtl_css_location
-file_gallery_post_attachment_count
-file_gallery_post_thumb_content
-file_gallery_no_post_thumb_content
-file_gallery_parse_attachment_data
-file_gallery_attachment_copy_title_extension
-file_gallery_mime_types
-file_gallery_lightboxes_options
-file_gallery_lightbox_classes
-file_gallery_approved_attachment_post_statuses
-file_gallery_ignored_attachment_post_statuses
-file_gallery_lightbox_linkrel
-file_gallery_lightbox_linkclass
-file_gallery_lightbox_imageclass
-file_gallery_non_image_thumb_link
-file_gallery_galleryclass
-file_gallery_output
-file_gallery_get_file_type
-
-
 ## More info ##
 
 This plugin uses icons from the awesome famfamfam Silk icon set by 
