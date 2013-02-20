@@ -1,0 +1,150 @@
+.gallery.simple,
+#content .gallery.simple
+{
+	margin: auto auto 1.5em auto;
+	overflow: hidden;
+}
+
+.gallery.simple .gallery-item,
+#content .gallery.simple .gallery-item
+{
+	float: left;
+	text-align: center;
+	margin: 10px 0 0 0;
+	padding: 0;
+}
+
+.gallery.simple .gallery-item .gallery-icon,
+#content .gallery.simple .gallery-item .gallery-icon
+{
+	margin: 0;
+	padding: 0;
+}
+
+.gallery.simple img,
+#content .gallery.simple img
+{
+	border: 2px solid #cfcfcf;
+	margin: 0;
+	padding: 0;
+}
+
+.gallery.simple .gallery-caption,
+#content .gallery.simple .gallery-caption
+{
+	margin-left: 0;
+}
+
+.gallery.simple .gallery-description,
+#content .gallery.simple .gallery-description
+{
+	margin-left: 0;
+}
+
+.gallery.simple br.clear,
+#content .gallery.simple br.clear
+{
+	clear: both;
+	height: 0.001px;
+	visibility: hidden;
+}
+
+/* js */
+
+.gallery_simple_thumbnails,
+.gallery_simple_current
+{
+	float: left;
+	width: 50%;
+	position: relative;
+}
+
+.gallery.simple .gallery_simple_current_image,
+#content .gallery.simple .gallery_simple_current_image
+{
+	display: block;
+	width: 95%;
+	margin-right: 4%;
+	border-width: 2px;
+	border-color: #EEEEEE;
+}
+
+.gallery.simple .gallery_simple_thumbnails .gallery-item,
+#content .gallery.simple .gallery_simple_thumbnails .gallery-item
+{
+	width: 32%;
+	margin: 0 1% 1% 0;
+}
+
+.gallery.simple .gallery_simple_thumbnails .gallery-item img,
+#content .gallery.simple .gallery_simple_thumbnails .gallery-item img
+{
+	width: 90%;
+	height: auto;
+	border-color: #EEEEEE;
+}
+
+.file_gallery_simple_loading,
+#content .gallery.simple .file_gallery_simple_loading
+{
+	position: absolute;
+	top: 0;
+	left: 0;
+	border-color: #EEEEEE;
+}
+
+.gallery_simple_current_image_caption
+{
+	width: 95%;
+	border: 2px solid #EEEEEE;
+	background: #EEEEEE;
+	-webkit-border-bottom-right-radius: 5px;
+	-webkit-border-bottom-left-radius: 5px;
+	-moz-border-radius-bottomright: 5px;
+	-moz-border-radius-bottomleft: 5px;
+	border-bottom-right-radius: 5px;
+	border-bottom-left-radius: 5px;
+}
+
+.gallery_simple_current_image_caption p,
+#content .gallery_simple_current_image_caption p
+{
+	margin: 0 !important;
+	padding: 0.5em;
+	font-size: 13px;
+	font-family: Arial, Helvetica, sans-serif;
+}
+
+.diff
+{
+	display: none;
+}
+
+
+
+/*
+Default style for WP-PageNavi plugin
+
+http://wordpress.org/extend/plugins/wp-pagenavi/
+*/
+
+.gallery.simple .wp-pagenavi {
+	clear: both;
+	padding: 10px 0;
+	margin-top: 1em;
+}
+
+.gallery.simple .wp-pagenavi a, .wp-pagenavi span {
+	text-decoration: none;
+	border: 1px solid #BFBFBF;
+	padding: 3px 5px;
+	margin: 2px;
+}
+
+.gallery.simple .wp-pagenavi a:hover, .wp-pagenavi span.current {
+	border-color: #000;
+}
+
+.gallery.simple .wp-pagenavi span.current {
+	font-weight: bold;
+}

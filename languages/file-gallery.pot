@@ -1,0 +1,1033 @@
+# Copyright (C) 2010 File Gallery
+# This file is distributed under the same license as the File Gallery package.
+msgid ""
+msgstr ""
+"Project-Id-Version: File Gallery 1.7\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-06-17 19:56+0100\n"
+"PO-Revision-Date: 2012-06-17 19:56+0100\n"
+"Last-Translator: Bruno Babic <aesqe@skyphe.org>\n"
+"Language-Team: ENGLISH <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: __;_e;_ngettext\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../file-gallery.php:162
+#: ../file-gallery.php:1221
+#: ../file-gallery.php:1226
+#: ../file-gallery.php:1227
+#: ../includes/media-settings.php:16
+msgid "File Gallery"
+msgstr ""
+
+#: ../file-gallery.php:199
+msgid "Disable 'File Gallery' handling of [gallery] shortcode?"
+msgstr ""
+
+#: ../file-gallery.php:207
+msgid "Display File Gallery on which post types?"
+msgstr ""
+
+#: ../file-gallery.php:216
+msgid "Use alternative color scheme (a bit more contrast)?"
+msgstr ""
+
+#: ../file-gallery.php:224
+msgid "How many page links should be shown in pagination?"
+msgstr ""
+
+#: ../file-gallery.php:232
+msgid "Auto enqueue lightbox scripts for which link classes (separate with commas)?"
+msgstr ""
+
+#: ../file-gallery.php:240
+msgid "Default WordPress image size for thumbnails in File Gallery metabox on post editing screens?"
+msgstr ""
+
+#: ../file-gallery.php:249
+msgid "Default width (in pixels) for thumbnails in File Gallery metabox on post editing screens?"
+msgstr ""
+
+#: ../file-gallery.php:259
+msgid "Some default values for when inserting a gallery into a post"
+msgstr ""
+
+#: ../file-gallery.php:259
+#, php-format
+msgid "The following two blocks of options <strong>do not</strong> affect the output/display of your galleries - they are here only so you could set default values for File Gallery metabox on post editing screen. <a href=\"%s/help/index.html#settings_page\" target=\"_blank\">More information is available in the help file</a>."
+msgstr ""
+
+#: ../file-gallery.php:259
+#: ../file-gallery.php:364
+#: ../includes/main-form.php:70
+#: ../includes/main-form.php:259
+#: ../includes/media-settings.php:26
+msgid "size"
+msgstr ""
+
+#: ../file-gallery.php:268
+#: ../file-gallery.php:373
+msgid "link"
+msgstr ""
+
+#: ../file-gallery.php:277
+#: ../includes/main-form.php:101
+msgid "linked image size"
+msgstr ""
+
+#: ../file-gallery.php:286
+#: ../file-gallery.php:382
+#: ../includes/main-form.php:91
+#: ../includes/main-form.php:96
+#: ../includes/main-form.php:274
+#: ../includes/main-form.php:279
+#: ../includes/media-settings.php:146
+msgid "external url"
+msgstr ""
+
+#: ../file-gallery.php:294
+msgid "order by"
+msgstr ""
+
+#: ../file-gallery.php:303
+#: ../includes/main-form.php:134
+msgid "order"
+msgstr ""
+
+#: ../file-gallery.php:312
+#: ../includes/main-form.php:149
+msgid "template"
+msgstr ""
+
+#: ../file-gallery.php:321
+#: ../file-gallery.php:390
+#: ../includes/main-form.php:129
+#: ../includes/main-form.php:284
+msgid "link class"
+msgstr ""
+
+#: ../file-gallery.php:329
+#: ../file-gallery.php:398
+#: ../includes/main-form.php:175
+#: ../includes/main-form.php:289
+msgid "image class"
+msgstr ""
+
+#: ../file-gallery.php:337
+#: ../includes/main-form.php:203
+msgid "columns"
+msgstr ""
+
+#: ../file-gallery.php:346
+#: ../includes/main-form.php:180
+msgid "mime type"
+msgstr ""
+
+#: ../file-gallery.php:354
+#: ../includes/main-form.php:170
+msgid "gallery class"
+msgstr ""
+
+#: ../file-gallery.php:364
+msgid "...and for when inserting (a) single image(s) into a post"
+msgstr ""
+
+#: ../file-gallery.php:406
+#: ../includes/main-form.php:294
+msgid "alignment"
+msgstr ""
+
+#: ../file-gallery.php:417
+msgid "Cache"
+msgstr ""
+
+#: ../file-gallery.php:417
+msgid "Enable caching?"
+msgstr ""
+
+#: ../file-gallery.php:425
+msgid "Cache expires after how many seconds? (leave as is if you don't know what it means)"
+msgstr ""
+
+#: ../file-gallery.php:433
+msgid "Cache non-HTML gallery output (<em>array, object, json</em>)"
+msgstr ""
+
+#: ../file-gallery.php:443
+msgid "Edit screens options"
+msgstr ""
+
+#: ../file-gallery.php:443
+msgid "Display attachment count?"
+msgstr ""
+
+#: ../file-gallery.php:451
+msgid "Filter out duplicate attachments (copies) when browsing media library?"
+msgstr ""
+
+#: ../file-gallery.php:459
+msgid "Display media tags for attachments in media library?"
+msgstr ""
+
+#: ../file-gallery.php:467
+msgid "Display post thumb (if set)?"
+msgstr ""
+
+#: ../file-gallery.php:477
+msgid "Other options"
+msgstr ""
+
+#: ../file-gallery.php:477
+msgid "Display galleries within post excerpts?"
+msgstr ""
+
+#: ../file-gallery.php:483
+msgid "galleries are shown on full posts only"
+msgstr ""
+
+#: ../file-gallery.php:485
+msgid "Replacement text for galleries within post excerpts (if you haven't checked the above option)"
+msgstr ""
+
+#: ../file-gallery.php:493
+msgid "Display options for inserting galleries into a post?"
+msgstr ""
+
+#: ../file-gallery.php:501
+msgid "Display options for inserting single images into a post?"
+msgstr ""
+
+#: ../file-gallery.php:509
+msgid "Display attachment custom fields?"
+msgstr ""
+
+#: ../file-gallery.php:517
+msgid "Display 'insert gallery' button even if gallery options are hidden?"
+msgstr ""
+
+#: ../file-gallery.php:525
+msgid "Display 'insert single image(s)' button even if single image options are hidden?"
+msgstr ""
+
+#: ../file-gallery.php:533
+msgid "Delete all options on deactivation?"
+msgstr ""
+
+#: ../file-gallery.php:546
+msgid "File Gallery version"
+msgstr ""
+
+#: ../file-gallery.php:554
+msgid "File Gallery folder"
+msgstr ""
+
+#: ../file-gallery.php:562
+msgid "File Gallery path"
+msgstr ""
+
+#: ../file-gallery.php:570
+#: ../includes/media-tags.php:44
+msgid "Media tags Taxonomy name"
+msgstr ""
+
+#: ../file-gallery.php:570
+#: ../file-gallery.php:578
+#: ../includes/main.php:146
+msgid "Edit"
+msgstr ""
+
+#: ../file-gallery.php:578
+#: ../includes/media-tags.php:51
+msgid "Media tags URL slug"
+msgstr ""
+
+#: ../file-gallery.php:591
+msgid "Gallery insert options state"
+msgstr ""
+
+#: ../file-gallery.php:599
+msgid "Single images insert options state"
+msgstr ""
+
+#: ../file-gallery.php:607
+msgid "Attachment custom fields state"
+msgstr ""
+
+#: ../file-gallery.php:615
+msgid "\"Textual\" mode"
+msgstr ""
+
+#: ../file-gallery.php:788
+msgid "Settings"
+msgstr ""
+
+#: ../file-gallery.php:789
+msgid "Help"
+msgstr ""
+
+#: ../file-gallery.php:826
+#: ../file-gallery.php:885
+#: ../file-gallery.php:1130
+#: ../file-gallery.php:1359
+#: ../includes/main-form.php:233
+msgid "Media tags"
+msgstr ""
+
+#: ../file-gallery.php:827
+msgid "Media tag"
+msgstr ""
+
+#: ../file-gallery.php:959
+#: ../includes/main-form.php:321
+msgid "Switch to tags"
+msgstr ""
+
+#: ../file-gallery.php:960
+msgid "Switch to list of attachments"
+msgstr ""
+
+#: ../file-gallery.php:961
+#: ../includes/main-form.php:58
+msgid "Insert checked attachments into post as"
+msgstr ""
+
+#: ../file-gallery.php:962
+msgid "No files are currently attached to this post."
+msgstr ""
+
+#: ../file-gallery.php:963
+msgid "Are you sure that you want to delete these attachments? Press [OK] to delete or [Cancel] to abort."
+msgstr ""
+
+#: ../file-gallery.php:964
+msgid "saving attachment data..."
+msgstr ""
+
+#: ../file-gallery.php:965
+msgid "loading attachment data..."
+msgstr ""
+
+#: ../file-gallery.php:966
+msgid "deleting attachment..."
+msgstr ""
+
+#: ../file-gallery.php:967
+msgid "deleting attachments..."
+msgstr ""
+
+#: ../file-gallery.php:968
+msgid "loading..."
+msgstr ""
+
+#: ../file-gallery.php:969
+msgid "detaching attachment"
+msgstr ""
+
+#: ../file-gallery.php:970
+msgid "detaching attachments"
+msgstr ""
+
+#: ../file-gallery.php:971
+msgid "Are you sure that you want to detach these attachments? Press [OK] to detach or [Cancel] to abort."
+msgstr ""
+
+#: ../file-gallery.php:972
+msgid "close"
+msgstr ""
+
+#: ../file-gallery.php:973
+msgid "loading attachments"
+msgstr ""
+
+#: ../file-gallery.php:974
+msgid "Featured image set successfully"
+msgstr ""
+
+#: ../file-gallery.php:975
+msgid "Featured image removed"
+msgstr ""
+
+#: ../file-gallery.php:976
+msgid "Copy all attachments from the original post"
+msgstr ""
+
+#: ../file-gallery.php:977
+msgid "Copy all attachments from the original post?"
+msgstr ""
+
+#: ../file-gallery.php:978
+msgid "Copy all attachments from this translation"
+msgstr ""
+
+#: ../file-gallery.php:979
+msgid "Copy all attachments from this translation?"
+msgstr ""
+
+#: ../file-gallery.php:980
+#: ../includes/main.php:156
+msgid "Set as featured image"
+msgstr ""
+
+#: ../file-gallery.php:981
+#: ../includes/main.php:156
+msgid "Unset as featured image"
+msgstr ""
+
+#: ../file-gallery.php:982
+#, php-format
+msgid "Supplied ID (%d) is zero or not a number, please correct."
+msgstr ""
+
+#: ../file-gallery.php:983
+#: ../file-gallery.php:1043
+msgid "regenerating..."
+msgstr ""
+
+#: ../file-gallery.php:984
+msgid "Gallery contents updated"
+msgstr ""
+
+#: ../file-gallery.php:1001
+#: ../file-gallery.php:1065
+#: ../includes/attachments-custom-fields.php:45
+#: ../includes/attachments-custom-fields.php:179
+msgid "Add New Custom Field"
+msgstr ""
+
+#: ../file-gallery.php:1002
+#: ../file-gallery.php:1066
+#: ../includes/attachments-custom-fields.php:62
+#: ../includes/attachments-custom-fields.php:182
+msgid "Add Custom Field"
+msgstr ""
+
+#: ../file-gallery.php:1003
+#: ../file-gallery.php:1067
+msgid "Error deleting attachment custom field!"
+msgstr ""
+
+#: ../file-gallery.php:1004
+#: ../file-gallery.php:1068
+msgid "Error adding attachment custom field!"
+msgstr ""
+
+#: ../file-gallery.php:1005
+#: ../file-gallery.php:1069
+#: ../includes/attachments-custom-fields.php:51
+#: ../includes/attachments-custom-fields.php:182
+msgid "Name:"
+msgstr ""
+
+#: ../file-gallery.php:1006
+#: ../file-gallery.php:1070
+#: ../includes/attachments-custom-fields.php:182
+msgid "Value:"
+msgstr ""
+
+#: ../file-gallery.php:1091
+msgid "Attach all checked items to current post"
+msgstr ""
+
+#: ../file-gallery.php:1092
+msgid "Exclude current post's attachments"
+msgstr ""
+
+#: ../file-gallery.php:1093
+msgid "Include current post's attachments"
+msgstr ""
+
+#: ../file-gallery.php:1182
+msgid "File Gallery requires Javascript to function. Please enable it in your browser."
+msgstr ""
+
+#: ../file-gallery.php:1190
+msgid "Delete attachment dialog"
+msgstr ""
+
+#: ../file-gallery.php:1191
+msgid "Warning: one of the attachments you've chosen to delete has copies."
+msgstr ""
+
+#: ../file-gallery.php:1192
+msgid "How do you wish to proceed?"
+msgstr ""
+
+#: ../file-gallery.php:1193
+msgid "Click here if you have no idea what this dialog means"
+msgstr ""
+
+#: ../file-gallery.php:1193
+msgid "(opens File Gallery help in new browser window)"
+msgstr ""
+
+#: ../file-gallery.php:1196
+#: ../includes/main-form.php:43
+msgid "Copy all attachments from another post"
+msgstr ""
+
+#: ../file-gallery.php:1198
+#: ../includes/main-form.php:222
+msgid "Post ID:"
+msgstr ""
+
+#: ../file-gallery.php:1281
+msgid "No. of attachments"
+msgstr ""
+
+#: ../file-gallery.php:1320
+msgid "No Media Tags"
+msgstr ""
+
+#: ../includes/attachments-custom-fields.php:64
+#: ../includes/attachments-custom-fields.php:180
+msgid "The \"Name\" field is required"
+msgstr ""
+
+#: ../includes/attachments-custom-fields.php:71
+#: ../includes/attachments-custom-fields.php:162
+msgid "Custom Fields"
+msgstr ""
+
+#: ../includes/attachments-custom-fields.php:72
+#: ../includes/main-form.php:65
+#: ../includes/main-form.php:255
+msgid "show/hide this fieldset"
+msgstr ""
+
+#: ../includes/attachments-custom-fields.php:148
+msgid "Attachment Post URL"
+msgstr ""
+
+#: ../includes/attachments-custom-fields.php:149
+msgid "Post URL"
+msgstr ""
+
+#: ../includes/attachments-custom-fields.php:149
+msgid "Attachment URL"
+msgstr ""
+
+#: ../includes/attachments-custom-fields.php:151
+msgid "Parent Post URL"
+msgstr ""
+
+#: ../includes/attachments.php:255
+#, php-format
+msgid "Attachment with ID <strong>%d</strong> does not exist!"
+msgstr ""
+
+#: ../includes/attachments.php:296
+msgid "Regenerate this image's thumbnails"
+msgstr ""
+
+#: ../includes/attachments.php:303
+msgid "ID:"
+msgstr ""
+
+#: ../includes/attachments.php:304
+msgid "Date uploaded:"
+msgstr ""
+
+#: ../includes/attachments.php:305
+msgid "Uploaded by:"
+msgstr ""
+
+#: ../includes/attachments.php:307
+msgid "IDs of copies of this attachment:"
+msgstr ""
+
+#: ../includes/attachments.php:310
+msgid "This attachment is a copy of attachment ID"
+msgstr ""
+
+#: ../includes/attachments.php:328
+msgid "Alternate text for this image"
+msgstr ""
+
+#: ../includes/attachments.php:332
+msgid "Title"
+msgstr ""
+
+#: ../includes/attachments.php:335
+msgid "Caption"
+msgstr ""
+
+#: ../includes/attachments.php:338
+msgid "Description"
+msgstr ""
+
+#: ../includes/attachments.php:341
+msgid "Media tags (separate each tag with a comma)"
+msgstr ""
+
+#: ../includes/attachments.php:344
+msgid "Menu order"
+msgstr ""
+
+#: ../includes/attachments.php:347
+msgid "Attachment file URL:"
+msgstr ""
+
+#: ../includes/attachments.php:358
+msgid "save and return"
+msgstr ""
+
+#: ../includes/attachments.php:359
+msgid "cancel and return"
+msgstr ""
+
+#: ../includes/attachments.php:423
+msgid "Some of the checked attachments were successfully attached to current post."
+msgstr ""
+
+#: ../includes/attachments.php:424
+msgid "Additionally, here are ID's of attachments you had selected, but were already attached to current post, according to their URIs.<br />You will be presented with an option to copy those attachments as well in the next version of this plugin. If that makes any sense, that is."
+msgstr ""
+
+#: ../includes/attachments.php:428
+msgid "Checked attachments were successfully attached to current post."
+msgstr ""
+
+#: ../includes/attachments.php:434
+msgid "All of the checked attachments are already attached to current post, according to their URIs.<br />You will be presented with an option to copy those attachments as well in the next version of this plugin. If that makes any sense, that is."
+msgstr ""
+
+#: ../includes/attachments.php:436
+msgid "You must check the checkboxes next to attachments you want to copy to current post."
+msgstr ""
+
+#: ../includes/attachments.php:550
+msgid "Database error! (file_gallery_copy_all_attachments)"
+msgstr ""
+
+#: ../includes/attachments.php:556
+#, php-format
+msgid "Uh-oh. No attachments were found for post ID %d."
+msgstr ""
+
+#: ../includes/attachments.php:577
+#, php-format
+msgid "All attachments were successfully copied from post %d."
+msgstr ""
+
+#: ../includes/cache.php:119
+msgid "You have successfully cleared the File Gallery cache."
+msgstr ""
+
+#: ../includes/main-form.php:32
+msgid "Refresh attachments"
+msgstr ""
+
+#: ../includes/main-form.php:35
+msgid "Check all"
+msgstr ""
+
+#: ../includes/main-form.php:36
+msgid "Uncheck all"
+msgstr ""
+
+#: ../includes/main-form.php:37
+msgid "Delete all checked"
+msgstr ""
+
+#: ../includes/main-form.php:38
+msgid "Detach all checked"
+msgstr ""
+
+#: ../includes/main-form.php:41
+msgid "Upload new files"
+msgstr ""
+
+#: ../includes/main-form.php:41
+msgid "Add an Image"
+msgstr ""
+
+#: ../includes/main-form.php:46
+#: ../includes/main-form.php:357
+msgid "Save attachment order"
+msgstr ""
+
+#: ../includes/main-form.php:47
+msgid "Clear File Gallery cache"
+msgstr ""
+
+#: ../includes/main-form.php:48
+msgid "Adjust media settings"
+msgstr ""
+
+#: ../includes/main-form.php:49
+msgid "Open help file"
+msgstr ""
+
+#: ../includes/main-form.php:64
+#: ../includes/main-form.php:228
+#: ../includes/main-form.php:247
+msgid "Insert a gallery"
+msgstr ""
+
+#: ../includes/main-form.php:73
+#: ../includes/main-form.php:103
+#: ../includes/media-settings.php:176
+msgid "thumbnail"
+msgstr ""
+
+#: ../includes/main-form.php:74
+#: ../includes/main-form.php:104
+#: ../includes/media-settings.php:182
+msgid "medium"
+msgstr ""
+
+#: ../includes/main-form.php:75
+#: ../includes/main-form.php:105
+#: ../includes/media-settings.php:188
+msgid "large"
+msgstr ""
+
+#: ../includes/main-form.php:76
+#: ../includes/main-form.php:106
+#: ../includes/media-settings.php:194
+msgid "full"
+msgstr ""
+
+#: ../includes/main-form.php:85
+#: ../includes/main-form.php:268
+msgid "link to"
+msgstr ""
+
+#: ../includes/main-form.php:87
+#: ../includes/main-form.php:270
+#: ../includes/media-settings.php:142
+msgid "nothing (do not link)"
+msgstr ""
+
+#: ../includes/main-form.php:88
+#: ../includes/main-form.php:271
+#: ../includes/media-settings.php:143
+msgid "file"
+msgstr ""
+
+#: ../includes/main-form.php:89
+#: ../includes/main-form.php:272
+#: ../includes/media-settings.php:144
+msgid "attachment page"
+msgstr ""
+
+#: ../includes/main-form.php:90
+#: ../includes/main-form.php:273
+#: ../includes/media-settings.php:145
+msgid "parent post"
+msgstr ""
+
+#: ../includes/main-form.php:115
+msgid "link 'rel' attribute"
+msgstr ""
+
+#: ../includes/main-form.php:122
+#: ../includes/main.php:173
+#: ../includes/main.php:182
+#: ../includes/main.php:191
+msgid "or"
+msgstr ""
+
+#: ../includes/main-form.php:123
+msgid "custom value"
+msgstr ""
+
+#: ../includes/main-form.php:136
+#: ../includes/media-settings.php:149
+msgid "file gallery"
+msgstr ""
+
+#: ../includes/main-form.php:137
+#: ../includes/media-settings.php:150
+msgid "random"
+msgstr ""
+
+#: ../includes/main-form.php:138
+#: ../includes/main-form.php:343
+#: ../includes/media-settings.php:151
+msgid "menu order"
+msgstr ""
+
+#: ../includes/main-form.php:139
+#: ../includes/main-form.php:344
+#: ../includes/media-settings.php:152
+msgid "title"
+msgstr ""
+
+#: ../includes/main-form.php:140
+#: ../includes/media-settings.php:153
+msgid "date / time"
+msgstr ""
+
+#: ../includes/main-form.php:143
+#: ../includes/main-form.php:350
+msgid "ASC"
+msgstr ""
+
+#: ../includes/main-form.php:144
+#: ../includes/main-form.php:351
+msgid "DESC"
+msgstr ""
+
+#: ../includes/main-form.php:185
+msgid "limit"
+msgstr ""
+
+#: ../includes/main-form.php:190
+msgid "offset"
+msgstr ""
+
+#: ../includes/main-form.php:195
+msgid "paginate"
+msgstr ""
+
+#: ../includes/main-form.php:236
+msgid "current post's attachments only?"
+msgstr ""
+
+#: ../includes/main-form.php:254
+#: ../includes/main-form.php:310
+#: ../includes/main-form.php:334
+msgid "Insert single files"
+msgstr ""
+
+#: ../includes/main-form.php:296
+#: ../includes/media-settings.php:136
+#: ../includes/media-settings.php:160
+msgid "none"
+msgstr ""
+
+#: ../includes/main-form.php:297
+#: ../includes/media-settings.php:137
+#: ../includes/media-settings.php:161
+msgid "left"
+msgstr ""
+
+#: ../includes/main-form.php:298
+#: ../includes/media-settings.php:138
+#: ../includes/media-settings.php:162
+msgid "right"
+msgstr ""
+
+#: ../includes/main-form.php:299
+#: ../includes/media-settings.php:139
+#: ../includes/media-settings.php:163
+msgid "center"
+msgstr ""
+
+#: ../includes/main-form.php:304
+msgid "display caption?"
+msgstr ""
+
+#: ../includes/main-form.php:328
+msgid "Toggle 'textual' mode"
+msgstr ""
+
+#: ../includes/main-form.php:340
+msgid "Sort attachments by"
+msgstr ""
+
+#: ../includes/main-form.php:345
+msgid "name"
+msgstr ""
+
+#: ../includes/main-form.php:346
+msgid "date"
+msgstr ""
+
+#: ../includes/main-form.php:354
+msgid "Go"
+msgstr ""
+
+#: ../includes/main-form.php:374
+#, php-format
+msgid "File Gallery &mdash; %d attachment."
+msgstr ""
+
+#: ../includes/main-form.php:377
+#, php-format
+msgid "File Gallery &mdash; %d attachments."
+msgstr ""
+
+#: ../includes/main.php:141
+msgid "Zoom"
+msgstr ""
+
+#: ../includes/main.php:148
+msgid "Click to select, or click and drag to change position"
+msgstr ""
+
+#: ../includes/main.php:149
+msgid "Click to select"
+msgstr ""
+
+#: ../includes/main.php:164
+msgid "Detach / Delete"
+msgstr ""
+
+#: ../includes/main.php:171
+msgid "Delete"
+msgstr ""
+
+#: ../includes/main.php:177
+msgid "Detach"
+msgstr ""
+
+#: ../includes/main.php:180
+msgid "Really detach?"
+msgstr ""
+
+#: ../includes/main.php:181
+#: ../includes/main.php:190
+#: ../includes/media-upload.php:143
+msgid "Continue"
+msgstr ""
+
+#: ../includes/main.php:183
+#: ../includes/main.php:192
+msgid "Cancel"
+msgstr ""
+
+#: ../includes/main.php:189
+msgid "Really delete?"
+msgstr ""
+
+#: ../includes/main.php:454
+msgid "No attachments were deleted (capabilities?)"
+msgstr ""
+
+#: ../includes/main.php:456
+msgid "Attachment(s) deleted"
+msgstr ""
+
+#: ../includes/main.php:467
+msgid "Attachment(s) detached"
+msgstr ""
+
+#: ../includes/main.php:469
+msgid "Error detaching attachment(s)"
+msgstr ""
+
+#: ../includes/main.php:543
+msgid "Attachment data updated"
+msgstr ""
+
+#: ../includes/main.php:547
+msgid "Error updating attachment data!"
+msgstr ""
+
+#: ../includes/main.php:552
+msgid "No change."
+msgstr ""
+
+#: ../includes/media-settings.php:15
+msgid "Intermediate image sizes"
+msgstr ""
+
+#: ../includes/media-settings.php:30
+msgid "Medium size"
+msgstr ""
+
+#: ../includes/media-settings.php:35
+msgid "Large size"
+msgstr ""
+
+#: ../includes/media-settings.php:65
+msgid "Here you can specify width, height and crop attributes for intermediate image sizes added by plugins and/or themes, as well as crop options for the default medium and large sizes"
+msgstr ""
+
+#: ../includes/media-settings.php:68
+#, php-format
+msgid "File Gallery help file is located in the \"help\" subfolder of the plugin. You can <a href=\"%s/help/index.html\" target=\"_blank\">click here to open it in new window</a>."
+msgstr ""
+
+#: ../includes/media-settings.php:156
+msgid "ascending"
+msgstr ""
+
+#: ../includes/media-settings.php:157
+msgid "descending"
+msgstr ""
+
+#: ../includes/media-settings.php:322
+msgid "Crop medium size to exact dimensions"
+msgstr ""
+
+#: ../includes/media-settings.php:328
+msgid "Crop large size to exact dimensions"
+msgstr ""
+
+#: ../includes/media-settings.php:342
+msgid "Width"
+msgstr ""
+
+#: ../includes/media-settings.php:344
+msgid "Height"
+msgstr ""
+
+#: ../includes/media-settings.php:347
+#, php-format
+msgid "Crop %s size to exact dimensions"
+msgstr ""
+
+#: ../includes/miscellaneous.php:170
+msgid "Attachment order saved successfully."
+msgstr ""
+
+#: ../includes/miscellaneous.php:174
+msgid "Database error! Function: file_gallery_save_menu"
+msgstr ""
+
+#: ../includes/regenerate-images.php:6
+msgid "Regenerate"
+msgstr ""
+
+#: ../includes/regenerate-images.php:27
+msgid "No valid attachment IDs were supplied!"
+msgstr ""
+
+#: ../includes/regenerate-images.php:38
+#, php-format
+msgid "Error: %s while regenerating image ID %d"
+msgstr ""
+
+#: ../includes/regenerate-images.php:40
+#, php-format
+msgid "Unknown error while regenerating image ID %d"
+msgstr ""
+
+#: ../includes/regenerate-images.php:51
+msgid "Attachment thumbnails were successfully regenerated"
+msgstr ""
+
+#: ../includes/regenerate-images.php:53
+msgid "All attachments' thumbnails were successfully regenerated"
+msgstr ""
+
+#: ../includes/regenerate-images.php:58
+msgid "There were errors and some of the attachments' thumbnails weren't successfully regenerated!"
+msgstr ""
+
+#: ../includes/regenerate-images.php:60
+msgid "There were errors and none of the attachments' thumbnails were successfully regenerated!"
+msgstr ""
+
+#: ../includes/templating.php:282
+msgid "file does not exist:"
+msgstr ""
+
+#: ../includes/templating.php:282
+msgid "using default style"
+msgstr ""
+
+#: ../includes/templating.php:976
+msgid "Skip to first page"
+msgstr ""
+
+#: ../includes/templating.php:979
+msgid "Skip to last page"
+msgstr ""
+

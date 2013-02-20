@@ -1,0 +1,200 @@
+#fg_container
+{
+	padding-left: 7px !important;
+}
+
+#file_gallery fieldset p
+{
+	float: right !important;
+}
+
+#file_gallery fieldset p input#fg_gallery_tags_from
+{
+	margin: -1px 3px 0 0 !important;
+}
+
+#fg_info
+{
+	float: right !important;
+}
+
+.sortableitem,
+.ui-selected
+{
+	float:right !important;
+		
+	padding-left: 3px !important;
+	padding-right: 20px !important;
+	
+	margin-right: 3px !important;
+	margin-left: 5px !important;	
+}
+
+.sortableitem .checker
+{
+	left: 3px !important;
+	right:auto !important;
+}
+
+.delete_or_detach_link
+{
+	right: 0 !important;
+	left:auto !important;
+}
+
+.post_thumb_status
+{
+	right: 62px !important;
+	left:auto !important;
+}
+
+.del_attachment,
+.detach_attachment,
+.detach_or_delete,
+.post_thumb_setter,
+.post_thumb_unsetter
+{
+	left: 1px !important;
+	right:auto !important;
+}
+
+#file_gallery_list .sortableitem img.fgtt
+{
+	right: auto;
+	left: 4px;
+	padding: 1px 1px 0 0 !important;	
+}
+
+.sortableitem img.fgtt.non_image
+{
+	margin: 8px 10px 0 0 !important;	
+}
+
+a.img_zoom
+{	
+	right:auto !important;	
+	left:56px !important;
+}
+a.img_edit
+{
+	right:auto !important;	
+	left:0px !important;
+}
+
+#attachment_data_edit_form
+{
+	float: left !important;
+}
+
+#attachment_data_edit_form label
+{	
+	padding: 5px 2px 0px 0 !important;
+}
+
+#file_gallery_response
+{
+	left:25px !important;
+	right:auto !important;
+}
+
+#fg_buttons
+{
+	float: right !important;	
+	text-align: left !important;
+}
+#file-gallery-content	{
+	float:right;
+	width:97%;
+	margin-right: 35px;
+	}
+
+#file_gallery_upload_media
+{
+	float: left;
+	margin-left: 0;
+	margin-right: 3px;
+}
+
+#file_gallery_attachment_edit_image
+{
+	float:right !important;
+	margin-right:2.5% !important;
+	margin-left:5% !important;
+}
+
+#file_gallery_upload_files
+{
+	right: 5px !important;
+	left:auto !important;
+}
+
+#poststuff .inside p#fg_media_tag_list .fg_insert_tag
+{
+	float: right !important;
+	margin-left: 15px !important;
+}
+
+/* wp-admin css fixes */
+
+
+.ui-dialog button
+{
+	margin-left: 6px !important;
+}
+
+.ui-dialog .ui-dialog-titlebar-close
+{	
+	left: 7px !important;
+	right:auto !important;
+}
+
+
+.file_gallery_attach_to_post.solo
+{
+	float: left !important;
+	margin: 11px 0 0 6px !important;
+}
+
+#file_gallery_hide_gallery_options,
+#file_gallery_hide_single_options
+{
+	left: 0 !important;
+	right:auto !important;
+}
+
+.thumb_switch_load
+{	
+	right: 36px !important;
+	left:auto !important;
+}
+
+#file_gallery_copy_from_wmpl_original
+{
+	-moz-border-radius: 0 5px 5px 0 !important;
+	-webkit-border-radius: 0 5px 5px 0 !important;
+	border-radius: 0 5px 5px 0 !important;
+	margin:10px -6px -8px !important;	
+}
+
+#file_gallery_hide_acf {
+	right:auto;
+	left:0;
+}
+
+#media_tag_taxonomy_name,
+#media_tag_taxonomy_slug
+{
+	background: url(../images/file-gallery-logo.png) left center no-repeat;
+}
+
+#poststuff #file_gallery h3.hndle span
+{
+	width: 100%;
+	display: block;
+	background:url(../images/file-gallery-logo.png) left center no-repeat;
+}
+
+#file_gallery_list .img_zoom img
+{
+	right: 28%;
+}

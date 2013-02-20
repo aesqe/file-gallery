@@ -1,0 +1,92 @@
+.gallery.default,
+#content .gallery.default
+{
+	margin: auto;
+	overflow: hidden;
+}
+
+.gallery.default .gallery-item,
+#content .gallery.default .gallery-item
+{
+	float: left;
+	text-align: center;
+	margin: 10px 0 0 0;
+	padding: 0;
+}
+
+.gallery.default .gallery-caption,
+#content .gallery.default .gallery-caption
+{
+	margin-left: 0;
+}
+
+.gallery.default .gallery-startcol,
+#content .gallery.default .gallery-startcol
+{
+	clear: left;
+}
+
+/* the following styles do not seem to be needed, please let me know if you feel otherwise! */
+/*
+.gallery.default .gallery-item .gallery-icon,
+#content .gallery.default .gallery-item .gallery-icon
+{
+	margin: 0;
+	padding: 0;
+}
+
+.gallery.default img,
+#content .gallery.default img
+{
+	border: 2px solid #cfcfcf;
+	padding: 0;
+	margin: 0;
+}
+
+.gallery.default .gallery-description,
+#content .gallery.default .gallery-description
+{
+	margin-left: 0;
+}
+
+.gallery.default br.clear,
+#content .gallery.default br.clear
+{
+	clear: both;
+	height: 0.001px;
+	visibility: hidden;
+}
+*/
+
+
+
+
+
+
+
+
+
+/*
+Default style for WP-PageNavi plugin
+http://wordpress.org/extend/plugins/wp-pagenavi/
+*/
+.gallery.default .wp-pagenavi {
+	clear: both;
+	padding: 10px 0;
+	margin-top: 1em;
+}
+
+.gallery.default .wp-pagenavi a, .wp-pagenavi span {
+	text-decoration: none;
+	border: 1px solid #BFBFBF;
+	padding: 3px 5px;
+	margin: 2px;
+}
+
+.gallery.default .wp-pagenavi a:hover, .wp-pagenavi span.current {
+	border-color: #000;
+}
+
+.gallery.default .wp-pagenavi span.current {
+	font-weight: bold;
+}

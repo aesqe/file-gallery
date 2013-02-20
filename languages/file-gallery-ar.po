@@ -1,0 +1,1083 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: File Gallery 1.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2012-01-10 10:29+0200\n"
+"PO-Revision-Date: \n"
+"Last-Translator: sanapix <webmaster@sanapix.com>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Language: Croatian\n"
+"X-Poedit-Country: CROATIA\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: __;_e;__ngettext\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#: ../file-gallery.php:185
+msgid "Disable 'File Gallery' handling of [gallery] shortcode?"
+msgstr "الغاء استخدام معرض الصور للكود المختصر   [gallery] ?"
+
+#: ../file-gallery.php:193
+msgid "Display File Gallery on which post types?"
+msgstr "بأية نوعية مواضيع سيتم عرض معرض الصور?"
+
+#: ../file-gallery.php:202
+msgid "Use alternative color scheme (a bit more contrast)?"
+msgstr "استخدام مخطط الوان بديل (تباين أكثر)?"
+
+#: ../file-gallery.php:210
+msgid "How many page links should be shown in pagination?"
+msgstr "كم عدد الصفحات التي تريد عرضها عند ترقيم الصفحات ?"
+
+#: ../file-gallery.php:218
+msgid "Auto enqueue lightbox scripts for which link classes (separate with commas)?"
+msgstr "ارفاق لايتبوكس تلقائيا لرابط class التالي : (افصل بينهم باستخدام الفاصلة)"
+
+#: ../file-gallery.php:226
+msgid "Default WordPress image size for thumbnails in File Gallery metabox on post editing screens?"
+msgstr "الحجم الافتراضي للصورة المصغرة داخل معرض الصور في اختيارات الشاشة للموضوع"
+
+#: ../file-gallery.php:235
+msgid "Default width (in pixels) for thumbnails in File Gallery metabox on post editing screens?"
+msgstr "العرض الافتراضي بالبيكسل للصورة المصغرة داخل معرض الصور في اختيارات الشاشة للموضوع"
+
+#: ../file-gallery.php:245
+msgid "Some default values for when inserting a gallery into a post"
+msgstr "بعض القيم الافتراضية عند ادخال معرض صور للموضوع..."
+
+#: ../file-gallery.php:245
+#, php-format
+msgid "The following two blocks of options <strong>do not</strong> affect the output/display of your galleries - they are here only so you could set default values for File Gallery metabox on post editing screen. <a href=\"%s/help/index.html#settings_page\" target=\"_blank\">More information is available in the help file</a>."
+msgstr "الخيارات التالية <strong>لا تؤثر</strong> نتيجة العرض لمعرض الصور - الهدف منها تعيين قيم افتراضية للخانات في شاشة التحرير للمواضيع. <a href=\"%s/help/index.html#settings_page\" target=\"_blank\">المزيد من الشرح في ملف المساعدة التالي</a>."
+
+#: ../file-gallery.php:245
+#: ../file-gallery.php:350
+#: ../includes/main-form.php:70
+#: ../includes/main-form.php:260
+#: ../includes/media-settings.php:26
+msgid "size"
+msgstr "حجم"
+
+#: ../file-gallery.php:254
+#: ../file-gallery.php:359
+msgid "link"
+msgstr "رابط"
+
+#: ../file-gallery.php:263
+#: ../includes/main-form.php:96
+msgid "linked image size"
+msgstr "حجم الصور المرفقة"
+
+#: ../file-gallery.php:272
+#: ../file-gallery.php:368
+#: ../includes/main-form.php:91
+#: ../includes/main-form.php:124
+#: ../includes/main-form.php:275
+#: ../includes/main-form.php:280
+#: ../includes/media-settings.php:146
+msgid "external url"
+msgstr "رابط خارجي"
+
+#: ../file-gallery.php:280
+msgid "order by"
+msgstr "ترتيب حسب"
+
+#: ../file-gallery.php:289
+#: ../includes/main-form.php:134
+msgid "order"
+msgstr "ترتيب"
+
+#: ../file-gallery.php:298
+#: ../includes/main-form.php:149
+msgid "template"
+msgstr "قوالب"
+
+#: ../file-gallery.php:307
+#: ../file-gallery.php:376
+#: ../includes/main-form.php:129
+#: ../includes/main-form.php:285
+msgid "link class"
+msgstr "class رابط"
+
+#: ../file-gallery.php:315
+#: ../file-gallery.php:384
+#: ../includes/main-form.php:175
+#: ../includes/main-form.php:290
+msgid "image class"
+msgstr "class الصورة"
+
+#: ../file-gallery.php:323
+#: ../includes/main-form.php:203
+msgid "columns"
+msgstr "عواميد"
+
+#: ../file-gallery.php:332
+#: ../includes/main-form.php:180
+msgid "mime type"
+msgstr "mime type"
+
+#: ../file-gallery.php:340
+#: ../includes/main-form.php:170
+msgid "gallery class"
+msgstr "class الصورة"
+
+#: ../file-gallery.php:350
+msgid "...and for when inserting (a) single image(s) into a post"
+msgstr "...وعند ادخال صور/ة بالموضوع"
+
+#: ../file-gallery.php:392
+#: ../includes/main-form.php:295
+msgid "alignment"
+msgstr "محاذاة"
+
+#: ../file-gallery.php:403
+msgid "Cache"
+msgstr "ذاكرة كاش  (Cache)"
+
+#: ../file-gallery.php:403
+msgid "Enable caching?"
+msgstr "تمكين ذاكرة الكاش (Caching) ؟"
+
+#: ../file-gallery.php:411
+msgid "Cache expires after how many seconds? (leave as is if you don't know what it means)"
+msgstr "بعد كم من الوقت ينتهي مفعول ذاكرة الكاش ؟ (لا تغيره اذا كنت لا تفهم المقصود)"
+
+#: ../file-gallery.php:419
+msgid "Cache non-HTML gallery output (<em>array, object, json</em>)"
+msgstr "حفظ بذاكرة الكاش معلومات ليست HTML (<em>array, object, json</em>) "
+
+#: ../file-gallery.php:429
+msgid "Edit screens options"
+msgstr "اختيارات شاشة التحرير"
+
+#: ../file-gallery.php:429
+msgid "Display attachment count?"
+msgstr "عرض عدد المرفقات ؟"
+
+#: ../file-gallery.php:437
+msgid "Filter out duplicate attachments (copies) when browsing media library?"
+msgstr "هل تريد تصفية المرفقات المكررة عند معاينة مجلد الميديا ؟"
+
+#: ../file-gallery.php:445
+msgid "Display media tags for attachments in media library?"
+msgstr "عرض وسوم الميديا للمرفقات في مجلد الميديا ؟"
+
+#: ../file-gallery.php:453
+msgid "Display post thumb (if set)?"
+msgstr "عرض الصورة المصغرة (اذا وجدت) ?"
+
+#: ../file-gallery.php:463
+msgid "Other options"
+msgstr "المزيد من الاختيارات"
+
+#: ../file-gallery.php:463
+msgid "Display galleries within post excerpts?"
+msgstr "هل تريد عرض المعارض داخل مقتطفات المواضيع ؟"
+
+#: ../file-gallery.php:469
+msgid "galleries are shown on full posts only"
+msgstr "المعارض تعرض بالمواضيع الكاملة"
+
+#: ../file-gallery.php:471
+msgid "Replacement text for galleries within post excerpts (if you haven't checked the above option)"
+msgstr "نص بديل للمعارض داخل مقتطفات المواضيع (اذا لم تختر المربع اعلاه)"
+
+#: ../file-gallery.php:479
+msgid "Display options for inserting galleries into a post?"
+msgstr "عرض الخيارات لادخال معارض الصور / صورة داخل الموضوع ؟"
+
+#: ../file-gallery.php:487
+msgid "Display options for inserting single images into a post?"
+msgstr "عرض الخيارات لادخال معارض الصور / صورة داخل الموضوع ؟"
+
+#: ../file-gallery.php:495
+msgid "Display attachment custom fields?"
+msgstr "عرض عدد المرفقات ؟"
+
+#: ../file-gallery.php:503
+msgid "Display 'insert gallery' button even if gallery options are hidden?"
+msgstr "عرض زر \"ادراج معرض صور\" حتى لو كان"
+
+#: ../file-gallery.php:511
+msgid "Display 'insert single image(s)' button even if single image options are hidden?"
+msgstr "عرض زر 'ادراج صورة واحدة'  حتى وان كان خيارات الصورة مخبأة?"
+
+#: ../file-gallery.php:519
+msgid "Delete all options on deactivation?"
+msgstr "?حذف كل الاختيارات عند تعطيل الاضافة"
+
+#: ../file-gallery.php:532
+msgid "File Gallery version"
+msgstr "نسخة معرض الصور File Gallery"
+
+#: ../file-gallery.php:540
+msgid "File Gallery folder"
+msgstr "مجلد معرض الصور File Gallery"
+
+#: ../file-gallery.php:548
+msgid "File Gallery path"
+msgstr "مسار معرض الصور File Gallery"
+
+#: ../file-gallery.php:556
+#: ../includes/media-tags.php:44
+msgid "Media tags Taxonomy name"
+msgstr "اسم تصنيفات الوسوم"
+
+#: ../file-gallery.php:564
+#: ../includes/media-tags.php:51
+msgid "Media tags URL slug"
+msgstr "وسوم الميديا"
+
+#: ../file-gallery.php:577
+msgid "Gallery insert options state"
+msgstr "استخدام خيارات ادراج معرض صور"
+
+#: ../file-gallery.php:585
+msgid "Single images insert options state"
+msgstr "استخدام خيارات ادراج صورة واحدة"
+
+#: ../file-gallery.php:593
+msgid "Attachment custom fields state"
+msgstr "استخدام الحقول المخصصة للمرفقات"
+
+#: ../file-gallery.php:770
+msgid "Settings"
+msgstr "اعدادت"
+
+#: ../file-gallery.php:771
+msgid "Help"
+msgstr "مساعدة"
+
+#: ../file-gallery.php:796
+#: ../file-gallery.php:855
+#: ../file-gallery.php:1084
+#: ../file-gallery.php:1304
+#: ../includes/main-form.php:234
+msgid "Media tags"
+msgstr "وسوم الميديا"
+
+#: ../file-gallery.php:797
+msgid "Media tag"
+msgstr "وسم الميديا"
+
+#: ../file-gallery.php:932
+#: ../includes/main-form.php:318
+msgid "Switch to tags"
+msgstr "الانتقال الى الوسوم"
+
+#: ../file-gallery.php:933
+msgid "Switch to list of attachments"
+msgstr "الانتقال لقائمة المرفقات"
+
+#: ../file-gallery.php:934
+#: ../includes/main-form.php:58
+msgid "Insert checked attachments into post as"
+msgstr "ادخال الملفات المرفقة المختارة لداخل الموضوع"
+
+#: ../file-gallery.php:935
+msgid "No files are currently attached to this post."
+msgstr "لا يوجد حاليا ملفات مرفقة لهذا الموضوع"
+
+#: ../file-gallery.php:936
+msgid "Are you sure that you want to delete these attachments? Press [OK] to delete or [Cancel] to abort."
+msgstr "هل انت متاكد من حذف المرفقات ؟ اضغظ موافق للحذف و الغاء للتخطي ."
+
+#: ../file-gallery.php:937
+msgid "saving attachment data..."
+msgstr "يحفظ  معلومات المرفقات ..."
+
+#: ../file-gallery.php:938
+msgid "loading attachment data..."
+msgstr "تحميل معلومات المرفقات ..."
+
+#: ../file-gallery.php:939
+msgid "deleting attachment..."
+msgstr "حذف المرفقات.."
+
+#: ../file-gallery.php:940
+msgid "deleting attachments..."
+msgstr "حذف المرفقات.."
+
+#: ../file-gallery.php:941
+msgid "loading..."
+msgstr "تحميل..."
+
+#: ../file-gallery.php:942
+msgid "detaching attachment"
+msgstr "فصل المرفقات"
+
+#: ../file-gallery.php:943
+msgid "detaching attachments"
+msgstr "فصل المرفقات"
+
+#: ../file-gallery.php:944
+msgid "Are you sure that you want to detach these attachments? Press [OK] to detach or [Cancel] to abort."
+msgstr "هل انت متاكد من فصل المرفقات؟اضغط موافق للفصل والغاء للتخطي"
+
+#: ../file-gallery.php:945
+msgid "close"
+msgstr "إغلاق"
+
+#: ../file-gallery.php:946
+msgid "loading attachments"
+msgstr "تحميل المرفقات"
+
+#: ../file-gallery.php:947
+msgid "Featured image set successfully"
+msgstr "الصورة البارزة حفظت بنجاح"
+
+#: ../file-gallery.php:948
+msgid "Featured image removed"
+msgstr "الصورة البارزة حذفت"
+
+#: ../file-gallery.php:949
+msgid "Copy all attachments from the original post"
+msgstr "نسخ جميع المرفقات من الموضوع الاصلي"
+
+#: ../file-gallery.php:950
+msgid "Copy all attachments from the original post?"
+msgstr "نسخ جميع المرفقات من الموضوع الاصلي"
+
+#: ../file-gallery.php:951
+msgid "Copy all attachments from this translation"
+msgstr "نسخ جميع المرفقات من هذه النسحة"
+
+#: ../file-gallery.php:952
+msgid "Copy all attachments from this translation?"
+msgstr "نسخ جميع المرفقات من هذه النسحة"
+
+#: ../file-gallery.php:953
+#: ../includes/main.php:154
+msgid "Set as featured image"
+msgstr "اضبط كصورة بارزة"
+
+#: ../file-gallery.php:954
+#: ../includes/main.php:156
+msgid "Unset as featured image"
+msgstr "حذف الصورة البارزة"
+
+#: ../file-gallery.php:955
+#, php-format
+msgid "Supplied ID (%d) is zero or not a number, please correct."
+msgstr "رقم ID المرفق (%d)صفر او ليس برقم,الرجاء تصحيحه."
+
+#: ../file-gallery.php:956
+msgid "regenerating..."
+msgstr "تحديث..."
+
+#: ../file-gallery.php:973
+#: ../file-gallery.php:1019
+#: ../includes/attachments-custom-fields.php:45
+#: ../includes/attachments-custom-fields.php:179
+msgid "Add New Custom Field"
+msgstr "اضف حقل مخصص جديد"
+
+#: ../file-gallery.php:974
+#: ../file-gallery.php:1020
+#: ../includes/attachments-custom-fields.php:62
+#: ../includes/attachments-custom-fields.php:182
+msgid "Add Custom Field"
+msgstr "اضف حقل مخصص"
+
+#: ../file-gallery.php:975
+#: ../file-gallery.php:1021
+msgid "Error deleting attachment custom field!"
+msgstr "خطأ اثناء حذف الحقل المخصص"
+
+#: ../file-gallery.php:976
+#: ../file-gallery.php:1022
+msgid "Error adding attachment custom field!"
+msgstr "خطأ اثناء اضافة الحقل المخصص"
+
+#: ../file-gallery.php:977
+#: ../file-gallery.php:1023
+#: ../includes/attachments-custom-fields.php:51
+#: ../includes/attachments-custom-fields.php:182
+msgid "Name:"
+msgstr "الاسم :"
+
+#: ../file-gallery.php:978
+#: ../file-gallery.php:1024
+#: ../includes/attachments-custom-fields.php:182
+msgid "Value:"
+msgstr "القيمة:"
+
+#: ../file-gallery.php:1045
+msgid "Attach all checked items to current post"
+msgstr "اضافة جميع الملفات المختارة للموضوع الحالي"
+
+#: ../file-gallery.php:1046
+msgid "Exclude current post's attachments"
+msgstr "تخطي ارفاق الملفات في الموضوع الحالي"
+
+#: ../file-gallery.php:1047
+msgid "Include current post's attachments"
+msgstr "ارفاق الملفات في الموضوع الحالي"
+
+#: ../file-gallery.php:1136
+msgid "File Gallery requires Javascript to function. Please enable it in your browser."
+msgstr "هذه الاضافة تتطلب تفعيل جافا سكريبت . الرجاء تفعيلها في المتصفح"
+
+#: ../file-gallery.php:1144
+msgid "Delete attachment dialog"
+msgstr "حذف مربع المرفقات"
+
+#: ../file-gallery.php:1145
+msgid "Warning: one of the attachments you've chosen to delete has copies."
+msgstr "تحذير : احد المرفقات التي اخترت حذفه يوجد له نسخ"
+
+#: ../file-gallery.php:1146
+msgid "How do you wish to proceed?"
+msgstr "كيف تريد الاكمال ؟"
+
+#: ../file-gallery.php:1147
+msgid "Click here if you have no idea what this dialog means"
+msgstr "اضغط هنا اذا كنت لا تعرف ما يعنيه المربع"
+
+#: ../file-gallery.php:1147
+msgid "(opens File Gallery help in new browser window)"
+msgstr "(فتح ملف المساعدة معرض الصور File Gallery في نافذة جديدة )"
+
+#: ../file-gallery.php:1150
+#: ../includes/main-form.php:43
+msgid "Copy all attachments from another post"
+msgstr "نسخ كل المرفقات لموضوع آخر"
+
+#: ../file-gallery.php:1152
+#: ../includes/main-form.php:223
+msgid "Post ID:"
+msgstr " ID معرف الموضوع"
+
+#: ../file-gallery.php:1175
+#: ../file-gallery.php:1180
+#: ../file-gallery.php:1181
+#: ../includes/media-settings.php:16
+msgid "File Gallery"
+msgstr "معرض الصور"
+
+#: ../file-gallery.php:1229
+msgid "No. of attachments"
+msgstr "عدد الملفات المرفقة"
+
+#: ../file-gallery.php:1232
+msgid "Post thumb"
+msgstr "الصورة المصغرة للموضوع"
+
+#: ../file-gallery.php:1265
+msgid "No Media Tags"
+msgstr "وسوم الميديا"
+
+#: ../includes/attachments-custom-fields.php:64
+#: ../includes/attachments-custom-fields.php:180
+msgid "The \"Name\" field is required"
+msgstr "حقل الاسم هو حقل ضروري"
+
+#: ../includes/attachments-custom-fields.php:71
+#: ../includes/attachments-custom-fields.php:162
+msgid "Custom Fields"
+msgstr "حقول مخصصة"
+
+#: ../includes/attachments-custom-fields.php:72
+#: ../includes/main-form.php:65
+#: ../includes/main-form.php:256
+msgid "show/hide this fieldset"
+msgstr "اظهر/اخفي هذه الحقول"
+
+#: ../includes/attachments-custom-fields.php:148
+msgid "Attachment Post URL"
+msgstr "رابط المرفقات"
+
+#: ../includes/attachments-custom-fields.php:149
+msgid "Post URL"
+msgstr "رابط الموضوع"
+
+#: ../includes/attachments-custom-fields.php:149
+msgid "Attachment URL"
+msgstr "رابط المرفقات"
+
+#: ../includes/attachments-custom-fields.php:151
+msgid "Parent Post URL"
+msgstr "رابط الموضوع"
+
+#: ../includes/attachments.php:256
+#, php-format
+msgid "Attachment with ID <strong>%d</strong> does not exist!"
+msgstr "ملف مرفق مع معرف رقم <strong>%d</strong> غير موجود!"
+
+#: ../includes/attachments.php:297
+msgid "Regenerate this image's thumbnails"
+msgstr "تحديث الصورة المضغرة لهذه الصورة"
+
+#: ../includes/attachments.php:304
+msgid "ID:"
+msgstr " ID معرف :"
+
+#: ../includes/attachments.php:305
+msgid "Date uploaded:"
+msgstr "تاريخ الرفع :"
+
+#: ../includes/attachments.php:306
+msgid "Uploaded by:"
+msgstr "تم رفعه عن طريق :"
+
+#: ../includes/attachments.php:308
+msgid "IDs of copies of this attachment:"
+msgstr "الانتقال لقائمة المرفقات"
+
+#: ../includes/attachments.php:311
+msgid "This attachment is a copy of attachment ID"
+msgstr "الانتقال لقائمة المرفقات"
+
+#: ../includes/attachments.php:329
+msgid "Alternate text for this image"
+msgstr "نص بديل لللصورة"
+
+#: ../includes/attachments.php:333
+msgid "Title"
+msgstr "عنوان"
+
+#: ../includes/attachments.php:336
+msgid "Caption"
+msgstr "تعريف"
+
+#: ../includes/attachments.php:339
+msgid "Description"
+msgstr "وصف"
+
+#: ../includes/attachments.php:342
+msgid "Media tags (separate each tag with a comma)"
+msgstr "وسوم الميديا (افصل كل وسم بواسطة الفاصلة)"
+
+#: ../includes/attachments.php:345
+msgid "Menu order"
+msgstr "ترتيب القائمة"
+
+#: ../includes/attachments.php:348
+msgid "Attachment file URL:"
+msgstr "رابط الملف المرفق :"
+
+#: ../includes/attachments.php:359
+msgid "save and return"
+msgstr "حفظ ورجوع"
+
+#: ../includes/attachments.php:360
+msgid "cancel and return"
+msgstr "الغاء ورجوع"
+
+#: ../includes/attachments.php:424
+msgid "Some of the checked attachments were successfully attached to current post."
+msgstr "بعض المرفقات تم ارفاقها للموضوع الحالي"
+
+#: ../includes/attachments.php:425
+msgid "Additionally, here are ID's of attachments you had selected, but were already attached to current post, according to their URIs.<br />You will be presented with an option to copy those attachments as well in the next version of this plugin. If that makes any sense, that is."
+msgstr "بالاضافة هذه هي المرفقات التي اخترتها والتي ارفقت مسبقا بالموضوع الحالي حسب العناوين <br /> .  ستتمكن من نسخ المرفقات بالنسخة القادمة من الاضافة"
+
+#: ../includes/attachments.php:429
+msgid "Checked attachments were successfully attached to current post."
+msgstr "الملفات التي تم اختيارها ارفقت بنجاح للموضوع الحالي"
+
+#: ../includes/attachments.php:435
+msgid "All of the checked attachments are already attached to current post, according to their URIs.<br />You will be presented with an option to copy those attachments as well in the next version of this plugin. If that makes any sense, that is."
+msgstr " المرفقات التي اخترتها  ارفقت مسبقا بالموضوع الحالي حسب العناوين <br /> .  ستتمكن من نسخ المرفقات بالنسخة القادمة من الاضافة"
+
+#: ../includes/attachments.php:437
+msgid "You must check the checkboxes next to attachments you want to copy to current post."
+msgstr "يتوجب عليك تأشير الاخيارات بجانب المرفقات التي تريد نسخها لموضوع آخر"
+
+#: ../includes/attachments.php:545
+msgid "Database error! (file_gallery_copy_all_attachments)"
+msgstr "خطأ قاعدة البيانات ! (file_gallery_copy_all_attachments)"
+
+#: ../includes/attachments.php:551
+#, php-format
+msgid "Uh-oh. No attachments were found for post ID %d."
+msgstr "لم نجد مرفقات لمعرف موضوع رقم %d."
+
+#: ../includes/attachments.php:572
+#, php-format
+msgid "All attachments were successfully copied from post %d."
+msgstr "كل الملفات المرفقة تم نسخها بنجاح من الموضوع %d."
+
+#: ../includes/cache.php:119
+msgid "You have successfully cleared the File Gallery cache."
+msgstr "تم مسح ذاكرة الكاش لمعرض الصور بنجاح"
+
+#: ../includes/main-form.php:32
+msgid "Refresh attachments"
+msgstr "تحديث المرفقات"
+
+#: ../includes/main-form.php:35
+msgid "Check all"
+msgstr "اختيار الكل"
+
+#: ../includes/main-form.php:36
+msgid "Uncheck all"
+msgstr "عدم اختيار الكل"
+
+#: ../includes/main-form.php:37
+msgid "Delete all checked"
+msgstr "حذف كل المؤشر"
+
+#: ../includes/main-form.php:38
+msgid "Detach all checked"
+msgstr "فصل كل المؤشر"
+
+#: ../includes/main-form.php:41
+msgid "Upload new files"
+msgstr "رفع صور جديدة"
+
+#: ../includes/main-form.php:41
+msgid "Add an Image"
+msgstr "اضف صورة"
+
+#: ../includes/main-form.php:46
+#: ../includes/main-form.php:347
+msgid "Save attachment order"
+msgstr "حفظ ترتيب المرفقات"
+
+#: ../includes/main-form.php:47
+msgid "Clear File Gallery cache"
+msgstr "محي ذاكرة الكاش لمعرض الصور"
+
+#: ../includes/main-form.php:48
+msgid "Adjust media settings"
+msgstr "تغيير اعدادت الميديا"
+
+#: ../includes/main-form.php:49
+msgid "Open help file"
+msgstr "فتح ملف المساعدة"
+
+#: ../includes/main-form.php:64
+#: ../includes/main-form.php:229
+#: ../includes/main-form.php:248
+msgid "Insert a gallery"
+msgstr "ادراج معرض صور"
+
+#: ../includes/main-form.php:73
+#: ../includes/main-form.php:98
+#: ../includes/media-settings.php:176
+msgid "thumbnail"
+msgstr "صورة مصغرة"
+
+#: ../includes/main-form.php:74
+#: ../includes/main-form.php:99
+#: ../includes/media-settings.php:182
+msgid "medium"
+msgstr "متوسط"
+
+#: ../includes/main-form.php:75
+#: ../includes/main-form.php:100
+#: ../includes/media-settings.php:188
+msgid "large"
+msgstr "كبير"
+
+#: ../includes/main-form.php:76
+#: ../includes/main-form.php:101
+#: ../includes/media-settings.php:194
+msgid "full"
+msgstr "كامل"
+
+#: ../includes/main-form.php:85
+#: ../includes/main-form.php:269
+msgid "link to"
+msgstr "رابط ل"
+
+#: ../includes/main-form.php:87
+#: ../includes/main-form.php:271
+#: ../includes/media-settings.php:142
+msgid "nothing (do not link)"
+msgstr "لا شيء(لا تربط)"
+
+#: ../includes/main-form.php:88
+#: ../includes/main-form.php:272
+#: ../includes/media-settings.php:143
+msgid "file"
+msgstr "ملف"
+
+#: ../includes/main-form.php:89
+#: ../includes/main-form.php:273
+#: ../includes/media-settings.php:144
+msgid "attachment page"
+msgstr "صفحة الملف المرفق"
+
+#: ../includes/main-form.php:90
+#: ../includes/main-form.php:274
+#: ../includes/media-settings.php:145
+msgid "parent post"
+msgstr "الموضوع الرئيسي"
+
+#: ../includes/main-form.php:110
+msgid "link 'rel' attribute"
+msgstr "خصائص الرابط  'rel'"
+
+#: ../includes/main-form.php:117
+#: ../includes/main.php:165
+#: ../includes/main.php:172
+#: ../includes/main.php:188
+#: ../includes/main.php:198
+#: ../includes/main.php:207
+msgid "or"
+msgstr "او"
+
+#: ../includes/main-form.php:118
+msgid "custom value"
+msgstr "حقل مخصص"
+
+#: ../includes/main-form.php:136
+#: ../includes/media-settings.php:149
+msgid "file gallery"
+msgstr "معرض صور"
+
+#: ../includes/main-form.php:137
+#: ../includes/media-settings.php:150
+msgid "random"
+msgstr "عشوائي"
+
+#: ../includes/main-form.php:138
+#: ../includes/main-form.php:333
+#: ../includes/media-settings.php:151
+msgid "menu order"
+msgstr "ترتيب القائمة"
+
+#: ../includes/main-form.php:139
+#: ../includes/main-form.php:334
+#: ../includes/media-settings.php:152
+msgid "title"
+msgstr "عنوان"
+
+#: ../includes/main-form.php:140
+#: ../includes/media-settings.php:153
+msgid "date / time"
+msgstr "تاريخ / وقت"
+
+#: ../includes/main-form.php:143
+#: ../includes/main-form.php:340
+msgid "ASC"
+msgstr "ترتيب تصاعدي"
+
+#: ../includes/main-form.php:144
+#: ../includes/main-form.php:341
+msgid "DESC"
+msgstr "ترتيب تنازلي"
+
+#: ../includes/main-form.php:185
+msgid "limit"
+msgstr "تحديد"
+
+#: ../includes/main-form.php:190
+msgid "offset"
+msgstr "offset"
+
+#: ../includes/main-form.php:195
+msgid "paginate"
+msgstr "ترقيم الصفحات"
+
+#: ../includes/main-form.php:237
+msgid "current post's attachments only?"
+msgstr "مرفقات الموضوع الحالي فقط ؟"
+
+#: ../includes/main-form.php:255
+#: ../includes/main-form.php:311
+#: ../includes/main-form.php:324
+msgid "Insert single files"
+msgstr "ادراج ملف واحد"
+
+#: ../includes/main-form.php:297
+#: ../includes/media-settings.php:136
+#: ../includes/media-settings.php:160
+msgid "none"
+msgstr "لا شيء"
+
+#: ../includes/main-form.php:298
+#: ../includes/media-settings.php:137
+#: ../includes/media-settings.php:161
+msgid "left"
+msgstr "شمال"
+
+#: ../includes/main-form.php:299
+#: ../includes/media-settings.php:138
+#: ../includes/media-settings.php:162
+msgid "right"
+msgstr "يمين"
+
+#: ../includes/main-form.php:300
+#: ../includes/media-settings.php:139
+#: ../includes/media-settings.php:163
+msgid "center"
+msgstr "وسط"
+
+#: ../includes/main-form.php:305
+msgid "display caption?"
+msgstr "عرض التعريف ؟"
+
+#: ../includes/main-form.php:330
+msgid "Sort attachments by"
+msgstr "ترتيب الملفات المرفقة"
+
+#: ../includes/main-form.php:335
+msgid "name"
+msgstr "الاسم"
+
+#: ../includes/main-form.php:336
+msgid "date"
+msgstr "تاريخ"
+
+#: ../includes/main-form.php:344
+msgid "Go"
+msgstr "تنفيذ"
+
+#: ../includes/main-form.php:363
+#, php-format
+msgid "File Gallery &mdash; %d attachment."
+msgstr "معرض الصور &mdash; %d ملف مرفق"
+
+#: ../includes/main-form.php:366
+#, php-format
+msgid "File Gallery &mdash; %d attachments."
+msgstr "معرض الصور &mdash; %d ملفات مرفقة"
+
+#: ../includes/main.php:138
+msgid "Zoom"
+msgstr "تكبير"
+
+#: ../includes/main.php:143
+msgid "Edit"
+msgstr "تحرير"
+
+#: ../includes/main.php:145
+msgid "Click to select, or click and drag to change position"
+msgstr "اضغط للاختيار , او اضغط و جر لتغيير المكان "
+
+#: ../includes/main.php:146
+msgid "Click to select"
+msgstr "اضغط للتحرير"
+
+#: ../includes/main.php:163
+msgid "Really set as featured image?"
+msgstr "هل تريد اختيار كصورة بارزة"
+
+#: ../includes/main.php:164
+#: ../includes/main.php:171
+#: ../includes/main.php:197
+#: ../includes/main.php:206
+msgid "Continue"
+msgstr "اكمل"
+
+#: ../includes/main.php:166
+#: ../includes/main.php:173
+#: ../includes/main.php:199
+#: ../includes/main.php:208
+msgid "Cancel"
+msgstr "الغاء"
+
+#: ../includes/main.php:170
+msgid "Really unset as featured image?"
+msgstr "هل تريد"
+
+#: ../includes/main.php:179
+msgid "Detach / Delete"
+msgstr "حذف/فصل"
+
+#: ../includes/main.php:186
+msgid "Delete"
+msgstr "حذف"
+
+#: ../includes/main.php:193
+msgid "Detach"
+msgstr "فصل"
+
+#: ../includes/main.php:196
+msgid "Really detach?"
+msgstr "متاكد من الفصل ؟"
+
+#: ../includes/main.php:205
+msgid "Really delete?"
+msgstr "متاكد من الحذف ؟"
+
+#: ../includes/main.php:471
+msgid "No attachments were deleted (capabilities?)"
+msgstr "لم تحذف المرفقات (تاكد من الصلاحيات)"
+
+#: ../includes/main.php:473
+msgid "Attachment(s) deleted"
+msgstr "حذفت المرفقات"
+
+#: ../includes/main.php:484
+msgid "Attachment(s) detached"
+msgstr "فصل المرفقات"
+
+#: ../includes/main.php:486
+msgid "Error detaching attachment(s)"
+msgstr "خطأ اثناء فصل الملفات"
+
+#: ../includes/main.php:560
+msgid "Attachment data updated"
+msgstr "تحديث المرفقات"
+
+#: ../includes/main.php:564
+msgid "Error updating attachment data!"
+msgstr "خطأ بتحديث المرفقات !"
+
+#: ../includes/main.php:569
+msgid "No change."
+msgstr "من دون تغيير"
+
+#: ../includes/media-settings.php:15
+msgid "Intermediate image sizes"
+msgstr "احجام صور متوسطة"
+
+#: ../includes/media-settings.php:30
+msgid "Medium size"
+msgstr "حجم متوسط"
+
+#: ../includes/media-settings.php:35
+msgid "Large size"
+msgstr "حجم كبير"
+
+#: ../includes/media-settings.php:65
+msgid "Here you can specify width, height and crop attributes for intermediate image sizes added by plugins and/or themes, as well as crop options for the default medium and large sizes"
+msgstr "هنا بالامكان  تحديد عرض , ارتفاع ,تأطير احداثيات صورة اضيقت بواسطة اضافات وقوالب , وايضا اختيارات تأطير لاحجام صور متوسطة , كبيرة , وتلقائية ."
+
+#: ../includes/media-settings.php:68
+#, php-format
+msgid "File Gallery help file is located in the \"help\" subfolder of the plugin. You can <a href=\"%s/help/index.html\" target=\"_blank\">click here to open it in new window</a>."
+msgstr "ملف المساعدة لمعرض الصور File Gallery موجود بمجلد الاضافة   \"help\" . <a href=\"%s/help/index.html\" target=\"_blank\">اضغط هنا</a> للفتح باطار جديد"
+
+#: ../includes/media-settings.php:156
+msgid "ascending"
+msgstr "ترتيب تصاعدي"
+
+#: ../includes/media-settings.php:157
+msgid "descending"
+msgstr "ترتيب تنازلي"
+
+#: ../includes/media-settings.php:323
+msgid "Crop medium size to exact dimensions"
+msgstr "تأطير الحجم المتوسط للاحداثيات المختارة"
+
+#: ../includes/media-settings.php:329
+msgid "Crop large size to exact dimensions"
+msgstr "تأطير الحجم الكبير للاحداثيات المختارة"
+
+#: ../includes/media-settings.php:343
+msgid "Width"
+msgstr "عرض"
+
+#: ../includes/media-settings.php:345
+msgid "Height"
+msgstr "ارتفاع"
+
+#: ../includes/media-settings.php:348
+#, php-format
+msgid "Crop %s size to exact dimensions"
+msgstr "هل تريد التأطير %s للاحداثيات المخصصة"
+
+#: ../includes/miscellaneous.php:170
+msgid "Attachment order saved successfully."
+msgstr "تم حفظ ترتيب المرفقات"
+
+#: ../includes/miscellaneous.php:174
+msgid "Database error! Function: file_gallery_save_menu"
+msgstr "خطأ في قاعدة البيانات ! دالة: file_gallery_save_menu"
+
+#: ../includes/regenerate-images.php:17
+msgid "No valid attachment IDs were supplied!"
+msgstr "ID المرفقات غير صالح!"
+
+#: ../includes/regenerate-images.php:28
+#, php-format
+msgid "Error: %s while regenerating image ID %d"
+msgstr "خطأ: %s اثناء تحديث صورة رقم ID %d"
+
+#: ../includes/regenerate-images.php:30
+#, php-format
+msgid "Unknown error while regenerating image ID %d"
+msgstr "خطأ غير معروف خلال تحديث صورة رقم   ID %d"
+
+#: ../includes/regenerate-images.php:41
+msgid "Attachment thumbnails were successfully regenerated"
+msgstr "كل الصور المصغرة للملفات المرفقة تم تحديثها ."
+
+#: ../includes/regenerate-images.php:43
+msgid "All attachments' thumbnails were successfully regenerated"
+msgstr "كل الملفات المرفقة تم تحديثها بنجاح."
+
+#: ../includes/regenerate-images.php:48
+msgid "There were errors and some of the attachments' thumbnails weren't successfully regenerated!"
+msgstr "هنالك اخطاء ولم نستطع تجديد بعض الصور المصغرة بنجاح!"
+
+#: ../includes/regenerate-images.php:50
+msgid "There were errors and none of the attachments' thumbnails were successfully regenerated!"
+msgstr "هنالك اخطاء ولم نستطع تجديد الصور المصغرة بنجاح!"
+
+#: ../includes/templating.php:283
+msgid "file does not exist:"
+msgstr "ملف غير موجود"
+
+#: ../includes/templating.php:283
+msgid "using default style"
+msgstr "نستخدم القال الافتراضي"
+
+#: ../includes/templating.php:961
+msgid "Skip to first page"
+msgstr "التخطي للصفحة الاولى"
+
+#: ../includes/templating.php:964
+msgid "Skip to last page"
+msgstr "التخطي للصفحة الاخيرة"
+
+#~ msgid "File gallery"
+#~ msgstr "معرض الصور"
+
+#~ msgid ""
+#~ "Wordpress version 2.9 or higher is required for this plugin to function "
+#~ "properly, please upgrade."
+#~ msgstr ""
+#~ "נדרשת וורדרפס 2.9 ומעלה כדי שתוסף זה יפעל כראוי. נא עדכן גרסת וורדפרס כדי "
+#~ "להשתמש בתוסף."
+
+#~ msgid "Attachment deleted"
+#~ msgstr "Prilog izbrisan"
+
+#~ msgid "Attachment detached"
+#~ msgstr "Prilog odvojen"
+
+#~ msgid "Error detaching attachment"
+#~ msgstr "Greška pri odvajanju priloga!"
+
+#~ msgid "Fullsize URI:"
+#~ msgstr "Adresa pune veličine:"
+
+#~ msgid "Error updating attachments menu order!"
+#~ msgstr "Greška pri ažuriranju podataka o redoslijedu u izborniku!"
+
+#~ msgid "File does not exist"
+#~ msgstr "Datoteka ne postoji"
+
+#~ msgid "using default template"
+#~ msgstr "koristim osnovni predložak"
+
+#~ msgid ""
+#~ "Media tags - enter by hand separating each tag with a comma, or choose "
+#~ "from the list below by clicking on tag name"
+#~ msgstr ""
+#~ "Media tagovi - unesite ih ili ručno razdvajajući ih zarezom, ili kliknite "
+#~ "na nazive tagova sa liste"
+
+#~ msgid "Insert checked"
+#~ msgstr "Umetni označene priloge"
+
+#~ msgid "Save current sort order as menu order"
+#~ msgstr "Spremi trenutni poredak kao redoslijed u izborniku (menu order)"
+
+#~ msgid "Are you sure that you want to delete these attachments?"
+#~ msgstr "Sigurno želite izbrisati ove priloge?"
+
+#~ msgid "deleting attachment(s)..."
+#~ msgstr "brišem prilog(e)..."
+
+#~ msgid "Crop "
+#~ msgstr "Crop"

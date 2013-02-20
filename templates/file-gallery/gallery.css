@@ -1,0 +1,120 @@
+.gallery.file-gallery,
+#content .gallery.file-gallery
+{
+	margin: 20px auto !important;
+	clear:both !important;
+	overflow: hidden !important;
+	background: #d8d4c8 !important;
+	padding: 5px !important;
+	list-style: none !important;
+}
+
+.entry ul li:before,
+#content .entry ul li:before
+{
+	content: "";
+}
+
+html > body .entry ul,
+html > body #content .entry ul
+{
+	text-indent: 0;
+}
+
+html > body .entry li,
+html > body #content .entry li
+{
+	margin: 0;
+	list-style: none;
+}
+
+.gallery.file-gallery .gallery-item,
+#content .gallery.file-gallery .gallery-item
+{
+	float: left !important;
+	text-align: center;
+}
+
+.gallery.file-gallery img,
+#content .gallery.file-gallery img
+{
+	border: 2px solid #FFFFFF !important;
+	background: #BFBFB7 !important;
+	padding: 12px 5px 8px 5px !important;
+	margin: 5px !important;
+	width: 86% !important;
+	height: auto !important;
+}
+
+.gallery.file-gallery .gallery-caption,
+#content .gallery.file-gallery .gallery-caption
+{
+	color: #FFFFFF;
+	margin: 0;
+	text-align: center;
+}
+
+.gallery.file-gallery .gallery-description,
+#content .gallery.file-gallery .gallery-description
+{
+	font-size: 80%;
+	color: #664422;
+	margin: 0;
+}
+
+.gallery.file-gallery .gallery-endcol,
+#content .gallery.file-gallery .gallery-endcol
+{
+	margin-right: 0;
+}
+
+.gallery.file-gallery .clear,
+#content .gallery.file-gallery .clear
+{
+	clear: both;
+	height: 0.001px;
+	visibility: hidden;
+}
+
+.gallery.file-gallery .gallery-icon,
+#content .gallery.file-gallery .gallery-icon
+{
+	background: none !important;
+	margin: 0 !important;
+	padding: 0 !important;
+}
+
+.gallery.file-gallery .gallery-startcol,
+#content .gallery.file-gallery .gallery-startcol
+{
+	clear: left;
+}
+
+
+
+/*
+Default style for WP-PageNavi plugin
+
+http://wordpress.org/extend/plugins/wp-pagenavi/
+*/
+
+.gallery.file-gallery .wp-pagenavi {
+	clear: both;
+	padding: 10px 0;
+	margin-top: 1em;
+}
+
+.gallery.file-gallery .wp-pagenavi a, .wp-pagenavi span {
+	text-decoration: none;
+	border: 1px solid #BFBFBF;
+	padding: 3px 5px;
+	margin: 2px;
+}
+
+.gallery.file-gallery .wp-pagenavi a:hover, .wp-pagenavi span.current {
+	border-color: #000;
+}
+
+.gallery.file-gallery .wp-pagenavi span.current {
+	font-weight: bold;
+}

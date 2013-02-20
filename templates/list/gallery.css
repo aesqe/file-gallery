@@ -1,0 +1,98 @@
+.gallery.list,
+#content .gallery.list
+{
+	margin: 0 0 0 1em;
+	list-style: square;
+}
+
+.entry ul.gallery.list li:before,
+#content .entry ul.gallery.list li:before
+{
+	content: "";
+}
+
+html > body .entry ul.gallery.list,
+#content html > body #content .entry ul.gallery.list
+{
+	text-indent: 0;
+}
+
+html > body .entry ul.gallery.list li,
+html > body #content .entry ul.gallery.list li
+{
+	margin: 0;
+}
+
+.gallery.list .gallery-item,
+#content .gallery.list .gallery-item
+{
+	float: none;
+	width: auto !important;
+	text-align: left;
+	list-style: square;
+	display: list-item !important;
+}
+
+.gallery.list .gallery-item a,
+#content .gallery.list .gallery-item a
+{
+	clear: both;
+}
+
+.gallery.list .gallery-caption,
+#content .gallery.list .gallery-caption
+{
+	margin: 0;
+}
+
+.gallery.list .gallery-description,
+#content .gallery.list .gallery-description
+{
+	font-size: 80%;
+	color: #664422;
+	margin: 0;
+}
+
+.gallery.list .gallery-endcol,
+#content .gallery.list .gallery-endcol
+{
+	margin-right: 0;
+}
+
+.gallery.list .clear,
+#content .gallery.list .clear
+{
+	clear: both;
+	height: 0.001px;
+	visibility: hidden;
+}
+
+
+
+
+/*
+Default style for WP-PageNavi plugin
+
+http://wordpress.org/extend/plugins/wp-pagenavi/
+*/
+
+.gallery.list .wp-pagenavi {
+	clear: both;
+	padding: 10px 0;
+	margin-top: 1em;
+}
+
+.gallery.list .wp-pagenavi a, .wp-pagenavi span {
+	text-decoration: none;
+	border: 1px solid #BFBFBF;
+	padding: 3px 5px;
+	margin: 2px;
+}
+
+.gallery.list .wp-pagenavi a:hover, .wp-pagenavi span.current {
+	border-color: #000;
+}
+
+.gallery.list .wp-pagenavi span.current {
+	font-weight: bold;
+}
