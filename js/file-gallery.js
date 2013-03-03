@@ -1672,20 +1672,20 @@ jQuery(document).ready(function($)
 			if( "rand" == $("#file_gallery_orderby").val() )
 			{
 				$("#file_gallery_order").css({display : "none"});
-				order = "";
+				//order = "";
 			}
 			else
 			{
 				$("#file_gallery_order").css({display : "inline"});
 			}
 			
-			orderby = ' orderby="' + $("#file_gallery_orderby").val() + '"';
+			//orderby = ' orderby="' + $("#file_gallery_orderby").val() + '"';
 		}
 		else
 		{
 			$("#file_gallery_order").css({display : "none"});
-			order 	= "";
-			orderby = "";
+			//order 	= "";
+			//orderby = "";
 		}
 	
 	
