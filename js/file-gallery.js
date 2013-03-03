@@ -45,13 +45,9 @@ jQuery(document).ready(function($)
 		{
 			var ed = file_gallery.tinymce_get_editor();
 
-			console.log("tinymce_maybe_update_gallery_data", ed, ed.id, file_gallery.gallery_image_clicked[ed.id]);
-
 			// update tinymce gallery
 			if( ed && file_gallery.gallery_image_clicked[ed.id] )
 			{
-				console.log("clicked");
-
 				if( ed.selection.getContent() === "" )
 				{
 					ed.focus();
@@ -61,8 +57,6 @@ jQuery(document).ready(function($)
 
 				if( ed.selection.getContent() !== "" )
 				{
-					console.log("got content");
-
 					// skips setContent for webkit browsers if tinyMCE version is below 3.3.6
 					if( (! $.browser.webkit && ! $.browser.safari) || (3 <= parseFloat(tinymce.majorVersion) /*&& 3.6 <= parseFloat(tinymce.minorVersion)*/) )
 					{
@@ -73,8 +67,6 @@ jQuery(document).ready(function($)
 							{
 								return "<img src='" + tinymce.baseURL + "/plugins/wpgallery/img/t.gif' class='wpGallery mceItem' title='gallery" + tinymce.DOM.encode(b).replace(/\[/, '\[').replace(/\]/, '\]') + "' id='" + new_gallery_id + "' />";
 							});
-
-						console.log("new content generated");
 
 						ed.focus();
 						ed.selection.select( ed.getDoc().getElementById(file_gallery.last_clicked_gallery[ed.id]) );
@@ -706,8 +698,6 @@ jQuery(document).ready(function($)
 			serial += id + size + linkto + linksize + linkclass + imageclass + galleryclass + mimetype + limit + order + orderby + template + columns + linkrel + "]\n";
 
 			$("#data_collector").val(serial);
-
-			console.log("serialized", internal_event);
 
 			if( internal_event === "normal" ) {
 				file_gallery.tinymce_maybe_update_gallery_data(serial);
