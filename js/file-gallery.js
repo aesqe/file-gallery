@@ -4,61 +4,10 @@ var file_gallery =
 	options : file_gallery_options
 };
 
-// add access and prop for older versions of jQuery
-if( typeof(jQuery.access) !== "function" )
-{
-	jQuery.extend({
-		access: function( elems, key, value, exec, fn, pass ) {
-			var length = elems.length;
-	
-			// Setting many attributes
-			if ( typeof key === "object" ) {
-				for ( var k in key ) {
-					jQuery.access( elems, k, key[k], exec, fn, value );
-				}
-				return elems;
-			}
-	
-			// Setting one attribute
-			if ( value !== undefined ) {
-				// Optionally, function values get executed if exec is true
-				exec = !pass && exec && jQuery.isFunction(value);
-	
-				for ( var i = 0; i < length; i++ ) {
-					fn( elems[i], key, exec ? value.call( elems[i], i, fn( elems[i], key ) ) : value, pass );
-				}
-	
-				return elems;
-			}
-	
-			// Getting an attribute
-			return length ? fn( elems[0], key ) : undefined;
-		}
-	});
-}
-	
-if( typeof(jQuery.fn.prop) !== "function" )
-{
-	jQuery.fn.extend({
-		prop: function( name, value ) {
-			
-			if( "checked" === name || "selected" === name || "disabled" === name || "readonly" === name )
-			{
-				if( true === value ) {
-					value = name;
-				}
-				else if( false === value ) {
-					value = "";
-				}
-			}
-			
-			return jQuery.access( this, name, value, true, jQuery.attr );
-		}
-	});
-}
-
 jQuery(document).ready(function($)
-{	
+{
+	"use strict";
+
 	$.extend(file_gallery,
 	{
 		tmp : [],
@@ -69,26 +18,25 @@ jQuery(document).ready(function($)
 		uploader_dragdrop : true,
 		initialized : false,
 
-		
 		tinymce_get_editor: function()
 		{
-			if( "undefined" === typeof(wpActiveEditor) )
+			if( wpActiveEditor === void 0 ) {
 				wpActiveEditor = "content";
-			
-			if( "undefined" !== typeof(tinymce) )
+			}
+
+			if( tinymce === void 0 ){
 				return tinymce.EditorManager.get(wpActiveEditor);
-			
+			}
+
 			return null;
 		},
-		
-		
+
 		tinymce_remove_upload_iframe : function()
 		{
 			var ed = file_gallery.tinymce_get_editor();
-			
+
 			$( ed.getBody() ).find("#file_gallery_tinymce_upload").remove();
 		},
-
 
 		/**
 		 * updates the contents of [gallery] shortcode
@@ -100,35 +48,36 @@ jQuery(document).ready(function($)
 			// update tinymce gallery
 			if( ed && file_gallery.gallery_image_clicked[ed.id] )
 			{
-				if( "" == ed.selection.getContent() )
+				if( ed.selection.getContent() === "" )
 				{
 					ed.focus();
 					ed.selection.select( ed.getDoc().getElementById( file_gallery.last_clicked_gallery[ed.id] ) ) ;
 					tinymce.execCommand("mceFocus", false, ed.id);
 				}
 
-				if( "" != ed.selection.getContent() )
+				if( ed.selection.getContent() !== "" )
 				{
 					// skips setContent for webkit browsers if tinyMCE version is below 3.3.6
 					if( (! $.browser.webkit && ! $.browser.safari) || (3 <= parseFloat(tinymce.majorVersion) && 3.6 <= parseFloat(tinymce.minorVersion)) )
 					{
-						var ed = file_gallery.tinymce_get_editor(),
-							new_gallery_id = "file_gallery_tmp_" + file_gallery.tmp[ed.id];
+						ed = file_gallery.tinymce_get_editor();
+
+						var new_gallery_id = "file_gallery_tmp_" + file_gallery.tmp[ed.id],
 							new_content = serial.replace(/\[gallery([^\]]*)\]/g, function(a,b)
 							{
 								return "<img src='" + tinymce.baseURL + "/plugins/wpgallery/img/t.gif' class='wpGallery mceItem' title='gallery" + tinymce.DOM.encode(b).replace(/\[/, '\[').replace(/\]/, '\]') + "' id='" + new_gallery_id + "' />";
 							});
 
 						ed.focus();
-							ed.selection.select( ed.getDoc().getElementById(file_gallery.last_clicked_gallery[ed.id]) );
-								ed.selection.setContent( new_content );
-							ed.selection.select( ed.getDoc().getElementById(new_gallery_id) );
+						ed.selection.select( ed.getDoc().getElementById(file_gallery.last_clicked_gallery[ed.id]) );
+						ed.selection.setContent( new_content );
+						ed.selection.select( ed.getDoc().getElementById(new_gallery_id) );
 						tinymce.execCommand( "mceFocus", false, ed.id );
-						
+
 						file_gallery.last_clicked_gallery[ed.id] = new_gallery_id;
 						file_gallery.tmp[ed.id]++;
 					}
-					
+
 					$('#file_gallery_response').html(file_gallery.L10n.gallery_updated).show().fadeOut(1000);
 				}
 			}
@@ -144,7 +93,7 @@ jQuery(document).ready(function($)
 			if( typeof title === "undefined" ) {
 				title = $("#data_collector").val();
 			}
-			
+
 			var opt = title.replace("gallery", "").replace("attachment_ids", "ids"), // gets gallery options from image title
 				attachment_ids = opt.match(/ids=['"]([0-9,]+)['"]/),
 				attachment_includes = opt.match(/include=['"]([0-9,]+)['"]/),
@@ -181,7 +130,7 @@ jQuery(document).ready(function($)
 				external_url = decodeURIComponent(thelink);
 				thelink = "external_url";
 			}
-		
+
 			$("#file_gallery_postid").val( post_id ? post_id[1] : ""  );
 			$("#file_gallery_size").val(size ? size[1] : "thumbnail" );
 			$("#file_gallery_linkto").val( thelink );
@@ -199,24 +148,26 @@ jQuery(document).ready(function($)
 			$("#file_gallery_offset").val(offset ? offset[1] : "" );
 			$("#file_gallery_paginate").val(paginate ? paginate[1] : "false" );
 			$("#file_gallery_columns").val(columns ? columns[1] : "3" );
-			
-			if( linkrel && "true" != linkrel[1] && "false" != linkrel[1])
+
+			if( linkrel && linkrel[1] !== "true" && linkrel[1] !== "false" )
 			{
 				$("#file_gallery_linkrel").val("true");
 				$("#file_gallery_linkrel_custom").val( linkrel[1].replace(/\\\[/, '[').replace(/\\\]/, ']') );
 			}
-			
+
 			if( tags )
 			{
 				$("#fg_gallery_tags").val(tags[1]);
 				$("#files_or_tags").val("tags");
 				file_gallery.files_or_tags( false );
-				
-				if( tags_from )
+
+				if( tags_from ) {
 					$("#fg_gallery_tags_from").prop("checked", false);
-				else
+				}
+				else {
 					$("#fg_gallery_tags_from").prop("checked", true);
-				
+				}
+
 				$("#file_gallery_toggler").show();
 			}
 			else
@@ -234,31 +185,32 @@ jQuery(document).ready(function($)
 			else {
 				attachment_ids = "all";
 			}
-			
+
 			if( 0 < file_gallery.options.num_attachments )
 			{
 				$("#file_gallery_uncheck_all").trigger("click_tinymce_gallery");
-				
+
 				$("#fg_container .sortableitem .checker").map(function()
 				{
 					var id = $(this).attr("id").replace("att-chk-", "");
-					
+
 					this_post_attachment_ids.push(id);
-					
+
 					if( "all" === attachment_ids || -1 < attachment_ids.indexOf(id) )
 					{
 						$(this).parents(".sortableitem").addClass("selected");
-						return this.checked = true;
+						this.checked = true;
+						return;
 					}
 				});
-				
+
 				for( i; i < attachment_ids.length; i++ )
 				{
 					if( this_post_attachment_ids.indexOf(attachment_ids[i]) === -1 ) {
 						external_attachments.push(attachment_ids[i]);
 					}
 				}
-				
+
 				file_gallery.serialize("tinymce_gallery", external_attachments);
 			}
 			else
@@ -273,22 +225,26 @@ jQuery(document).ready(function($)
 		 */
 		tinymce_deselect : function( force )
 		{
-			if( "undefined" === typeof(force) )
+			if( force === void 0 ) {
 				force = false;
+			}
 
 			var ed = file_gallery.tinymce_get_editor();
 
-			if( "undefined" !== ed || (ed.id && false === file_gallery.gallery_image_clicked[ed.id] && false === force) )
+			if( ed !== void 0 || (ed.id && false === file_gallery.gallery_image_clicked[ed.id] && false === force) ) {
 				return;
+			}
 
-			if( force && 0 < $("#TB_overlay").length )
+			if( force && $("#TB_overlay").length > 0 ) {
 				return setTimeout( function(){ file_gallery.tinymce_deselect( force ); }, 100 );
-			
-			if( "undefined" !== typeof(ed) )
+			}
+
+			if( ed !== void 0 )
 			{
-				if( ed.selection )
+				if( ed.selection ) {
 					ed.selection.collapse(false);
-			
+				}
+
 				tinymce.execCommand("mceRepaint", false, ed.id);
 				tinymce.execCommand("mceFocus", false, ed.id);
 			}
@@ -301,7 +257,7 @@ jQuery(document).ready(function($)
 		is_all_checked : function()
 		{
 			var all_checked = true;
-			
+
 			$("#fg_container .sortableitem .checker").map(function()
 			{
 				if( ! this.checked )
@@ -311,7 +267,7 @@ jQuery(document).ready(function($)
 					return;
 				}
 			});
-			
+
 			return all_checked;
 		},
 
@@ -321,57 +277,61 @@ jQuery(document).ready(function($)
 		 */
 		init : function( response_message )
 		{
-			var tags_from = $("#fg_gallery_tags_from").prop("checked"), 
-				container = $("#fg_container"), 
+			var tags_from = $("#fg_gallery_tags_from").prop("checked"),
+				container = $("#fg_container"),
 				fieldsets = $("#file_gallery_fieldsets").val(),
 				data = null,
 				attachment_order = $("#data_collector_full").val();
-			
+
 			$("#file_gallery").removeClass("uploader");
 			$("#fg_container").css({ minHeight: 0 });
-			
-			if( 0 === $("#file_gallery_response").length )
+
+			if( 0 === $("#file_gallery_response").length ) {
 				$("#file_gallery.postbox").prepend('<div id="file_gallery_response"></div>');
-			
-			if( "return_from_single_attachment" == response_message )
+			}
+
+			if( response_message === "return_from_single_attachment" )
 			{
 				file_gallery.tinymce_deselect();
 			}
-			else if( "refreshed" == response_message )
+			else if( response_message === "refreshed"  )
 			{
 				file_gallery.refreshed = true;
 			}
-			else if( "sorted" == response_message )
+			else if( response_message === "sorted"  )
 			{
 				file_gallery.refreshed = true;
 				attachment_order = $("#file_gallery_attachments_sort").val();
 			}
-			else if( "UploadComplete" == response_message )
+			else if( response_message === "UploadComplete" )
 			{
 				file_gallery.refreshed = true;
 			}
-			
-			if( "undefined" == typeof(fieldsets) )
+
+			if( fieldsets === void 0 ) {
 				fieldsets = "";
-			
-			if( true === tags_from || "undefined" == typeof( tags_from ) || "undefined" == tags_from )
+			}
+
+			if( tags_from === true || tags_from === void 0 ) {
 				tags_from = true;
-			else
+			}
+			else {
 				tags_from = false;
+			}
 
 			data = {
-				action				: "file_gallery_load",
-				post_id 			: $("#post_ID").val(),
-				attachment_order 	: attachment_order,
-				attachment_orderby 	: $("#file_gallery_attachments_sortby").val(),
+				action : "file_gallery_load",
+				post_id : $("#post_ID").val(),
+				attachment_order : attachment_order,
+				attachment_orderby : $("#file_gallery_attachments_sortby").val(),
 				checked_attachments : $("#data_collector_checked").val(),
-				files_or_tags 		: $("#files_or_tags").val(),
-				tag_list 			: $("#fg_gallery_tags").val(),
-				tags_from 			: tags_from,
-				fieldsets			: fieldsets,
-				_ajax_nonce			: file_gallery.options.file_gallery_nonce
+				files_or_tags : $("#files_or_tags").val(),
+				tag_list : $("#fg_gallery_tags").val(),
+				tags_from : tags_from,
+				fieldsets : fieldsets,
+				_ajax_nonce : file_gallery.options.file_gallery_nonce
 			};
-			
+
 			response_message = null;
 
 			container
@@ -379,10 +339,10 @@ jQuery(document).ready(function($)
 				.append('<p class="loading_image"><img src="' + file_gallery.options.file_gallery_url + '/images/ajax-loader.gif" alt="' + file_gallery.L10n.loading_attachments + '" /><br />' + file_gallery.L10n.loading_attachments + '<br /></p>')
 				.css({height : "auto"})
 				.show();
-			
+
 			var request = $.post
 			(
-				ajaxurl, 
+				ajaxurl,
 				data,
 				function(response)
 				{
@@ -403,25 +363,27 @@ jQuery(document).ready(function($)
 		{
 			var container = $("#fg_container"),
 				files_or_tags = $("#files_or_tags");
-			
-			if( 0 === container.length || (0 === files_or_tags.length && 0 < $("file_gallery_gallery_options").length) )
+
+			if( container.length === 0 || (files_or_tags.length === 0 && $("file_gallery_gallery_options").length > 0) ) {
 				return;
+			}
 
 			file_gallery.options.num_attachments = $("#fg_container #file_gallery_list li").length;
-			
+
 			$("#file_gallery_copy_all").appendTo("#fg_buttons .advanced");
 
 			container.css({height : "auto"});
 			$("#file_gallery_switch_to_tags").show();
-			
+
 			// hide elements if post has no attachments
 			if( 0 === file_gallery.options.num_attachments )
 			{
 				$("#file_gallery_attachments_sorting, #file_gallery_save_menu_order_link").hide();
-				
-				if( 0 === $("#fg_info").length )
+
+				if( 0 === $("#fg_info").length ) {
 					$("#file_gallery_form").append('<div id="fg_info"></div>');
-				
+				}
+
 				$("#fg_info").html(file_gallery.L10n.no_attachments_upload).appendTo("#file_gallery_attachment_list").show();
 				container.css({overflow:"hidden", paddingBottom: 0});
 			}
@@ -429,28 +391,31 @@ jQuery(document).ready(function($)
 			{
 				container.css({overflow:"auto"});
 			}
-			
+
 			$("#file_gallery fieldset").not(".hidden").show();
-			
+
 			// tags from current post only checkbox
-			$("#fg_gallery_tags_from").prop("checked", ("false" == file_gallery.options.tags_from) ? false : true);
-			
+			$("#fg_gallery_tags_from").prop("checked", file_gallery.options.tags_from === "false" ? false : true);
+
 			// clickable tags
 			$(".fg_insert_tag").each( function()
 			{
 				var ct = "," + $("#fg_gallery_tags").val() + ",",
 					ns = "," + $(this).attr("name") + ",",
 					nn = "," + $(this).html() + ",";
-				
-				if ( -1 < ct.search(ns) || -1 < ct.search(nn) )
+
+				if ( ct.search(ns) > -1 || ct.search(nn) > -1 ) {
 					$(this).addClass("selected");
-				else
+				}
+				else {
 					$(this).removeClass("selected");
+				}
 			});
-			
+
 			// display tags or attachments
-			if( "undefined" == typeof( files_or_tags.val() ) || "undefined" == files_or_tags.val() )
+			if( files_or_tags.val() === void 0 ) {
 				files_or_tags.val("tags");
+			}
 
 			// load files / tags respectively
 			file_gallery.files_or_tags( true );
@@ -467,7 +432,7 @@ jQuery(document).ready(function($)
 		serialize : function( internal_event, external_attachments )
 		{
 			var serial = "",
-				id = ""
+				id = "",
 				size = "",
 				linkto = "",
 				linkrel = "",
@@ -487,7 +452,7 @@ jQuery(document).ready(function($)
 				columns = "",
 				tags = "",
 				tags_from = "",
-				ctlen = ""
+				ctlen = "",
 				ct = "",
 				ns = "",
 				nn = "",
@@ -496,22 +461,22 @@ jQuery(document).ready(function($)
 				file_gallery_order = "",
 				file_gallery_orderby = "",
 				include_attribute_name = file_gallery_options.wp_version >= 3.5 ? "ids" : "include";
-			
-			if( "undefined" == typeof(internal_event) ) {
+
+			if( internal_event === void 0 ) {
 				internal_event = "normal";
 			}
-			
-			if( "" != $("#file_gallery_linkrel_custom").val() && "undefined" != typeof($("#file_gallery_linkrel_custom").val()) )
+
+			if( $("#file_gallery_linkrel_custom").val() !== "" && $("#file_gallery_linkrel_custom").val() !== void 0 )
 			{
 				$("#file_gallery_linkrel_custom").val( $("#file_gallery_linkrel_custom").val().replace(/\[/, '').replace(/\]/, '') );
 				linkrel = ' rel="' + $("#file_gallery_linkrel_custom").val() + '"';
 			}
-			else if( "false" == $("#file_gallery_linkrel").val() )
+			else if( $("#file_gallery_linkrel").val() === "false" )
 			{
 				linkrel = ' rel="false"';
 			}
 
-			if( "external_url" == linkto_val ) {
+			if( linkto_val === "external_url" ) {
 				linkto_val = encodeURIComponent(external_url);
 			}
 
@@ -519,33 +484,34 @@ jQuery(document).ready(function($)
 			// tags
 			if( 0 < $("#fg_gallery_tags").length )
 			{
-				if( "undefined" == typeof( $("#fg_gallery_tags").val() ) || "undefined" == $("#fg_gallery_tags").val() )
+				if( $("#fg_gallery_tags").val() === void 0 ) {
 					$("#fg_gallery_tags").val("");
-				
+				}
+
 				tags = $("#fg_gallery_tags").val();
 				tags_from = $("#fg_gallery_tags_from").prop("checked");
-				
+
 				tags = tags.replace(/\s+/g, " ").replace(/\s+,/g, ",").replace(/,+\s*/g, ",");
-			
+
 				ctlen = tags.length;
-				
-				if( "," == tags[0] ) {
+
+				if( tags[0] === "," ) {
 					tags = tags.substring(1);
 				}
-				
-				if( "," == tags[ctlen-2] ) {
+
+				if( tags[ctlen-2] === "," ) {
 					tags = tags.substring(0, ctlen-1);
 				}
-			
+
 				$("#fg_gallery_tags").val(tags);
-				
+
 				$(".fg_insert_tag").each( function()
 				{
 					ct = "," + $("#fg_gallery_tags").val() + ",";
 					ns = "," + $(this).attr("name") + ",";
 					nn = "," + $(this).html() + ",";
-					
-					if ( -1 < ct.search(ns) || -1 < ct.search(nn) ) {
+
+					if ( ct.search(ns) > -1 || ct.search(nn) > -1 ) {
 						$(this).addClass("selected");
 					}
 					else {
@@ -554,38 +520,37 @@ jQuery(document).ready(function($)
 				});
 			}
 
-
 			if( 0 < file_gallery.options.num_attachments ) {
 				serial = $("#file_gallery_list").sortable("serialize");
 			}
-			
+
 			serial = serial.toString().replace(/image\[\]=/g, '').replace(/&/g, ',').replace(/,+/g, ',');
 			$("#data_collector_full").val(serial);
-			
+
 			// get checked items
 			serial = file_gallery.map("checked", serial);
 			$("#data_collector_checked").val(serial);
-			
+
 			// get checked copies
 			copies = file_gallery.map("copy", serial);
 			$("#file_gallery_copies").val(copies);
-		
+
 			// get checked originals
 			originals = file_gallery.map("has_copies", serial);
 			$("#file_gallery_originals").val(originals);
-			
-			if( "" == $("#file_gallery_originals").val() && "" == $("#file_gallery_copies").val() ) {
+
+			if( $("#file_gallery_originals").val() === "" && $("#file_gallery_copies").val() === "" ) {
 				$("#file_gallery_delete_what").val("all");
 			}
-			
+
 			file_gallery_order = $("#file_gallery_order");
 			file_gallery_orderby = $("#file_gallery_orderby");
-			
+
 			order = ' order="' + file_gallery_order.val() + '"';
-				
-			if( "default" != file_gallery_orderby.val() )
+
+			if( file_gallery_orderby.val() !== "default" )
 			{
-				if( "rand" == file_gallery_orderby.val() )
+				if( file_gallery_orderby.val() === "rand" )
 				{
 					file_gallery_order.hide();
 					order = "";
@@ -594,7 +559,7 @@ jQuery(document).ready(function($)
 				{
 					file_gallery_order.css({display : "inline"});
 				}
-				
+
 				orderby = ' orderby="' + file_gallery_orderby.val() + '"';
 			}
 			else
@@ -603,48 +568,48 @@ jQuery(document).ready(function($)
 				order = "";
 				orderby = "";
 			}
-			
-			if( "external_url" == $("#file_gallery_linkto").val() ) {
+
+			if( $("#file_gallery_linkto").val() === "external_url" ) {
 				$("#file_gallery_external_url_label").show();
 			}
 			else {
 				$("#file_gallery_external_url_label").hide();
 			}
-			
-			if( "external_url" == $("#file_gallery_single_linkto").val() ) {
+
+			if( $("#file_gallery_single_linkto").val() === "external_url" ) {
 				$("#file_gallery_single_external_url_label").show();
 			}
 			else {
 				$("#file_gallery_single_external_url_label").hide();
 			}
 
-			if( "none" == $("#file_gallery_linkto").val() ) {
+			if( $("#file_gallery_linkto").val() === "none" ) {
 				$("#file_gallery_linkclass_label").hide();
 			}
 			else {
 				$("#file_gallery_linkclass_label").show();
 			}
 
-			if( "none" == $("#file_gallery_single_linkto").val() ) {
+			if( $("#file_gallery_single_linkto").val() === "none" ) {
 				$("#file_gallery_single_linkclass_label").hide();
 			}
 			else {
 				$("#file_gallery_single_linkclass_label").show();
 			}
-			
-			if( 0 < Number($("#file_gallery_limit").val()) ) {
+
+			if( Number($("#file_gallery_limit").val()) > 0 ) {
 				$("#file_gallery_paginate_label").show();
 			}
 			else {
 				$("#file_gallery_paginate_label").hide();
 			}
-			
-			if( "file" == $("#file_gallery_linkto").val() || "external_url" == $("#file_gallery_linkto").val())
+
+			if( $("#file_gallery_linkto").val() === "file" || $("#file_gallery_linkto").val() === "external_url" )
 			{
 				$("#file_gallery_linksize_label").show();
 				$("#file_gallery_linkrel_custom_label").show();
 
-				if( "full" != $("#file_gallery_linksize").val() ) {
+				if( $("#file_gallery_linksize").val() === "full" ) {
 					linksize = ' link_size="' + $("#file_gallery_linksize").val() + '"';
 				}
 			}
@@ -662,8 +627,8 @@ jQuery(document).ready(function($)
 			}
 
 			if( typeof external_attachments !== "undefined" ) {
-				
-				if( serial == "" ) {
+
+				if( serial === "" ) {
 					serial = external_attachments.join(",");
 				}
 				else {
@@ -671,60 +636,72 @@ jQuery(document).ready(function($)
 				}
 			}
 
-			if( "" != tags ) {
+			if( tags !== "" ) {
 				serial = '[gallery tags="' + tags + '"' + tags_from;
 			}
-			else if( "" != serial && false === file_gallery.is_all_checked() ) {
+			else if( serial !== "" && file_gallery.is_all_checked() === false ) {
 				serial = '[gallery ' + include_attribute_name + '="' + serial + '"';
 			}
 			else {
 				serial = '[gallery';
 			}
-		
-			if( "thumbnail" != $("#file_gallery_size").val() )
-				size = ' size="' + $("#file_gallery_size").val() + '"';
 
-			if( "attachment" != $("#file_gallery_linkto").val() )
+			if( $("#file_gallery_size").val() !== "thumbnail" ) {
+				size = ' size="' + $("#file_gallery_size").val() + '"';
+			}
+
+			if( $("#file_gallery_linkto").val() !== "attachment" ) {
 				linkto = ' link="' + linkto_val + '"';
-		
-			if( "default" != $("#file_gallery_template").val() )
+			}
+
+			if( $("#file_gallery_template").val() !== "default" ) {
 				template = ' template="' + $("#file_gallery_template").val() + '"';
-			
-			if( "" != $("#file_gallery_linkclass").val() && "none" != $("#file_gallery_linkto").val() )
+			}
+
+			if( $("#file_gallery_linkclass").val() !== "" && $("#file_gallery_linkto").val() !== "none" ) {
 				linkclass = ' linkclass="' + $("#file_gallery_linkclass").val() + '"';
-			
-			if( "" != $("#file_gallery_imageclass").val() )
+			}
+
+			if( $("#file_gallery_imageclass").val() !== "" ) {
 				imageclass = ' imageclass="' + $("#file_gallery_imageclass").val() + '"';
-			
-			if( "" != $("#file_gallery_galleryclass").val() )
+			}
+
+			if( $("#file_gallery_galleryclass").val() !== "" ) {
 				galleryclass = ' galleryclass="' + $("#file_gallery_galleryclass").val() + '"';
-			
-			if( "" != $("#file_gallery_mimetype").val() )
+			}
+
+			if( $("#file_gallery_mimetype").val() !== "" ) {
 				mimetype = ' mimetype="' + $("#file_gallery_mimetype").val() + '"';
-				
-			if( 0 < Number($("#file_gallery_limit").val()) )
+			}
+
+			if( Number($("#file_gallery_limit").val()) > 0 )
 			{
 				limit = ' limit="' + $("#file_gallery_limit").val() + '"';
-				
-				if( "true" == $("#file_gallery_paginate").val() )
+
+				if( $("#file_gallery_paginate").val() === "true" ) {
 					limit += ' paginate="true"';
+				}
 			}
-			
-			if( 0 < Number($("#file_gallery_offset").val()) )
+
+			if( Number($("#file_gallery_offset").val()) > 0 ) {
 				limit += ' offset="' + $("#file_gallery_offset").val() + '"';
-			
-			if( "" != $("#file_gallery_postid").val() )
+			}
+
+			if( $("#file_gallery_postid").val() !== "" ) {
 				id = ' id="' + $("#file_gallery_postid").val() + '"';
-			
-			if( "" != $("#file_gallery_columns").val() && "3" != $("#file_gallery_columns").val() )
+			}
+
+			if( $("#file_gallery_columns").val() !== "" && $("#file_gallery_columns").val() !== "3" ) {
 				columns = ' columns="' + $("#file_gallery_columns").val() + '"';
-			
+			}
+
 			serial += id + size + linkto + linksize + linkclass + imageclass + galleryclass + mimetype + limit + order + orderby + template + columns + linkrel + "]\n";
-			
+
 			$("#data_collector").val(serial);
 
-			if( "normal" == internal_event )
+			if( internal_event === "normal" ) {
 				file_gallery.tinymce_maybe_update_gallery_data(serial);
+			}
 		},
 
 
@@ -753,9 +730,11 @@ jQuery(document).ready(function($)
 			}
 			catch(error)
 			{
-				alert("Error initializing $.ui.sortables: " + error.description);
-			};
-			
+				if( console && console.log ) {
+					console.log("Error initializing $.ui.sortables: " + error.description);
+				}
+			}
+
 			if( true !== file_gallery.refreshed )
 			{
 				// set up draggable / sortable list of attachments
@@ -773,7 +752,7 @@ jQuery(document).ready(function($)
 					},
 					update: function(){ file_gallery.serialize(); }
 				});
-				
+
 				// set up delete originals choice dialog
 				$("#file_gallery_delete_dialog").dialog(
 				{
@@ -791,21 +770,21 @@ jQuery(document).ready(function($)
 						$("#detach_or_delete_" + id + ", #detach_attachment_" + id + ",#del_attachment_" + id).fadeOut(100);
 					},
 					buttons: {
-	
+
 						"Cancel" : function()
 						{
 							var id = $("#file_gallery_delete_dialog").data("single_delete_id");
-							
+
 							$("#file_gallery_delete_what").val("data_only");
 							$("#detach_or_delete_" + id + ", #detach_attachment_" + id + ",#del_attachment_" + id).fadeOut(100);
 							$("#file_gallery_delete_dialog").removeData("single_delete_id");
-							
+
 							$(this).dialog("close");
 						},
 						"Delete attachment data only" : function()
 						{
 							var message = false, id = "";
-							
+
 							if( $(this).hasClass("single") )
 							{
 								id = $("#file_gallery_delete_dialog").data("single_delete_id");
@@ -815,16 +794,16 @@ jQuery(document).ready(function($)
 								message = file_gallery.L10n.sure_to_delete;
 								id = $('#data_collector_checked').val();
 							}
-							
+
 							$("#file_gallery_delete_what").val("data_only");
 							file_gallery.delete_attachments( id, message );
-							
+
 							$(this).dialog("close");
 						},
 						"Delete attachment data, its copies and the files" : function()
 						{
 							var message = false, id;
-							
+
 							if( $(this).hasClass("single") )
 							{
 								id = $("#file_gallery_delete_dialog").data("single_delete_id");
@@ -834,15 +813,15 @@ jQuery(document).ready(function($)
 								message = file_gallery.L10n.sure_to_delete;
 								id = $('#data_collector_checked').val();
 							}
-							
+
 							$("#file_gallery_delete_what").val("all");
 							file_gallery.delete_attachments( id, message );
-							
+
 							$(this).dialog("close");
 						}
 					}
 				});
-					
+
 				$("#file_gallery_image_dialog").dialog(
 				{
 					autoOpen: false,
@@ -854,7 +833,7 @@ jQuery(document).ready(function($)
 					draggable: false,
 					dialogClass: 'wp-dialog'
 				});
-				
+
 				$("#file_gallery_copy_all_dialog").dialog(
 				{
 					autoOpen: false,
@@ -870,8 +849,8 @@ jQuery(document).ready(function($)
 						"Cancel": function(){ $(this).dialog("close"); },
 						"Continue": function()
 						{
-							var from_id = parseInt($("#file_gallery_copy_all_dialog input#file_gallery_copy_all_from").val());
-							
+							var from_id = parseInt($("#file_gallery_copy_all_dialog input#file_gallery_copy_all_from").val(), 10);
+
 							if( isNaN(from_id) || from_id === 0 )
 							{
 								if( isNaN(from_id) ) {
@@ -879,10 +858,10 @@ jQuery(document).ready(function($)
 								}
 
 								alert(file_gallery.L10n.copy_from_is_nan_or_zero.replace(/%d/, from_id));
-								
+
 								return false;
 							}
-							
+
 							file_gallery.copy_all_attachments(from_id);
 							$(this).dialog("close");
 						}
@@ -900,17 +879,21 @@ jQuery(document).ready(function($)
 			var m = false,
 				delete_dialog = $("#file_gallery_delete_dialog"),
 				o = $("#file_gallery_originals").val();
-			
-			if( single )
+
+			if( single ) {
 				delete_dialog.addClass("single");
-			else
-				m = file_gallery.L10n.sure_to_delete
-			
-			if( ("" != o && "undefined" != o && "undefined" != typeof( o )) || $("#image-" + id).hasClass("has_copies") )
+			}
+			else {
+				m = file_gallery.L10n.sure_to_delete;
+			}
+
+			if( ("" != o && "undefined" != o && "undefined" != typeof( o )) || $("#image-" + id).hasClass("has_copies") ) {
 				delete_dialog.data("single_delete_id", id).dialog('open'); //originals present in checked list
-			else
+			}
+			else {
 				file_gallery.delete_attachments( id, m );
-			
+			}
+
 			return false;
 		},
 
@@ -922,21 +905,21 @@ jQuery(document).ready(function($)
 		 */
 		add_remove_tags : function( tag )
 		{
-			var current_tags 	= $("#fg_gallery_tags").val(),
-				newtag_slug  	= $(tag).attr("name"),
-				newtag_name		= $(tag).html(),
-				ct 			 	= "," + current_tags + ",",
-				ns			 	= "," + newtag_slug  + ",",
-				nn			 	= "," + newtag_name  + ",",
-				ctlen			= 0;
-			
+			var current_tags = $("#fg_gallery_tags").val(),
+				newtag_slug = $(tag).attr("name"),
+				newtag_name = $(tag).html(),
+				ct = "," + current_tags + ",",
+				ns = "," + newtag_slug  + ",",
+				nn = "," + newtag_name  + ",",
+				ctlen = 0;
+
 			if( "-1" == ct.search(ns) && "-1" == ct.search(nn) )
 			{
 				$(tag).addClass("selected");
-				
+
 				if( "" != current_tags )
 					newtag_slug = "," + newtag_slug;
-				
+
 				current_tags += newtag_slug;
 			}
 			else
@@ -1000,9 +983,9 @@ jQuery(document).ready(function($)
 			{
 				return false;
 			}
-			
+
 			data = '"' + data.toString() + '"';
-			
+
 			return data.replace(/,+/g, ',').replace(/",/g, '').replace(/,"/g, '').replace(/"/g, '');
 		},
 
