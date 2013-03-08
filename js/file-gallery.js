@@ -1045,7 +1045,7 @@ jQuery(document).ready(function($)
 				files_or_tags.val("files");
 			}
 			
-			if( do_Switch === false ) {
+			if( do_switch === false ) {
 				file_gallery.serialize("files_or_tags");
 			}
 		},
