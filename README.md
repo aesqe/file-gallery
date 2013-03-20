@@ -6,7 +6,11 @@
 "File Gallery" extends WordPress' media (attachments) capabilities 
 by adding a new gallery shortcode handler with templating support, 
 a new interface for attachment handling when editing posts, and much 
-more... Here's the full list of features:
+more...
+
+Some examples: http://skyphe.org/code/wordpress/file-gallery/file-gallery-examples/
+
+Support forums at WordPress.org: http://wordpress.org/support/plugin/file-gallery
 
 
 ## Features:##
