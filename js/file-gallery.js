@@ -26,7 +26,7 @@ jQuery(document).ready(function($)
 				wpActiveEditor = "content";
 			}
 
-			if( tinymce !== void 0 ){
+			if( tinymce !== void 0 ) {
 				return tinymce.EditorManager.get(wpActiveEditor);
 			}
 
@@ -123,7 +123,7 @@ jQuery(document).ready(function($)
 				external_attachments = [],
 				i = 0;
 
-			if( thelink === "attachment" && file_gallery_options.wp_version >= 3.5 ) {
+			if( thelink === "attachment" ) {
 				thelink = "post";
 			}
 
@@ -440,7 +440,7 @@ jQuery(document).ready(function($)
 				originals = "",
 				file_gallery_order = "",
 				file_gallery_orderby = "",
-				include_attribute_name = file_gallery_options.wp_version >= 3.5 ? "ids" : "include";
+				include_attribute_name = "ids";
 
 			if( internal_event === void 0 ) {
 				internal_event = "normal";
@@ -1733,7 +1733,7 @@ jQuery(document).ready(function($)
 	 * uploader
 	 * thanks to http://stackoverflow.com/questions/7110353/html5-dragleave-fired-when-hovering-a-child-element
 	 */ 
-		$('#file_gallery').on(
+		$("#file_gallery").on(
 		{
 			dragenter: function()
 			{
@@ -1805,7 +1805,7 @@ jQuery(document).ready(function($)
 		
 
 
-		$("#file_gallery_linkclass, #file_gallery_imageclass, #file_gallery_galleryclass, #file_gallery_mimetype, #file_gallery_limit, #file_gallery_offset, #file_gallery_external_url, #file_gallery_single_linkclass, #file_gallery_single_imageclass, #file_gallery_single_external_url, #fg_gallery_tags, #file_gallery_postid, #file_gallery_mimetype, #file_gallery_linkrel_custom").on("keypress keyup", function(e)
+		$("#file_gallery").on("keypress keyup", "#file_gallery_linkclass, #file_gallery_imageclass, #file_gallery_galleryclass, #file_gallery_mimetype, #file_gallery_limit, #file_gallery_offset, #file_gallery_external_url, #file_gallery_single_linkclass, #file_gallery_single_imageclass, #file_gallery_single_external_url, #fg_gallery_tags, #file_gallery_postid, #file_gallery_mimetype, #file_gallery_linkrel_custom", function(e)
 		{
 			// on enter
 			if( e.which === 13 || e.keyCode === 13 )
@@ -1827,7 +1827,7 @@ jQuery(document).ready(function($)
 		});
 	
 		
-		$("#fgae_post_alt, #fgae_post_title, #fgae_post_excerpt, #fgae_tax_input, #fgae_menu_order").on("keypress keyup", function(e)
+		$("#file_gallery").on("keypress keyup", "#fgae_post_alt, #fgae_post_title, #fgae_post_excerpt, #fgae_tax_input, #fgae_menu_order", function(e)
 		{
 			if( e.which === 13 || e.keyCode === 13 ) // on enter
 			{
@@ -1852,7 +1852,7 @@ jQuery(document).ready(function($)
 			return file_gallery.set_post_thumb($(this).attr("rel"), what);
 		});
 			
-		$("#remove-post-thumbnail").attr("onclick", "").on("click.file_gallery", function()
+		$("#file_gallery").attr("onclick", "").on("click.file_gallery", "#remove-post-thumbnail", function()
 		{		
 			if( $(".sortableitem.post_thumb").length > 0 ) {
 				return file_gallery.set_post_thumb($(".sortableitem.post_thumb").attr("id").split("-").pop(), true);
@@ -1863,11 +1863,11 @@ jQuery(document).ready(function($)
 			return false;
 		});
 		
-		$("#file_gallery_copy_all_form").on("submit", function(){ return false; });
+		$("#file_gallery").on("submit", "#file_gallery_copy_all_form", function(){ return false; });
 	
 	
 		// copy all attachments from another post
-		$("#file_gallery_copy_all").on("click", function()
+		$("#file_gallery").on("click", "#file_gallery_copy_all", function()
 		{
 			$("#file_gallery_copy_all_dialog").dialog("open");
 		});
@@ -1907,7 +1907,7 @@ jQuery(document).ready(function($)
 		});
 		
 		// acf enter on new field name
-		$("#file_gallery #new_custom_field_key").on("keypress keyup", function(e)
+		$("#file_gallery").on("keypress keyup", "#new_custom_field_key", function(e)
 		{
 			if( e.which === 13 || e.keyCode === 13 ) // on enter
 			{
@@ -2102,13 +2102,13 @@ jQuery(document).ready(function($)
 	/* other bindings */
 		
 		// bind dropdown select boxes change to serialize attachments list
-		$("#file_gallery_size, #file_gallery_linkto, #file_gallery_orderby, #file_gallery_order, #file_gallery_template, #file_gallery_single_linkto, #fg_container .sortableitem .checker, #file_gallery_columns, #file_gallery_linkrel,  #file_gallery_paginate, #file_gallery_linksize").on("change", function()
+		$("#file_gallery").on("change", "#file_gallery_size, #file_gallery_linkto, #file_gallery_orderby, #file_gallery_order, #file_gallery_template, #file_gallery_single_linkto, #fg_container .sortableitem .checker, #file_gallery_columns, #file_gallery_linkrel,  #file_gallery_paginate, #file_gallery_linksize", function()
 		{
 			file_gallery.serialize();
 		});
 				
 		// blur binding for text inputs and dropdown selects
-		$("#fg_gallery_tags, #file_gallery_linkclass, #file_gallery_imageclass, #file_gallery_galleryclass, #file_gallery_single_linkclass, #file_gallery_single_imageclass, #file_gallery_single_external_url, #file_gallery_external_url, #file_gallery_postid, #file_gallery_limit").on("blur", function()
+		$("#file_gallery").on("blur", "#fg_gallery_tags, #file_gallery_linkclass, #file_gallery_imageclass, #file_gallery_galleryclass, #file_gallery_single_linkclass, #file_gallery_single_imageclass, #file_gallery_single_external_url, #file_gallery_external_url, #file_gallery_postid, #file_gallery_limit", function()
 		{
 			file_gallery.serialize();
 		});
@@ -2153,35 +2153,11 @@ jQuery(document).ready(function($)
 			);
 		});
 		
-		if( file_gallery_options.wp_version >= 3.5 )
+		jQuery("body").on("click", ".media-modal-close", function()
 		{
-			jQuery(".media-modal-close").on("click", function()
-			{
-				file_gallery.tinymce_deselect( true );
-				file_gallery.init();
-			});
-		}
-		else
-		{
-			// thickbox window closed
-			// WP >= 3.3
-			if( typeof jQuery.fn.on === "function" )
-			{
-				jQuery(document.body).on("tb_unload", "#TB_window", function()
-				{
-					file_gallery.tinymce_deselect( true );
-					file_gallery.init();
-				});
-			}
-			else // WP < 3.3
-			{
-				jQuery("#TB_window").live("unload", function()
-				{
-					file_gallery.tinymce_deselect( true );
-					file_gallery.init();
-				});
-			}
-		}
+			file_gallery.tinymce_deselect( true );
+			file_gallery.init();
+		});
 	}
 
 	// min/max-width/height adjustments for post thumbnails on edit.php screens
@@ -2194,7 +2170,7 @@ jQuery(document).ready(function($)
 	}
 	
 	// regenerate thumbnails
-	$("a.file_gallery_regenerate").on("click", function(e)
+	$("#file_gallery").on("click", "a.file_gallery_regenerate",function(e)
 	{
 		var id = $(this).attr("id").split(/-/).pop();
 		
@@ -2235,7 +2211,7 @@ if( ! Array.indexOf )
 /**
  * thanks to http://phpjs.org/functions/strip_tags:535
  */
-function strip_tags (input, allowed)
+function strip_tags(input, allowed)
 {
 	"use strict";
 
