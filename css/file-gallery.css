@@ -243,10 +243,10 @@
 #file_gallery_list .ui-selected
 {
 	float:left;
-	background-color: #FAFAFA;
+	background-color: #EEEEEE;
 	position: relative;
-	padding: 5px;
-	border: 2px solid #DFDFDF;
+	padding: 6px;
+	/*border: 2px solid #DFDFDF;*/
 	margin-left: 3px;
 	margin-right: 5px;
 	margin-bottom: 6px;
@@ -256,20 +256,15 @@
 	min-height: 65px;
 	cursor: move;
 	overflow: hidden;
-	
-	border-radius: 5px;
-	-moz-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	-ms-border-radius: 5px;
-	-o-border-radius: 5px;
-	
-	/*
-	box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-	-moz-box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-	-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-	-ms-box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-	-o-box-shadow: 0 0 1px rgba(0, 0, 0, 0.2);
-	*/
+
+	/**/
+	border: none;
+	-moz-box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) inset, 0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+	-webkit-box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) inset, 0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+	-ms-box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) inset, 0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+	-o-box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) inset, 0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.1) inset, 0 0 0 1px rgba(0, 0, 0, 0.05) inset;
+	/**/
 }
 
 #file_gallery_textual_switcher
@@ -330,24 +325,24 @@
 
 #file_gallery_list .sortableitem.copy
 {
-	background-color: #C0E0F0;
+	background-color: #A0E8F0;
 }
 
 #file_gallery_list .sortableitem.has_copies
 {
-	background-color: #d6f1b3;
+	background-color: #C6EF83;
 }
 
 #file_gallery_list .sortableitem.post_thumb
 {
 	background-image: url(../images/overlay-featured.png);
 	border-color: #79d2d3;
-	
-	box-shadow: 0 0 6px 2px #52aeaf !important;
-	-moz-box-shadow: 0 0 6px 2px #52aeaf !important;
-	-webkit-box-shadow: 0 0 6px 2px #52aeaf !important;
-	-ms-box-shadow: 0 0 6px 2px #52aeaf !important;
-	-o-box-shadow: 0 0 6px 2px #52aeaf !important;
+
+	-moz-box-shadow: 0 0 0 4px #FFCC00 !important;
+	-webkit-box-shadow: 0 0 0 4px #FFCC00 !important;
+	-ms-box-shadow: 0 0 0 4px #FFCC00 !important;
+	-o-box-shadow: 0 0 0 4px #FFCC00 !important;
+	box-shadow: 0 0 0 4px #FFCC00 !important;
 }
 
 #file_gallery_list .sortableitem.selected
@@ -1470,4 +1465,35 @@ td.column-post_thumb .no-post-thumbnail
 .no-attachments #fg_buttons .basic
 {
 	display: none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.media-selection
+{
+	right: 400px;
+}
+
+.file-gallery-response
+{
+	background: #FFFFFF;
+	color: #21759B;
+	font-weight: 700;
+	margin: 10px -5px;
+	padding: 10px;
+
+	-webkit-border-radius: 1px;
+	-moz-border-radius: 1px;
+	-ms-border-radius: 1px;
+	-o-border-radius: 1px;
+	border-radius: 1px;
 }

@@ -13,9 +13,8 @@ jQuery(document).ready(function()
 			wpMediaFramePost.prototype.mainInsertToolbar.call(this, view);
 
 			var controller = this,
-				toolbar = this.selectionStatusToolbar( view );
-
-			// console.log(this, this.options, this.state(), this.toolbar, this.state().get('toolbar'), toolbar, controller.state().get('filterable'));
+				responseContainerAdded = false,
+				responseContainer = jQuery('<div class="file-gallery-response" style="display: none;"></div>');
 
 			view.set( "attach", {
 				style: "primary",
@@ -29,7 +28,16 @@ jQuery(document).ready(function()
 				{
 					var state = controller.state(),
 						selection = state.get("selection");
-					
+
+					if( responseContainerAdded === false ) {
+						controller.content.get().sidebar.$el.append(responseContainer);
+						responseContainerAdded = true;
+					}
+
+					responseContainer.stop().fadeOut(75, function() {
+						responseContainer.html("");
+					});
+
 					jQuery.post
 					(
 						wp.media.model.settings.ajaxurl,
@@ -41,13 +49,10 @@ jQuery(document).ready(function()
 						},
 						function(response)
 						{
-							var data = response.split("#"),
-								attached_ids = data[0];
-								response = data[1];
-
-							console.log(response);
-
 							state.reset();
+							responseContainer.html( response.split("#").pop() ).fadeIn(500, function() {
+								responseContainer.fadeOut(15000);
+							});
 						},
 						"html"
 					);

@@ -260,7 +260,7 @@ jQuery(document).ready(function($)
 		{
 			var unchecked = $("#fg_container .sortableitem .checker").not(':checked');
 
-			return unchecked.length > 0;
+			return unchecked.length === 0;
 		},
 
 
@@ -1826,19 +1826,22 @@ jQuery(document).ready(function($)
 			}
 		});
 	
-		
+		// single attachment editing view
 		$("#file_gallery").on("keypress keyup", "#fgae_post_alt, #fgae_post_title, #fgae_post_excerpt, #fgae_tax_input, #fgae_menu_order", function(e)
 		{
 			if( e.which === 13 || e.keyCode === 13 ) // on enter
 			{
-				$("#file_gallery_edit_attachment_save").trigger("click");
-				e.preventDefault();
+				// Disabled. http://wordpress.org/support/topic/how-to-stop-enter-key-to-save-in-attachment-editing-screen?replies=1
+				// $("#file_gallery_edit_attachment_save").trigger("click");
+				// e.preventDefault();
 				return false;
 			}
+			/**
 			else if( e.which === 27 || e.keyCode === 27 ) // on esc
 			{
 				$("#file_gallery_edit_attachment_cancel").trigger("click");
 			}
+			/**/
 		});
 	
 		$("#file_gallery").on("click", "a.post_thumb_status", function()
@@ -2152,8 +2155,19 @@ jQuery(document).ready(function($)
 				}
 			);
 		});
-		
-		jQuery("body").on("click", ".media-modal-close", function()
+
+		$("body").on("click", ".media-frame .media-frame-content .attachment", function()
+		{
+			$(".file-gallery-response").hide();
+		});
+
+		wp.media.view.Modal.prototype.on("close", function()
+		{
+			file_gallery.tinymce_deselect( true );
+			file_gallery.init();
+		});
+
+		jQuery("body").on("tb_unload", "#TB_window", function()
 		{
 			file_gallery.tinymce_deselect( true );
 			file_gallery.init();
