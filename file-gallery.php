@@ -1468,6 +1468,68 @@ function file_gallery_media_columns( $columns )
 }
 add_filter('manage_media_columns', 'file_gallery_media_columns');
 
+function print_new_attachment_template(){
+global $post;
+?>
+
+<script type="text/html" id="tmpl-attachment-new">
+		<# 	if ( <?php echo $post->ID; ?> == data.uploadedTo ) { #>
+		<div class="attachment-preview isattached type-{{ data.type }} subtype-{{ data.subtype }} {{ data.orientation }}">
+		<# } else { #>
+		<div class="attachment-preview type-{{ data.type }} subtype-{{ data.subtype }} {{ data.orientation }}">
+		<# } #>
+			<# if ( data.uploading ) { #>
+				<div class="media-progress-bar"><div></div></div>
+			<# } else if ( 'image' === data.type ) { #>
+				<div class="thumbnail">
+					<div class="centered">
+						<img src="{{ data.size.url }}" draggable="false" />
+					</div>
+				</div>
+			<# } else { #>
+				<img src="{{ data.icon }}" class="icon" draggable="false" />
+				<div class="filename">
+					<div>{{ data.filename }}</div>
+				</div>
+			<# } #>
+
+			<# if ( data.buttons.close ) { #>
+				<a class="close media-modal-icon" href="#" title="<?php _e('Remove'); ?>"></a>
+			<# } #>
+
+			<# if ( data.buttons.check ) { #>
+				<a class="check" href="#" title="<?php _e('Deselect'); ?>"><div class="media-modal-icon"></div></a>
+			<# } #>
+			
+			<# if ( data.buttons.attach ) { #>
+				<a class="attach id_{{ data.id }}" href="#" title="attach/detach"><div class="media-modal-icon"></div></a>
+			<# } #>
+
+		</div>
+		<#
+		var maybeReadOnly = data.can.save || data.allowLocalEdits ? '' : 'readonly';
+		if ( data.describe ) { #>
+			<# if ( 'image' === data.type ) { #>
+				<input type="text" value="{{ data.caption }}" class="describe" data-setting="caption"
+					placeholder="<?php esc_attr_e('Caption this image&hellip;'); ?>" {{ maybeReadOnly }} />
+			<# } else { #>
+				<input type="text" value="{{ data.title }}" class="describe" data-setting="title"
+					<# if ( 'video' === data.type ) { #>
+						placeholder="<?php esc_attr_e('Describe this video&hellip;'); ?>"
+					<# } else if ( 'audio' === data.type ) { #>
+						placeholder="<?php esc_attr_e('Describe this audio file&hellip;'); ?>"
+					<# } else { #>
+						placeholder="<?php esc_attr_e('Describe this media file&hellip;'); ?>"
+					<# } #> {{ maybeReadOnly }} />
+			<# } #>
+		<# } #>
+	</script>
+
+
+<?php
+ }
+ 
+add_action('print_media_templates','print_new_attachment_template');
 
 /**
  * Includes
