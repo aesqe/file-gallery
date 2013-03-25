@@ -80,4 +80,15 @@ jQuery(document).ready(function()
 			}
 		});
 	});
+	
+	wp.media.view.Attachment.Library = wp.media.view.Attachment.extend({
+		buttons: {
+			check: true,
+			attach: true
+		}
+	});
+	
+	jQuery('#tmpl-attachment').remove();
+	jQuery('#tmpl-attachment-new').attr('id','tmpl-attachment');
+	
 });
