@@ -50,6 +50,7 @@ jQuery(document).ready(function()
 						function(response)
 						{
 							state.reset();
+							wp.media.editor.get(wpActiveEditor).views._views[".media-frame-content"][0].views._views[""][1].collection.props.set({nocache:(+(new Date()))})
 							responseContainer.html( response.split("#").pop() ).fadeIn(500, function() {
 								responseContainer.fadeOut(15000);
 							});
