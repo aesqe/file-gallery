@@ -1006,6 +1006,53 @@ function file_gallery_add_library_query_vars( $input )
 add_filter('posts_where', 'file_gallery_add_library_query_vars');
 
 
+remove_action( 'wp_ajax_query-attachments', 'wp_ajax_query_attachments', 1 );
+add_action( 'wp_ajax_query-attachments', 'my_ajax_query_attachments', 1 );
+
+$attach_parent = null;
+
+function my_ajax_query_attachments(){
+global $attach_parent;
+
+$options = get_option('file_gallery');
+
+	$query = isset( $_REQUEST['query'] ) ? (array) $_REQUEST['query'] : array();
+	$query = array_intersect_key( $query, array_flip( array(
+		's', 'order', 'orderby', 'posts_per_page', 'paged', 'post_mime_type',
+		'post_parent', 'post__in', 'post__not_in',
+	) ) );
+
+	$query['post_type'] = 'attachment';
+	$query['post_status'] = 'inherit';
+	if ( current_user_can( get_post_type_object( 'attachment' )->cap->read_private_posts ) )
+		$query['post_status'] .= ',private';
+	
+	if( isset($options["library_filter_duplicates"]) && true == $options["library_filter_duplicates"] ){
+	$attach_parent = $_REQUEST['post_id'];
+	add_filter('posts_where', 'filter_duplicate_attachments');
+	}
+	
+	$query = new WP_Query( $query );
+	
+	if( isset($options["library_filter_duplicates"]) && true == $options["library_filter_duplicates"] ){
+	remove_filter('posts_where', 'filter_duplicate_attachments');
+	}
+	$attach_parent = null;
+	$posts = array_map( 'wp_prepare_attachment_for_js', $query->posts );
+	$posts = array_filter( $posts );
+
+	wp_send_json_success( $posts );
+}
+
+function filter_duplicate_attachments($input) {
+global $post, $attach_parent;
+if (!empty($attach_parent)){
+	$input .= " AND ((wp_posts.ID NOT IN ( SELECT ID FROM wp_posts AS ps INNER JOIN wp_postmeta AS pm ON pm.post_id = ps.ID WHERE pm.meta_key = '_is_copy_of' )) OR (wp_posts.post_parent=". $attach_parent ."))";
+	$input .= " AND (wp_posts.ID NOT IN ( SELECT pm.meta_value FROM wp_posts AS ps INNER JOIN wp_postmeta AS pm ON pm.post_id = ps.ID WHERE pm.meta_key = '_is_copy_of' and ps.post_parent = 18885 ))";
+}
+	return $input;
+}
+
 /**
  * Adds js to admin area
  */
