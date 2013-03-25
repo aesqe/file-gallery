@@ -397,6 +397,7 @@ function file_gallery_copy_attachments_to_post()
 	
 	$post_id 	  = (int) $_POST['post_id'];
 	$attached_ids = $_POST['ids'];
+	$output = "";
 	
 	// get checked attachments
 	if( "" != $attached_ids )
