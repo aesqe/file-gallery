@@ -64,6 +64,10 @@ jQuery(document).ready(function()
 
 	jQuery(document).on("click", ".insert-media, .media-menu-item", function(e)
 	{
+	        var $this = jQuery(this),
+			editor = $this.data('editor');
+			wp.media.editor.get(editor).views._views[".media-frame-toolbar"][0].selection.reset();
+			wp.media.editor.get(editor).views._views[".media-frame-content"][0].views._views[""][1].collection.props.set({nocache:(+(new Date()))});
 		var attachButton = jQuery(".media-frame-toolbar .media-button-attach"),
 			filters = jQuery("select.attachment-filters");
 
