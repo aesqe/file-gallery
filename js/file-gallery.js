@@ -233,7 +233,7 @@ jQuery(document).ready(function($)
 
 			var ed = file_gallery.tinymce_get_editor();
 
-			if( ed !== void 0 || (ed.id && file_gallery.gallery_image_clicked[ed.id] === false && force === false) ) {
+			if( ed === void 0 || (ed.id && file_gallery.gallery_image_clicked[ed.id] === false && force === false) ) {
 				return;
 			}
 
