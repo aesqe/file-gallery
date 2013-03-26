@@ -1081,6 +1081,7 @@ jQuery(document).ready(function($)
 		 */
 		delete_attachments : function( attachment_ids, message )
 		{
+			
 			var delete_what = $("#file_gallery_delete_what"),
 				delete_what_val = delete_what.val(),
 				attachment_count = 1,
@@ -1169,6 +1170,7 @@ jQuery(document).ready(function($)
 		 */
 		detach_attachments : function( attachment_ids, message )
 		{
+			
 			if( attachment_ids === "" || attachment_ids === void 0 ) {
 				return false;
 			}

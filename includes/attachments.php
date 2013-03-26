@@ -399,7 +399,7 @@ function file_gallery_copy_attachments_to_post()
 	$attached_ids = $_POST['ids'];
 	
 	// get checked attachments
-	if( "" != $attached_ids )
+	if( "" != $attached_ids && "," != $attached_ids)
 		$possible_new_attachments = get_posts('post_type=attachment&include=' . $attached_ids);
 	
 	// get current post's attachments
