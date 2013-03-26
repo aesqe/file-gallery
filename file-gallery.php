@@ -1006,6 +1006,53 @@ function file_gallery_add_library_query_vars( $input )
 add_filter('posts_where', 'file_gallery_add_library_query_vars');
 
 
+remove_action( 'wp_ajax_query-attachments', 'wp_ajax_query_attachments', 1 );
+add_action( 'wp_ajax_query-attachments', 'my_ajax_query_attachments', 1 );
+
+$attach_parent = null;
+
+function my_ajax_query_attachments(){
+global $attach_parent;
+
+$options = get_option('file_gallery');
+
+	$query = isset( $_REQUEST['query'] ) ? (array) $_REQUEST['query'] : array();
+	$query = array_intersect_key( $query, array_flip( array(
+		's', 'order', 'orderby', 'posts_per_page', 'paged', 'post_mime_type',
+		'post_parent', 'post__in', 'post__not_in',
+	) ) );
+
+	$query['post_type'] = 'attachment';
+	$query['post_status'] = 'inherit';
+	if ( current_user_can( get_post_type_object( 'attachment' )->cap->read_private_posts ) )
+		$query['post_status'] .= ',private';
+	
+	if( isset($options["library_filter_duplicates"]) && true == $options["library_filter_duplicates"] ){
+	$attach_parent = $_REQUEST['post_id'];
+	add_filter('posts_where', 'filter_duplicate_attachments');
+	}
+	
+	$query = new WP_Query( $query );
+	
+	if( isset($options["library_filter_duplicates"]) && true == $options["library_filter_duplicates"] ){
+	remove_filter('posts_where', 'filter_duplicate_attachments');
+	}
+	$attach_parent = null;
+	$posts = array_map( 'wp_prepare_attachment_for_js', $query->posts );
+	$posts = array_filter( $posts );
+
+	wp_send_json_success( $posts );
+}
+
+function filter_duplicate_attachments($input) {
+global $post, $attach_parent;
+if (!empty($attach_parent)){
+	$input .= " AND ((wp_posts.ID NOT IN ( SELECT ID FROM wp_posts AS ps INNER JOIN wp_postmeta AS pm ON pm.post_id = ps.ID WHERE pm.meta_key = '_is_copy_of' )) OR (wp_posts.post_parent=". $attach_parent ."))";
+	$input .= " AND (wp_posts.ID NOT IN ( SELECT pm.meta_value FROM wp_posts AS ps INNER JOIN wp_postmeta AS pm ON pm.post_id = ps.ID WHERE pm.meta_key = '_is_copy_of' and ps.post_parent = 18885 ))";
+}
+	return $input;
+}
+
 /**
  * Adds js to admin area
  */
@@ -1468,6 +1515,68 @@ function file_gallery_media_columns( $columns )
 }
 add_filter('manage_media_columns', 'file_gallery_media_columns');
 
+function print_new_attachment_template(){
+global $post;
+?>
+
+<script type="text/html" id="tmpl-attachment-new">
+		<# 	if ( <?php echo $post->ID; ?> == data.uploadedTo ) { #>
+		<div class="attachment-preview isattached type-{{ data.type }} subtype-{{ data.subtype }} {{ data.orientation }}">
+		<# } else { #>
+		<div class="attachment-preview type-{{ data.type }} subtype-{{ data.subtype }} {{ data.orientation }}">
+		<# } #>
+			<# if ( data.uploading ) { #>
+				<div class="media-progress-bar"><div></div></div>
+			<# } else if ( 'image' === data.type ) { #>
+				<div class="thumbnail">
+					<div class="centered">
+						<img src="{{ data.size.url }}" draggable="false" />
+					</div>
+				</div>
+			<# } else { #>
+				<img src="{{ data.icon }}" class="icon" draggable="false" />
+				<div class="filename">
+					<div>{{ data.filename }}</div>
+				</div>
+			<# } #>
+
+			<# if ( data.buttons.close ) { #>
+				<a class="close media-modal-icon" href="#" title="<?php _e('Remove'); ?>"></a>
+			<# } #>
+
+			<# if ( data.buttons.check ) { #>
+				<a class="check" href="#" title="<?php _e('Deselect'); ?>"><div class="media-modal-icon"></div></a>
+			<# } #>
+			
+			<# if ( data.buttons.attach ) { #>
+				<a class="attach id_{{ data.id }}" href="#" title="attach/detach"><div class="media-modal-icon"></div></a>
+			<# } #>
+
+		</div>
+		<#
+		var maybeReadOnly = data.can.save || data.allowLocalEdits ? '' : 'readonly';
+		if ( data.describe ) { #>
+			<# if ( 'image' === data.type ) { #>
+				<input type="text" value="{{ data.caption }}" class="describe" data-setting="caption"
+					placeholder="<?php esc_attr_e('Caption this image&hellip;'); ?>" {{ maybeReadOnly }} />
+			<# } else { #>
+				<input type="text" value="{{ data.title }}" class="describe" data-setting="title"
+					<# if ( 'video' === data.type ) { #>
+						placeholder="<?php esc_attr_e('Describe this video&hellip;'); ?>"
+					<# } else if ( 'audio' === data.type ) { #>
+						placeholder="<?php esc_attr_e('Describe this audio file&hellip;'); ?>"
+					<# } else { #>
+						placeholder="<?php esc_attr_e('Describe this media file&hellip;'); ?>"
+					<# } #> {{ maybeReadOnly }} />
+			<# } #>
+		<# } #>
+	</script>
+
+
+<?php
+ }
+ 
+add_action('print_media_templates','print_new_attachment_template');
 
 /**
  * Includes

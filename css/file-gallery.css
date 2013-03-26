@@ -1497,3 +1497,59 @@ td.column-post_thumb .no-post-thumbnail
 	-o-border-radius: 1px;
 	border-radius: 1px;
 }
+
+
+
+
+/* media modal attachment icon */
+
+.attachment .attach {
+    background: linear-gradient(to bottom, #F1F1F1, #E1E1E1) repeat scroll 0 0 #F1F1F1;
+	background-color:#F1F1F1;
+    border: 1px solid #FFFFFF;
+    border-radius: 3px 3px 3px 3px;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.4);
+    display: none;
+    height: 24px;
+    outline: 0 none;
+    position: absolute;
+    right: -7px;
+    top: 24px;
+    width: 24px;
+    z-index: 10;
+}
+
+/*
+//show on hover
+
+.attachment:hover .attach, 
+*/
+.attachment .attached .attach,
+.attachment .isattached .attach {   
+	display:block;
+}
+
+.attachment.details .attach {
+    background: linear-gradient(to bottom, #1E8CBE, #0074A2) repeat scroll 0 0 #1E8CBE;
+	background-color:#1E8CBE;
+    box-shadow: 0 0 0 1px #1E8CBE;
+}
+.attachment .attach div {
+    background-position: -1px 0;
+    height: 15px;
+    margin: 5px;
+    width: 15px;
+}
+.attachment.details .attach div {
+    background-position: -21px 0;
+}
+.attachment .attached .attach div, .attachment .isattached .attach div {
+    background-position: -41px 0;
+}
+.attachment.details .attached .attach div, .attachment.details .isattached .attach div  {
+    background-position: -61px 0;
+}
+.attach .media-modal-icon {
+    background-image: url("../images/uploader-custom-icons.png");
+    background-repeat: no-repeat;
+}
