@@ -2,7 +2,7 @@
 /*
 Plugin Name: File Gallery
 Plugin URI: http://skyphe.org/code/wordpress/file-gallery/
-Version: 1.7.8-beta4
+Version: 1.7.8-beta5
 Description: "File Gallery" extends WordPress' media (attachments) capabilities by adding a new gallery shortcode handler with templating support, a new interface for attachment handling when editing posts, and much more.
 Author: Bruno "Aesqe" Babic
 Author URI: http://skyphe.org
@@ -1044,12 +1044,17 @@ $options = get_option('file_gallery');
 	wp_send_json_success( $posts );
 }
 
-function filter_duplicate_attachments($input) {
-global $post, $attach_parent;
-if (!empty($attach_parent)){
-	$input .= " AND ((wp_posts.ID NOT IN ( SELECT ID FROM wp_posts AS ps INNER JOIN wp_postmeta AS pm ON pm.post_id = ps.ID WHERE pm.meta_key = '_is_copy_of' )) OR (wp_posts.post_parent=". $attach_parent ."))";
-	$input .= " AND (wp_posts.ID NOT IN ( SELECT pm.meta_value FROM wp_posts AS ps INNER JOIN wp_postmeta AS pm ON pm.post_id = ps.ID WHERE pm.meta_key = '_is_copy_of' and ps.post_parent=". $attach_parent ."))";
-}
+function filter_duplicate_attachments( $input )
+{
+	global $wpdb, $post, $attach_parent;
+
+	if( ! empty($attach_parent) )
+	{
+		$input .= " AND (($wpdb->posts.ID NOT IN ( SELECT ID FROM $wpdb->posts AS ps INNER JOIN $wpdb->postmeta AS pm ON pm.post_id = ps.ID WHERE pm.meta_key = '_is_copy_of' )) OR ($wpdb->posts.post_parent=" . $attach_parent . "))";
+
+		$input .= " AND ($wpdb->posts.ID NOT IN ( SELECT pm.meta_value FROM $wpdb->posts AS ps INNER JOIN $wpdb->postmeta AS pm ON pm.post_id = ps.ID WHERE pm.meta_key = '_is_copy_of' and ps.post_parent=" . $attach_parent . "))";
+	}
+
 	return $input;
 }
 
