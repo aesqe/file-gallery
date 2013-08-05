@@ -24,14 +24,13 @@
 	
 	if( '' != $fgf_class )
 		$fgf_class = ' class="' . trim($fgf_class) . '"';
-
 ?>
 <div id="file_gallery_response_inner"><?php echo $output; ?></div>
 
 <div id="file_gallery_form"<?php echo $fgf_class; ?>>
 
 	<input type="hidden" name="data_collector"           id="data_collector"           value="" style="width: 90%" />
-	<input type="hidden" name="data_collector_checked"   id="data_collector_checked"   value="<?php echo $checked_attachments; ?>" style="width: 90%" />
+	<input type="hidden" name="data_collector_checked"   id="data_collector_checked"   value="<?php echo implode(',', $checked_attachments); ?>" style="width: 90%" />
 	<input type="hidden" name="data_collector_full"      id="data_collector_full"      value="" style="width: 90%" />
 	<input type="hidden" name="file_gallery_delete_what" id="file_gallery_delete_what" value="<?php echo $delete_what; ?>" style="width: 90%" />
 	<input type="hidden" name="file_gallery_copies"      id="file_gallery_copies"      value="" style="width: 90%" />

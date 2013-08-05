@@ -22,12 +22,8 @@ jQuery(document).ready(function($)
 
 		tinymce_get_editor: function()
 		{
-			if( wpActiveEditor === void 0 ) {
-				wpActiveEditor = "content";
-			}
-
 			if( tinymce !== void 0 ) {
-				return tinymce.EditorManager.get(wpActiveEditor);
+				return tinymce.EditorManager.get(wpActiveEditor || "content");
 			}
 
 			return null;
@@ -1021,8 +1017,8 @@ jQuery(document).ready(function($)
 			{
 				$("#file_gallery_switch_to_tags").attr("value", file_gallery.L10n.switch_to_files);
 
-				$("#file_gallery_attachment_list").fadeOut(250, function(){
-					$("#fg_gallery_tags_container, #file_gallery_tag_list").fadeIn(); 
+				$("#file_gallery_attachment_list").fadeOut(250, function() {
+					$("#fg_gallery_tags_container, #file_gallery_tag_list").fadeIn();
 				});
 				
 				files_or_tags.val("files");
@@ -1046,7 +1042,7 @@ jQuery(document).ready(function($)
 			
 			$.post
 			(
-				ajaxurl, 
+				ajaxurl,
 				{
 					post_id : $("#post_ID").val(),
 					attachment_id : attachment_data.id,
@@ -1134,7 +1130,7 @@ jQuery(document).ready(function($)
 				data = {
 						post_id : $("#post_ID").val(),
 						action : "file_gallery_main_delete",
-						attachment_ids : attachment_ids, 
+						attachment_ids : attachment_ids,
 						attachment_order : $("#data_collector_full").val(),
 						checked_attachments : $("#data_collector_checked").val(),
 						copies : copies,
@@ -1145,7 +1141,7 @@ jQuery(document).ready(function($)
 				
 				$.post
 				(
-					ajaxurl, 
+					ajaxurl,
 					data,
 					function(response)
 					{
@@ -1200,7 +1196,7 @@ jQuery(document).ready(function($)
 				data = {
 						post_id : $("#post_ID").val(),
 						action : "file_gallery_main_detach",
-						attachment_ids : attachment_ids, 
+						attachment_ids : attachment_ids,
 						attachment_order : $("#data_collector_full").val(),
 						checked_attachments : $("#data_collector_checked").val(),
 						_ajax_nonce : file_gallery.options.file_gallery_nonce
@@ -1208,7 +1204,7 @@ jQuery(document).ready(function($)
 				
 				$.post
 				(
-					ajaxurl, 
+					ajaxurl,
 					data,
 					function(response)
 					{
@@ -1232,7 +1228,7 @@ jQuery(document).ready(function($)
 
 		/**
 		 * saves attachment order as menu_order
-		 */ 
+		 */
 		save_menu_order : function()
 		{
 			var attachment_order = $("#data_collector_full").val(),
@@ -1256,7 +1252,7 @@ jQuery(document).ready(function($)
 			
 			$.post
 			(
-				ajaxurl, 
+				ajaxurl,
 				data,
 				function(response)
 				{
@@ -1307,7 +1303,7 @@ jQuery(document).ready(function($)
 				
 				$.post
 				(
-					ajaxurl, 
+					ajaxurl,
 					data,
 					function( single_data )
 					{
@@ -1334,7 +1330,7 @@ jQuery(document).ready(function($)
 			var data = {
 				action : "file_gallery_edit_attachment",
 				post_id : $("#post_ID").val(),
-				attachment_id : attachment_id, 
+				attachment_id : attachment_id,
 				attachment_order : $("#data_collector_full").val(),
 				checked_attachments : $("#data_collector_checked").val(),
 				_ajax_nonce : file_gallery.options.file_gallery_nonce
@@ -1345,7 +1341,7 @@ jQuery(document).ready(function($)
 			
 			$.post
 			(
-				ajaxurl, 
+				ajaxurl,
 				data,
 				function(response)
 				{
@@ -1416,16 +1412,16 @@ jQuery(document).ready(function($)
 
 			switch( toggler )
 			{
-				case "file_gallery_hide_single_options" : 
+				case "file_gallery_hide_single_options" :
 					togglee = "file_gallery_single_toggler";
 					action = "file_gallery_save_single_toggle_state";
 					fieldset = "file_gallery_single_options";
 					break;
-				case "file_gallery_hide_acf" : 
+				case "file_gallery_hide_acf" :
 					togglee = "fieldset_attachment_custom_fields #media-single-form";
 					action = "file_gallery_save_acf_toggle_state";
 					break;
-				default : 
+				default :
 					break;
 			}
 
@@ -1443,7 +1439,7 @@ jQuery(document).ready(function($)
 			
 			$.post
 			(
-				ajaxurl, 
+				ajaxurl,
 				{
 					"action" : action,
 					"state" : state,
@@ -1476,7 +1472,7 @@ jQuery(document).ready(function($)
 			
 			$.post
 			(
-				ajaxurl, 
+				ajaxurl,
 				data,
 				function(response)
 				{
@@ -1518,7 +1514,7 @@ jQuery(document).ready(function($)
 			
 			$.post
 			(
-				ajaxurl, 
+				ajaxurl,
 				data,
 				function( new_thumb )
 				{
@@ -1549,7 +1545,7 @@ jQuery(document).ready(function($)
 							.html(new_thumb);
 					}
 					else
-					{						
+					{
 						WPRemoveThumbnail(file_gallery.options.post_thumb_nonce);
 						
 						response = file_gallery.L10n.post_thumb_unset;
@@ -1627,7 +1623,7 @@ jQuery(document).ready(function($)
 
 			$.post
 			(
-				ajaxurl, 
+				ajaxurl,
 				{
 					action : "file_gallery_regenerate_thumbnails",
 					attachment_ids : attachment_ids
@@ -1655,7 +1651,7 @@ jQuery(document).ready(function($)
 
 	
 	if( init_file_gallery !== void 0 && init_file_gallery === true )
-	{	
+	{
 		// WPML
 		if( $("#icl_div").length > 0 )
 		{
@@ -1702,7 +1698,7 @@ jQuery(document).ready(function($)
 					});
 				}
 			}
-		} 
+		}
 	
 	
 		// show / hide additional gallery options depending on preselected values
@@ -1734,29 +1730,19 @@ jQuery(document).ready(function($)
 	/**
 	 * uploader
 	 * thanks to http://stackoverflow.com/questions/7110353/html5-dragleave-fired-when-hovering-a-child-element
-	 */ 
+	 */
 		$("#file_gallery").on(
 		{
-			dragenter: function()
+			dragenter: function(e)
 			{
 				if( ! file_gallery.uploader_dragdrop ) {
 					return;
 				}
 				
-				if( 0 < $("#file_gallery_upload_area").length && false === file_gallery.upload_inside )
+				if( file_gallery.upload_inside === false )
 				{
-					$("#file_gallery").addClass("uploader");
-					$("#fg_container").css({ minHeight: "350px"	});
-	
-					$("#file_gallery_upload_area").css({
-						top: "5px", 
-						width: $("#file-gallery-content").width() + "px", 
-						height: $("#file-gallery-content").height() + "px",
-						minHeight: "350px",
-						backgroundImage: $("#file_gallery").css("backgroundImage")
-					});
-	
 					file_gallery.upload_inside = true;
+					$("#file_gallery").addClass("uploader");
 				}
 			},
 			
@@ -1766,43 +1752,25 @@ jQuery(document).ready(function($)
 					return;
 				}
 				
-				var related = e.relatedTarget,
+				var related = e.target,
 					inside = false;
-			
-				if( related === null ) { // webkit
-					related = e.target;
-				}
 				
-				if( related !== this )
-				{
-					if( related )
-					{
-						if( $.contains(this, related) || $.contains($("#file_gallery_tinymce_upload"), related) ) {
-							inside = true;
-						}
-					}
+				if( related && related !== this && $.contains(this, related) ) {
+					inside = true;
 				}
-				else
+				else if( file_gallery.upload_inside === true )
 				{
-					if( e.relatedTarget === null ) { // webkit
-						inside = false;
-					}
-				}
-				
-				if( ! inside && $("#file_gallery_upload_area").length > 0 && file_gallery.upload_inside === true )
-				{
-					$("#file_gallery_upload_area").css({top: "-9999em"});
-					$("#fg_container").css({ minHeight: 0 });
-					$("#file_gallery").removeClass("uploader");
-			
 					file_gallery.upload_inside = false;
+					$("#file_gallery").removeClass("uploader");
 				}
 			}
 		});
 		
 		file_gallery.upload_handle_error = function(error, uploader)
 		{
-			// console.log(error);
+			if( console && console.log ) {
+				console.log(error);
+			}
 		};
 		
 
