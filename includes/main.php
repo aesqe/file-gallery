@@ -59,7 +59,7 @@ function file_gallery_list_attachments(&$count_attachments, $post_id, $attachmen
 
 		$attachment_thumb_ratio = 0 < (int) $ats_width && 0 < (int) $ats_height ? $ats_width / $ats_height : 1;
 			
-		if( '' == strval($attachment_thumb_ratio) )
+		if( '' == (string)($attachment_thumb_ratio) )
 			$attachment_thumb_ratio = 1;
 
 		$attachment_thumb_height = $attachment_thumb_width / $attachment_thumb_ratio;
@@ -82,10 +82,11 @@ function file_gallery_list_attachments(&$count_attachments, $post_id, $attachmen
 			
 			$original_id = get_post_meta($attachment->ID, '_is_copy_of', true);
 			$copies 	 = get_post_meta($attachment->ID, '_has_copies', true);
-			
-			if( '' != strval($original_id) )
+			$cj = json_encode($copies);
+
+			if( '' != (string)($original_id) )
 				$classes[] = 'copy copy-of-' . $original_id;
-			elseif( '' != strval($copies) )
+			elseif( $copies && $cj != '[]' )
 				$classes[] = 'has_copies copies-' . implode('-', $copies);
 			
 			if( (int) $thumb_id === (int) $attachment->ID )

@@ -1,10 +1,11 @@
-if( "undefined" == typeof(file_gallery) )
-	var file_gallery = { L10n : file_gallery_L10n };
+var file_gallery = file_gallery || { L10n : file_gallery_L10n };
 
 jQuery(document).ready(function()
 {
-	var admin_url    = ajaxurl.split("/wp-admin").shift() + "/wp-admin",
-		current_tab  = window.location.toString().split("wp-admin/").pop(),
+	"use strict";
+
+	var admin_url = ajaxurl.split("/wp-admin").shift() + "/wp-admin",
+		current_tab = window.location.toString().split("wp-admin/").pop(),
 		fg_inex_href = current_tab + "&amp;exclude=current",
 		fg_inex      = file_gallery.L10n.exclude_current;
 
@@ -28,10 +29,12 @@ jQuery(document).ready(function()
 		}
 		else
 		{
-			if( ! jQuery(this).hasClass("child-of-" + post_id) )
+			if( ! jQuery(this).hasClass("child-of-" + post_id) ) {
 				jQuery(this).prepend('<input type="checkbox" class="file_gallery_attach_to_post solo" value="' + jQuery(this).attr('id').split('-').pop() + '" />');
-			else
+			}
+			else {
 				jQuery(this).prepend('<input type="checkbox" class="file_gallery_attach_to_post solo" checked="checked" disabled="disabled" />');
+			}
 		}
 	});
 	
@@ -46,9 +49,9 @@ jQuery(document).ready(function()
 		(
 			ajaxurl,
 			{
-				action  	: "file_gallery_copy_attachments_to_post",
-				post_id	 	: post_id,
-				ids     	: jQuery.map(jQuery('.file_gallery_attach_to_post:checked'),function(i){return jQuery(i).val();}).join(","),
+				action : "file_gallery_copy_attachments_to_post",
+				post_id : post_id,
+				ids : jQuery.map(jQuery('.file_gallery_attach_to_post:checked'),function(i){return jQuery(i).val();}).join(","),
 				_ajax_nonce : file_gallery_attach_nonce
 			},
 			function(response)
@@ -61,10 +64,12 @@ jQuery(document).ready(function()
 				{
 					jQuery(this).parents(".media-item").addClass("child-of-" + post_id);
 
-					if( jQuery(this).hasClass("solo") )
+					if( jQuery(this).hasClass("solo") ) {
 						jQuery(this).prop("disabled", true);
-					else
+					}
+					else {
 						jQuery(this).prop("checked", false);
+					}
 				});
 				
 				jQuery('#file_gallery_attach_response')

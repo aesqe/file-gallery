@@ -395,18 +395,19 @@ function file_gallery_copy_attachments_to_post()
 	
 	check_ajax_referer('file-gallery-attach');
 	
-	$post_id 	  = (int) $_POST['post_id'];
+	$post_id = (int) $_POST['post_id'];
 	$attached_ids = $_POST['ids'];
-	$output = "";
+	$output = '';
 	
 	// get checked attachments
-	if( "" != $attached_ids && "," != $attached_ids)
+	if( $attached_ids != '' && $attached_ids != ',' ) {
 		$possible_new_attachments = get_posts('post_type=attachment&include=' . $attached_ids);
+	}
 	
 	// get current post's attachments
 	$current_attachments = get_posts('numberposts=-1&post_type=attachment&post_parent=' . $post_id);
 	
-	if( false !== $current_attachments && ! empty($current_attachments) ) // if post already has attachments
+	if( $current_attachments !== false && ! empty($current_attachments) ) // if post already has attachments
 	{
 		foreach( $possible_new_attachments as $pna ) // for each checked item...
 		{
@@ -414,7 +415,7 @@ function file_gallery_copy_attachments_to_post()
 			{
 				if( wp_get_attachment_url($pna->ID) == wp_get_attachment_url($ca->ID) ) // if their URIs match
 				{
-					$attached_ids = str_replace( $pna->ID, "", $attached_ids ); // remove that id from the list
+					$attached_ids = str_replace( $pna->ID, '', $attached_ids ); // remove that id from the list
 					$attachments_exist[] = $pna->ID; // and add it to a list of conflicting attachments
 				}
 			}
@@ -422,13 +423,18 @@ function file_gallery_copy_attachments_to_post()
 	}
 	
 	$attached_ids = preg_replace('#,+#', ',', $attached_ids ); // remove extra commas
+	$attached_ids = trim($attached_ids, ',');
+	$attached_ids = trim($attached_ids);
 	
-	if( '' != $attached_ids )
-		$attached_ids = explode(',', trim($attached_ids, ',')); // explode into array if not empty
+	if( $attached_ids != '' ) {
+		$attached_ids = explode(',', $attached_ids); // explode into array if not empty
+	}
 	
 	// prepare data and copy attachment to current post
 	if( is_array($attached_ids) )
 	{
+		$attached_ids = array_unique($attached_ids);
+
 		foreach( $attached_ids as $aid )
 		{
 			file_gallery_copy_attachment_to_post( $aid, $post_id );

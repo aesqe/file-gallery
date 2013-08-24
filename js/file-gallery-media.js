@@ -44,7 +44,7 @@ jQuery(document).ready(function()
 						{
 							action : "file_gallery_copy_attachments_to_post",
 							post_id : wp.media.model.settings.post.id,
-							ids : _.pluck(selection._byId, "id").join(","),
+							ids : _.uniq( _.pluck(selection._byId, "id") ).join(","),
 							_ajax_nonce : file_gallery_attach_nonce
 						},
 						function(response)
@@ -65,10 +65,11 @@ jQuery(document).ready(function()
 	jQuery(document).on("click", ".insert-media, .media-menu-item", function(e)
 	{
 		var $this = jQuery(this),
-			editor = $this.data('editor');
+			editor = $this.data("editor"),
+			toolbar = wp.media.editor.get(editor).views._views[".media-frame-toolbar"][0];
 
-		wp.media.editor.get(editor).views._views[".media-frame-toolbar"][0].selection.reset();
-		wp.media.editor.get(editor).views._views[".media-frame-content"][0].views._views[""][1].collection.props.set({nocache:(+(new Date()))});
+		toolbar.selection.reset();
+		toolbar.views._views[""][1].collection.props.set({nocache:(+(new Date()))});
 		
 		var attachButton = jQuery(".media-frame-toolbar .media-button-attach"),
 			filters = jQuery("select.attachment-filters");

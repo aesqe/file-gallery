@@ -115,6 +115,7 @@ jQuery(document).ready(function($)
 				columns = opt.match(/columns=['"](\d+)['"]/),
 				tags = opt.match(/tags=['"]([^'"]+)['"]/i),
 				tags_from = opt.match(/tags_from=['"]([^'"]+)['"]/i),
+				captions = opt.match(/captions=['"]([^'"]+)['"]/i),
 				this_post_attachment_ids = [],
 				external_attachments = [],
 				i = 0;
@@ -1297,7 +1298,7 @@ jQuery(document).ready(function($)
 					imageclass : $("#file_gallery_single_imageclass").val(),
 					align : $("#file_gallery_single_align").val(),
 					post_id : $("#post_ID").val(),
-					caption       : $("#file_gallery_single_caption:checked").length ? true : false,
+					caption : $("#file_gallery_single_caption:checked").length ? true : false,
 					_ajax_nonce : file_gallery.options.file_gallery_nonce
 				};
 				
