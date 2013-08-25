@@ -434,8 +434,8 @@ function file_gallery_shortcode( $content = false, $attr = false )
 		'offset'			=> -1,
 		'paginate'			=> 0,
 		'link_size'			=> 'full',
-		'include_meta'		=> false,
-		'captions'           => true
+		'include_meta'		=> false
+		//,'captions'           => true
 	);
 	
 	if( floatval(get_bloginfo('version')) >= 3.5 ) {
@@ -489,9 +489,9 @@ function file_gallery_shortcode( $content = false, $attr = false )
 	$offset = (int) $offset;
 	$page   = (int) get_query_var('page');
 
-	if( $captions === 'false' || $captions == '0' ) {
-		$captions = false;
-	}
+	// if( $captions === 'false' || $captions == '0' ) {
+	// 	$captions = false;
+	// }
 
 	if( 'false' === $rel || (is_numeric($rel) && 0 === (int) $rel) )
 		$_rel = false;
@@ -782,9 +782,10 @@ function file_gallery_shortcode( $content = false, $attr = false )
 					break;
 			}
 						
-			$param['title'] 		= $attachment->post_title;
-			$param['caption'] 		= $captions !== false ? $attachment->post_excerpt : '';
-			$param['description'] 	= $attachment->post_content;
+			$param['title'] = $attachment->post_title;
+			// $param['caption'] = $captions !== false ? $attachment->post_excerpt : '';
+			$param['caption'] = $attachment->post_excerpt;
+			$param['description'] = $attachment->post_content;
 			
 			if( $attachment_is_image )
 			{

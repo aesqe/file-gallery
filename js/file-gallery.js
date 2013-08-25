@@ -63,7 +63,7 @@ jQuery(document).ready(function($)
 						var new_gallery_id = "file_gallery_tmp_" + file_gallery.tmp[ed.id],
 							new_content = serial.replace(/\[gallery([^\]]*)\]/g, function(a,b)
 							{
-								return "<img src='" + tinymce.baseURL + "/plugins/wpgallery/img/t.gif' class='wpGallery mceItem' title='gallery" + tinymce.DOM.encode(b).replace(/\[/, '\[').replace(/\]/, '\]') + "' id='" + new_gallery_id + "' />";
+								return "<img src='" + tinymce.baseURL + "/plugins/wpgallery/img/t.gif' class='wpGallery wp-gallery mceItem' title='gallery" + tinymce.DOM.encode(b).replace(/\[/, '\[').replace(/\]/, '\]') + "' id='" + new_gallery_id + "' />";
 							});
 
 						ed.focus();
@@ -115,7 +115,7 @@ jQuery(document).ready(function($)
 				columns = opt.match(/columns=['"](\d+)['"]/),
 				tags = opt.match(/tags=['"]([^'"]+)['"]/i),
 				tags_from = opt.match(/tags_from=['"]([^'"]+)['"]/i),
-				captions = opt.match(/captions=['"]([^'"]+)['"]/i),
+				//captions = opt.match(/captions=['"]([^'"]+)['"]/i),
 				this_post_attachment_ids = [],
 				external_attachments = [],
 				i = 0;
@@ -138,7 +138,7 @@ jQuery(document).ready(function($)
 			$("#file_gallery_external_url").val( external_url );
 			$("#file_gallery_template").val(template ? template[1] : "default" );
 			$("#file_gallery_order").val(order ? order[1] : "ASC" );
-			$("#file_gallery_orderby").val(orderby ? orderby[1] : "file gallery" );
+			$("#file_gallery_orderby").val(orderby ? orderby[1] : "default" );
 			$("#file_gallery_linkclass").val(linkclass ? linkclass[1] : "" );
 			$("#file_gallery_imageclass").val(imageclass ? imageclass[1] : "" );
 			$("#file_gallery_galleryclass").val(galleryclass ? galleryclass[1] : "" );
@@ -1827,7 +1827,7 @@ jQuery(document).ready(function($)
 		});
 			
 		$("#file_gallery").attr("onclick", "").on("click.file_gallery", "#remove-post-thumbnail", function()
-		{		
+		{
 			if( $(".sortableitem.post_thumb").length > 0 ) {
 				return file_gallery.set_post_thumb($(".sortableitem.post_thumb").attr("id").split("-").pop(), true);
 			}
@@ -1963,7 +1963,7 @@ jQuery(document).ready(function($)
 			$('#del_attachment_' + id).fadeIn(100);
 	
 			return false;
-		});	
+		});
 			
 		// delete single attachment link confirm
 		$("#file_gallery").on("click", "#fg_container .delete", function()
@@ -2108,13 +2108,13 @@ jQuery(document).ready(function($)
 
 		// alternative display mode, with smaller thumbs and attachment titles
 		$("#file_gallery").on("click", "#file_gallery_toggle_textual", function()
-		{			
+		{
 			$("#file_gallery_list").toggleClass("textual");
 			$(this).prop("disabled", true);
 			
 			$.post
 			(
-				ajaxurl, 
+				ajaxurl,
 				{
 					action : "file_gallery_toggle_textual",
 					state : $("#file_gallery_list").hasClass("textual") ? 1 : 0,
@@ -2147,7 +2147,7 @@ jQuery(document).ready(function($)
 
 	// min/max-width/height adjustments for post thumbnails on edit.php screens
 	if( $(".column-post_thumb").length > 0 )
-	{		
+	{
 		$(window).on("load resize", function()
 		{
 			file_gallery.post_edit_screen_adjust();

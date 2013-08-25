@@ -1,39 +1,43 @@
-(function() {
-    tinymce.create('tinymce.plugins.file_gallery',
+(function()
+{
+	"use strict";
+
+    tinymce.create("tinymce.plugins.filegallery",
 	{
-        init : function(ed, url)
-		{
+        init: function(ed, url) {
 			this.add_events(ed);
         },
 		
-		add_events : function( ed )
+		add_events: function( ed )
 		{
 			var $ = jQuery;
 			
-			if( "replycontent" != ed.id )
+			if( ed.id !== "replycontent" )
 			{
 				ed.onMouseDown.add( function(tinymce_object, mouseEvent)
 				{
 					wpActiveEditor = ed.id;
 
-					if( mouseEvent.target.className.match(/wpGallery/) )
+					var t = mouseEvent.target;
+
+					if( t.className.indexOf("wpGallery") > -1 || t.className.indexOf("wp-gallery") > -1 )
 					{
 						file_gallery.gallery_image_clicked[ed.id] = true;
-	
-						if( "" == mouseEvent.target.id )
+
+						if( ! t.id )
 						{
-							mouseEvent.target.id = "file_gallery_tmp_" + file_gallery.tmp[ed.id];
+							t.id = "file_gallery_tmp_" + file_gallery.tmp[ed.id];
 							file_gallery.tmp[ed.id]++;
 						}
 	
-						file_gallery.last_clicked_gallery[ed.id] = mouseEvent.target.id;
+						file_gallery.last_clicked_gallery[ed.id] = t.id;
 						
 						// call tinymce_gallery with image title as argument (title holds gallery options)
-						file_gallery.tinymce_gallery( mouseEvent.target.title );
+						file_gallery.tinymce_gallery( t.title );
 					}
 					else
 					{
-						// uncheck all items and serialize()
+						// uncheck all items and serialize
 						if( true === file_gallery.gallery_image_clicked[ed.id] )
 						{
 							file_gallery.gallery_image_clicked[ed.id] = false;
@@ -45,32 +49,33 @@
 				
 				ed.onMouseUp.add( function(tinymce_object, mouseEvent)
 				{
-					if ( tinymce.isIE && ! ed.isHidden() )
+					if ( tinymce.isIE && ! ed.isHidden() ) {
 						ed.windowManager.insertimagebookmark = ed.selection.getBookmark(1);
+					}
 				});
 				
 				
 				ed.onEvent.add(function(ed, e)
 				{
-					if( 46 === e.keyCode && "keyup" == e.type && true === file_gallery.gallery_image_clicked[ed.id] )
+					if( 46 === e.keyCode && "keyup" === e.type && true === file_gallery.gallery_image_clicked[ed.id] )
 					{
 						$("#file_gallery_uncheck_all").trigger("click");
 						file_gallery.gallery_image_clicked[ed.id] = false;
 					}
-				});	
+				});
 			}
 		},
 		
-        getInfo : function() {
+        getInfo: function() {
             return {
                 longname : "File Gallery",
                 author : 'Bruno "Aesqe" babic',
                 authorurl : "http://skyphe.org/",
-                infourl : "http://skyphe.org/code/wordpress/file-gallery/",
-                version : "1.7.7"
+                infourl : "http://wordpress.org/plugins/file-gallery/",
+                version : "1.7.8-beta8"
             };
         }
     });
 	
-    tinymce.PluginManager.add("file_gallery", tinymce.plugins.file_gallery);
+    tinymce.PluginManager.add("filegallery", tinymce.plugins.filegallery);
 })();
