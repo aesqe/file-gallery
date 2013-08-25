@@ -72,7 +72,7 @@
                 author : 'Bruno "Aesqe" babic',
                 authorurl : "http://skyphe.org/",
                 infourl : "http://wordpress.org/plugins/file-gallery/",
-                version : "1.7.8-beta8"
+                version : file_gallery.options.file_gallery_version
             };
         }
     });

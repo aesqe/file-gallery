@@ -813,6 +813,26 @@ function file_gallery_shortcode( $content = false, $attr = false )
 			
 			$param['attachment_id'] = $attachment->ID;
 		}
+
+		/**
+		 * Make sure that all attributes added/filtered via
+		 * 'wp_get_attachment_link' filter are included here as well
+		 */
+		$wp_attachment_link = new SimpleXMLElement(wp_get_attachment_link($attachment->ID));
+		$wp_attachment_link_attributes = $wp_attachment_link->attributes();
+
+		foreach( $wp_attachment_link_attributes as $key => $val )
+		{
+			if( $key === 'title' ) {
+				$param['title'] = $val;
+			}
+			else if( $key === 'class' ) {
+				$param['link_class'] .= ' ' . $val;
+			}
+			else if( $key === 'rel' ) {
+				$param['rel'] .= ' ' . $val;
+			}
+		}
 		
 		$param = array_map('trim', $param);
 		

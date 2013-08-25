@@ -29,10 +29,8 @@
 ?>
 <dl class="gallery-item<?php echo $endcol; ?>">
 	<dt class="gallery-icon">
-    	<span class="diff"><?php echo $diff[0] . $diff_sep . $diff[1]; ?></span>
-		<a href="<?php echo $link; ?>" title="<?php echo urlencode($caption); ?>"<?php if( ! empty($link_class) ) : ?> class="<?php echo $link_class; ?>"<?php endif; ?><?php if( ! empty($rel) ) : ?> rel="<?php echo $rel; ?>"<?php endif; ?>>
-			<img src="<?php echo $thumb_link; ?>" width="<?php echo $thumb_width; ?>" height="<?php echo $thumb_height; ?>" title="<?php echo $title; ?>" class="attachment-<?php echo $size ?><?php if( ! empty($image_class) ){ echo ' ' . $image_class;} ?>" alt="<?php if( $thumb_alt ){ echo $thumb_alt; }else{ echo $title; }?><?php ?>" />
-		</a>
+    	<span class="diff" style="position: absolute; top: -9999em; left: -em; width: 0; height: 0;"><?php echo $diff[0] . $diff_sep . $diff[1]; ?></span>
+		<a href="<?php echo $link; ?>" title="<?php echo urlencode($caption); ?>"<?php if( ! empty($link_class) ) : ?> class="<?php echo $link_class; ?>"<?php endif; ?><?php if( ! empty($rel) ) : ?> rel="<?php echo $rel; ?>"<?php endif; ?>><img src="<?php echo $thumb_link; ?>" width="<?php echo $thumb_width; ?>" height="<?php echo $thumb_height; ?>" title="<?php echo $title; ?>" class="attachment-<?php echo $size ?><?php if( ! empty($image_class) ){ echo ' ' . $image_class;} ?>" alt="<?php if( $thumb_alt ){ echo $thumb_alt; }else{ echo $title; }?><?php ?>" /></a>
 	</dt>
 	<?php if( ! empty($caption) ) : ?>
 	<dd class="gallery-caption">
