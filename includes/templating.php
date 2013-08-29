@@ -845,7 +845,7 @@ function file_gallery_shortcode( $content = false, $attr = false )
 		}
 		**/
 
-		$dom_document = HTML5_Parser::parseFragment('<a href="#" title="test" title="test2">test</a>');
+		$dom_document = HTML5_Parser::parseFragment(wp_get_attachment_link($attachment->ID));
 		$wp_attachment_link_attributes = $dom_document->item(0)->attributes;
 
 		foreach( $wp_attachment_link_attributes as $attribute )
