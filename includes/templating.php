@@ -367,6 +367,8 @@ function file_gallery_shortcode( $content = false, $attr = false )
 {
 	global $file_gallery, $wpdb, $post;
 
+	require_once('html5lib/Parser.php');
+
 	// if the function is called directly, not via shortcode
 	if( false !== $content && false === $attr )
 		$attr = wp_parse_args($content);
@@ -818,6 +820,14 @@ function file_gallery_shortcode( $content = false, $attr = false )
 		 * Make sure that all attributes added/filtered via
 		 * 'wp_get_attachment_link' filter are included here as well
 		 */
+
+		/**
+			$dom_document = new DOMDocument();
+			@$dom_document->loadHTML(wp_get_attachment_link($attachment->ID)); //
+			$wp_attachment_link_attributes = $dom_document->getElementsByTagName('a')->item(0)->attributes;
+		**/
+
+		/**
 		$wp_attachment_link = new SimpleXMLElement(wp_get_attachment_link($attachment->ID));
 		$wp_attachment_link_attributes = $wp_attachment_link->attributes();
 
@@ -833,7 +843,24 @@ function file_gallery_shortcode( $content = false, $attr = false )
 				$param['rel'] .= ' ' . $val;
 			}
 		}
-		
+		**/
+
+		$dom_document = HTML5_Parser::parseFragment('<a href="#" title="test" title="test2">test</a>');
+		$wp_attachment_link_attributes = $dom_document->item(0)->attributes;
+
+		foreach( $wp_attachment_link_attributes as $attribute )
+		{
+			if( $attribute->name === 'title' ) {
+				$param['title'] = $attribute->value;
+			}
+			else if( $attribute->name === 'class' ) {
+				$param['link_class'] .= ' ' . $attribute->value;
+			}
+			else if( $attribute->name === 'rel' ) {
+				$param['rel'] .= ' ' . $attribute->value;
+			}
+		}
+
 		$param = array_map('trim', $param);
 		
 		if( $include_meta )
