@@ -1006,12 +1006,22 @@ function file_gallery_do_pagination( $total = 0, $page = 0 )
 			$limit--;
 		}
 		
-		if( $start )
+		if( $start ) {
 			array_unshift($out, str_replace('<a ', '<a title="' . __('Skip to first page', 'file-gallery') . '" class="page"', _wp_link_page(1)) . '&laquo;</a>');
+		}
 		
-		if( $end )
+		if( $end ) {
 			array_push($out, str_replace('<a ', '<a title="' . __('Skip to last page', 'file-gallery') . '" class="page"', _wp_link_page($total)) . '&raquo;</a>');
-		
+		}
+
+		if( $page > 1 ) {
+			array_unshift($out, str_replace('<a ', '<a title="' . __('Previous page', 'file-gallery') . '" class="page"', _wp_link_page($page-1)) . '&lsaquo;</a>');
+		}
+
+		if( $page > 0 && $page < $total ) {
+			array_push($out, str_replace('<a ', '<a title="' . __('Next page', 'file-gallery') . '" class="page"', _wp_link_page($page+1)) . '&rsaquo;</a>');
+		}
+
 		if( 'rtl' == get_bloginfo('text_direction') )
 			$out = array_reverse($out);
 		

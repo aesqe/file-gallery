@@ -554,7 +554,7 @@ function file_gallery_main( $ajax = true )
 	elseif( "file_gallery_set_post_thumb" == $action )
 	{
 		update_post_meta($post_id, "_thumbnail_id", $attachment_ids[0]);
-		exit(_wp_post_thumbnail_html($attachment_ids[0]));
+		exit(_wp_post_thumbnail_html($attachment_ids[0], $post_id));
 	}
 	elseif( "file_gallery_unset_post_thumb" == $action )
 	{
