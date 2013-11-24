@@ -2,9 +2,9 @@
 Contributors: aesqe
 Donate link: http://skyphe.org/donate/
 Tags: attachment, attachments, gallery, galleries, template, templates, shortcode, file, files, attach, detach, unattach, copy, media, tags, library, custom, custom fields, custom fields for attachments, attachment custom fields, drag drop upload
-Requires at least: 3.1
-Tested up to: 3.5
-Stable tag: 1.7.7
+Requires at least: 3.5
+Tested up to: 3.8-beta1
+Stable tag: 1.7.8
 
 File Gallery extends WordPress media (attachments) capabilities 
 by adding a new gallery shortcode handler with templating support 
@@ -47,7 +47,7 @@ more... Here's the full list of features:
 13. compatible with "WordPress Mobile Edition", "Media Tags" and 
     "WPML Multilingual CMS" plugins	
 14. basic caching of gallery output and frequent queries (transients)
-15. please see the help file for complete list of features :)
+15. please see the help file for complete list of features
 
 
 
@@ -73,7 +73,7 @@ more... Here's the full list of features:
 	installation folder (usually under 'wp-content\plugins').
 2.	Go to WordPress administration -> plugins page and activate 
 	"File Gallery" plugin.
-3.	You're done - go edit or add a new post to see how it works :)
+3.	You're done - go edit or add a new post to see how it works.
 
 
 
@@ -120,13 +120,12 @@ file_gallery_get_file_type
 == More info ==
 
 This plugin uses icons from the awesome famfamfam Silk icon set by 
-Mark James :)
-
+Mark James.
 "Silk" can be found at: http://famfamfam.com/lab/icons/silk/
 
 Plugin settings are integrated into media settings page.
 
-Help file is included, you'll find it in the "help" subfolder :)
+Help file is included, you'll find it in the "help" subfolder.
 
 
 
@@ -153,14 +152,30 @@ Polish:
 
 
 
+== Contributors ==
+
+Greg Haddow (https://github.com/shaddowgh/)
+Josh Eaton (https://github.com/jjeaton/)
+
+
+
 == Thanks goes out to... ==
 
-* All the translators, and people leaving comments, bug reports and 
-  suggestions on the official page and in the WordPress.org forums
+* All the contributors, translators, and people leaving comments, 
+  bug reports and suggestions on the official page and in the 
+  WordPress.org forums
 
 
 
 == Changelog ==
+
+= 1.7.8 =
+* November 24th, 2013
+* from this version on, File Gallery is for WordPress 3.5 and later only!
+* there have been 12 beta versions released on Github, prior to this one
+* those beta versions fixed some compatibility issues with WordPress 3.5 and up - mostly thanks to Greg Haddow (https://github.com/shaddowgh/) and Josh Eaton (https://github.com/jjeaton/) - I can't thank you enough, guys!
+* some legacy code was thrown out
+* javascript parts of the plugin were improved
 
 = 1.7.7 =
 * December 16th, 2012
