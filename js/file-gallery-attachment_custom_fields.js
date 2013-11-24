@@ -6,6 +6,8 @@ var file_gallery_acf =
 
 jQuery(document).ready(function()
 {
+	"use strict";
+
 	var admin_url = ajaxurl.split("/wp-admin").shift() + "/wp-admin",
 		file_gallery_acf_custom_field_num = 1;
 	
@@ -25,17 +27,17 @@ jQuery(document).ready(function()
 			value = jQuery("#new_custom_field_value").val(),
 			attachment_id = jQuery("#attachment_id").val() || jQuery("#fgae_attachment_id").val();
 
-		if( "" != key )
+		if( key != "" )
 		{
 			jQuery.post
 			(
 				ajaxurl,
 				{
-					action: 		"file_gallery_add_new_attachment_custom_field",
-					attachment_id: 	attachment_id,
-					key: 			key,
-					value: 			value,
-					_ajax_nonce: 	file_gallery_acf.options.add_new_attachment_custom_field_nonce
+					action: "file_gallery_add_new_attachment_custom_field",
+					attachment_id: attachment_id,
+					key: key,
+					value: value,
+					_ajax_nonce: file_gallery_acf.options.add_new_attachment_custom_field_nonce
 				},
 				function(response)
 				{
@@ -73,22 +75,20 @@ jQuery(document).ready(function()
 		(
 			ajaxurl,
 			{
-				action:			"file_gallery_delete_attachment_custom_field",
+				action: "file_gallery_delete_attachment_custom_field",
 				attachment_id:	jQuery("#attachment_id").val() || jQuery("#fgae_attachment_id").val(),
-				key:			key,
-				value:			jQuery(".fgacf_" + key + " textarea").val(),
-				_ajax_nonce:	file_gallery_acf.options.delete_attachment_custom_field_nonce
+				key: key,
+				value: jQuery(".fgacf_" + key + " textarea").val(),
+				_ajax_nonce: file_gallery_acf.options.delete_attachment_custom_field_nonce
 			},
 			function(response)
 			{
 				response = Number(response);
 
-				if( response === 1 )
-				{
+				if( response === 1 ) {
 					row.css({"backgroundColor": "#FF8888"}).fadeTo(250, 0, function(){ row.remove(); });
 				}
-				else if( response === 0 )
-				{
+				else if( response === 0 ) {
 					alert(file_gallery_acf.L10n.error_deleting_attachment_custom_field);
 				}
 				
