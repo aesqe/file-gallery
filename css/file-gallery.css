@@ -207,6 +207,7 @@
 	border: 1px solid #E0E0E0;
 	margin: 3px 2px;
 	padding: 0 2px 0 3px;
+	height: 32px;
 	
 	-moz-border-radius: 3px;
 	-webkit-border-radius: 3px;
@@ -230,7 +231,7 @@
 #file_gallery fieldset p input,
 #file_gallery fieldset p select
 {
-	margin: 0px;
+	/*margin: 0px;*/
 }
 
 #fg_container select option
@@ -1021,7 +1022,8 @@
 #file_gallery_single_imageclass,
 #file_gallery_single_linkclass,
 #file_gallery_galleryclass,
-#file_gallery_postid
+#file_gallery_postid,
+#file_gallery_linkrel_custom
 {
 	width: 93px;
 }

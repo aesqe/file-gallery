@@ -141,14 +141,19 @@ function file_gallery_css_front( $mobile = false )
 	if( 0 === $gallery_matches )
 		return;
 	
+	$aqs = array();
 	// automaticaly enqueue predefined scripts and styles
 	$aqs = explode(',', $options['auto_enqueued_scripts']);
 	$aqs = array_map('trim', $aqs);
 	$aq_linkclasses = array();
+	$galleries_data = array();
+	$j = 0;
 
 	// collect template names
 	foreach( $galleries as $gallery )
 	{
+		$galleries_data[$j] = array();
+
 		if( false === $columns_required )
 		{
 			$zc = preg_match("#\columns=(['\"])0\\1#is", $gallery);
@@ -162,22 +167,32 @@ function file_gallery_css_front( $mobile = false )
 		$tm = preg_match("#\stemplate=(['\"])([^'\"]+)\\1#is", $gallery, $gm);
 
 		if( isset($gm[2]) )
+		{
 			$templates[] = $gm[2];
+			$galleries_data[$j]['template'] = $gm[2];
+		}
+			
 		
 		$gcm = preg_match("#\slinkclass=(['\"])([^'\"]+)\\1#is", $gallery, $gcg);
 
 		if( isset($gcg[2]) && '' != $gcg[2] )
 		{
 			$glc = explode(' ', $gcg[2]);
+			$galleries_data[$j]['linkclasses'] = array();
 
 			foreach( $glc as $glcs )
 			{
 				$glcs = trim($glcs);
 
-				if( in_array($glcs, $aqs) )//if( false !== strpos( implode(' ', $aqs), $glcs) )
+				if( in_array($glcs, $aqs) )
+				{
 					$aq_linkclasses[] = $glcs;
+					$galleries_data[$j]['linkclasses'][] = $glcs;
+				}
 			}
 		}
+
+		$j++;
 	}
 
 	$aq_linkclasses = apply_filters('file_gallery_lightbox_classes', array_unique($aq_linkclasses));
@@ -185,8 +200,9 @@ function file_gallery_css_front( $mobile = false )
 	// auto enqueue scripts
 	if( ! empty($aq_linkclasses) )
 	{
-		if( ! defined('FILE_GALLERY_LIGHTBOX_CLASSES') )
+		if( ! defined('FILE_GALLERY_LIGHTBOX_CLASSES') ) {
 			define('FILE_GALLERY_LIGHTBOX_CLASSES', serialize($aq_linkclasses));
+		}
 
 		file_gallery_print_scripts( true );
 	}
@@ -206,7 +222,7 @@ function file_gallery_css_front( $mobile = false )
 
 		// eliminate duplicate entries
 		$templates = array_unique($templates);
-		
+
 		// if none of default templates are needed, don't include the 'columns.css' file
 		if( array() == array_intersect($templates, $default_templates) )
 			$columns_required = false;
@@ -214,7 +230,20 @@ function file_gallery_css_front( $mobile = false )
 		// walk through template names
 		foreach($templates as $template)
 		{
-			$js_dependencies = isset($aq_linkclasses) ? $aq_linkclasses : array();
+			$js_dependencies = array();
+
+			foreach( $galleries_data as $gd )
+			{
+				if( isset($gd['template']) && $gd['template'] == $template )
+				{
+					foreach( $aq_linkclasses as $aql )
+					{
+						if( isset( $gd['linkclasses'] ) && in_array($aql, $gd['linkclasses']) ) {
+							$js_dependencies[] = $aql;
+						}
+					}
+				}
+			}
 
 			// check if file exists in theme's folder
 			if( is_readable(FILE_GALLERY_THEME_TEMPLATES_ABSPATH . '/' . $template . '/gallery.css') )
@@ -261,7 +290,7 @@ function file_gallery_css_front( $mobile = false )
 					wp_enqueue_style('file_gallery_' . $template, FILE_GALLERY_URL . '/templates/' . $template . '/gallery.css', false, FILE_GALLERY_VERSION);
 				else
 					$mobiles[] = FILE_GALLERY_URL . '/templates/' . $template . '/gallery.css';
-				
+
 				if( is_readable(FILE_GALLERY_ABSPATH . '/templates/' . $template . '/gallery.js') )
 				{
 					$overriding = true;
@@ -295,8 +324,8 @@ function file_gallery_css_front( $mobile = false )
 	if( $mobile && ! defined('FILE_GALLERY_MOBILE_STYLESHEETS') )
 		define('FILE_GALLERY_MOBILE_STYLESHEETS', serialize($mobiles));
 }
-add_action('wp_print_styles',  'file_gallery_css_front');
-add_action('wp_print_scripts', 'file_gallery_css_front');
+//add_action('wp_enqueue_styles',  'file_gallery_css_front');
+add_action('wp_enqueue_scripts', 'file_gallery_css_front');
 
 
 /**
@@ -339,7 +368,7 @@ echo "\n" .
 		}
 	}
 }
-add_action('wp_print_scripts', 'file_gallery_print_scripts');
+add_action('wp_enqueue_scripts', 'file_gallery_print_scripts');
 
 
 /**
@@ -845,26 +874,31 @@ function file_gallery_shortcode( $content = false, $attr = false )
 		}
 		**/
 
-		$dom_document = HTML5_Parser::parseFragment(wp_get_attachment_link($attachment->ID));
-		$wp_attachment_link_attributes = $dom_document->item(0)->attributes;
+		$dom_document = HTML5_Parser::parse(wp_get_attachment_link($attachment->ID));
+		$wp_attachment_link_attributes = $dom_document->getElementsByTagName("a")->item(0)->attributes;
+		$length = $wp_attachment_link_attributes->length;
 
-		foreach( $wp_attachment_link_attributes as $attribute )
+		for( $i = 0; $i < $length; ++$i )
 		{
-			if( $attribute->name === 'title' ) {
-				$param['title'] = $attribute->value;
+			$name = $wp_attachment_link_attributes->item($i)->name;
+			$value = $wp_attachment_link_attributes->item($i)->value;
+
+			if( $name === 'title' ) {
+				$param['title'] = $value;
 			}
-			else if( $attribute->name === 'class' ) {
-				$param['link_class'] .= ' ' . $attribute->value;
+			else if( $name === 'class' ) {
+				$param['link_class'] .= ' ' . $value;
 			}
-			else if( $attribute->name === 'rel' ) {
-				$param['rel'] .= ' ' . $attribute->value;
+			else if( $name === 'rel' ) {
+				$param['rel'] .= ' ' . $value;
 			}
 		}
 
 		$param = array_map('trim', $param);
 		
-		if( $include_meta )
+		if( $include_meta ) {
 			$meta = get_post_custom($attachment->ID);
+		}
 		
 		if( 'object' == $output_type )
 		{

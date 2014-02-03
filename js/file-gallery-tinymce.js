@@ -53,16 +53,29 @@
 						ed.windowManager.insertimagebookmark = ed.selection.getBookmark(1);
 					}
 				});
-				
-				
-				ed.onEvent.add(function(ed, e)
+
+				if( typeof ed.on === "function" ) // tinyMCE 4.x
 				{
-					if( 46 === e.keyCode && "keyup" === e.type && true === file_gallery.gallery_image_clicked[ed.id] )
+					ed.on("keyup", function(e)
 					{
-						$("#file_gallery_uncheck_all").trigger("click");
-						file_gallery.gallery_image_clicked[ed.id] = false;
-					}
-				});
+						if( file_gallery.gallery_image_clicked[ed.id] === true && (e.keyCode === 46 || e.keyCode === 27) )
+						{
+							$("#file_gallery_uncheck_all").trigger("click");
+							file_gallery.gallery_image_clicked[ed.id] = false;
+						}
+					});
+				}
+				else
+				{
+					ed.onEvent.add(function(ed, e)
+					{
+						if( e.type === "keyup" && file_gallery.gallery_image_clicked[ed.id] === true && (e.keyCode === 46 || e.keyCode === 27) )
+						{
+							$("#file_gallery_uncheck_all").trigger("click");
+							file_gallery.gallery_image_clicked[ed.id] = false;
+						}
+					});
+				}
 			}
 		},
 		
