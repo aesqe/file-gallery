@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: File Gallery v1.5.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-08-29 19:36+0100\n"
-"PO-Revision-Date: 2013-08-29 19:37+0100\n"
+"POT-Creation-Date: 2014-02-04 09:04+0100\n"
+"PO-Revision-Date: 2014-02-04 09:05+0100\n"
 "Last-Translator: Li-An <lian00@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,12 +16,12 @@ msgstr ""
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
 "X-Poedit-Basepath: ../\n"
 "X-Textdomain-Support: yes\n"
-"X-Generator: Poedit 1.5.7\n"
+"X-Generator: Poedit 1.6.3\n"
 "X-Poedit-SearchPath-0: .\n"
 
 # @ file-gallery
-#: file-gallery.php:155 file-gallery.php:1382 file-gallery.php:1388
-#: file-gallery.php:1389 includes/media-settings.php:16
+#: file-gallery.php:155 file-gallery.php:1392 file-gallery.php:1398
+#: file-gallery.php:1399 includes/media-settings.php:16
 msgid "File Gallery"
 msgstr "File Gallery"
 
@@ -343,8 +343,8 @@ msgid "Help"
 msgstr "Aide"
 
 # @ file-gallery
-#: file-gallery.php:905 file-gallery.php:964 file-gallery.php:1282
-#: file-gallery.php:1527 includes/main-form.php:251
+#: file-gallery.php:905 file-gallery.php:968 file-gallery.php:969
+#: file-gallery.php:1292 file-gallery.php:1537 includes/main-form.php:251
 msgid "Media tags"
 msgstr "Mots clef média"
 
@@ -354,27 +354,27 @@ msgid "Media tag"
 msgstr "Mot clef média"
 
 # @ file-gallery
-#: file-gallery.php:1090 includes/main-form.php:343
+#: file-gallery.php:1100 includes/main-form.php:343
 msgid "Switch to tags"
 msgstr "Basculer vers les tags"
 
 # @ file-gallery
-#: file-gallery.php:1091
+#: file-gallery.php:1101
 msgid "Switch to list of attachments"
 msgstr "Basculer vers la liste des pièces attachées"
 
 # @ file-gallery
-#: file-gallery.php:1092 includes/main-form.php:71
+#: file-gallery.php:1102 includes/main-form.php:71
 msgid "Insert checked attachments into post as"
 msgstr "Insérer les attachements sélectionnés dans le billet en tant que"
 
 # @ file-gallery
-#: file-gallery.php:1093
+#: file-gallery.php:1103
 msgid "No files are currently attached to this post."
 msgstr "Aucun fichier n'est rattaché à ce billet pour le moment"
 
 # @ file-gallery
-#: file-gallery.php:1094
+#: file-gallery.php:1104
 msgid ""
 "Are you sure that you want to delete these attachments? Press [OK] to delete "
 "or [Cancel] to abort."
@@ -383,42 +383,42 @@ msgstr ""
 "supprimer ou [Annuler] pour l'éviter."
 
 # @ file-gallery
-#: file-gallery.php:1095
+#: file-gallery.php:1105
 msgid "saving attachment data..."
 msgstr "sauvegarde des informations d'attachement..."
 
 # @ file-gallery
-#: file-gallery.php:1096
+#: file-gallery.php:1106
 msgid "loading attachment data..."
 msgstr "chargement des informations d'attachement ..."
 
 # @ file-gallery
-#: file-gallery.php:1097
+#: file-gallery.php:1107
 msgid "deleting attachment..."
 msgstr "suppression du fichier attaché ..."
 
 # @ file-gallery
-#: file-gallery.php:1098
+#: file-gallery.php:1108
 msgid "deleting attachments..."
 msgstr "suppression des fichiers attachés ..."
 
 # @ file-gallery
-#: file-gallery.php:1099
+#: file-gallery.php:1109
 msgid "loading..."
 msgstr "chargement ..."
 
 # @ file-gallery
-#: file-gallery.php:1100
+#: file-gallery.php:1110
 msgid "detaching attachment"
 msgstr "détachement du fichier attaché"
 
 # @ file-gallery
-#: file-gallery.php:1101
+#: file-gallery.php:1111
 msgid "detaching attachments"
 msgstr "détachement des fichiers attachés"
 
 # @ file-gallery
-#: file-gallery.php:1102
+#: file-gallery.php:1112
 msgid ""
 "Are you sure that you want to detach these attachments? Press [OK] to detach "
 "or [Cancel] to abort."
@@ -427,127 +427,127 @@ msgstr ""
 "détacher ou [Annuler] pour éviter."
 
 # @ file-gallery
-#: file-gallery.php:1103
+#: file-gallery.php:1113
 msgid "close"
 msgstr "fermer"
 
 # @ file-gallery
-#: file-gallery.php:1104
+#: file-gallery.php:1114
 msgid "loading attachments"
 msgstr "chargement des fichiers attachés"
 
 # @ file-gallery
-#: file-gallery.php:1105
+#: file-gallery.php:1115
 msgid "Featured image set successfully"
 msgstr "Image de présentation définie avec succès"
 
 # @ file-gallery
-#: file-gallery.php:1106
+#: file-gallery.php:1116
 msgid "Featured image removed"
 msgstr "Image de présentation retirée"
 
 # @ file-gallery
-#: file-gallery.php:1107
+#: file-gallery.php:1117
 msgid "Copy all attachments from the original post"
 msgstr "Copier toutes les pièces attachées au billet d'origine"
 
 # @ file-gallery
-#: file-gallery.php:1108
+#: file-gallery.php:1118
 msgid "Copy all attachments from the original post?"
 msgstr "Copier tous les fichiers attachés du billet d'origine ?"
 
 # @ file-gallery
-#: file-gallery.php:1109
+#: file-gallery.php:1119
 msgid "Copy all attachments from this translation"
 msgstr "Copier toutes les pièces attachées de cette traduction"
 
 # @ file-gallery
-#: file-gallery.php:1110
+#: file-gallery.php:1120
 msgid "Copy all attachments from this translation?"
 msgstr "Copier tous les fichiers attachés de cette traduction ?"
 
 # @ file-gallery
-#: file-gallery.php:1111 includes/main.php:155
+#: file-gallery.php:1121 includes/main.php:155
 msgid "Set as featured image"
 msgstr "Définir comme image de présentation"
 
 # @ file-gallery
-#: file-gallery.php:1112 includes/main.php:155
+#: file-gallery.php:1122 includes/main.php:155
 msgid "Unset as featured image"
 msgstr "Retirer le statut d'image de présentation"
 
 # @ file-gallery
-#: file-gallery.php:1113
+#: file-gallery.php:1123
 #, php-format
 msgid "Supplied ID (%d) is zero or not a number, please correct."
 msgstr "L' ID (%d) fourni est zéro ou n'est pas un nombre. Veuillez corriger."
 
 # @ file-gallery
-#: file-gallery.php:1114 file-gallery.php:1196
+#: file-gallery.php:1124 file-gallery.php:1206
 msgid "regenerating..."
 msgstr "régénération..."
 
 # @ file-gallery
-#: file-gallery.php:1115
+#: file-gallery.php:1125
 msgid "Gallery contents updated"
 msgstr "Contenus des galleries mis à jour"
 
 # @ file-gallery
-#: file-gallery.php:1116 file-gallery.php:1244
+#: file-gallery.php:1126 file-gallery.php:1254
 msgid "Attach all checked items to current post"
 msgstr "Attacher tous les éléments cochés dans le billet actuel"
 
 # @ file-gallery
-#: file-gallery.php:1117 file-gallery.php:1245
+#: file-gallery.php:1127 file-gallery.php:1255
 msgid "Exclude current post's attachments"
 msgstr "Exclure les pièces attachées au billet actuel"
 
 # @ file-gallery
-#: file-gallery.php:1118 file-gallery.php:1246
+#: file-gallery.php:1128 file-gallery.php:1256
 msgid "Include current post's attachments"
 msgstr "Inclure les pièces attachées du billet actuel"
 
 # @ file-gallery
 # @ ile-gallery
-#: file-gallery.php:1166 file-gallery.php:1218
+#: file-gallery.php:1176 file-gallery.php:1228
 #: includes/attachments-custom-fields.php:53
 #: includes/attachments-custom-fields.php:185
 msgid "Add New Custom Field"
 msgstr "Ajouter un nouveau champ personnalisé"
 
 # @ file-gallery
-#: file-gallery.php:1167 file-gallery.php:1219
+#: file-gallery.php:1177 file-gallery.php:1229
 #: includes/attachments-custom-fields.php:70
 #: includes/attachments-custom-fields.php:188
 msgid "Add Custom Field"
 msgstr "Ajouter un champ personnalisé"
 
 # @ file-gallery
-#: file-gallery.php:1168 file-gallery.php:1220
+#: file-gallery.php:1178 file-gallery.php:1230
 msgid "Error deleting attachment custom field!"
 msgstr ""
 "Erreur lors de la suppression d'un champs personnalisé pour fichier attaché !"
 
 # @ file-gallery
-#: file-gallery.php:1169 file-gallery.php:1221
+#: file-gallery.php:1179 file-gallery.php:1231
 msgid "Error adding attachment custom field!"
 msgstr "Erreur lors de l'ajout d'un champ personnalisé pour fichier atttaché !"
 
 # @ file-gallery
-#: file-gallery.php:1170 file-gallery.php:1222
+#: file-gallery.php:1180 file-gallery.php:1232
 #: includes/attachments-custom-fields.php:59
 #: includes/attachments-custom-fields.php:188
 msgid "Name:"
 msgstr "Nom:"
 
 # @ file-gallery
-#: file-gallery.php:1171 file-gallery.php:1223
+#: file-gallery.php:1181 file-gallery.php:1233
 #: includes/attachments-custom-fields.php:188
 msgid "Value:"
 msgstr "Valeur:"
 
 # @ file-gallery
-#: file-gallery.php:1345
+#: file-gallery.php:1355
 msgid ""
 "File Gallery requires Javascript to function. Please enable it in your "
 "browser."
@@ -556,63 +556,63 @@ msgstr ""
 "votre navigateur."
 
 # @ file-gallery
-#: file-gallery.php:1353
+#: file-gallery.php:1363
 msgid "Delete attachment dialog"
 msgstr "Supprimer le dialogue de fichier attaché"
 
 # @ file-gallery
-#: file-gallery.php:1354
+#: file-gallery.php:1364
 msgid "Warning: one of the attachments you've chosen to delete has copies."
 msgstr ""
 "Avertissement: un des fichiers attachés choisi pour être supprimé a des "
 "copies."
 
 # @ file-gallery
-#: file-gallery.php:1355
+#: file-gallery.php:1365
 msgid "How do you wish to proceed?"
 msgstr "Comment voulez-vous procéder ?"
 
 # @ file-gallery
-#: file-gallery.php:1356
+#: file-gallery.php:1366
 msgid "Click here if you have no idea what this dialog means"
 msgstr "Cliquez ici si vous ne comprenez pas la signification de ce dialogue"
 
 # @ file-gallery
-#: file-gallery.php:1356
+#: file-gallery.php:1366
 msgid "(opens File Gallery help in new browser window)"
 msgstr ""
 "(ouvrir l'aide de File Gallery dans une nouvelle fenêtre du navigateur)"
 
 # @ file-gallery
-#: file-gallery.php:1359 includes/main-form.php:56
+#: file-gallery.php:1369 includes/main-form.php:56
 msgid "Copy all attachments from another post"
 msgstr "Copier tous les fichiers attachés d'un autre billet"
 
 # @ file-gallery
-#: file-gallery.php:1361 includes/main-form.php:240
+#: file-gallery.php:1371 includes/main-form.php:240
 msgid "Post ID:"
 msgstr "ID du billet:"
 
 # @ file-gallery
-#: file-gallery.php:1394
+#: file-gallery.php:1404
 msgid "File Gallery: Attachment Custom Fields"
 msgstr "File Gallery: champs personnalisés de fichier attaché"
 
 # @ file-gallery
-#: file-gallery.php:1448
+#: file-gallery.php:1458
 msgid "No. of attachments"
 msgstr "Nombre de fichiers attachés"
 
 # @ file-gallery
-#: file-gallery.php:1487
+#: file-gallery.php:1497
 msgid "No Media Tags"
 msgstr "Aucun tag média"
 
-#: file-gallery.php:1560
+#: file-gallery.php:1570
 msgid "Remove"
 msgstr "Retirer"
 
-#: file-gallery.php:1564
+#: file-gallery.php:1574
 msgid "Deselect"
 msgstr "Déselectionner"
 
@@ -1282,21 +1282,29 @@ msgstr ""
 "régénérées !"
 
 # @ file-gallery
-#: includes/templating.php:282
+#: includes/templating.php:311
 msgid "file does not exist:"
 msgstr "le fichier n'existe pas:"
 
 # @ file-gallery
-#: includes/templating.php:282
+#: includes/templating.php:311
 msgid "using default style"
 msgstr "utiliser le style par défaut"
 
 # @ file-gallery
-#: includes/templating.php:1010
+#: includes/templating.php:1071
 msgid "Skip to first page"
 msgstr "Aller directement à la première page"
 
 # @ file-gallery
-#: includes/templating.php:1013
+#: includes/templating.php:1075
 msgid "Skip to last page"
 msgstr "Aller directement à la dernière page"
+
+#: includes/templating.php:1079
+msgid "Previous page"
+msgstr "Page précédente"
+
+#: includes/templating.php:1083
+msgid "Next page"
+msgstr "Page suivante"

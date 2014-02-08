@@ -132,8 +132,8 @@
 				<p id="file_gallery_linkrel_label">
 					<label for="file_gallery_linkrel"><?php _e("link 'rel' attribute", "file-gallery"); ?>:</label>
 					<select type="text" name="file_gallery_linkrel" id="file_gallery_linkrel">
-						<option value="true">true (auto generated)</option>
-						<option value="false">false</option>
+						<option value="true"><?php _e("true (auto generated)", "file-gallery"); ?></option>
+						<option value="false"><?php _e("false", "file-gallery"); ?></option>
 					</select>
 	
 					<span id="file_gallery_linkrel_custom_label">
