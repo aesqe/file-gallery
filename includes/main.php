@@ -486,8 +486,9 @@ function file_gallery_main( $ajax = true )
 		{
 			foreach( $custom_fields as $key => $val )
 			{
-				if( isset($custom[$key]) && $custom[$key][0] != $val )
+				if( isset($custom[$key]) && $custom[$key][0] != $val ) {
 					update_post_meta($attachment_id, $key, $val);
+				}
 			}
 		}
 		

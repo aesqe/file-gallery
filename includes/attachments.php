@@ -15,40 +15,51 @@ function file_gallery_check_attachment_originality()
 			$ids[] = $post->ID;
 		}
 		
-		if( ! empty($ids) && $results = $wpdb->get_results("SELECT post_id, meta_key FROM $wpdb->postmeta WHERE meta_key IN ('_has_copies', '_is_copy_of') AND post_id IN ('" . implode("', '", $ids) . "')") )
+		if( ! empty($ids) )
 		{
-			foreach( $results as $r )
+			$query = "SELECT post_id, meta_key FROM $wpdb->postmeta WHERE meta_key IN ('_has_copies', '_is_copy_of') AND post_id IN ('" . implode("', '", $ids) . "')";
+			$results = $wpdb->get_results($query);
+
+			foreach( (array) $results as $r )
 			{
-				if( '_has_copies' == $r->meta_key )
+				if( '_has_copies' == $r->meta_key ) {
 					$originals[] = $r->post_id;
+				}
 				
-				if( '_is_copy_of' == $r->meta_key )
+				if( '_is_copy_of' == $r->meta_key ) {
 					$copies[] = $r->post_id;
+				}
 			}
 		}
 		
 		if( ! empty($originals) || ! empty($copies) )
 		{
-			if( ! empty($originals) )
+			if( ! empty($originals) ) {
 				$originals = '"#post-' . implode(', #post-', $originals) . '"';
-			else
+			}
+			else {
 				$originals = 'null';
+			}
 
-			if( ! empty($copies) )
+			if( ! empty($copies) ) {
 				$copies = '"#post-' . implode(', #post-', $copies) . '"';
-			else
+			}
+			else {
 				$copies = 'null';
+			}
 			
 		?>
 			<script type="text/javascript">
 				var file_gallery_originals = <?php echo $originals; ?>,
 					file_gallery_copies = <?php echo $copies; ?>;
 
-				if( null !== file_gallery_originals )
+				if( null !== file_gallery_originals ) {
 					jQuery(file_gallery_originals).addClass("attachment-original");
+				}
 				
-				if( null !== file_gallery_copies )
+				if( null !== file_gallery_copies ) {
 					jQuery(file_gallery_copies).addClass("attachment-copy");
+				}
 			</script>
 		<?php
 		}
@@ -84,26 +95,32 @@ function file_gallery_get_attachment_data()
 	$rel          = '';
 	$_caption      = ('true' == $_POST['caption'] || '1' == $_POST['caption']) ? true : false;
 	
-	if( 'external_url' == $linkto )
+	if( 'external_url' == $linkto ) {
 		$linkto = $external_url;
+	}
 	
-	if( 'undefined' == $linkclass || '' == $linkclass )
+	if( 'undefined' == $linkclass || '' == $linkclass ) {
 		$linkclass = '';
+	}
 		
-	if( 'undefined' == $imageclass || '' == $imageclass )
+	if( 'undefined' == $imageclass || '' == $imageclass ) {
 		$imageclass = '';
+	}
 	
-	if( 'undefined' == $align || '' == $align )
+	if( 'undefined' == $align || '' == $align ) {
 		$align = 'none';
+	}
 
 	$attachments = explode(',', $attachment);
 	
 	if( 1 < count($attachments) && '' != $linkclass && ! in_array($linkto, array('attachment', 'parent_post', 'none')) )
 	{
-		if( ! isset($file_gallery->gallery_id) )
+		if( ! isset($file_gallery->gallery_id) ) {
 			$file_gallery->gallery_id = 1;
-		else
+		}
+		else {
 			$file_gallery->gallery_id++;
+		}
 
 		$rel = ' rel="' . $linkclass . '[' . $file_gallery->gallery_id . ']"';
 	}
@@ -115,16 +132,19 @@ function file_gallery_get_attachment_data()
 		$attachment = get_post($attachment_id);
 		$excerpt = trim($attachment->post_excerpt);
 
-		if( true === $caption  )
+		if( true === $caption  ) {
 			$caption = '' != $excerpt ? $excerpt : false;
+		}
 		
-		if( false === $caption )
+		if( false === $caption ) {
 			$_imageclass = $imageclass . ' align' . $align;
+		}
 
 		$_imageclass .= ' size-' . $size;
 		
-		if( (1 === count($attachments) || (1 < count($attachments) && '' == $linkclass)) && 'attachment' == $linkto )
+		if( (1 === count($attachments) || (1 < count($attachments) && '' == $linkclass)) && 'attachment' == $linkto ) {
 			$rel = ' rel="attachment wp-att-' . $attachment->ID . '"';
+		}
 
 		echo file_gallery_parse_attachment_data( $attachment, $size, $linkto, $linkclass, $_imageclass, $rel, $caption, $align );
 	}
@@ -145,13 +165,15 @@ function file_gallery_parse_attachment_data( $attachment, $size, $linkto, $linkc
 {
 	global $wpdb;
 	
-	if( ! is_numeric($attachment->ID) )
+	if( ! is_numeric($attachment->ID) ) {
 		return false; // not a number, exiting
+	}
 	
 	$link = '';
 	
-	if( ! $thumb_alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true) )
+	if( ! $thumb_alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true) ) {
 		$thumb_alt = $attachment->post_title;
+	}
 
 	$title = $attachment->post_title;
 	
@@ -194,8 +216,9 @@ function file_gallery_parse_attachment_data( $attachment, $size, $linkto, $linkc
 	
 	if( '' != $link )
 	{
-		if( '' != trim($linkclass) )
+		if( '' != trim($linkclass) ) {
 			$linkclass = ' class="' . trim($linkclass) . '"';
+		}
 
 		$output = '<a href="' . $link . '"' . $linkclass . $rel . '>' . $output . '</a>' . "\n\n";
 	}
@@ -287,7 +310,7 @@ function file_gallery_edit_attachment()
 	$media_tags = implode(', ', $media_tags);
 	
 	$has_copies = maybe_unserialize(get_post_meta($attachment->ID, '_has_copies', true));
-	$is_copy    = get_post_meta($attachment->ID, '_is_copy_of', true);
+	$is_copy = get_post_meta($attachment->ID, '_is_copy_of', true);
 
 	do_action('file_gallery_edit_attachment', $attachment->ID);
 ?>
@@ -479,16 +502,18 @@ function file_gallery_copy_attachment_to_post( $aid, $post_id )
 {
 	global $wpdb;
 	
-	if( ! is_numeric($aid) || ! is_numeric($post_id) || 0 === (int) $aid || 0 === (int) $post_id )
+	if( ! is_numeric($aid) || ! is_numeric($post_id) || 0 === (int) $aid || 0 === (int) $post_id ) {
 		return -1;
+	}
 	
 	$attachment = get_post($aid);
 	
 	// don't duplicate - if it's unattached, just attach it without copying the data
-	if( 0 === $attachment->post_parent )
+	if( 0 === $attachment->post_parent ) {
 		return $wpdb->update( $wpdb->posts, array('post_parent' => $post_id), array('ID' => $attachment->ID), array('%d'), array('%d') );
+	}
 
-	$attachment->metadata      = get_post_meta($attachment->ID, '_wp_attachment_metadata', true);
+	$attachment->metadata = get_post_meta($attachment->ID, '_wp_attachment_metadata', true);
 	$attachment->attached_file = get_post_meta($attachment->ID, '_wp_attached_file', true);
 
 	unset($attachment->ID);
@@ -504,12 +529,12 @@ function file_gallery_copy_attachment_to_post( $aid, $post_id )
 	
 	foreach( $acf as $key => $val )
 	{
-		if( in_array($key, array('_is_copy_of', '_has_copies')) )
-			continue;
-
-		foreach( $val as $v )
+		if( ! in_array($key, array('_is_copy_of', '_has_copies')) )
 		{
-			add_post_meta($attachment_id, $key, $v);
+			foreach( $val as $v )
+			{
+				add_post_meta($attachment_id, $key, $v);
+			}
 		}
 	}
 	
@@ -520,8 +545,9 @@ function file_gallery_copy_attachment_to_post( $aid, $post_id )
 	/* copies and originals */
 
 	// if we're duplicating a copy, set duplicate's "_is_copy_of" value to original's ID
-	if( $is_a_copy = get_post_meta($aid, '_is_copy_of', true) )
+	if( $is_a_copy = get_post_meta($aid, '_is_copy_of', true) ) {
 		$aid = $is_a_copy;
+	}
 	
 	update_post_meta($attachment_id, '_is_copy_of', $aid);
 	
@@ -563,8 +589,9 @@ function file_gallery_copy_all_attachments()
 	$to_id    = $_POST['to_id'];
 	$thumb_id = false;
 	
-	if( ! is_numeric($from_id) || ! is_numeric($to_id) || 0 === $from_id || 0 === $to_id )
+	if( ! is_numeric($from_id) || ! is_numeric($to_id) || 0 === $from_id || 0 === $to_id ){
 		exit('ID not numeric or zero! (file_gallery_copy_all_attachments)');
+	}
 	
 	$attachments = $wpdb->get_results( sprintf("SELECT `ID` FROM $wpdb->posts WHERE `post_type`='attachment' AND `post_parent`=%d", $from_id) );
 	
@@ -575,12 +602,14 @@ function file_gallery_copy_all_attachments()
 		exit( $error );
 	}
 	
-	if( 0 === count($attachments) )
+	if( 0 === count($attachments) ){
 		exit( sprintf( __('Uh-oh. No attachments were found for post ID %d.', 'file-gallery'), $from_id ) );
+	}
 	
 	// if the post we're copying all the attachments to has no attachments...
-	if( 0 === count( $wpdb->get_results( $wpdb->prepare("SELECT `ID` FROM $wpdb->posts WHERE `post_type`='attachment' AND `post_parent`=%d", $to_id) ) ) )
+	if( 0 === count($wpdb->get_results($wpdb->prepare("SELECT `ID` FROM $wpdb->posts WHERE `post_type`='attachment' AND `post_parent`=%d", $to_id))) ) {
 		$thumb_id = get_post_meta( $from_id, '_thumbnail_id', true ); // ...automatically set the original post's thumb to the new one
+	}
 	
 	do_action('file_gallery_copy_all_attachments', $from_id, $to_id);
 	
@@ -588,18 +617,22 @@ function file_gallery_copy_all_attachments()
 	{
 		$r = file_gallery_copy_attachment_to_post( $aid->ID, $to_id );
 		
-		if( -1 === $r )
+		if( -1 === $r ) {
 			$errors[] = $aid->ID;
+		}
 		
 		// set post thumb
-		if( $aid->ID === $thumb_id )
+		if( $aid->ID === $thumb_id ) {
 			update_post_meta( $to_id, '_thumbnail_id', $r);
+		}
 	}
 	
-	if( ! isset($errors) )
+	if( ! isset($errors) ) {
 		echo sprintf( __('All attachments were successfully copied from post %d.', 'file-gallery'), $from_id );
-	else
+	}
+	else {
 		echo 'error ids: ' . implode(', ', $errors);
+	}
 	
 	exit();
 }
@@ -616,14 +649,17 @@ function file_gallery_delete_attachment( $post_id )
 {
 	global $wpdb;
 	
-	if ( ! current_user_can('delete_post', $post_id) )
+	if ( ! current_user_can('delete_post', $post_id) ) {
 		return false;
+	}
 
-	if ( ! $post = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $wpdb->posts WHERE ID = %d", $post_id) ) )
+	if ( ! $post = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $wpdb->posts WHERE ID = %d", $post_id) ) ) {
 		return $post;
+	}
 
-	if ( 'attachment' != $post->post_type )
+	if ( 'attachment' != $post->post_type ) {
 		return false;
+	}
 
 	delete_post_meta($post_id, '_wp_trash_meta_status');
 	delete_post_meta($post_id, '_wp_trash_meta_time');
@@ -637,10 +673,13 @@ function file_gallery_delete_attachment( $post_id )
 
 	// delete comments
 	$comment_ids = $wpdb->get_col( $wpdb->prepare( "SELECT comment_ID FROM $wpdb->comments WHERE comment_post_ID = %d", $post_id ));
-	if ( ! empty( $comment_ids ) ) {
+	if ( ! empty( $comment_ids ) )
+	{
 		do_action( 'delete_comment', $comment_ids );
 		foreach ( $comment_ids as $comment_id )
+		{
 			wp_delete_comment( $comment_id, true );
+		}
 		do_action( 'deleted_comment', $comment_ids );
 	}
 
@@ -674,8 +713,9 @@ function file_gallery_cancel_file_deletion_if_attachment_copies( $file )
 {
 	global $wpdb;
 
-	if( defined('FILE_GALLERY_SKIP_DELETE_CANCEL') && true === FILE_GALLERY_SKIP_DELETE_CANCEL )
+	if( defined('FILE_GALLERY_SKIP_DELETE_CANCEL') && true === FILE_GALLERY_SKIP_DELETE_CANCEL ) {
 		return $file;
+	}
 	
 	$_file = $file;
 	$was_original = true;
@@ -684,7 +724,7 @@ function file_gallery_cancel_file_deletion_if_attachment_copies( $file )
 	if( false != get_option('uploads_use_yearmonth_folders') )
 	{
 		$_file = explode('/', $_file);
-		$c     = count($_file);
+		$c = count($_file);
 		
 		$_file = $_file[$c-3] . '/' . $_file[$c-2] . '/' . $_file[$c-1];
 	}
@@ -708,18 +748,21 @@ function file_gallery_cancel_file_deletion_if_attachment_copies( $file )
 	{
 		foreach( $this_copies as $tc ) // determine if original was deleted
 		{
-			if( '' != get_post_meta($tc, '_has_copies', true) )
+			if( '' != get_post_meta($tc, '_has_copies', true) ) {
 				$was_original = false;
+			}
 		}
 
-		if( $was_original ) // original is deleted, promote first copy
+		if( $was_original ) { // original is deleted, promote first copy
 			$promoted_id = file_gallery_promote_first_attachment_copy(0, $this_copies);
+		}
 		
 		$uploadpath = wp_upload_dir();
 		$file_path  = path_join($uploadpath['basedir'], $_file);
 		
-		if( file_gallery_file_is_displayable_image($file_path) ) // if it's an image - regenerate its intermediate sizes
+		if( file_gallery_file_is_displayable_image($file_path) ) { // if it's an image - regenerate its intermediate sizes
 			$regenerate = wp_update_attachment_metadata($promoted_id, wp_generate_attachment_metadata($promoted_id, $file_path));
+		}
 
 		return '';
 	}
@@ -763,14 +806,17 @@ function file_gallery_handle_deleted_attachment( $post_id )
 	{
 		foreach( $copies as $k => $v )
 		{
-			if( (int) $post_id === (int) $v )
+			if( (int) $post_id === (int) $v ) {
 				unset($copies[$k]);
+			}
 		}
 		
-		if( empty($copies) )
+		if( empty($copies) ) {
 			delete_post_meta($is_copy_of, '_has_copies');
-		else
+		}
+		else {
 			update_post_meta($is_copy_of, '_has_copies', $copies);
+		}
 	}
 }
 add_action('delete_attachment',              'file_gallery_handle_deleted_attachment');
@@ -784,8 +830,9 @@ add_action('file_gallery_delete_attachment', 'file_gallery_handle_deleted_attach
  */
 function file_gallery_promote_first_attachment_copy( $attachment_id, $copies = false )
 {
-	if( false === $copies )
+	if( false === $copies ) {
 		$copies = get_post_meta($attachment_id, '_has_copies', true);
+	}
 	
 	if( is_array($copies) && ! empty($copies) )
 	{
@@ -811,4 +858,3 @@ function file_gallery_promote_first_attachment_copy( $attachment_id, $copies = f
 	// no copies
 	return false;
 }
-

@@ -347,7 +347,7 @@ function file_gallery_attachment_fields_to_edit( $form_fields, $attachment )
 	return $form_fields;
 }
 if( floatval(get_bloginfo('version')) < 3.5 ) {
-	add_filter('attachment_fields_to_edit', 'file_gallery_attachment_fields_to_edit', 10, 2);
+	//add_filter('attachment_fields_to_edit', 'file_gallery_attachment_fields_to_edit', 10, 2);
 }
 
 
@@ -373,14 +373,15 @@ function file_gallery_attachment_fields_to_save( $attachment, $new_data )
 		}
 		
 		// no javascript
-		if( isset($_POST['new_custom_field_submit']) && isset($_POST['new_custom_field_key']) )
+		if( isset($_POST['new_custom_field_submit']) && isset($_POST['new_custom_field_key']) ) {
 			update_post_meta($attachment['ID'], $_POST['new_custom_field_key'], $_POST['new_custom_field_value']);
+		}
 	}
 
 	return $attachment;
 }
 if( floatval(get_bloginfo('version')) < 3.5 ) {
-	add_filter('attachment_fields_to_save', 'file_gallery_attachment_fields_to_save', 10, 2);
+	//add_filter('attachment_fields_to_save', 'file_gallery_attachment_fields_to_save', 10, 2);
 }
 
 

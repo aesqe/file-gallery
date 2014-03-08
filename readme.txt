@@ -169,6 +169,12 @@ Josh Eaton (https://github.com/jjeaton/)
 
 == Changelog ==
 
+= 1.7.9 =
+* March 8th, 2014
+* tinyMCE v4 compatibility; no visual editor bug fixed
+* fixed attachment custom fields inside File Gallery
+* minor code "improvements"
+
 = 1.7.8 =
 * November 24th, 2013
 * from this version on, File Gallery is for WordPress 3.5 and later only!

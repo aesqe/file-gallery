@@ -22,8 +22,8 @@ jQuery(document).ready(function($)
 
 		tinymce_get_editor: function()
 		{
-			if( tinymce !== void 0 ) {
-				return tinymce.EditorManager.get(wpActiveEditor || "content");
+			if( window.tinymce !== void 0 ) {
+				return tinymce.EditorManager.get(window.wpActiveEditor || "content");
 			}
 
 			return null;
@@ -223,7 +223,7 @@ jQuery(document).ready(function($)
 
 			var ed = this.tinymce_get_editor();
 
-			if( ed === void 0 || (ed.id && this.gallery_image_clicked[ed.id] === false && force === false) ) {
+			if( ! ed || (ed.id && this.gallery_image_clicked[ed.id] === false && force === false) ) {
 				return;
 			}
 
@@ -2148,7 +2148,7 @@ jQuery(document).ready(function($)
 	}
 	
 	// regenerate thumbnails
-	$("#file_gallery").on("click", "a.file_gallery_regenerate",function(e)
+	$("#file_gallery, #posts-filter").on("click", "a.file_gallery_regenerate",function(e)
 	{
 		var id = $(this).attr("id").split(/-/).pop();
 		
