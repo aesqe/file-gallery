@@ -64,12 +64,14 @@ jQuery(document).ready(function()
 
 	jQuery(document).on("click", ".insert-media, .media-menu-item", function(e)
 	{
-		var $this = jQuery(this),
-			editor = $this.data("editor"),
+		var editor = jQuery(this).data("editor"),
 			toolbar = wp.media.editor.get(editor).views._views[".media-frame-toolbar"][0];
 
 		toolbar.selection.reset();
-		toolbar.views._views[""][1].collection.props.set({nocache:(+(new Date()))});
+
+		if( toolbar.views._views[""][1].collection !== void 0 ) {
+			toolbar.views._views[""][1].collection.props.set({nocache:(+(new Date()))});
+		}
 		
 		var attachButton = jQuery(".media-frame-toolbar .media-button-attach"),
 			filters = jQuery("select.attachment-filters");
@@ -98,5 +100,4 @@ jQuery(document).ready(function()
 	
 	jQuery('#tmpl-attachment').remove();
 	jQuery('#tmpl-attachment-new').attr('id','tmpl-attachment');
-	
 });
