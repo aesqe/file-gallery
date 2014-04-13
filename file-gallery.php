@@ -2,7 +2,7 @@
 /*
 Plugin Name: File Gallery
 Plugin URI: http://skyphe.org/code/wordpress/file-gallery/
-Version: 1.7.9.1
+Version: 1.7.9.2
 Description: "File Gallery" extends WordPress' media (attachments) capabilities by adding a new gallery shortcode handler with templating support, a new interface for attachment handling when editing posts, and much more.
 Author: Bruno "Aesqe" Babic
 Author URI: http://skyphe.org
@@ -31,7 +31,7 @@ Author URI: http://skyphe.org
  * Setup default File Gallery options
  */
 
-define('FILE_GALLERY_VERSION', '1.7.9.1');
+define('FILE_GALLERY_VERSION', '1.7.9.2');
 define('FILE_GALLERY_DEFAULT_TEMPLATES', serialize( array('default', 'file-gallery', 'list', 'simple') ) );
 
 
@@ -1327,8 +1327,6 @@ function file_gallery_css_admin()
 {
 	global $pagenow, $current_screen, $file_gallery;
 
-	
-	
 	if(
 		   'post.php' 			== $pagenow
 		|| 'post-new.php' 		== $pagenow 
@@ -1440,7 +1438,6 @@ function file_gallery_posts_custom_column($column_name, $post_id)
 	if( 'attachment_count' == $column_name && isset($options['e_display_attachment_count']) && true == $options['e_display_attachment_count'] )
 	{
 		$count = $wpdb->get_var( $wpdb->prepare("SELECT COUNT(ID) FROM $wpdb->posts WHERE post_type='attachment' AND post_parent=%d", $post_id) );
-		
 		echo apply_filters('file_gallery_post_attachment_count', $count, $post_id);
 	}
 	elseif( 'post_thumb' == $column_name && isset($options['e_display_post_thumb']) && true == $options['e_display_post_thumb'] )
@@ -1562,11 +1559,11 @@ function file_gallery_media_columns( $columns )
 }
 add_filter('manage_media_columns', 'file_gallery_media_columns');
 
-function print_new_attachment_template(){
-global $post;
+function print_new_attachment_template()
+{
+	global $post;
 ?>
-
-<script type="text/html" id="tmpl-attachment-new">
+	<script type="text/html" id="tmpl-attachment-new">
 		<# 	if ( <?php echo $post->ID; ?> == data.uploadedTo ) { #>
 		<div class="attachment-preview isattached type-{{ data.type }} subtype-{{ data.subtype }} {{ data.orientation }}">
 		<# } else { #>
@@ -1618,11 +1615,8 @@ global $post;
 			<# } #>
 		<# } #>
 	</script>
-
-
 <?php
- }
- 
+}
 add_action('print_media_templates','print_new_attachment_template');
 
 /**

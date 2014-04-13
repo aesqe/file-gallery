@@ -69,8 +69,9 @@ function file_gallery_options_sections( $args )
 			break;
 	}
 	
-	if( "" != $output )
+	if( "" != $output ) {
 		echo "<p>" . $output . "</p>";
+	}
 }
 
 
@@ -102,12 +103,12 @@ function file_gallery_parse_args( $args, $defaults )
 {
 	foreach( $defaults as $key => $val )
 	{
-		// if key isn't set, it's a new option - add
-		if( ! isset($args[$key]) )
-			$args[$key] = $val;
-		// if a key's value is empty, but should be a false - make it rather a zero
-		elseif( '' == $args[$key] && (0 === $val || 1 === $val) )
-			$args[$key] = 0;
+		if( ! isset($args[$key]) ) {
+			$args[$key] = $val; // if key isn't set, it's a new option - add
+		}
+		elseif( '' == $args[$key] && (0 === $val || 1 === $val) ) {
+			$args[$key] = 0; // if a key's value is empty, but should be a false - make it rather a zero
+		}
 	}
 	
 	return $args;
@@ -126,11 +127,13 @@ function file_gallery_dropdown( $name, $type )
 	
 	$current = $options[$name];
 	
-	if( 'image_size' == $type )
+	if( 'image_size' == $type ) {
 		$keys['image_size'] = file_gallery_get_intermediate_image_sizes();
+	}
 	
-	if( 'template' == $type )
+	if( 'template' == $type ) {
 		$keys['template'] = file_gallery_get_templates('file_gallery_dropdown');
+	}
 
 	$keys['align'] = array(
 		'none' => __('none', 'file-gallery'), 
@@ -170,42 +173,49 @@ function file_gallery_dropdown( $name, $type )
 	{
 		$output .= '<option value="thumbnail"';
 		
-		if( $current == 'thumbnail' )
+		if( $current == 'thumbnail' ) {
 			$output .= ' selected="selected"';
+		}
 		
 		$output .= '>' . __('thumbnail', 'file-gallery') . '</option>';
 		$output .= '<option value="medium"';
 		
-		if( $current == 'medium' )
+		if( $current == 'medium' ) {
 			$output .= ' selected="selected"';
+		}
 		
 		$output .= '>' . __('medium', 'file-gallery') . '</option>';
 		$output .= '<option value="large"';
 		
-		if( $current == 'large' )
+		if( $current == 'large' ) {
 			$output .= ' selected="selected"';
+		}
 		
 		$output .= '>' . __('large', 'file-gallery') . '</option>';
 		$output .= '<option value="full"';
 		
-		if( $current == 'full' )
+		if( $current == 'full' ) {
 			$output .= ' selected="selected"';
+		}
 		
 		$output .= '>' . __('full', 'file-gallery') . '</option>';
 	}
 	
 	foreach( $keys[$type] as $name => $description )
 	{
-		if( is_numeric($name) )
+		if( is_numeric($name) ) {
 			$name = $description;
+		}
 
-		if( 'image_size' == $type && in_array($name, array('thumbnail', 'medium', 'large', 'full')) )
+		if( 'image_size' == $type && in_array($name, array('thumbnail', 'medium', 'large', 'full')) ) {
 			continue;
+		}
 
 		$output .= '<option value="' . $name . '"';
 		
-		if( $current == $name )
+		if( $current == $name ) {
 			$output .= ' selected="selected"';
+		}
 		
 		$output .= '>' . $description . '</option>';
 	}
@@ -227,8 +237,9 @@ function file_gallery_post_type_checkboxes()
 	
 	foreach( $types as $type )
 	{
-		if( ! isset($type->labels->name) )
+		if( ! isset($type->labels->name) ) {
 			$type->labels->name = $type->label;
+		}
 
 		if( ! in_array( $type->name, array('nav_menu_item', 'revision', 'attachment', 'deprecated_log') ) )
 		{
@@ -262,30 +273,42 @@ function file_gallery_add_settings()
 	
 	foreach( $settings as $key => $val )
 	{		
-		if( false !== $val['display'] )
+		if( $val['display'] !== false )
 		{
 			$type = preg_replace("#[^a-z]#", '', $val['type']);
-			$current = ! empty($options[$key]) ? str_replace("'", "\'", $options[$key]) : '';
-			$values  = ! empty($val['values']) ? str_replace("'", "\'", $val['values']) : '';
-			$disabled = ('disabled' === $val['display']) ? 1 : 0;
 
-			$anon = "echo file_gallery_options_fields(
-						array(
-							'name'     => '" . $key . "',
-							'type'     => '" . $type . "',
-							'current'  => '" . $current . "',
-							'values'   => '" . $values . "',
-							'disabled' => '" . $disabled . "'
-						));";
+			if( ! isset($val['values']) ) {
+				$val['values'] = 0;
+			}
+
+			if( $type == 'checkbox' || $type == 'select' ) {
+				$values = $val['values'];
+			}
+			else if( $type == 'textarea' ) {
+				$values = esc_textarea($values);
+			}
+			else {
+				$values = esc_attr($values);
+			}
+
+			$disabled = ('disabled' === $val['display']) ? true : false;
+			$section = $val['section'] ? $val['section'] : 'file_gallery_options';
+
+			$args = array(
+				'name' => $key,
+				'type' => $type ,
+				'current' => $options[$key],
+				'values' => $values,
+				'disabled' => $disabled
+			);
 
 			add_settings_field(
 				$key, 
 				$val['title'], 
-				create_function(
-					'', 
-					$anon), 
+				'file_gallery_options_fields', 
 				'media', 
-				$val['section'] ? $val['section'] : 'file_gallery_options'
+				$section,
+				$args
 			);
 		}
 	}
@@ -300,43 +323,47 @@ function file_gallery_add_settings()
 function file_gallery_options_fields( $args )
 {
 	global $_wp_additional_image_sizes;
+
+	$output = '';
 	
 	$name_id = 'name="file_gallery[' . $args['name'] . ']" id="file_gallery_' . $args['name'] . '"';
-	$ro = true == $args['disabled'] ? ' readonly="readonly"' : '';
+	$ro = ($args['disabled'] === true) ? ' readonly="readonly"' : '';
 	
-	if( in_array($args['type'], array('checkbox', 'button')) )
-		$ro = true == $args['disabled'] ? ' disabled="disabled"' : '';
+	if( in_array($args['type'], array('checkbox', 'button')) ) {
+		$ro = ($args['disabled'] === true) ? ' disabled="disabled"' : '';
+	}
 	
-	if( 'intermediate_image_sizes' == $args['type'] )
+	if( $args['type'] == 'intermediate_image_sizes'  )
 	{
 		$checked = '';
 		$size = $args["name"];
 		
-		if( "1" == get_option($size . "_crop") || (isset($_wp_additional_image_sizes[$size]['crop']) && 1 == $_wp_additional_image_sizes[$size]['crop']) )
+		if( get_option($size . "_crop") == 1 || (isset($_wp_additional_image_sizes[$size]['crop']) && $_wp_additional_image_sizes[$size]['crop'] == 1 ) ) {
 			$checked = ' checked="checked" ';
-		
-		if( "medium" == $size )
-		{	
-			$output = 
-			'<input name="medium_crop" id="medium_crop" value="1" ' . $checked . ' type="checkbox" />
-			 <label for="medium_crop">' . __('Crop medium size to exact dimensions', 'file-gallery') . '</label>';
 		}
-		elseif( "large" == $size )
+		
+		if( $size == "medium" )
 		{	
-			$output = 
-			'<input name="large_crop" id="large_crop" value="1" ' . $checked . ' type="checkbox" />
-			 <label for="large_crop">' . __('Crop large size to exact dimensions', 'file-gallery') . '</label>';
+			$output = '<input name="medium_crop" id="medium_crop" value="1" ' . $checked . ' type="checkbox" />
+						<label for="medium_crop">' . __('Crop medium size to exact dimensions', 'file-gallery') . '</label>';
+		}
+		elseif( $size == "large" )
+		{	
+			$output = '<input name="large_crop" id="large_crop" value="1" ' . $checked . ' type="checkbox" />
+						<label for="large_crop">' . __('Crop large size to exact dimensions', 'file-gallery') . '</label>';
 		}
 		else
 		{
 			$size_w = get_option($size . "_size_w");
 			$size_h = get_option($size . "_size_h");
 			
-			if( ! is_numeric($size_w) )
+			if( ! is_numeric($size_w) ) {
 				$size_w = $_wp_additional_image_sizes[$size]['width'];
+			}
 			
-			if( ! is_numeric($size_h) )
+			if( ! is_numeric($size_h) ) {
 				$size_h = $_wp_additional_image_sizes[$size]['height'];
+			}
 			
 			$output = 
 			'<label for="'  . $size . '_size_w">' . __("Width", 'file-gallery') . '</label>
@@ -347,27 +374,32 @@ function file_gallery_options_fields( $args )
 			 <label for="'  . $size . '_crop">' . sprintf(__('Crop %s size to exact dimensions', 'file-gallery'), $size) . '</label>';
 		}
 		
-		return $output;
+		echo $output;
+		return;
 	}
 
 	switch( $args['type'] )
 	{
 		case 'checkbox' :
-			if( false != $args['values'] )
-				return $args['values'];
-			return '<input class="file_gallery_checkbox ' . $args['name'] . '" type="checkbox" ' . $name_id . ' value="1"' . checked('1', true == $args['current'] ? 1 : 0, false) . $ro . ' />';
+			if( $args['values'] != false ) {
+				$output = $args['values'];
+			}
+			else
+			{
+				$output = '<input class="file_gallery_checkbox ' . $args['name'] . '" type="checkbox" ' . $name_id . ' value="1"' . checked('1', true == $args['current'] ? 1 : 0, false) . $ro . ' />';
+			}
 			break;
 		case 'select' :
-			return '<select class="file_gallery_select ' . $args['name'] . '" ' . $name_id . $ro . '>' . $args['values'] . '</select>';
+			$output = '<select class="file_gallery_select ' . $args['name'] . '" ' . $name_id . $ro . '>' . $args['values'] . '</select>';
 			break;
 		case 'textarea' :
-			return '<textarea cols="51" rows="5" class="file_gallery_textarea ' . $args['name'] . '" ' . $name_id . $ro . '>' . esc_textarea($args['current']) . '</textarea>';
+			$output = '<textarea cols="51" rows="5" class="file_gallery_textarea ' . $args['name'] . '" ' . $name_id . $ro . '>' . esc_textarea($args['current']) . '</textarea>';
 			break;
 		case 'text' :
 		case 'number' :
-			return '<input size="63" class="file_gallery_text ' . $args['name'] . '" type="text" ' . $name_id . ' value="' . esc_attr($args['current']) . '"' . $ro . ' />';
+			$output = '<input size="63" class="file_gallery_text ' . $args['name'] . '" type="text" ' . $name_id . ' value="' . esc_attr($args['current']) . '"' . $ro . ' />';
 			break;
 	}
-}
 
-?>
+	echo $output;
+}
