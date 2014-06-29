@@ -269,11 +269,11 @@ function file_gallery_edit_attachment()
 {
 	check_ajax_referer('file-gallery');
 	
-	$type 			= 'image';
+	$type = 'image';
 	$media_tags		= array();
-	$options		= get_option('file_gallery');
-	$attachment_id	= (int) $_POST['attachment_id'];
-	$attachment		= get_post( $attachment_id );
+	$options = get_option('file_gallery');
+	$attachment_id = (int) $_POST['attachment_id'];
+	$attachment = get_post( $attachment_id );
 	
 	if( ! $attachment )
 	{

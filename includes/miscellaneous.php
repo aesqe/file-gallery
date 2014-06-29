@@ -15,38 +15,6 @@ function file_gallery_https( $input )
 }
 
 
-/**
- * Taken from WordPress 3.1-beta1
- */
-if( ! function_exists('_wp_link_page') )
-{
-	/**
-	 * Helper function for wp_link_pages().
-	 *
-	 * @since 3.1.0
-	 * @access private
-	 *
-	 * @param int $i Page number.
-	 * @return string Link.
-	 */
-	function _wp_link_page( $i ) {
-		global $post, $wp_rewrite;
-	
-		if ( 1 == $i ) {
-			$url = get_permalink();
-		} else {
-			if ( '' == get_option('permalink_structure') || in_array($post->post_status, array('draft', 'pending')) )
-				$url = add_query_arg( 'page', $i, get_permalink() );
-			elseif ( 'page' == get_option('show_on_front') && get_option('page_on_front') == $post->ID )
-				$url = trailingslashit(get_permalink()) . user_trailingslashit("$wp_rewrite->pagination_base/" . $i, 'single_paged');
-			else
-				$url = trailingslashit(get_permalink()) . user_trailingslashit($i, 'single_paged');
-		}
-	
-		return '<a href="' . esc_url( $url ) . '">';
-	}
-}
-
 
 /**
  * Modified WP function to support !%mimetype% syntax // not yet, actually
@@ -133,14 +101,13 @@ function file_gallery_file_is_displayable_image( $path )
 {
 	$path = preg_replace(array("#\\\#", "#/+#"), array("/", "/"), $path);		
 	$info = @getimagesize($path);
+	$result = true;
 
-	if ( empty($info) )
+	if ( empty($info) || ! in_array($info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG)) ) {
+		// only gif, jpeg and png images can reliably be displayed
 		$result = false;
-	elseif ( !in_array($info[2], array(IMAGETYPE_GIF, IMAGETYPE_JPEG, IMAGETYPE_PNG)) )    // only gif, jpeg and png images can reliably be displayed
-		$result = false;
-	else
-		$result = true;
-	
+	}
+
 	return apply_filters('file_is_displayable_image', $result, $path);
 }
 
@@ -158,7 +125,11 @@ function file_gallery_save_menu()
 	
 	check_ajax_referer('file-gallery');
 
-	$order = explode(',', $_POST['attachment_order']);
+	$order = $_POST['attachment_order'];
+
+	array_walk($order, function (&$value, $index) {
+		$value = (int) $value;
+	});
 
 	foreach($order as $mo => $ID)
 	{

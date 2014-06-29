@@ -96,7 +96,7 @@ function file_gallery_list_attachments(&$count_attachments, $post_id, $attachmen
 			}
 			
 			$attachment_thumb = wp_get_attachment_image_src($attachment->ID, $attachment_thumb_size);
-			$large            = wp_get_attachment_image_src($attachment->ID, 'large');
+			$large = wp_get_attachment_image_src($attachment->ID, 'large');
 
 			if( in_array($attachment->ID, $checked_attachments) )
 			{
@@ -345,9 +345,15 @@ function file_gallery_main( $ajax = true )
 {
 	global $wpdb;
 
-	check_ajax_referer('file-gallery');
+	if( isset($_POST['_ajax_nonce']) || isset($_REQUEST['_ajax_nonce']) ) {
+		$ajax = true;
+	}
 
-	$post_id			  = isset($_POST['post_id']) ? $_POST['post_id'] : '';
+	if( $ajax === true ) {
+		check_ajax_referer('file-gallery');
+	}
+
+	$post_id			  = isset($_POST['post_id']) ? $_POST['post_id'] : $_GET['post'];
 	$attachment_order	  = isset($_POST['attachment_order']) ? $_POST['attachment_order'] : '';
 	$attachment_orderby	  = isset($_POST['attachment_orderby']) ? $_POST['attachment_orderby'] : '';
 	$files_or_tags		  = isset($_POST['files_or_tags']) ? $_POST["files_or_tags"] : '';
@@ -387,7 +393,7 @@ function file_gallery_main( $ajax = true )
 	
 	if( empty_array($attachment_ids) )
 		$attachment_ids = array();
-	
+
 	if( 'file_gallery_main_delete' == $action )
 	{
 		if( ! empty($copies) && ! empty($originals) )
@@ -467,91 +473,6 @@ function file_gallery_main( $ajax = true )
 		else
 			$output = __("Error detaching attachment(s)", "file-gallery");
 	}
-	elseif( "file_gallery_main_update" == $action )
-	{
-		$attachment_id = (int) $_POST['attachment_id'];
-
-		$attachment_data['ID'] 			  = $attachment_id;
-		$attachment_data['post_alt']      = $_POST['post_alt'];
-		$attachment_data['post_title']    = $_POST['post_title'];
-		$attachment_data['post_content']  = $_POST['post_content'];
-		$attachment_data['post_excerpt']  = $_POST['post_excerpt'];
-		$attachment_data['menu_order'] 	  = $_POST['menu_order'];
-		
-		// attachment custom fields
-		$custom = get_post_custom($attachment_id);
-		$custom_fields = isset($_POST['custom_fields']) ? $_POST['custom_fields'] : '';
-		
-		if( ! empty($custom) && ! empty($custom_fields) )
-		{
-			foreach( $custom_fields as $key => $val )
-			{
-				if( isset($custom[$key]) && $custom[$key][0] != $val ) {
-					update_post_meta($attachment_id, $key, $val);
-				}
-			}
-		}
-		
-		// media_tag taxonomy - attachment tags
-		$tax_input = "";
-		$old_media_tags = "";
-		
-		$get_old_media_tags = wp_get_object_terms((int) $_POST['attachment_id'], FILE_GALLERY_MEDIA_TAG_NAME);
-		
-		if( !empty($get_old_media_tags) )
-		{
-			foreach( $get_old_media_tags as $mt )
-			{
-				$old_media_tags[] = $mt->name;
-			}
-			
-			$old_media_tags = implode(", ", $old_media_tags);
-		}
-		
-		if( "" != $_POST['tax_input'] && $old_media_tags != $_POST['tax_input'] )
-		{
-			$tax_input = preg_replace("#\s+#", " ", $_POST['tax_input']);
-			$tax_input = preg_replace("#,+#", ",", $_POST['tax_input']);
-			$tax_input = trim($tax_input, " ");
-			$tax_input = trim($tax_input, ",");
-			$tax_input = explode(", ", $tax_input);
-			
-			$media_tags_result = wp_set_object_terms( $attachment_id, $tax_input, FILE_GALLERY_MEDIA_TAG_NAME );
-		}
-		elseif( "" == $_POST['tax_input'] )
-		{
-			$media_tags_result = wp_set_object_terms( $attachment_id, NULL, FILE_GALLERY_MEDIA_TAG_NAME );
-		}
-		
-		// check if there were any changes
-		$old_attachment_data = get_object_vars( get_post($attachment_id) );
-		
-		if( file_gallery_file_is_displayable_image(  get_attached_file($attachment_id) ) )
-			$old_attachment_data['post_alt'] = get_post_meta($attachment_id, "_wp_attachment_image_alt", true);
-		
-		if( ( isset($old_attachment_data['post_alt']) 
-				&& $old_attachment_data['post_alt'] != $attachment_data['post_alt']) ||  
-		    $old_attachment_data['post_title']   != $attachment_data['post_title']   || 
-			$old_attachment_data['post_content'] != $attachment_data['post_content'] || 
-			$old_attachment_data['post_excerpt'] != $attachment_data['post_excerpt'] ||	
-			$old_attachment_data['menu_order']   != $attachment_data['menu_order']   ||
-			is_array($tax_input) )
-		{
-			if( 0 !== wp_update_post($attachment_data) )
-			{
-				update_post_meta($attachment_id, "_wp_attachment_image_alt", $attachment_data['post_alt']);
-				$output = __("Attachment data updated", "file-gallery");
-			}
-			else
-			{
-				$output = __("Error updating attachment data!", "file-gallery");
-			}
-		}
-		else
-		{
-			$output = __("No change.", "file-gallery");
-		}
-	}
 	elseif( "file_gallery_set_post_thumb" == $action )
 	{
 		update_post_meta($post_id, "_thumbnail_id", $attachment_ids[0]);
@@ -561,15 +482,110 @@ function file_gallery_main( $ajax = true )
 	{
 		exit();
 	}
-
-	include_once("main-form.php");
-
-	exit();
 }
-add_action('wp_ajax_file_gallery_load',				'file_gallery_main');
-add_action('wp_ajax_file_gallery_main_update',		'file_gallery_main');
 add_action('wp_ajax_file_gallery_main_delete',		'file_gallery_main');
 add_action('wp_ajax_file_gallery_main_detach',		'file_gallery_main');
 add_action('wp_ajax_file_gallery_set_post_thumb',	'file_gallery_main');
 add_action('wp_ajax_file_gallery_unset_post_thumb',	'file_gallery_main');
 
+
+
+
+
+
+
+
+
+
+function file_gallery_ajax_update_attachment_data()
+{
+	check_ajax_referer('file-gallery');
+	
+	$attachment_id = (int) $_POST['attachment_id'];
+
+	$new = array();
+	$old = array();
+
+	$new['ID'] = $attachment_id;
+	$new['post_alt'] = esc_html($_POST['post_alt']);
+	$new['post_title'] = esc_attr($_POST['post_title']);
+	$new['post_content'] = esc_html($_POST['post_content']);
+	$new['post_excerpt'] = esc_html($_POST['post_excerpt']);
+	$new['menu_order'] = (int) $_POST['menu_order'];
+
+	$output = __('Error updating attachment data!', 'file-gallery');
+	
+	// attachment custom fields
+	$custom = get_post_custom($attachment_id);
+	$custom_fields = isset($_POST['custom_fields']) ? $_POST['custom_fields'] : '';
+	
+	if( ! empty($custom) && ! empty($custom_fields) )
+	{
+		foreach( $custom_fields as $key => $val )
+		{
+			if( isset($custom[$key]) && $custom[$key][0] != $val ) {
+				update_post_meta($attachment_id, $key, $val);
+			}
+		}
+	}
+	
+	// attachment media tags
+	$tax_input = '';
+	$old_media_tags = '';
+	$get_old_media_tags = wp_get_object_terms($attachment_id, FILE_GALLERY_MEDIA_TAG_NAME);
+	
+	if( ! empty($get_old_media_tags) )
+	{
+		foreach( $get_old_media_tags as $mt )
+		{
+			$old_media_tags[] = $mt->name;
+		}
+		
+		$old_media_tags = implode(', ', $old_media_tags);
+	}
+	
+	if( ! empty($_POST['tax_input']) && $old_media_tags != $_POST['tax_input'] )
+	{
+		$tax_input = preg_replace("#\s+#", ' ', $_POST['tax_input']);
+		$tax_input = preg_replace("#,+#", ',', $_POST['tax_input']);
+		$tax_input = trim($tax_input, ' ');
+		$tax_input = trim($tax_input, ',');
+		$tax_input = explode(', ', $tax_input);
+		
+		$media_tags_result = wp_set_object_terms( $attachment_id, $tax_input, FILE_GALLERY_MEDIA_TAG_NAME );
+	}
+	elseif( empty($_POST['tax_input']) )
+	{
+		$media_tags_result = wp_set_object_terms( $attachment_id, NULL, FILE_GALLERY_MEDIA_TAG_NAME );
+	}
+	
+	// check if there were any changes
+	$old = get_object_vars( get_post($attachment_id) );
+	
+	if( file_gallery_file_is_displayable_image(  get_attached_file($attachment_id) ) ) {
+		$old['post_alt'] = get_post_meta($attachment_id, '_wp_attachment_image_alt', true);
+	}
+	
+	if( (isset($old['post_alt']) && $old['post_alt'] != $new['post_alt']) ||  
+	     $old['post_title'] != $new['post_title'] || 
+		 $old['post_content'] != $new['post_content'] || 
+		 $old['post_excerpt'] != $new['post_excerpt'] ||	
+		 $old['menu_order'] != $new['menu_order'] ||
+		 is_array($tax_input)
+	)
+	{
+		if( wp_update_post($new) !== 0 )
+		{
+			update_post_meta($attachment_id, '_wp_attachment_image_alt', $new['post_alt']);
+			$output = __('Attachment data updated', 'file-gallery');
+		}
+	}
+	else
+	{
+		$output = __('No change.', 'file-gallery');
+	}
+
+	echo $output;
+	exit;
+}
+add_action('wp_ajax_file_gallery_update_attachment', 'file_gallery_ajax_update_attachment_data');

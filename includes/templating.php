@@ -455,6 +455,7 @@ function file_gallery_shortcode( $content = false, $attr = false )
 		'imageclass'		=> '',
 		'galleryclass'		=> '',
 		'rel'				=> 1,
+		'linkrel'			=> 1,
 		'tags'				=> '',
 		'tags_from'			=> 'current',
 		'output_type'		=> 'html',
@@ -622,6 +623,8 @@ function file_gallery_shortcode( $content = false, $attr = false )
 	}
 	elseif( '' != $attachment_ids )
 	{
+		// convert order by ID to 'orderby' => 'post__in'
+
 		$attachment_ids = explode(',', $attachment_ids);
 		$sql_limit = count($attachment_ids);
 
