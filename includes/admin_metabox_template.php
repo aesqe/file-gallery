@@ -316,8 +316,6 @@ $files_or_tags = 'files';
 						<button id="file_gallery_attachments_sort_submit" class="button button-secondary"><?php _e('Go', 'file-gallery'); ?></button>
 					</p>
 
-					<a href="#" id="file_gallery_save_menu_order_link" class="button button-secondary"><?php _e("Save attachment order", "file-gallery"); ?></a>
-
 					<style type="text/css">
 						.file_gallery_list .attachment
 						{
@@ -535,28 +533,30 @@ $files_or_tags = 'files';
 
 		<div id="attachment_data_edit_form">
 
-			{{#isImage}}
-			<label for="fgae_image_alt_text"><?php _e('Alternate text for this image', 'file-gallery'); ?>: </label>
-			<input type="text" name="post_alt" id="fgae_post_alt_text" value="{{imageAltText}}" class="roundborder" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
-			{{/isImage}}
+			<div class="standard-fields">
+				{{#isImage}}
+				<label for="file_gallery_attachment_image_alt_text"><?php _e('Alternate text for this image', 'file-gallery'); ?>: </label>
+				<input type="text" name="file_gallery_attachment_post_alt" id="file_gallery_attachment_post_alt_text" value="{{imageAltText}}" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
+				{{/isImage}}
 
-			<label for="fgae_post_title"><?php _e('Title', 'file-gallery'); ?>: </label>
-			<input type="text" name="post_title" id="fgae_post_title" value="{{post_title}}" class="roundborder" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
+				<label for="file_gallery_attachment_post_title"><?php _e('Title', 'file-gallery'); ?>: </label>
+				<input type="text" name="file_gallery_attachment_post_title" id="file_gallery_attachment_post_title" value="{{post_title}}" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
 
-			<label for="fgae_post_excerpt"><?php _e('Caption', 'file-gallery'); ?>: </label>
-			<textarea name="post_excerpt" id="fgae_post_excerpt" class="roundborder" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" value="{{post_excerpt}}"></textarea><br />
+				<label for="file_gallery_attachment_post_excerpt"><?php _e('Caption', 'file-gallery'); ?>: </label>
+				<textarea name="file_gallery_attachment_post_excerpt" id="file_gallery_attachment_post_excerpt" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" value="{{post_excerpt}}"></textarea><br />
 
-			<label for="fgae_post_content"><?php _e('Description', 'file-gallery'); ?>: </label>
-			<textarea name="post_content" id="fgae_post_content" rows="4" cols="20" class="roundborder" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" value="{{post_content}}"></textarea><br />
+				<label for="file_gallery_attachment_post_content"><?php _e('Description', 'file-gallery'); ?>: </label>
+				<textarea name="file_gallery_attachment_post_content" id="file_gallery_attachment_post_content" rows="4" cols="20" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" value="{{post_content}}"></textarea><br />
 
-			<label for="fgae_tax_input"><?php _e('Media tags (separate each tag with a comma)', 'file-gallery'); ?>: </label>
-			<input type="text" name="tax_input" id="fgae_tax_input" value="{{mediaTags}}" class="roundborder" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
+				<label for="file_gallery_attachment_tax_input"><?php _e('Media tags (separate each tag with a comma)', 'file-gallery'); ?>: </label>
+				<input type="text" name="file_gallery_attachment_tax_input" id="file_gallery_attachment_tax_input" value="{{mediaTags}}" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
 
-			<label for="fgae_menu_order"><?php _e('Menu order', 'file-gallery'); ?>: </label>
-			<input type="text" name="menu_order" id="fgae_menu_order" value="{{menu_order}}" class="roundborder" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
+				<label for="file_gallery_attachment_menu_order"><?php _e('Menu order', 'file-gallery'); ?>: </label>
+				<input type="text" name="file_gallery_attachment_menu_order" id="file_gallery_attachment_menu_order" value="{{menu_order}}" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
 
-			<label for="fgae_attachment_uri"><?php _e('Attachment file URL:', 'file-gallery'); ?></label>
-			<input type="text" name="attachment_uri" id="fgae_attachment_uri" readonly="readonly" value="{{baseUrl + file}}" class="roundborder" />
+				<label for="file_gallery_attachment_attachment_uri"><?php _e('Attachment file URL:', 'file-gallery'); ?></label>
+				<input type="text" name="file_gallery_attachment_attachment_uri" id="file_gallery_attachment_attachment_uri" readonly="readonly" value="{{baseUrl + file}}" />
+			</div>
 
 			{{{customFieldsTable}}}
 

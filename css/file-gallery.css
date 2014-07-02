@@ -102,7 +102,6 @@
 #file_gallery #attachment_data_edit_form #attachment-postcustomstuff
 {
 	margin-top: 30px;
-	width: 90%;
 }
 
 #file_gallery_toggle_textual[disabled]
@@ -564,8 +563,16 @@
 
 #attachment_data_edit_form
 {
-	float: right;
+	float: left;
 	width: 70%;
+	max-width: 650px;
+}
+
+#attachment_data_edit_form .standard-fields
+{
+	background: #f9f9f9;
+	border: 1px solid #dfdfdf;
+	padding: 10px;
 }
 
 #attachment_data_edit_form label
@@ -575,9 +582,10 @@
 	font-weight:bold;
 }
 
-#attachment_data_edit_form .roundborder
+#attachment_data_edit_form input,
+#attachment_data_edit_form textarea
 {
-	width: 90%;
+	width: 100%;
 }
 
 .float_left

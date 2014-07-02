@@ -39,7 +39,7 @@ var FileGallery = Ractive.extend(
 		captionedLinked: '[caption id="attachment_{{ID}}" align="align{{align}}" width="{{sizeWidth}}"]<a href="{{link}}"{{linkclass}}><img class="wp-image-{{ID}} size-{{sizeName}}{{imageclass}}" src="{{sizeFile}}" alt="{{imageAltText}}" width="{{sizeWidth}}" height="{{sizeHeight}}" /></a>{{caption}}[/caption]'
 	},
 
-	init: function()
+	init: function ()
 	{
 		var self = this;
 		var list = ["id", "size", "link",
@@ -143,7 +143,7 @@ var FileGallery = Ractive.extend(
 
 		jQuery("#file_gallery").removeClass("uploader");
 
-		jQuery.get(ajaxurl, data, function( data )
+		jQuery.get(ajaxurl, data, function ( data )
 		{
 			console.log(data);
 
@@ -199,7 +199,7 @@ var FileGallery = Ractive.extend(
 		return false;
 	},
 
-	ajaxGetAttachmentsById: function( ids, callback )
+	ajaxGetAttachmentsById: function ( ids, callback )
 	{
 		var data = {
 			action: "file_gallery_get_attachments_by_id",
@@ -207,7 +207,7 @@ var FileGallery = Ractive.extend(
 			_ajax_nonce: this.options.file_gallery_nonce
 		};
 
-		jQuery.get(ajaxurl, data, function( data ) {
+		jQuery.get(ajaxurl, data, function ( data ) {
 			callback(data);
 		}, "json");
 	},
@@ -302,16 +302,13 @@ var FileGallery = Ractive.extend(
 
 		var defaults = this.shortcodeDefaults;
 		var currentShortcode = "[gallery";
-		var i;
 
-		console.log(attrs);
-
-		for( i in attrs )
+		_.each(attrs, function (value, key, list)
 		{
-			if( attrs[i] !== defaults[i] ) {
-				currentShortcode += " " + i + '="' + attrs[i] + '"';
+			if( value !== defaults[key] ) {
+				currentShortcode += " " + key + '="' + value + '"';
 			}
-		}
+		});
 
 		this.currentShortcode = currentShortcode + "]";
 	},
@@ -380,7 +377,7 @@ var FileGallery = Ractive.extend(
 		{
 			var self = this;
 
-			_.each(this.data.attachments, function(el, i)
+			_.each(this.data.attachments, function (el, i)
 			{
 				if( ! el.selected ) {
 					self.set("attachments." + i + ".selected", true);
@@ -403,7 +400,7 @@ var FileGallery = Ractive.extend(
 		{
 			var self = this;
 
-			_.each(this.data.attachments, function(el, i)
+			_.each(this.data.attachments, function (el, i)
 			{
 				if( el.selected ) {
 					self.set("attachments." + i + ".selected", false);
@@ -541,7 +538,7 @@ var FileGallery = Ractive.extend(
 
 	save_menu_order: function (event, ui)
 	{
-		this.updateOrder(ui.item.context._ractive.index.i, ui.item.index());
+		this.updateOrder(this.data.attachments, ui.item.context._ractive.index.i, ui.item.index());
 		this.serialize();
 
 		if( ! this.allItems ) {
@@ -563,9 +560,8 @@ var FileGallery = Ractive.extend(
 		}, "html");
 	},
 
-	updateOrder: function (oldIndex, newIndex)
+	updateOrder: function (list, oldIndex, newIndex)
 	{
-		var list = this.data.attachments;
 		var source = list[oldIndex];
 
 		list.splice( oldIndex, 1 );
@@ -763,12 +759,12 @@ var FileGallery = Ractive.extend(
 			post_id: event.context.post_parent,
 			attachment_id: event.context.ID,
 			action: "file_gallery_update_attachment",
-			post_alt: jQuery('#fgae_post_alt_text').val(),
-			post_title: jQuery('#fgae_post_title').val(),
-			post_content: jQuery('#fgae_post_content').val(),
-			post_excerpt: jQuery('#fgae_post_excerpt').val(),
-			tax_input: jQuery('#fgae_tax_input').val(),
-			menu_order: jQuery('#fgae_menu_order').val(),
+			post_alt: jQuery('#file_gallery_attachment_post_alt_text').val(),
+			post_title: jQuery('#file_gallery_attachment_post_title').val(),
+			post_content: jQuery('#file_gallery_attachment_post_content').val(),
+			post_excerpt: jQuery('#file_gallery_attachment_post_excerpt').val(),
+			tax_input: jQuery('#file_gallery_attachment_tax_input').val(),
+			menu_order: jQuery('#file_gallery_attachment_menu_order').val(),
 			custom_fields: this.getAttachmentCustomFields(),
 			_ajax_nonce: this.options.file_gallery_nonce
 		};
@@ -813,10 +809,11 @@ var FileGallery = Ractive.extend(
 
 	do_plugins: function ()
 	{
-		var self = file_gallery;
+		var self = this;
 
 		jQuery(".file_gallery_list").sortable(
 		{
+			// connectWith: ".file_gallery_list", // TODO
 			placeholder: "attachment ui-selected",
 			tolerance: "pointer",
 			items: "li",
@@ -824,11 +821,33 @@ var FileGallery = Ractive.extend(
 			start: function () {},
 			update: function (event, ui)
 			{
-				if( this.id === "file_gallery_list" ) {
+				var editor = self.getEditor();
+
+				if( this.id === "file_gallery_list" )
+				{
 					self.save_menu_order(event, ui);
+
+					if( self.data.galleryAttachments.length === 0 )
+					{
+						self.set("galleryOptions.ids", _.pluck(self.data.attachments, "ID"));
+						self.updateShortcode();
+
+						if( editor && self.gallerySelected[editor.id] ) {
+							editor.fire("file_gallery_update_gallery");
+						}
+					}
 				}
-				else if( this.id = "file_gallery_galleryAttachments" ) {
-					// FIX (reorder gallery list)
+				else if( this.id = "file_gallery_galleryAttachments" )
+				{
+					var list = self.data.galleryAttachments;
+
+					self.updateOrder(list, ui.item.context._ractive.index.i, ui.item.index());
+					self.set("galleryOptions.ids", _.pluck(list, "ID"));
+					self.updateShortcode();
+
+					if( editor && self.gallerySelected[editor.id] ) {
+						editor.fire("file_gallery_update_gallery");
+					}
 				}
 			}
 		});
@@ -844,7 +863,7 @@ var FileGallery = Ractive.extend(
 			closeText: self.L10n.close,
 			dialogClass: "wp-dialog",
 			width: 600,
-			close: function(event, ui)
+			close: function (event, ui)
 			{
 				var id = jQuery("#file_gallery_delete_dialog").data("single_delete_id");
 				jQuery("#detach_or_delete_" + id + ", #detach_attachment_" + id + ",#del_attachment_" + id).fadeOut(100);
@@ -880,7 +899,7 @@ var FileGallery = Ractive.extend(
 
 					jQuery(this).dialog("close");
 				},
-				"Delete attachment data, its copies and the files" : function()
+				"Delete attachment data, its copies and the files": function ()
 				{
 					var message = false,
 						id;
@@ -961,7 +980,7 @@ var FileGallery = Ractive.extend(
 	}
 });
 
-jQuery(document).ready(function()
+jQuery(document).ready(function ()
 {
 	if( window.typenow === "attachment" ) {
 		return;
@@ -989,7 +1008,7 @@ jQuery(document).ready(function()
 
 	/* === BINDINGS === */
 
-	jQuery("#postimagediv").on("click", "#remove-post-thumbnail", function(event)
+	jQuery("#postimagediv").on("click", "#remove-post-thumbnail", function (event)
 	{
 		file_gallery.removeThumbnail();
 	});
@@ -997,7 +1016,7 @@ jQuery(document).ready(function()
 
 
 	// single attachment editing view
-	jQuery("#file_gallery").on("keypress keyup", "#fgae_post_alt, #fgae_post_title, #fgae_post_excerpt, #fgae_tax_input, #fgae_menu_order", function(e)
+	jQuery("#file_gallery").on("keypress keyup", "#file_gallery_attachment_post_alt, #file_gallery_attachment_post_title, #file_gallery_attachment_post_excerpt, #file_gallery_attachment_tax_input, #file_gallery_attachment_menu_order", function (e)
 	{
 		if( e.which === 13 || e.keyCode === 13 ) // on enter
 		{
@@ -1015,13 +1034,13 @@ jQuery(document).ready(function()
 	});
 
 
-	jQuery("#file_gallery").on("submit", "#file_gallery_copy_all_form", function() {
+	jQuery("#file_gallery").on("submit", "#file_gallery_copy_all_form", function () {
 		return false;
 	});
 
 
 	// copy all attachments from another post
-	jQuery("#file_gallery").on("click", "#file_gallery_copy_all", function() {
+	jQuery("#file_gallery").on("click", "#file_gallery_copy_all", function () {
 		jQuery("#file_gallery_copy_all_dialog").dialog("open");
 	});
 
@@ -1030,7 +1049,7 @@ jQuery(document).ready(function()
 	/* attachment edit screen */
 
 	// acf enter on new field name
-	jQuery("#file_gallery").on("keypress keyup", "#new_custom_field_key", function(e)
+	jQuery("#file_gallery").on("keypress keyup", "#new_custom_field_key", function (e)
 	{
 		if( e.which === 13 || e.keyCode === 13 ) // on enter
 		{
@@ -1043,7 +1062,7 @@ jQuery(document).ready(function()
 	/* thumbnails */
 
 	// delete or detach single attachment link click
-	jQuery("#file_gallery").on("click", "#fg_container .delete_or_detach_link", function()
+	jQuery("#file_gallery").on("click", "#fg_container .delete_or_detach_link", function ()
 	{
 		var id = jQuery(this).attr("rel"),
 			a = '#detach_or_delete_' + id,
@@ -1061,7 +1080,7 @@ jQuery(document).ready(function()
 	});
 
 	// detach single attachment link click
-	jQuery("#file_gallery").on("click", "#fg_container .do_single_detach", function()
+	jQuery("#file_gallery").on("click", "#fg_container .do_single_detach", function ()
 	{
 		var id = jQuery(this).attr("rel");
 
@@ -1072,7 +1091,7 @@ jQuery(document).ready(function()
 	});
 
 	// delete single attachment link click
-	jQuery("#file_gallery").on("click", "#fg_container .do_single_delete", function()
+	jQuery("#file_gallery").on("click", "#fg_container .do_single_delete", function ()
 	{
 		var id = jQuery(this).attr("rel");
 
@@ -1087,7 +1106,7 @@ jQuery(document).ready(function()
 	});
 
 	// delete single attachment link confirm
-	jQuery("#file_gallery").on("click", "#fg_container .delete", function()
+	jQuery("#file_gallery").on("click", "#fg_container .delete", function ()
 	{
 		var id = jQuery(this).parent("div").attr("id").replace(/del_attachment_/, "");
 
@@ -1102,7 +1121,7 @@ jQuery(document).ready(function()
 	});
 
 	// delete single attachment link confirm
-	jQuery("#file_gallery").on("click", "#fg_container .detach", function() {
+	jQuery("#file_gallery").on("click", "#fg_container .detach", function () {
 		return file_gallery.detach_attachments( jQuery(this).parent("div").attr("id").replace(/detach_attachment_/, ""), false );
 	});
 
