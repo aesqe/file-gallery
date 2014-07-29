@@ -35,11 +35,9 @@ function file_gallery_regenerate_thumbnails( $attachment_ids = "" )
 
 		if( is_wp_error($metadata) ) {
 			$data['errors'][] = sprintf( __('Error: %s while regenerating image ID %d', 'file-gallery'), $metadata->get_error_message(), $aid);
-		}
-		elseif( empty($metadata) ) {
+		} elseif( empty($metadata) ) {
 			$data['errors'][] = sprintf( __('Unknown error while regenerating image ID %d', 'file-gallery'), $aid);
-		}
-		else {
+		} else {
 			$data['success'][] = $aid;
 		}
 
@@ -51,8 +49,7 @@ function file_gallery_regenerate_thumbnails( $attachment_ids = "" )
 	{
 		if( count($attachment_ids) === 1 ) {
 			$data['message'] = __('Attachment thumbnails were successfully regenerated', 'file-gallery');
-		}
-		else {
+		} else {
 			$data['message'] = __("All attachments' thumbnails were successfully regenerated", 'file-gallery');
 		}
 	}
@@ -60,16 +57,13 @@ function file_gallery_regenerate_thumbnails( $attachment_ids = "" )
 	{
 		if( ! empty($data['success']) ) {
 			$data['message'] = __("There were errors and some of the attachments' thumbnails weren't successfully regenerated!", 'file-gallery');
-		}
-		else {
+		} else {
 			$data['message'] = __("There were errors and none of the attachments' thumbnails were successfully regenerated!", 'file-gallery');
 		}
 	}
 
 	header('Content-type: application/json');
-
 	echo json_encode($data);
-
 	exit();
 }
 add_action('wp_ajax_file_gallery_regenerate_thumbnails', 'file_gallery_regenerate_thumbnails');

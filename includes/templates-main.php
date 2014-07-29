@@ -30,8 +30,8 @@ $files_or_tags = 'files';
 				<button on-click="refresh" title="<?php _e("Refresh attachments", "file-gallery"); ?>" id="file_gallery_refresh" class="button"><div class="dashicons dashicons-update"></div><span class="screen-reader-text"><?php _e("Refresh attachments", "file-gallery"); ?></span></button>
 
 				<div class="basic">
-					<button on-click="checkAll" title="<?php _e("Check all", "file-gallery"); ?>" id="file_gallery_check_all" class="button"><div class="dashicons dashicons-yes"></div><span class="screen-reader-text"><?php _e("Check all", "file-gallery"); ?></span></button>
-					<button on-click="uncheckAll" title="<?php _e("Uncheck all", "file-gallery"); ?>" id="file_gallery_uncheck_all" class="button"><div class="dashicons dashicons-minus"></div><span class="screen-reader-text"><?php _e("Uncheck all", "file-gallery"); ?></span></button>
+					<button on-click="selectAll" title="<?php _e("Check all", "file-gallery"); ?>" id="file_gallery_check_all" class="button"><div class="dashicons dashicons-yes"></div><span class="screen-reader-text"><?php _e("Check all", "file-gallery"); ?></span></button>
+					<button on-click="deselectAll" title="<?php _e("Uncheck all", "file-gallery"); ?>" id="file_gallery_uncheck_all" class="button"><div class="dashicons dashicons-minus"></div><span class="screen-reader-text"><?php _e("Uncheck all", "file-gallery"); ?></span></button>
 					<button on-click="deleteChecked" title="<?php _e("Delete all checked", "file-gallery"); ?>" id="file_gallery_delete_checked" class="button"><div class="dashicons dashicons-trash"></div><span class="screen-reader-text"><?php _e("Delete all checked", "file-gallery"); ?></span></button>
 					<button on-click="detachChecked" title="<?php _e("Detach all checked", "file-gallery"); ?>" id="file_gallery_detach_checked" class="button"><div class="dashicons dashicons-editor-unlink"></div><span class="screen-reader-text"><?php _e("Detach all checked", "file-gallery"); ?></span></button>
 				</div>
@@ -153,7 +153,7 @@ $files_or_tags = 'files';
 							<select on-change="changeOption:template" name="file_gallery_template" id="file_gallery_template">
 								<?php
 									$file_gallery_templates = file_gallery_get_templates('main-form');
-	
+
 									foreach( $file_gallery_templates as $template_name )
 									{
 										echo '<option value="' . $template_name . '">' . $template_name . "</option>\n";
@@ -317,25 +317,26 @@ $files_or_tags = 'files';
 					</p>
 
 					<style type="text/css">
+
 						.file_gallery_list .attachment
 						{
-							width: {{ parseInt(attachments.0.itemWidth, 10) + 4}}px;
-							height: {{ parseInt(attachments.0.itemHeight, 10) + 4}}px;
+							width: {{ thumbWidth + 4}}px;
+							height: {{ thumbHeight + 4}}px;
 						}
 
 						.file_gallery_list .attachment-preview,
 						.file_gallery_list .attachment-preview .thumbnail
 						{
-							width: {{attachments.0.iconWidth}};
-							height: {{attachments.0.iconHeight}};
+							width: {{thumbWidth}}px;
+							height: {{thumbHeight}}px;
 						}
 
 						.file_gallery_list .attachment-preview img
 						{
 							width: auto;
 							height: auto;
-							max-width: {{attachments.0.iconWidth}};
-							max-height: {{attachments.0.iconHeight}};
+							max-width: {{thumbWidth}}px;
+							max-height: {{thumbHeight}}px;
 						}
 					</style>
 
@@ -354,9 +355,9 @@ $files_or_tags = 'files';
 							</div>
 							{{/isImage}}
 
-							{{#.isImage === false}}
+							{{^.isImage}}
 							<div class="attachment-preview isattached " style="background-image: url({{icon}});"></div>
-							{{/.isImage === false}}
+							{{/.isImage}}
 
 							<span class="attachment-title">{{post_title}}</span>
 
@@ -379,20 +380,22 @@ $files_or_tags = 'files';
 
 							<a href="#" on-click="detachDelete" class="delete_or_detach_link action" title="[{{ID}}] {{post_title}}"><div class="dashicons dashicons-trash" title="<?php _e('Detach / delete', 'file-gallery'); ?>"></div></a>
 
-							<div class="detach_or_delete">
-								<a href="#" class="do_single_delete">Delete</a> or
-								<a href="#" class="do_single_detach">Detach</a>
-							</div>
-							<div class="detach_attachment">
-								Really detach?
-								<a href="#" class="detach">Continue</a> or
-								<a href="#" class="detach_cancel">Cancel</a>
-							</div>
-							<div class="del_attachment">
-								Really delete?
-								<a href="#" class="delete">Continue</a> or
-								<a href="#" class="delete_cancel">Cancel</a>
-							</div>
+								<div class="detach_or_delete{{.detachDeleting ? ' show' : ''}}">
+									<a href="#" on-click="detachDelete:delete"><?php _e('Delete', 'file-gallery'); ?></a> or
+									<a href="#" on-click="detachDelete:detach"><?php _e('Detach', 'file-gallery'); ?></a>
+								</div>
+
+								<div class="detach_attachment{{.detaching ? ' show' : ''}}">
+									Really detach?
+									<a href="#" on-click="detachSingle"><?php _e('Continue', 'file-gallery'); ?></a> or
+									<a href="#" on-click="detachDelete:cancel"><?php _e('Cancel', 'file-gallery'); ?></a>
+								</div>
+
+								<div class="delete_attachment{{.deleting ? ' show' : ''}}">
+									Really delete?
+									<a href="#" on-click="deleteSingle"><?php _e('Continue', 'file-gallery'); ?></a> or
+									<a href="#" on-click="detachDelete:cancel"><?php _e('Cancel', 'file-gallery'); ?></a>
+								</div>
 						</li>
 					{{/galleryAttachments}}
 					</ul>
@@ -413,9 +416,9 @@ $files_or_tags = 'files';
 							</div>
 							{{/isImage}}
 
-							{{#.isImage === false}}
+							{{^.isImage}}
 							<div class="attachment-preview isattached " style="background-image: url({{icon}});"></div>
-							{{/.isImage === false}}
+							{{/.isImage}}
 
 							<span class="attachment-title">{{post_title}}</span>
 
@@ -438,26 +441,28 @@ $files_or_tags = 'files';
 
 							<a href="#" on-click="detachDelete" class="delete_or_detach_link action" title="[{{ID}}] {{post_title}}"><div class="dashicons dashicons-trash" title="<?php _e('Detach / delete', 'file-gallery'); ?>"></div></a>
 
-							<div class="detach_or_delete">
-								<a href="#" class="do_single_delete">Delete</a> or
-								<a href="#" class="do_single_detach">Detach</a>
-							</div>
-							<div class="detach_attachment">
-								Really detach?
-								<a href="#" class="detach">Continue</a> or
-								<a href="#" class="detach_cancel">Cancel</a>
-							</div>
-							<div class="del_attachment">
-								Really delete?
-								<a href="#" class="delete">Continue</a> or
-								<a href="#" class="delete_cancel">Cancel</a>
-							</div>
+								<div class="detach_or_delete{{.detachDeleting ? ' show' : ''}}">
+									<a href="#" on-click="detachDelete:delete"><?php _e('Delete', 'file-gallery'); ?></a> or
+									<a href="#" on-click="detachDelete:detach"><?php _e('Detach', 'file-gallery'); ?></a>
+								</div>
+
+								<div class="detach_attachment{{.detaching ? ' show' : ''}}">
+									Really detach?
+									<a href="#" on-click="detachSingle"><?php _e('Continue', 'file-gallery'); ?></a> or
+									<a href="#" on-click="detachDelete:cancel"><?php _e('Cancel', 'file-gallery'); ?></a>
+								</div>
+
+								<div class="delete_attachment{{.deleting ? ' show' : ''}}">
+									Really delete?
+									<a href="#" on-click="deleteSingle"><?php _e('Continue', 'file-gallery'); ?></a> or
+									<a href="#" on-click="detachDelete:cancel"><?php _e('Cancel', 'file-gallery'); ?></a>
+								</div>
 						</li>
 					{{/attachments}}
 					</ul>
 				</div>
 
-				
+
 
 				<div id="file_gallery_tag_list">
 				{{#mediatags}}
@@ -502,9 +507,9 @@ $files_or_tags = 'files';
 			</p>
 		{{/isImage}}
 
-		{{#isImage === false}}
+		{{^isImage}}
 			<img src="{{icon}}" alt="image" />
-		{{/isImage === false}}
+		{{/isImage}}
 
 			<div id="attachment_data">
 				<p><strong><?php _e('ID:', 'file-gallery'); ?></strong> <a href="<?php echo admin_url('post.php?post={{ID}}&action=edit&TB_iframe=1'); ?>" class="thickbox" onclick="return false;">{{ID}}</a></p>
@@ -570,11 +575,11 @@ $files_or_tags = 'files';
 	{{#zoomed}}
 		<img src="{{zoomed.zoomSrc.file}}" alt="{{zoomed.imageAltText}}" style="margin-left: -{{zoomed.zoomSrc.width / 2}}px; margin-top: -{{zoomed.zoomSrc.height / 2}}px;" />
 
-		{{#isImage === false}}
+		{{^isImage}}
 		<div class="wp_attachment_holder hidden">
 			<audio class="wp-audio-shortcode" preload="none" style="width: 100%; visibility: hidden;" controls="controls"><source type="audio/mpeg" src="http://wpcl.localhost/wp-content/uploads/originaldixielandjazzbandwithalbernard-stlouisblues.mp3?_=1" /></audio>
 		</div>
-		{{/isImage === false}}
+		{{/isImage}}
 
 		<div id="file_gallery_zoomed_image_description">
 			<div id="file_gallery_zoomed_image_description_inner">
@@ -588,7 +593,7 @@ $files_or_tags = 'files';
 		<span id="file_gallery_zoomed_image_prev" on-click="zoomPrev" class="{{zoomed.previous ? '' : 'hidden'}} dashicons dashicons-arrow-left-alt2"></span>
 		<span id="file_gallery_zoomed_image_next" on-click="zoomNext" class="{{zoomed.next ? '' : 'hidden'}} button-large dashicons dashicons-arrow-right-alt2"></span>
 		<span id="file_gallery_zoomed_image_edit" class="button button-primary button-large" on-click="edit:{{zoomed}}"><?php _e('Edit'); ?></span>
-		{{/zoomed}}
+	{{/zoomed}}
 	</div>
 
 </script>

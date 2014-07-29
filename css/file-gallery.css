@@ -486,7 +486,7 @@
 	margin: 0 10px 10px;
 }
 
-.file_gallery_list .del_attachment,
+.file_gallery_list .delete_attachment,
 .file_gallery_list .detach_attachment,
 .file_gallery_list .detach_or_delete,
 .file_gallery_list .post_thumb_setter,
@@ -503,6 +503,11 @@
 	margin: 0;
 	bottom: 0;
 	right: 0;
+}
+
+.file_gallery_list .show
+{
+	display: block;
 }
 
 .file_gallery_list a.img_zoom
@@ -1297,7 +1302,12 @@ td.column-post_thumb .no-post-thumbnail
 
 .media-selection
 {
-	right: 400px;
+	right: 450px;
+}
+
+.media-selection:after
+{
+	background: none;
 }
 
 .file-gallery-response

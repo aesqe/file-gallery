@@ -6,17 +6,22 @@ tinymce.PluginManager.add("filegallery", function (editor)
 			return;
 		}
 
+		var s = parseShortcode(shortcode);
+
 		var attachments = file_gallery.data.attachments;
 		var defaults = file_gallery.shortcodeDefaults;
-		var attrs = parseShortcode(shortcode);
 		var cache = file_gallery.elementCache;
 		var currentShortcode = "[gallery";
 		var	external_attachments = [];
+		var attrs = s.attrs.named;
 		var	attached_ids = [];
 		var	gallery_ids = [];
 		var selection;
 		var	i = 0;
 		var el;
+
+		var a = wp.media.file_gallery.attachments(s);
+		console.log("wpmfg", a, wp.media.file_gallery);
 
 		file_gallery.set("galleryOptions", attrs);
 
@@ -94,35 +99,28 @@ tinymce.PluginManager.add("filegallery", function (editor)
 
 	var parseShortcode = function( shortcode )
 	{
-		shortcode = shortcode.replace("[", "").replace("]", "")
-							 .replace("gallery", "").replace("includes", "ids")
-							 .replace("attachment_ids", "ids");
-
 		var defaults = _.clone(file_gallery.shortcodeDefaults); // default values
-		var attrs = wp.shortcode.attrs(shortcode).named; // currently set values
+		var s = new wp.shortcode({attrs: shortcode}); // currently set values
+		var attrs = s.attrs.named;
 
-		delete attrs._orderByField;
-		delete attrs._orderbyRandom;
+		console.log(s);
 
 		if( attrs.link === "attachment" ) {
 			attrs.link = "post";
 		}
 
-		if( attrs.orderby === "menu_order ID" ) {
-			delete attrs.orderby;
+		if( attrs.orderby === "menu_order ID" || attrs.orderby === "default" ) {
+			attrs.orderby = "";
 		}
 
 		if( attrs.id === file_gallery.shortcodeDefaults.id ) {
-			delete attrs.id;
+			attrs.id = "";
 		}
 
-		if( attrs.rel && ! attrs.linkrel ) {
-			attrs.linkrel = attrs.rel;
-		} else if( ! attrs.rel ) {
-			attrs.rel = attrs.linkrel;
-		}
+		attrs.rel = attrs.rel || attrs.linkrel || void 0;
+		attrs.linkrel = attrs.linkrel || attrs.rel || void 0;
 
-		if( ["none", "file", "parent_post", "post"].indexOf(attrs.link) === -1 )
+		if( ["", "none", "file", "parent_post", "post"].indexOf(attrs.link) === -1 )
 		{
 			attrs.external_url = decodeURIComponent(attrs.link);
 			attrs.link = "external_url";
@@ -130,21 +128,27 @@ tinymce.PluginManager.add("filegallery", function (editor)
 
 		if( attrs.linkrel && attrs.linkrel !== "true" && attrs.linkrel !== "false" )
 		{
+			attrs.rel = "true";
 			attrs.linkrel = "true";
 			attrs.linkrel_custom = attrs.linkrel.replace(/\\\[/, '[').replace(/\\\]/, ']');
 		}
 		
-		return _.extend(defaults, attrs); // complete current shortcode values
+		s.attrs.named = _.extend(defaults, attrs); // complete current shortcode values
+
+		return s;
 	};
 
 	var updateGallery = function(event)
 	{
 		var galleryView = wp.mce.views.getInstance( encodeURIComponent(editor.selection.getContent()) );
 		
-		// brute mode for now - FIX
-		galleryView.setContent("", function(){}, true);
-		wp.media.editor.insert( file_gallery.currentShortcode );
-		deselect_gallery();
+		if( galleryView )
+		{
+			// brute mode for now - FIX
+			galleryView.setContent("", function(){}, true);
+			wp.media.editor.insert( file_gallery.currentShortcode );
+			deselect_gallery();
+		}
 
 		// var node = jQuery( editor.selection.getNode() );
 		// if( ! node.hasClass("wpview-type-gallery") ) {

@@ -24,6 +24,7 @@ var FileGallery = Ractive.extend(
 
 	attachment_sortby: "menu_order, ASC",
 	currentShortcode: "",
+	deleteWhat: "data_only",
 	originals: "",
 	copies: "",
 
@@ -43,10 +44,10 @@ var FileGallery = Ractive.extend(
 	{
 		var self = this;
 		var list = ["id", "size", "link",
-			"linkrel", "linkrel_custom", "linksize", 
-			"external_url", "template", "order", 
+			"linkrel", "linkrel_custom", "linksize",
+			"external_url", "template", "order",
 			"orderby", "linkclass", "imageclass",
-			"galleryclass", "mimetype", "limit", 
+			"galleryclass", "mimetype", "limit",
 			"offset", "paginate", "columns"];
 		var wpdefs = wp.media.gallery.defaults || {};
 		var cache = this.elementCache;
@@ -60,6 +61,7 @@ var FileGallery = Ractive.extend(
 		this.L10n = file_gallery_L10n;
 		this.responseDiv = jQuery("#file_gallery_response");
 		this.shortcodeDefaults = {
+			_file_gallery: true,
 			linksize: "large",
 			template: "default",
 			linkclass: "",
@@ -77,7 +79,6 @@ var FileGallery = Ractive.extend(
 		};
 
 		_.extend(this.shortcodeDefaults, wpdefs);
-
 		galleryOptions = _.clone(this.shortcodeDefaults);
 
 		// cache option elements
@@ -109,6 +110,9 @@ var FileGallery = Ractive.extend(
 			"dragenter": self.dragenter,
 			"dragleave": self.dragleave,
 			"edit": self.editSingle,
+			"detachDelete": self.detachDelete,
+			"detachSingle": self.detachSingle,
+			"deleteSingle": self.deleteSingle,
 			"saveAttachment": self.saveAttachment,
 			"cancelEditAttachment": self.cancelEditAttachment,
 			"zoom": self.zoom,
@@ -178,9 +182,16 @@ var FileGallery = Ractive.extend(
 				zoomed: false,
 			});
 
+			_.extend(self.options, data["options"]);
+
+			self.set("thumbWidth", self.options.thumbWidth);
+			self.set("thumbHeight", self.options.thumbHeight);
+
 			self.do_plugins();
 			self.serialize();
 			self.updateShortcode();
+
+			self.deleteDialog = jQuery("#file_gallery_delete_dialog");
 
 			if( singleEditMode ) {
 				self.loadAttachmentCustomFields(attachmentBeingEdited);
@@ -367,7 +378,7 @@ var FileGallery = Ractive.extend(
 
 	select: function (event, attachment)
 	{
-		this.set("attachments." + event.index.i + ".selected", ! attachment.selected);
+		this.set(event.keypath + ".selected", ! attachment.selected);
 		this.serialize();
 	},
 
@@ -422,7 +433,7 @@ var FileGallery = Ractive.extend(
 		return _.where(this.data.attachments, {selected: true});
 	},
 
-	getAttachmentByID: function (id)
+	getAttachmentById: function (id)
 	{
 		return _.findWhere(this.data.attachments, {ID: id});
 	},
@@ -451,10 +462,11 @@ var FileGallery = Ractive.extend(
 		var len = all.length
 		var i = all.indexOf(zoomed.ID);
 
-		// FIX THESE!!!
-			zoomed.previous = (i > 0) ? this.getAttachmentByID(all[i-1]) : false;
-			zoomed.next = (i+1 !== len) ? this.getAttachmentByID(all[i+1]) : false;
-		// /FIX THESE!!!
+		console.log(zoomed, data, event);
+
+		// FIXED THESE?
+			zoomed.previous = (i > 0) ? this.getAttachmentById(all[i-1]) : false;
+			zoomed.next = (i+1 !== len) ? this.getAttachmentById(all[i+1]) : false;
 
 		this.set("zoomed", zoomed);
 
@@ -631,6 +643,63 @@ var FileGallery = Ractive.extend(
 		}
 	},
 
+	detachSingle: function( event )
+	{
+		var attachment = this.get(event.keypath);
+		this.detachAttachments([attachment]);
+
+		event.original.preventDefault();
+		return false;
+	},
+
+	deleteSingle: function( event )
+	{
+		var attachment = this.get(event.keypath);
+
+		if( attachment.isCopyOf ) {
+			this.deleteWhat = "data_only";
+		} else {
+			this.deleteWhat = "all";
+		}
+
+		this.showDeleteDialog( [attachment] );
+
+		event.original.preventDefault();
+		return false;
+	},
+
+	detachDelete: function ( event, action )
+	{
+		var keypath = event.keypath;
+
+		switch ( action )
+		{
+			case "detach":
+				this.set(keypath + ".detachDeleting", false);
+				this.set(keypath + ".detaching", true);
+				this.set(keypath + ".deleting", false);
+				break;
+			case "delete":
+				this.set(keypath + ".detachDeleting", false);
+				this.set(keypath + ".detaching", false);
+				this.set(keypath + ".deleting", true);
+				break;
+			case "cancel":
+				this.set(keypath + ".detachDeleting", false);
+				this.set(keypath + ".detaching", false);
+				this.set(keypath + ".deleting", false);
+				break;
+			default:
+				this.set(keypath + ".detachDeleting", true);
+				this.set(keypath + ".detaching", false);
+				this.set(keypath + ".deleting", false);
+				break;
+		}
+
+		event.original.preventDefault();
+		return false;
+	},
+
 	fieldsetToggle: function ( event, what )
 	{
 		what = what || "hide_gallery_options";
@@ -790,16 +859,17 @@ var FileGallery = Ractive.extend(
 	displayResponse: function (response, fade)
 	{
 		this.set("responseLoading", false);
-		fade = (fade === void 0) ? 7000 : Number(fade);
 
+		fade = (fade === void 0) ? 7000 : Number(fade);
 		if( isNaN(fade) ) {
 			fade = 0;
 		}
 
 		var div = this.responseDiv.children(".text");
-
 		div.stop(true, true).css({"opacity": 0, "display": "none"});
+
 		this.set("actionResponse", response);
+
 		div.css({"opacity": 1, "display": "block"});
 
 		if( fade > 0 ) {
@@ -863,60 +933,30 @@ var FileGallery = Ractive.extend(
 			closeText: self.L10n.close,
 			dialogClass: "wp-dialog",
 			width: 600,
-			close: function (event, ui)
-			{
-				var id = jQuery("#file_gallery_delete_dialog").data("single_delete_id");
-				jQuery("#detach_or_delete_" + id + ", #detach_attachment_" + id + ",#del_attachment_" + id).fadeOut(100);
-			},
+			close: function (event, ui) {},
 			buttons: {
 				"Cancel": function ()
 				{
-					var id = jQuery("#file_gallery_delete_dialog").data("single_delete_id");
-
-					jQuery("#file_gallery_delete_what").val("data_only");
-					jQuery("#detach_or_delete_" + id + ", #detach_attachment_" + id + ",#del_attachment_" + id).fadeOut(100);
-					jQuery("#file_gallery_delete_dialog").removeData("single_delete_id");
-
-					jQuery(this).dialog("close");
+					self.deleteWhat = "data_only";
+					self.deleteDialog.dialog("close");
 				},
 				"Delete attachment data only": function ()
 				{
-					var message = false,
-						id = "";
+					var message = attachments.length > 1 ? self.L10n.sure_to_delete : false;
+					var attachments = self.deleteDialog.data("attachments");
 
-					if( jQuery(this).hasClass("single") )
-					{
-						id = jQuery("#file_gallery_delete_dialog").data("single_delete_id");
-					}
-					else
-					{
-						message = self.L10n.sure_to_delete;
-						id = self.selectedItems;
-					}
-
-					jQuery("#file_gallery_delete_what").val("data_only");
-					self.delete_attachments( id, message );
-
-					jQuery(this).dialog("close");
+					self.deleteWhat = "data_only";
+					self.deleteAttachments( attachments, message );
+					self.deleteDialog.dialog("close");
 				},
 				"Delete attachment data, its copies and the files": function ()
 				{
-					var message = false,
-						id;
+					var message = attachments.length > 1 ? self.L10n.sure_to_delete : false;
+					var attachments = self.deleteDialog.data("attachments");
 
-					if( jQuery(this).hasClass("single") ) {
-						id = jQuery("#file_gallery_delete_dialog").data("single_delete_id");
-					}
-					else
-					{
-						message = self.L10n.sure_to_delete;
-						id = self.selectedItems;
-					}
-
-					jQuery("#file_gallery_delete_what").val("all");
-					self.delete_attachments( id, message );
-
-					jQuery(this).dialog("close");
+					self.deleteWhat = "all";
+					self.deleteAttachments( attachments, message );
+					self.deleteDialog.dialog("close");
 				}
 			}
 		});
@@ -958,25 +998,119 @@ var FileGallery = Ractive.extend(
 		});
 	},
 
-	delete_dialog: function ( id, single )
+	showDeleteDialog: function ( attachments )
 	{
-		var delete_dialog = jQuery("#file_gallery_delete_dialog");
-		var o = this.originals;
-		var m = false;
+		var message = attachments.length ? false : this.L10n.sure_to_delete;
+		var haveCopies = _.filter(attachments, function(attachment){ return attachment.hasCopies; });
 
-		if( single ) {
-			delete_dialog.addClass("single");
+		if( haveCopies.length ) {
+			this.deleteDialog.data("attachments", _.pluck(attachments, "ID")).dialog("open");
 		} else {
-			m = this.L10n.sure_to_delete;
-		}
-
-		if( (o !== "" && o !== void 0) || jQuery("#image-" + id).hasClass("has_copies") ) {
-			delete_dialog.data("single_delete_id", id).dialog('open'); //originals present in checked list
-		} else {
-			this.delete_attachments(id, m);
+			this.deleteAttachments(attachments, message);
 		}
 
 		return false;
+	},
+
+	detachAttachments: function( attachments, callback )
+	{
+		var self = this;
+		var message = attachments.length === 1 ? this.L10n.detaching_attachment : this.L10n.detaching_attachments;
+
+		this.displayResponse(message);
+
+		var data = {
+			action: "file_gallery_main_detach",
+			attachment_ids: _.pluck(attachments, "ID"),
+			_ajax_nonce: this.options.file_gallery_nonce
+		};
+
+		jQuery.post(ajaxurl, data, function (response)
+		{
+			var message = response.message || response.error;
+
+			self.displayResponse(message, 7000);
+
+			if( response.success ) {
+				self.removeAttachmentsFromList(data.attachment_ids);
+			}
+
+			if( typeof callback === "function" ) {
+				callback(message);
+			}
+		}, "json");
+	},
+
+	/**
+	 * deletes checked attachments
+	 */
+	deleteAttachments : function( attachments, message )
+	{
+		message = message || false;
+
+		if( ! attachments ) {
+			return false;
+		}
+
+		var self = this;
+		var len = attachments.length;
+		var deleteWhat = ["all", "data_only"].indexOf(this.deleteWhat) > -1;
+
+		if( ! deleteWhat || ! len ) {
+			return false;
+		}
+
+		if( ! message || confirm(message)  )
+		{
+			self.displayResponse(len > 1 ? this.L10n.deleting_attachments : this.L10n.deleting_attachment);
+
+			var data = {
+				action: "file_gallery_main_delete",
+				attachment_ids: _.pluck(attachments, "ID"),
+				delete_what: this.deleteWhat,
+				_ajax_nonce: this.options.file_gallery_nonce
+			};
+
+			jQuery.post(ajaxurl, data, function ( response )
+			{
+				var message = response.message || response.error;
+
+				self.displayResponse(message, 7000);
+
+				if( response.success ) {
+					self.removeAttachmentsFromList(data.attachment_ids);
+				}
+			}, "json");
+		}
+
+		this.deleteWhat = "data_only";
+	},
+
+	removeAttachmentsFromList: function (attachment_ids)
+	{
+		var list = this.get("attachments");
+
+		_.each(list, function(attachment, index)
+		{
+			if( _.contains(attachment_ids, attachment.ID) ) {
+				list.splice( index, 1 );
+			}
+		})
+	},
+
+	tinymceDeselect: function ()
+	{
+		var editor = this.getEditor();
+
+		if( editor )
+		{
+			if( editor.selection ) {
+				editor.selection.collapse(false);
+			}
+
+			tinymce.execCommand("mceRepaint", false, editor.id);
+			tinymce.execCommand("mceFocus", false, editor.id);
+		}
 	}
 });
 
@@ -1003,6 +1137,38 @@ jQuery(document).ready(function ()
 			mediaTags: []
 		}
 	});
+
+	if( wp.media && wp.media.collection )
+	{
+		wp.media.file_gallery = new wp.media.collection({
+			tag: 'gallery',
+			type : null,
+			editTitle : wp.media.view.l10n.editGalleryTitle,
+			defaults : file_gallery.shortcodeDefaults
+		});
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1061,88 +1227,19 @@ jQuery(document).ready(function ()
 
 	/* thumbnails */
 
-	// delete or detach single attachment link click
-	jQuery("#file_gallery").on("click", "#fg_container .delete_or_detach_link", function ()
-	{
-		var id = jQuery(this).attr("rel"),
-			a = '#detach_or_delete_' + id,
-			b = '#detach_attachment_' + id,
-			c = '#del_attachment_' + id;
 
-		if( jQuery(a).is(":hidden") && jQuery(b).is(":hidden") && jQuery(c).is(":hidden") ) {
-			jQuery(a).fadeIn(100);
-		}
-		else {
-			jQuery(a + ", " + b + ", " + c).fadeOut(100);
-		}
-
-		return false;
-	});
-
-	// detach single attachment link click
-	jQuery("#file_gallery").on("click", "#fg_container .do_single_detach", function ()
-	{
-		var id = jQuery(this).attr("rel");
-
-		jQuery("#detach_or_delete_" + id).fadeOut(250);
-		jQuery("#detach_attachment_" + id).fadeIn(100);
-
-		return false;
-	});
-
-	// delete single attachment link click
-	jQuery("#file_gallery").on("click", "#fg_container .do_single_delete", function ()
-	{
-		var id = jQuery(this).attr("rel");
-
-		if( jQuery("#image-" + id).hasClass("has_copies") ) {
-			return file_gallery.delete_dialog( id, true );
-		}
-
-		jQuery('#detach_or_delete_' + id).fadeOut(100);
-		jQuery('#del_attachment_' + id).fadeIn(100);
-
-		return false;
-	});
-
-	// delete single attachment link confirm
-	jQuery("#file_gallery").on("click", "#fg_container .delete", function ()
-	{
-		var id = jQuery(this).parent("div").attr("id").replace(/del_attachment_/, "");
-
-		if( jQuery("#image-" + id).hasClass("copy") ) {
-			jQuery("#file_gallery_delete_what").val("data_only");
-		}
-		else {
-			jQuery("#file_gallery_delete_what").val("all");
-		}
-
-		return file_gallery.delete_dialog( id, true );
-	});
-
-	// delete single attachment link confirm
-	jQuery("#file_gallery").on("click", "#fg_container .detach", function () {
-		return file_gallery.detach_attachments( jQuery(this).parent("div").attr("id").replace(/detach_attachment_/, ""), false );
-	});
-
-	// delete / detach single attachment link cancel
-	jQuery("#file_gallery").on("click", "#fg_container .delete_cancel, #fg_container .detach_cancel",function ()
-	{
-		jQuery(this).parent("div").fadeOut(250);
-		return false;
-	});
 
 
 	/* main menu buttons */
 
 	// delete checked attachments button click
 	jQuery("#file_gallery").on("click", "#file_gallery_delete_checked", function () {
-		file_gallery.delete_dialog( file_gallery.selectedItems );
+		file_gallery.showDeleteDialog( file_gallery.getSelectedAttachments() );
 	});
 
 	// detach checked attachments button click
 	jQuery("#file_gallery").on("click", "#file_gallery_detach_checked", function () {
-		file_gallery.detach_attachments(file_gallery.selectedItems, file_gallery.L10n.sure_to_detach);
+		file_gallery.detachAttachments(file_gallery.getSelectedAttachments(), file_gallery.L10n.sure_to_detach);
 	});
 
 
@@ -1194,7 +1291,7 @@ jQuery(document).ready(function ()
 
 	wp.media.view.Modal.prototype.on("close", function ()
 	{
-		//file_gallery.tinymce_deselect( true );
+		file_gallery.tinymceDeselect();
 		file_gallery.load();
 	});
 });
