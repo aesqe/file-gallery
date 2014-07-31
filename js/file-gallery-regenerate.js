@@ -1,7 +1,8 @@
 jQuery(document).ready(function ()
 {
 	var responseDiv = jQuery('<div id="file_gallery_regenerate_response" style="display: none; opacity: 0;"></div>');
-		jQuery("#wpbody-content h2 .add-new-h2").after(responseDiv);
+	
+	jQuery("#wpbody-content h2 .add-new-h2").after(responseDiv);
 
 	jQuery("#the-list").on("click", ".file_gallery_regenerate_link", function (event)
 	{

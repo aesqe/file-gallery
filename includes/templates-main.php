@@ -82,11 +82,11 @@ $files_or_tags = 'files';
 						<p>
 							<label for="file_gallery_link"><?php _e("link to", "file-gallery"); ?>:</label>
 							<select on-change="changeOption:link" name="file_gallery_link" id="file_gallery_link">
-								<option value="none"><?php _e("nothing (do not link)", "file-gallery"); ?></option>
-								<option value="file"><?php _e("file", "file-gallery"); ?></option>
 								<option value="post"><?php _e("attachment page", "file-gallery"); ?></option>
+								<option value="file"><?php _e("file", "file-gallery"); ?></option>
 								<option value="parent_post"><?php _e("parent post", "file-gallery"); ?></option>
 								<option value="external_url"><?php _e("external url", "file-gallery"); ?></option>
+								<option value="none"><?php _e("nothing (do not link)", "file-gallery"); ?></option>
 							</select>
 						</p>
 
@@ -100,7 +100,7 @@ $files_or_tags = 'files';
 							<select on-change="changeOption:linksize" name="file_gallery_linksize" id="file_gallery_linksize">
 								<option value="thumbnail"><?php _e('thumbnail', 'file-gallery'); ?></option>
 								<option value="medium"><?php _e('medium', 'file-gallery'); ?></option>
-								<option value="large"><?php _e('large', 'file-gallery'); ?></option>
+								<option value="large" selected="selected"><?php _e('large', 'file-gallery'); ?></option>
 								<option value="full"><?php _e('full', 'file-gallery'); ?></option>
 							<?php
 							foreach( $sizes as $size ) :
@@ -190,8 +190,8 @@ $files_or_tags = 'files';
 						<p id="file_gallery_paginate_label">
 							<label for="file_gallery_paginate"><?php _e("paginate", "file-gallery"); ?>:</label>
 							<select on-change="changeOption:paginate" type="text" name="file_gallery_paginate" id="file_gallery_paginate">
-								<option value="true">true</option>
 								<option value="false">false</option>
+								<option value="true">true</option>
 							</select>
 						</p>
 
@@ -199,9 +199,9 @@ $files_or_tags = 'files';
 							<label for="file_gallery_columns"><?php _e("columns", "file-gallery"); ?>:</label>
 							<select on-change="changeOption:columns" name="file_gallery_columns" id="file_gallery_columns">
 							<?php
-								for( $i=0; $i < 10; $i++ )
+								for( $i = 0; $i < 10; $i++ )
 								{
-									echo '<option value="' . $i . '">' . $i . "</option>\n";
+									echo '<option value="' . $i . '"' . ($i === 3 ? ' selected="selected"' : '') . '>' . $i . "</option>\n";
 								}
 							?>
 							</select>
