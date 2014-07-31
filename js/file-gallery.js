@@ -30,7 +30,7 @@ var FileGallery = Ractive.extend(
 
 	tmp: 0,
 
-	featuredImageId: window.wp !== void 0 ? wp.media.view.settings.post.featuredImageId : 0,
+	featuredImageId: 0, //wp.media.view.settings.post.featuredImageId
 
 	singleTemplates:
 	{
