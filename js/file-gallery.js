@@ -75,7 +75,7 @@ var FileGallery = Ractive.extend(
 			tags_from: "",
 			limit: "",
 			offset: "",
-			paginate: ""
+			paginate: "false"
 		};
 
 		_.extend(this.shortcodeDefaults, wpdefs);
@@ -229,6 +229,8 @@ var FileGallery = Ractive.extend(
 
 		if( editor ) {
 			editor.fire("file_gallery_insert_gallery");
+		} else {
+			send_to_editor(this.currentShortcode);
 		}
 
 		event.original.preventDefault();
@@ -311,12 +313,20 @@ var FileGallery = Ractive.extend(
 	{
 		attrs = attrs || this.data.galleryOptions;
 
+		if( attrs.orderby === "default" ) {
+			attrs.orderby = "menu_order ID";
+		}
+
 		var defaults = this.shortcodeDefaults;
 		var currentShortcode = "[gallery";
+		var ignored = ["", "", "undefined"];
 
 		_.each(attrs, function (value, key, list)
 		{
-			if( value !== defaults[key] ) {
+			value = String(value);
+			ignored[0] = String(defaults[key]);
+
+			if( ! _.contains(ignored, value) ) {
 				currentShortcode += " " + key + '="' + value + '"';
 			}
 		});
@@ -1054,7 +1064,7 @@ var FileGallery = Ractive.extend(
 
 		var self = this;
 		var len = attachments.length;
-		var deleteWhat = ["all", "data_only"].indexOf(this.deleteWhat) > -1;
+		var deleteWhat = _.contains(["all", "data_only"], this.deleteWhat);
 
 		if( ! deleteWhat || ! len ) {
 			return false;
@@ -1299,32 +1309,6 @@ jQuery(document).ready(function ()
 
 // --------------------------------------------------------- //
 
-
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
-if (!Array.prototype.indexOf) {
-Array.prototype.indexOf = function (searchElement, fromIndex) {
-  if ( this === undefined || this === null ) {
-    throw new TypeError( '"this" is null or not defined' );
-  }
-  var length = this.length >>> 0; // Hack to convert object.length to a UInt32
-  fromIndex = +fromIndex || 0;
-  if (Math.abs(fromIndex) === Infinity) {
-    fromIndex = 0;
-  }
-  if (fromIndex < 0) {
-    fromIndex += length;
-    if (fromIndex < 0) {
-      fromIndex = 0;
-    }
-  }
-  for (;fromIndex < length; fromIndex++) {
-    if (this[fromIndex] === searchElement) {
-      return fromIndex;
-    }
-  }
-  return -1;
-};
-}
 
 // thanks to http://phpjs.org/functions/strip_tags:535
 function strip_tags(input, allowed)

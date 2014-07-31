@@ -396,7 +396,7 @@ function file_gallery_shortcode( $content = false, $attr = false )
 {
 	global $file_gallery, $wpdb, $post;
 
-	require_once('html5lib/Parser.php');
+	require_once(FILE_GALLERY_ABSPATH . '/lib/html5lib/Parser.php');
 
 	// if the function is called directly, not via shortcode
 	if( false !== $content && false === $attr )

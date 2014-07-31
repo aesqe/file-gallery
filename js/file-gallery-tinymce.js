@@ -76,7 +76,7 @@ tinymce.PluginManager.add("filegallery", function (editor)
 
 					_.each(attachments, function(el, i)
 					{
-						if( selection.indexOf(el.ID) > -1 ) {
+						if( _.contains(selection, el.ID) ) {
 							file_gallery.set("attachments." + i + ".selected", true);
 						}
 					});
@@ -97,11 +97,12 @@ tinymce.PluginManager.add("filegallery", function (editor)
 		file_gallery.updateShortcode(attrs);
 	};
 
-	var parseShortcode = function( shortcode )
+	var parseShortcode = function ( shortcode )
 	{
 		var defaults = _.clone(file_gallery.shortcodeDefaults); // default values
 		var s = new wp.shortcode({attrs: shortcode}); // currently set values
 		var attrs = s.attrs.named;
+		var linkValues = ["", "none", "file", "parent_post", "post", void 0];
 
 		console.log(s);
 
@@ -109,8 +110,8 @@ tinymce.PluginManager.add("filegallery", function (editor)
 			attrs.link = "post";
 		}
 
-		if( attrs.orderby === "menu_order ID" || attrs.orderby === "default" ) {
-			attrs.orderby = "";
+		if( attrs.orderby === "default" ) {
+			attrs.orderby = "menu_order ID";
 		}
 
 		if( attrs.id === file_gallery.shortcodeDefaults.id ) {
@@ -120,7 +121,7 @@ tinymce.PluginManager.add("filegallery", function (editor)
 		attrs.rel = attrs.rel || attrs.linkrel || void 0;
 		attrs.linkrel = attrs.linkrel || attrs.rel || void 0;
 
-		if( ["", "none", "file", "parent_post", "post"].indexOf(attrs.link) === -1 )
+		if( _.contains(linkValues, attrs.link) )
 		{
 			attrs.external_url = decodeURIComponent(attrs.link);
 			attrs.link = "external_url";
@@ -138,14 +139,14 @@ tinymce.PluginManager.add("filegallery", function (editor)
 		return s;
 	};
 
-	var updateGallery = function(event)
+	var updateGallery = function (event)
 	{
 		var galleryView = wp.mce.views.getInstance( encodeURIComponent(editor.selection.getContent()) );
 		
 		if( galleryView )
 		{
 			// brute mode for now - FIX
-			galleryView.setContent("", function(){}, true);
+			galleryView.setContent("", function () {}, true);
 			wp.media.editor.insert( file_gallery.currentShortcode );
 			deselect_gallery();
 		}
@@ -189,7 +190,7 @@ tinymce.PluginManager.add("filegallery", function (editor)
 				var shortcode = "";
 				var parents;
 
-				if( target.className.indexOf("wpview-type-gallery") === -1 )
+				if( _.contains(target.className, "wpview-type-gallery") )
 				{
 					parents = jQuery(target).parents(".wpview-type-gallery");
 					target = parents.length ? parents[0] : false;
@@ -221,7 +222,7 @@ tinymce.PluginManager.add("filegallery", function (editor)
 			});
 		});
 
-		editor.on("click", function()
+		editor.on("click", function (event)
 		{
 			if( tinymce.isIE && ! editor.isHidden() ) {
 				editor.windowManager.insertimagebookmark = editor.selection.getBookmark(1);
@@ -230,18 +231,18 @@ tinymce.PluginManager.add("filegallery", function (editor)
 			deselect_gallery();
 		});
 
-		editor.on("keyup", function(event)
+		editor.on("keyup", function (event)
 		{
 			var sel = file_gallery.gallerySelected;
 
-			if( sel[editor.id] && [46,27].indexOf(event.keyCode) > -1 ) //DEL or ESC
+			if( sel[editor.id] && _.contains([46, 27], event.keyCode) ) //DEL or ESC
 			{
 				sel[editor.id] = false;
 				file_gallery.deselectAll();
 			}
 		});
 
-		editor.on("file_gallery_insert_gallery", function(event)
+		editor.on("file_gallery_insert_gallery", function (event)
 		{
 			var node = jQuery( editor.selection.getNode() );
 
