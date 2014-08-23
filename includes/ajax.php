@@ -2,17 +2,21 @@
 
 function file_gallery_init()
 {
-	global $_wp_additional_image_sizes, $thumb_width, $thumb_height, $thumb_id, $_fg_upload_dir;
+	global $_wp_additional_image_sizes, $thumb_width, $thumb_height, $thumb_id;
 
 	check_ajax_referer('file-gallery');
 
-	$options = get_option('file_gallery');
 	$out = array();
+	$options = get_option('file_gallery');
 	$post_id = (int) $_GET['post_id'];
-
 	$thumb_id = (int) get_post_meta( $post_id, '_thumbnail_id', true );
-	$thumb_size  = isset($options["default_metabox_image_size"]) ? $options["default_metabox_image_size"] : 'thumbnail';
-	$thumb_width = isset($options["default_metabox_image_width"]) && 0 < $options["default_metabox_image_width"] ? $options["default_metabox_image_width"] : 75;
+
+	$thumb_size  = isset($options["default_metabox_image_size"]) ? 
+						$options["default_metabox_image_size"] : 'thumbnail';
+
+	$thumb_width = isset($options["default_metabox_image_width"]) && 
+						0 < $options["default_metabox_image_width"] ? 
+						$options["default_metabox_image_width"] : 75;
 
 	if( isset($_wp_additional_image_sizes[$thumb_size]) )
 	{
@@ -25,15 +29,14 @@ function file_gallery_init()
 		$ats_height = get_option($thumb_size . '_size_h');
 	}
 
-	$thumb_ratio = ((int) $ats_width > 0 && (int) $ats_height > 0) ? ($ats_width / $ats_height) : 1;
+	$thumb_ratio = ((int) $ats_width > 0 && (int) $ats_height > 0) ? 
+						($ats_width / $ats_height) : 1;
 
 	if( (string)($thumb_ratio) == '' ) {
 		$thumb_ratio = 1;
 	}
 
 	$thumb_height = $thumb_width / $thumb_ratio;
-
-	$_fg_upload_dir = wp_upload_dir();
 
 	$query = array(
 		  'post_parent' => $post_id,
@@ -64,9 +67,13 @@ function file_gallery_init()
 	$options['thumbWidth'] = (int) $thumb_width;
 	$options['thumbHeight'] = (int) $thumb_height;
 
-	echo json_encode( array('attachments' => $out, 'mediaTags' => $media_tags, 'options' => $options) );
+	$output = array(
+		'attachments' => $out, 
+		'mediaTags' => $media_tags, 
+		'options' => $options
+	);
 
-	exit();
+	wp_send_json( $output );
 }
 add_action('wp_ajax_file_gallery_init', 'file_gallery_init');
 
@@ -74,7 +81,7 @@ add_action('wp_ajax_file_gallery_init', 'file_gallery_init');
 
 function file_gallery_get_attachment_ajax_data( $a )
 {
-	global $thumb_width, $thumb_height, $thumb_id, $_fg_upload_dir;
+	global $thumb_width, $thumb_height, $thumb_id;
 
 	if( ! is_object($a) && is_numeric($a) ) {
 		$a = get_post((int) $a);
@@ -288,24 +295,16 @@ add_filter('ajax_query_attachments_args', 'file_gallery_filter_ajax_query_attach
 
 
 
-function file_gallery_get_attachment_post_custom_html( $attachment_id = null )
-{
-	ob_start();
-		file_gallery_attachment_custom_fields_table($attachment_id);
-		$_buffer = ob_get_contents();
-	ob_end_clean();
-
-	return $_buffer;
-}
-
-
-
 function file_gallery_ajax_attachment_post_custom_html()
 {
 	check_ajax_referer('file-gallery');
 
-	file_gallery_attachment_custom_fields_table((int) $_POST['post_id']);
-	exit;
+	$attachment_id = (int) $_POST['post_id'];
+	$attachment = get_post($attachment_id);
+
+	file_gallery_post_custom_meta_box($attachment);
+
+	exit();
 }
 add_action('wp_ajax_file_gallery_get_acf', 'file_gallery_ajax_attachment_post_custom_html');
 
@@ -551,8 +550,7 @@ function file_gallery_main()
 		}
 	}
 
-	echo json_encode($output);
-	exit();
+	wp_send_json($output);
 }
 add_action('wp_ajax_file_gallery_main_delete', 'file_gallery_main');
 add_action('wp_ajax_file_gallery_main_detach', 'file_gallery_main');
@@ -654,6 +652,10 @@ add_action('wp_ajax_file_gallery_update_attachment', 'file_gallery_ajax_update_a
 
 
 
+function file_gallery_array_values_to_int(&$value, $index)
+{
+	$value = (int) $value;
+}
 /**
  * saves attachment order using "menu_order" field
  *
@@ -663,31 +665,28 @@ function file_gallery_save_menu()
 {
 	global $wpdb;
 	
-	$updates = '';
-	
 	check_ajax_referer('file-gallery');
 
+	$updates = '';
 	$order = $_POST['attachment_order'];
+	array_walk($order, 'file_gallery_array_values_to_int');
+	$output = __('Database error! Function: file_gallery_save_menu', 'file-gallery');
 
-	array_walk($order, function (&$value, $index) {
-		$value = (int) $value;
-	});
-
-	foreach($order as $mo => $ID)
+	foreach( $order as $mo => $ID )
 	{
 		$updates .= sprintf(" WHEN %d THEN %d ", $ID, $mo);
 	}
+
+	$query = $wpdb->query("UPDATE $wpdb->posts SET `menu_order` = CASE `ID` " . 
+							$updates . " ELSE `menu_order` END");
 	
-	if( false !== $wpdb->query("UPDATE $wpdb->posts SET `menu_order` = CASE `ID` " . $updates . " ELSE `menu_order` END") )
-	{
-		echo __('Attachment order saved successfully.', 'file-gallery');
+	if( $query === false ) {
+		$output = __('Attachment order saved successfully.', 'file-gallery');
+	} else {
+		file_gallery_write_log( $output );
 	}
-	else
-	{
-		$error = __('Database error! Function: file_gallery_save_menu', 'file-gallery');
-		file_gallery_write_log( $error );
-		echo $error;
-	}
+
+	echo $output;
 	
 	exit();
 }

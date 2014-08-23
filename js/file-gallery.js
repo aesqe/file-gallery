@@ -369,6 +369,28 @@ var FileGallery = Ractive.extend(
 		return (this.data.attachments.length > 0);
 	},
 
+	updateShortcodeIds: function ()
+	{
+		var current = this.get("galleryOptions.ids");
+		var editor = this.getEditor();
+		var selected = [];
+		var external = [];
+
+		if( this.isAnySelected() && ! this.isAllSelected() ) {
+			selected = this.selectedItems;
+		}
+
+		external = _.difference(current, selected);
+
+		this.set("galleryOptions.ids", selected);
+
+		this.updateShortcode();
+
+		if( editor && this.gallerySelected[editor.id] ) {
+			editor.fire("file_gallery_update_gallery");
+		}
+	},
+
 	isAnySelected: function ()
 	{
 		return (this.selectedItems.length > 0);
@@ -550,8 +572,12 @@ var FileGallery = Ractive.extend(
 			_ajax_nonce: file_gallery_regenerate_nonce
 		};
 
-		jQuery.post(ajaxurl, data, function (response) {
+		this.set("regenerating", true);
+
+		jQuery.post(ajaxurl, data, function (response)
+		{
 			self.displayResponse(response.message);
+			self.set("regenerating", false);
 		}, "json");
 
 		event.original.preventDefault();
@@ -805,6 +831,8 @@ var FileGallery = Ractive.extend(
 
 	loadAttachmentCustomFields: function (attachment)
 	{
+		console.log("ATTACHMENT", attachment);
+
 		var self = this;
 		var data = {
 			action: "file_gallery_get_acf",
@@ -812,8 +840,22 @@ var FileGallery = Ractive.extend(
 			_ajax_nonce: this.options.file_gallery_nonce
 		};
 
-		jQuery.post(ajaxurl, data, function (data) {
+		jQuery.post(ajaxurl, data, function (data)
+		{
 			self.set("attachmentBeingEdited.customFieldsTable", data);
+
+			jQuery('#attachment-the-list').wpList(
+			{
+				addAfter: function()
+				{
+					jQuery('table#attachment-list-table').show();
+				},
+				addBefore: function( s )
+				{
+					s.data += '&post_id=' + attachment.ID;
+					return s;
+				}
+			});
 		}, "html");
 	},
 

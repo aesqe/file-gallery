@@ -212,6 +212,7 @@
 	background-color: #EEEEEE;
 	position: relative;
 	padding: 4px;
+	margin: 4px;
 	height: auto;
 	cursor: pointer;
 	min-width: 55px;
@@ -1037,9 +1038,10 @@
 {
 	display: block;
 	text-decoration: none;
+	text-transform: none;
 	padding: 3px 3px 3px 20px;
 	height: 3em;
-	background: url(../images/famfamfam_silk/arrow_refresh_small.png) left center no-repeat;
+	background: url(../images/famfamfam_silk/arrow_refresh_small.png) left 0.5em no-repeat;
 }
 
 #file_gallery_attachment_edit_image .file_gallery_regenerate img

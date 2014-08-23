@@ -327,8 +327,8 @@ $files_or_tags = 'files';
 						.file_gallery_list .attachment-preview,
 						.file_gallery_list .attachment-preview .thumbnail
 						{
-							width: {{thumbWidth}}px;
-							height: {{thumbHeight}}px;
+							/*width: {{thumbWidth}}px;
+							height: {{thumbHeight}}px;*/
 						}
 
 						.file_gallery_list .attachment-preview img
@@ -502,9 +502,13 @@ $files_or_tags = 'files';
 		<div id="file_gallery_attachment_edit_image">
 		{{#isImage}}
 			<a href="{{zoomSrc.file}}" on-click="zoom:{{this}}" title="" class="attachment_edit_thumb"><img src="{{icon}}" alt="image" /></a>
-			<p>
+			{{^regenerating}}
 				<a href="#" on-click="regenerate:{{this}}" id="file_gallery_regenerate-{{ID}}" class="file_gallery_regenerate"><?php _e("Regenerate this image's thumbnails", 'file-gallery'); ?></a>
-			</p>
+			{{/regenerating}}
+
+			{{#regenerating}}
+				<span class="file_gallery_regenerate"><?php _e('Regenerating...', 'file-gallery'); ?></span>
+			{{/regenerating}}
 		{{/isImage}}
 
 		{{^isImage}}
@@ -539,10 +543,6 @@ $files_or_tags = 'files';
 		<div id="attachment_data_edit_form">
 
 			<div class="standard-fields">
-				{{#isImage}}
-				<label for="file_gallery_attachment_image_alt_text"><?php _e('Alternate text for this image', 'file-gallery'); ?>: </label>
-				<input type="text" name="file_gallery_attachment_post_alt" id="file_gallery_attachment_post_alt_text" value="{{imageAltText}}" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
-				{{/isImage}}
 
 				<label for="file_gallery_attachment_post_title"><?php _e('Title', 'file-gallery'); ?>: </label>
 				<input type="text" name="file_gallery_attachment_post_title" id="file_gallery_attachment_post_title" value="{{post_title}}" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
@@ -552,6 +552,11 @@ $files_or_tags = 'files';
 
 				<label for="file_gallery_attachment_post_content"><?php _e('Description', 'file-gallery'); ?>: </label>
 				<textarea name="file_gallery_attachment_post_content" id="file_gallery_attachment_post_content" rows="4" cols="20" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" value="{{post_content}}"></textarea><br />
+
+				{{#isImage}}
+				<label for="file_gallery_attachment_image_alt_text"><?php _e('Alternate text for this image', 'file-gallery'); ?>: </label>
+				<input type="text" name="file_gallery_attachment_post_alt" id="file_gallery_attachment_post_alt_text" value="{{imageAltText}}" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
+				{{/isImage}}
 
 				<label for="file_gallery_attachment_tax_input"><?php _e('Media tags (separate each tag with a comma)', 'file-gallery'); ?>: </label>
 				<input type="text" name="file_gallery_attachment_tax_input" id="file_gallery_attachment_tax_input" value="{{mediaTags}}" readonly="{{currentUserCanEdit === true ? '' : 'readonly'}}" /><br />
