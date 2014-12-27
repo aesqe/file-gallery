@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: File Gallery v1.5.9\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-03-08 22:18+0100\n"
-"PO-Revision-Date: 2014-03-08 22:22+0100\n"
+"POT-Creation-Date: 2014-11-01 22:41+0100\n"
+"PO-Revision-Date: 2014-11-01 22:43+0100\n"
 "Last-Translator: Li-An <lian00@gmail.com>\n"
 "Language-Team: \n"
 "Language: fr_FR\n"
@@ -16,7 +16,7 @@ msgstr ""
 "_n_noop:1,2;_c,_nc:4c,1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;_nx_noop:4c,1,2\n"
 "X-Poedit-Basepath: ../\n"
 "X-Textdomain-Support: yes\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Generator: Poedit 1.6.10\n"
 "X-Poedit-SearchPath-0: .\n"
 
 # @ file-gallery
@@ -114,7 +114,7 @@ msgstr "taille des images avec lien"
 # @ file-gallery
 #: file-gallery.php:282 file-gallery.php:378 includes/main-form.php:109
 #: includes/main-form.php:114 includes/main-form.php:292
-#: includes/main-form.php:297 includes/media-settings.php:146
+#: includes/main-form.php:297 includes/media-settings.php:149
 msgid "external url"
 msgstr "URL externe"
 
@@ -344,7 +344,7 @@ msgstr "Aide"
 
 # @ file-gallery
 #: file-gallery.php:917 file-gallery.php:978 file-gallery.php:979
-#: file-gallery.php:1313 file-gallery.php:1558 includes/main-form.php:251
+#: file-gallery.php:1313 file-gallery.php:1557 includes/main-form.php:251
 msgid "Media tags"
 msgstr "Mots clef média"
 
@@ -597,22 +597,14 @@ msgid "File Gallery: Attachment Custom Fields"
 msgstr "File Gallery: champs personnalisés de fichier attaché"
 
 # @ file-gallery
-#: file-gallery.php:1479
+#: file-gallery.php:1478
 msgid "No. of attachments"
 msgstr "Nombre de fichiers attachés"
 
 # @ file-gallery
-#: file-gallery.php:1518
+#: file-gallery.php:1517
 msgid "No Media Tags"
 msgstr "Aucun mot-cler média"
-
-#: file-gallery.php:1591
-msgid "Remove"
-msgstr "Retirer"
-
-#: file-gallery.php:1595
-msgid "Deselect"
-msgstr "Déselectionner"
 
 #: includes/attachments-custom-fields.php:46
 msgid "Key"
@@ -659,7 +651,7 @@ msgstr "Entrez un nouveau"
 
 # @ file-gallery
 #: includes/attachments-custom-fields.php:116 includes/main.php:182
-#: includes/main.php:191
+#: includes/main.php:191 includes/media-upload.php:91
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -745,17 +737,17 @@ msgid "Alternate text for this image"
 msgstr "Texte alternatif pour cette image"
 
 # @ file-gallery
-#: includes/attachments.php:372
+#: includes/attachments.php:372 includes/templates-media-wp39.php:120
 msgid "Title"
 msgstr "Titre"
 
 # @ file-gallery
-#: includes/attachments.php:375
+#: includes/attachments.php:375 includes/templates-media-wp39.php:124
 msgid "Caption"
 msgstr "Légende"
 
 # @ file-gallery
-#: includes/attachments.php:378
+#: includes/attachments.php:378 includes/templates-media-wp39.php:134
 msgid "Description"
 msgstr "Description"
 
@@ -923,25 +915,25 @@ msgstr "montrer/cacher ce champ"
 
 # @ file-gallery
 #: includes/main-form.php:86 includes/main-form.php:121
-#: includes/media-settings.php:176
+#: includes/media-settings.php:180
 msgid "thumbnail"
 msgstr "miniature"
 
 # @ file-gallery
 #: includes/main-form.php:87 includes/main-form.php:122
-#: includes/media-settings.php:182
+#: includes/media-settings.php:187
 msgid "medium"
 msgstr "medium"
 
 # @ file-gallery
 #: includes/main-form.php:88 includes/main-form.php:123
-#: includes/media-settings.php:188
+#: includes/media-settings.php:194
 msgid "large"
 msgstr "grande"
 
 # @ file-gallery
 #: includes/main-form.php:89 includes/main-form.php:124
-#: includes/media-settings.php:194
+#: includes/media-settings.php:201
 msgid "full"
 msgstr "entière"
 
@@ -952,25 +944,25 @@ msgstr "lien vers"
 
 # @ file-gallery
 #: includes/main-form.php:100 includes/main-form.php:288
-#: includes/media-settings.php:142
+#: includes/media-settings.php:145
 msgid "nothing (do not link)"
 msgstr "aucun (ne pas lier)"
 
 # @ file-gallery
 #: includes/main-form.php:101 includes/main-form.php:289
-#: includes/media-settings.php:143
+#: includes/media-settings.php:146
 msgid "file"
 msgstr "fichier"
 
 # @ file-gallery
 #: includes/main-form.php:103 includes/main-form.php:105
-#: includes/main-form.php:290 includes/media-settings.php:144
+#: includes/main-form.php:290 includes/media-settings.php:147
 msgid "attachment page"
 msgstr "page de fichier attaché"
 
 # @ file-gallery
 #: includes/main-form.php:108 includes/main-form.php:291
-#: includes/media-settings.php:145
+#: includes/media-settings.php:148
 msgid "parent post"
 msgstr "billet parent"
 
@@ -998,29 +990,29 @@ msgid "custom value"
 msgstr "valeur personnalisée"
 
 # @ file-gallery
-#: includes/main-form.php:154 includes/media-settings.php:149
+#: includes/main-form.php:154 includes/media-settings.php:152
 msgid "file gallery"
 msgstr "galerie de fichiers"
 
 # @ file-gallery
-#: includes/main-form.php:155 includes/media-settings.php:150
+#: includes/main-form.php:155 includes/media-settings.php:153
 msgid "random"
 msgstr "au hasard"
 
 # @ file-gallery
 #: includes/main-form.php:156 includes/main-form.php:363
-#: includes/media-settings.php:151
+#: includes/media-settings.php:154
 msgid "menu order"
 msgstr "ordre de menu"
 
 # @ file-gallery
 #: includes/main-form.php:157 includes/main-form.php:364
-#: includes/media-settings.php:152
+#: includes/media-settings.php:155
 msgid "title"
 msgstr "titre"
 
 # @ file-gallery
-#: includes/main-form.php:158 includes/media-settings.php:153
+#: includes/main-form.php:158 includes/media-settings.php:156
 msgid "date / time"
 msgstr "date / heure"
 
@@ -1061,26 +1053,26 @@ msgid "Insert single files"
 msgstr "Insérer des fichiers uniques"
 
 # @ file-gallery
-#: includes/main-form.php:314 includes/media-settings.php:136
-#: includes/media-settings.php:160
+#: includes/main-form.php:314 includes/media-settings.php:139
+#: includes/media-settings.php:163
 msgid "none"
 msgstr "aucun"
 
 # @ file-gallery
-#: includes/main-form.php:315 includes/media-settings.php:137
-#: includes/media-settings.php:161
+#: includes/main-form.php:315 includes/media-settings.php:140
+#: includes/media-settings.php:164
 msgid "left"
 msgstr "gauche"
 
 # @ file-gallery
-#: includes/main-form.php:316 includes/media-settings.php:138
-#: includes/media-settings.php:162
+#: includes/main-form.php:316 includes/media-settings.php:141
+#: includes/media-settings.php:165
 msgid "right"
 msgstr "droite"
 
 # @ file-gallery
-#: includes/main-form.php:317 includes/media-settings.php:139
-#: includes/media-settings.php:163
+#: includes/main-form.php:317 includes/media-settings.php:142
+#: includes/media-settings.php:166
 msgid "center"
 msgstr "centré"
 
@@ -1144,7 +1136,7 @@ msgid "Detach / Delete"
 msgstr "Détacher / Supprimer"
 
 # @ file-gallery
-#: includes/main.php:176
+#: includes/main.php:176 includes/templates-media-wp39.php:103
 msgid "Detach"
 msgstr "Détacher"
 
@@ -1154,7 +1146,7 @@ msgid "Really detach?"
 msgstr "Vraiment détacher ?"
 
 # @ file-gallery
-#: includes/main.php:180 includes/main.php:189 includes/media-upload.php:143
+#: includes/main.php:180 includes/main.php:189 includes/media-upload.php:138
 msgid "Continue"
 msgstr "Continuer"
 
@@ -1238,37 +1230,37 @@ msgstr ""
 "ici pour l'ouvrir dans une nouvelle fenêtre</a>."
 
 # @ file-gallery
-#: includes/media-settings.php:156
+#: includes/media-settings.php:159
 msgid "ascending"
 msgstr "croissant"
 
 # @ file-gallery
-#: includes/media-settings.php:157
+#: includes/media-settings.php:160
 msgid "descending"
 msgstr "décroissant"
 
 # @ file-gallery
-#: includes/media-settings.php:322
+#: includes/media-settings.php:348
 msgid "Crop medium size to exact dimensions"
 msgstr "Retailler la taille médium aux dimensions exactes"
 
 # @ file-gallery
-#: includes/media-settings.php:328
+#: includes/media-settings.php:353
 msgid "Crop large size to exact dimensions"
 msgstr "Retailler la grande taille aux dimensions exactes"
 
 # @ file-gallery
-#: includes/media-settings.php:342
+#: includes/media-settings.php:369
 msgid "Width"
 msgstr "Largeur"
 
 # @ file-gallery
-#: includes/media-settings.php:344
+#: includes/media-settings.php:371
 msgid "Height"
 msgstr "Hauteur"
 
 # @ file-gallery
-#: includes/media-settings.php:347
+#: includes/media-settings.php:374
 #, php-format
 msgid "Crop %s size to exact dimensions"
 msgstr "Retailler la taille %s aux dimensions exactes"
@@ -1334,6 +1326,46 @@ msgstr ""
 "régénérées !"
 
 # @ file-gallery
+#: includes/templates-media-wp39.php:31 includes/templates-media-wp40.php:33
+msgid "This file is attached to current post"
+msgstr "Ce fichier est attaché au billet courant"
+
+# @ file-gallery
+#: includes/templates-media-wp39.php:58
+msgid "Attachment Details"
+msgstr "Détails de la pièce attachée"
+
+# @ file-gallery
+#: includes/templates-media-wp39.php:85
+msgid "Edit Image"
+msgstr "Éditer l'image"
+
+#: includes/templates-media-wp39.php:86
+msgid "Refresh"
+msgstr "Rafraîchir"
+
+#: includes/templates-media-wp39.php:91
+msgid "Length:"
+msgstr "Longueur:"
+
+#: includes/templates-media-wp39.php:96
+msgid "Trash"
+msgstr "Poubelle"
+
+#: includes/templates-media-wp39.php:98
+msgid "Delete Permanently"
+msgstr "Suppression définitive"
+
+# @ file-gallery
+#: includes/templates-media-wp39.php:105
+msgid "Attach"
+msgstr "Attacher"
+
+#: includes/templates-media-wp39.php:129
+msgid "Alt Text"
+msgstr "Texte Alt"
+
+# @ file-gallery
 #: includes/templating.php:311
 msgid "file does not exist:"
 msgstr "le fichier n'existe pas:"
@@ -1344,19 +1376,25 @@ msgid "using default style"
 msgstr "utiliser le style par défaut"
 
 # @ file-gallery
-#: includes/templating.php:1071
+#: includes/templating.php:1061
 msgid "Skip to first page"
 msgstr "Aller directement à la première page"
 
 # @ file-gallery
-#: includes/templating.php:1075
+#: includes/templating.php:1065
 msgid "Skip to last page"
 msgstr "Aller directement à la dernière page"
 
-#: includes/templating.php:1079
+#: includes/templating.php:1069
 msgid "Previous page"
 msgstr "Page précédente"
 
-#: includes/templating.php:1083
+#: includes/templating.php:1073
 msgid "Next page"
 msgstr "Page suivante"
+
+#~ msgid "Remove"
+#~ msgstr "Retirer"
+
+#~ msgid "Deselect"
+#~ msgstr "Déselectionner"

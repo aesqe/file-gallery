@@ -719,6 +719,7 @@ function file_gallery_shortcode( $content = false, $attr = false )
 	}
 	
 	$i = 0;
+	$j = 0;
 	$unique_ids = array();
 	$gallery_items = '';
 	
@@ -733,6 +734,12 @@ function file_gallery_shortcode( $content = false, $attr = false )
 		$autoqueueclasses = explode(',', $options['auto_enqueued_scripts']);
 	
 	$file_gallery_this_template_counter = 1;
+
+	$html5 = current_theme_supports( 'html5', 'gallery' );
+	
+	$itemtag = $html5 ? 'figure' : 'dl';
+	$icontag = $html5 ? 'div' : 'dt';
+	$captiontag = $html5 ? 'figcaption' : 'dd';
 
 	// create output
 	foreach($attachments as $attachment)
@@ -848,43 +855,14 @@ function file_gallery_shortcode( $content = false, $attr = false )
 			$param['attachment_id'] = $attachment->ID;
 		}
 
-		/**
-		 * Make sure that all attributes added/filtered via
-		 * 'wp_get_attachment_link' filter are included here as well
-		 */
-
-		/**
-			$dom_document = new DOMDocument();
-			@$dom_document->loadHTML(wp_get_attachment_link($attachment->ID)); //
-			$wp_attachment_link_attributes = $dom_document->getElementsByTagName('a')->item(0)->attributes;
-		**/
-
-		/**
-		$wp_attachment_link = new SimpleXMLElement(wp_get_attachment_link($attachment->ID));
-		$wp_attachment_link_attributes = $wp_attachment_link->attributes();
-
-		foreach( $wp_attachment_link_attributes as $key => $val )
-		{
-			if( $key === 'title' ) {
-				$param['title'] = $val;
-			}
-			else if( $key === 'class' ) {
-				$param['link_class'] .= ' ' . $val;
-			}
-			else if( $key === 'rel' ) {
-				$param['rel'] .= ' ' . $val;
-			}
-		}
-		**/
-
 		$dom_document = HTML5_Parser::parse(wp_get_attachment_link($attachment->ID));
 		$wp_attachment_link_attributes = $dom_document->getElementsByTagName("a")->item(0)->attributes;
 		$length = $wp_attachment_link_attributes->length;
 
-		for( $i = 0; $i < $length; ++$i )
+		for( $j = 0; $j < $length; ++$j )
 		{
-			$name = $wp_attachment_link_attributes->item($i)->name;
-			$value = $wp_attachment_link_attributes->item($i)->value;
+			$name = $wp_attachment_link_attributes->item($j)->name;
+			$value = $wp_attachment_link_attributes->item($j)->value;
 
 			if( $name === 'title' ) {
 				$param['title'] = $value;
@@ -942,7 +920,7 @@ function file_gallery_shortcode( $content = false, $attr = false )
 			
 			$file_gallery_this_template_counter++;
 			
-			if ( $columns > 0 && $i+1 % $columns == 0 )
+			if ( $columns > 0 && ($i+1) % $columns == 0 )
 				$x .= $cleartag;
 			
 			$gallery_items .= $x;
@@ -963,21 +941,32 @@ function file_gallery_shortcode( $content = false, $attr = false )
 	else
 	{
 		$stc = '';
-		$cols = '';
+		$columns = (int) $columns;
+		$cols = 'columns_' . $columns . ' gallery-columns-' . $columns;
 		$pagination_html = '';
-
-		if( 0 < (int) $columns )
-			$cols = ' columns_' . $columns;
 		
-		if( isset($starttag_class) && '' != $starttag_class )
-			$stc = ' ' . $starttag_class;
+		if( isset($starttag_class) && '' != $starttag_class ) {
+			$stc = $starttag_class;
+		}
 		
 		$trans_append = "\n<!-- file gallery output cached on " . date('Y.m.d @ H:i:s', time()) . "-->\n";
 		
-		if( is_singular() && isset($file_gallery_query->max_num_pages) && 1 < $file_gallery_query->max_num_pages )
+		if( is_singular() && isset($file_gallery_query->max_num_pages) && 1 < $file_gallery_query->max_num_pages ) {
 			$pagination_html = file_gallery_do_pagination( $file_gallery_query->max_num_pages, $page );
+		}
 
-		$gallery_class = apply_filters('file_gallery_galleryclass', 'gallery ' . str_replace(' ', '-', $template) . $cols . $stc . ' ' . $galleryclass);
+		$gallery_classes = array(
+			'gallery',
+			'galleryid-' . $file_gallery->gallery_id,
+			str_replace(' ', '-', $template),
+			$cols, 
+			$galleryclass,
+			'gallery-size-' . $size,
+			$stc
+		);
+
+		$gallery_class = implode(' ', $gallery_classes);
+		$gallery_class = apply_filters('file_gallery_galleryclass', $gallery_class);
 		
 		$output = '<' . $starttag . ' id="gallery-' . $file_gallery->gallery_id . '" class="' . $gallery_class . '">' . "\n" . $gallery_items . "\n" . $pagination_html . "\n</" . $starttag . '>';
 	}

@@ -345,7 +345,7 @@ $files_or_tags = 'files';
 						<li id="file-gallery-galleryitem-{{ID}}" class="sortableitem attachment {{itemClasses}} {{selected ? 'selected details' : ''}} {{isPostThumb ? 'post_thumb' : ''}}" title="{{post_title}}">
 
 							{{#isImage}}
-							<div class="attachment-preview isattached">
+							<div class="attachment-preview">
 								<div class="thumbnail">
 									<div class="centered">
 										<img src="{{icon}}" draggable="false">
@@ -356,7 +356,7 @@ $files_or_tags = 'files';
 							{{/isImage}}
 
 							{{^.isImage}}
-							<div class="attachment-preview isattached " style="background-image: url({{icon}});"></div>
+							<div class="attachment-preview icon" style="background-image: url({{icon}});"></div>
 							{{/.isImage}}
 
 							<span class="attachment-title">{{post_title}}</span>

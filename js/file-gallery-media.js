@@ -4,90 +4,124 @@ jQuery(document).ready(function()
 {
 	"use strict";
 
-	var responseContainerAdded = false;
-	var responseContainer = jQuery('<div class="file-gallery-response" style="display: none;"></div>');
+    if( !wp || !wp.media ) {
+        return;
+    }
 
-	var wpMediaFramePost = wp.media.view.MediaFrame.Post;
+    var menuTitle = (function ()
+    {
+        var t = file_gallery.L10n.attach_all_checked_copy.split(" ");
+        var len = t.length;
+        var j = 0;
+        var i = 0;
 
-	wp.media.view.MediaFrame.Post = wpMediaFramePost.extend(
-	{
-		mainInsertToolbar: function( view )
-		{
-			wpMediaFramePost.prototype.mainInsertToolbar.call(this, view);
+        for( i; i < len; i++ )
+        {
+            j += t[i].length;
 
-			var controller = this;
+            if( j >= 18 )
+            {
+                t[i] += "<br />";
+                j = 0;
+            }
+        }
 
-			view.set( "attach", {
-				style: "primary",
-				priority: 80,
-				text: file_gallery.L10n.attach_all_checked_copy,
-				requires: {
-					selection: true
-				},
+        return t.join(" ");
+    }());
 
-				click: function ()
-				{
-					var state = controller.state(),
-						selection = state.get("selection");
+    var state;
+    var selection;
+    var controller;
+    var sel = false;
+    var ready = false;
+    var $filters = "select.attachment-filters";
+    var ajaxurl = wp.media.model.settings.ajaxurl;
+    var $responseContainer = jQuery('<div class="file-gallery-response"></div>');
+    var $menuItem = jQuery('<a href="#" class="media-menu-item">' + menuTitle + '</a>');
+    
+    var wpMediaFramePost = wp.media.view.MediaFrame.Post;
+    wp.media.view.MediaFrame.Post = wpMediaFramePost.extend(
+    {
+        mainMenu: function ( view )
+        {
+            wpMediaFramePost.prototype.mainMenu.call(this, view);
 
-					if( responseContainerAdded === false )
-					{
-						controller.content.get().sidebar.$el.append(responseContainer);
-						responseContainerAdded = true;
-					}
+            var $menu = view.$el;
+            controller = this;
 
-					responseContainer.stop().fadeOut(75, function() {
-						responseContainer.html("");
-					});
+            if( file_gallery.tinymce_is_active() )
+            {
+                controller.on("ready", function () 
+                {
+                    if( ! ready )
+                    {
+                        $filters = jQuery($filters);
 
-					var data = {
-						action: "file_gallery_copy_attachments_to_post",
-						post_id: wp.media.model.settings.post.id,
-						ids: _.uniq( _.pluck(selection._byId, "id") ).join(","),
-						_ajax_nonce: file_gallery_attach_nonce
-					};
+                        $filters.on("change", function ()
+                        {
+                            if( this.value === "uploaded" ) {
+                                $menuItem.hide();
+                            } else {
+                                $menuItem.show();
+                            }
+                        });
 
-					jQuery.post(wp.media.model.settings.ajaxurl, data, function (response)
-					{
-						responseContainer.html( response.split("#").pop() ).fadeIn(500, function () {
-							responseContainer.fadeOut(15000);
-						});
+                        $responseContainer.hide();
+                        controller.content.get().sidebar.$el.append($responseContainer);
 
-						state.reset();
-					}, "html");
-				}
-			});
-		}
-	});
+                        ready = true;
+                    }
+                });
 
-	jQuery(document).on("click", ".insert-media, .media-menu-item", function(e)
-	{
-		var editor = jQuery(this).data("editor");
+                controller.on("selection:toggle activate", function ()
+                {
+                    if( ready && file_gallery.tinymce_is_active() )
+                    {
+                        state = controller.state();
+                        selection = state.get("selection");
+                        sel = selection && selection.length ? selection.length : 0;
 
-		if( editor )
-		{
-			var attachButton = jQuery(".media-frame-toolbar .media-button-attach");
-			var filters = jQuery("select.attachment-filters");
-			var toolbar = wp.media.editor.get(editor).toolbar.get();
+                        if( controller._state === "insert" && sel > 0 && $filters.val() !== "uploaded" ) {
+                            $menuItem.show();
+                        } else {
+                            $menuItem.hide();
+                        }
+                    }
+                });
 
-			if( toolbar.selection ) {
-				toolbar.selection.reset();
-			}
+                $menuItem.on("click", function () 
+                {
+                    state = controller.state();
+                    selection = state.get("selection");
 
-			if( filters.val() === "uploaded" ) {
-				attachButton.hide();
-			}
+                    if( selection.length && $filters.val() !== "uploaded" )
+                    {
+                        $responseContainer.stop().fadeOut(75, function () {
+                            $responseContainer.html("");
+                        });
 
-			filters.on("change", function ()
-			{
-				if( this.value === "uploaded" ) {
-					attachButton.hide();
-				} else {
-					attachButton.show();
-				}
-			});
-		}
-	});
+                        var data = {
+                            action: "file_gallery_copy_attachments_to_post",
+                            post_id: wp.media.model.settings.post.id,
+                            ids: _.uniq( _.pluck(selection._byId, "id") ).join(","),
+                            _ajax_nonce: file_gallery_attach_nonce
+                        };
+
+                        jQuery.post(ajaxurl, data, function (response)
+                        {
+                        	response = response.split("#").pop();
+                            $responseContainer.html(response).fadeIn(500, function () {
+                                $responseContainer.fadeOut(15000);
+                            });
+                        }, "html");
+                    }
+                });
+
+                $menuItem.addClass("file-gallery-media-menu-item").hide();
+                $menu.append($menuItem);
+            }
+        }
+    });
 	
 	wp.media.view.Attachment.Library = wp.media.view.Attachment.extend({
 		buttons: {
@@ -104,36 +138,17 @@ jQuery(document).ready(function()
 		{
 			event.preventDefault();
 
-			var controller = this.controller;
-			var wp_version = file_gallery.options.wp_version.substring(0, 3);
-				wp_version = parseFloat(wp_version) * 10;
-
-			if( responseContainerAdded === false )
+			if( confirm("Really detach attachment from this post?") )
 			{
-				controller.content.get().sidebar.$el.append(responseContainer);
-				responseContainerAdded = true;
-			}
-
-			if ( confirm( "Really detach attachment from this post?" ) )
-			{
-				var id = this.model.get("id");
-				var attachment = file_gallery.getAttachmentById( id );
-
+				var attachment = file_gallery.getAttachmentById( this.model.get("id") );
 				this.model.set("uploadedTo", 0);
 
 				file_gallery.detachAttachments([attachment], function (response)
-				{
-					if( wp_version < 40 ) {
-						controller.state().reset();
-					}
-					
-					responseContainer.html( response )
-						.fadeIn(500, function() {
-							responseContainer.fadeOut(15000);
-						});
+				{					
+					responseContainer.html( response ).fadeIn(500, function () {
+						responseContainer.fadeOut(15000);
+					});
 				});
-
-				
 			}
 		}
 	});

@@ -6,6 +6,9 @@ var file_gallery;
 
 var FileGallery = Ractive.extend(
 {
+
+// properties
+
 	uploader_dragdrop: true,
 	activeEditorId: null,
 	upload_inside: false,
@@ -28,9 +31,8 @@ var FileGallery = Ractive.extend(
 	originals: "",
 	copies: "",
 
-	tmp: 0,
-
 	featuredImageId: 0, //wp.media.view.settings.post.featuredImageId
+	tmp: 0,
 
 	singleTemplates:
 	{
@@ -39,6 +41,10 @@ var FileGallery = Ractive.extend(
 		captioned: '[caption id="attachment_{{ID}}" align="align{{align}}" width="{{sizeWidth}}"]<img class="wp-image-{{ID}} size-{{sizeName}}{{imageclass}}" src="{{sizeFile}}" alt="{{imageAltText}}" width="{{sizeWidth}}" height="{{sizeHeight}}" />{{caption}}[/caption]',
 		captionedLinked: '[caption id="attachment_{{ID}}" align="align{{align}}" width="{{sizeWidth}}"]<a href="{{link}}"{{linkclass}}><img class="wp-image-{{ID}} size-{{sizeName}}{{imageclass}}" src="{{sizeFile}}" alt="{{imageAltText}}" width="{{sizeWidth}}" height="{{sizeHeight}}" /></a>{{caption}}[/caption]'
 	},
+
+
+
+// methods
 
 	init: function ()
 	{
@@ -155,10 +161,12 @@ var FileGallery = Ractive.extend(
 			var attachments = data["attachments"];
 			var attachmentBeingEdited = null;
 			var len = attachments.length;
+			var atID = 0;
 
 			if( singleEditMode )
 			{
-				attachmentBeingEdited = _.findWhere(attachments, {ID: self.data.attachmentBeingEdited.ID});
+				atID = self.data.attachmentBeingEdited.ID;
+				attachmentBeingEdited = _.findWhere(attachments, {ID: atID});
 
 				if( attachmentBeingEdited === void 0 )
 				{
@@ -474,7 +482,8 @@ var FileGallery = Ractive.extend(
 	{
 		if( window.tinymce !== void 0 )
 		{
-			var editor = tinymce.EditorManager.get(this.activeEditorId || window.wpActiveEditor || "content");
+			var edID = this.activeEditorId || window.wpActiveEditor || "content";
+			var editor = tinymce.EditorManager.get(edID);
 
 			if( editor )
 			{
@@ -484,6 +493,12 @@ var FileGallery = Ractive.extend(
 		}
 
 		return null;
+	},
+
+	tinymce_is_active: function ()
+	{
+		var editor = file_gallery.tinymce_get_editor();
+		return editor && ! editor.isHidden()
 	},
 
 	zoom: function (event, data)
@@ -566,9 +581,10 @@ var FileGallery = Ractive.extend(
 	{
 		var self = this;
 		var el = event.node;
+		var len = attachments.length;
 		var data = {
 			action: "file_gallery_regenerate_thumbnails",
-			attachment_ids: attachments.length ? _.pluck(attachments, "ID") : [attachments.ID],
+			attachment_ids: len ? _.pluck(attachments, "ID") : [attachments.ID],
 			_ajax_nonce: file_gallery_regenerate_nonce
 		};
 
@@ -622,7 +638,7 @@ var FileGallery = Ractive.extend(
 		var self = this;
 		var loader = jQuery("#file-gallery-item-" + event.context.ID).find(".thumbLoadingAnim");
 		var data = {
-			action: 'set-post-thumbnail',
+			action: "set-post-thumbnail",
 			post_id: event.context.post_parent,
 			thumbnail_id: event.context.ID,
 			_ajax_nonce: file_gallery_setAsThumbnailNonce,
@@ -831,8 +847,6 @@ var FileGallery = Ractive.extend(
 
 	loadAttachmentCustomFields: function (attachment)
 	{
-		console.log("ATTACHMENT", attachment);
-
 		var self = this;
 		var data = {
 			action: "file_gallery_get_acf",
@@ -844,15 +858,15 @@ var FileGallery = Ractive.extend(
 		{
 			self.set("attachmentBeingEdited.customFieldsTable", data);
 
-			jQuery('#attachment-the-list').wpList(
+			jQuery("#attachment-the-list").wpList(
 			{
-				addAfter: function()
+				addAfter: function ()
 				{
-					jQuery('table#attachment-list-table').show();
+					jQuery("table#attachment-list-table").show();
 				},
-				addBefore: function( s )
+				addBefore: function ( s )
 				{
-					s.data += '&post_id=' + attachment.ID;
+					s.data += "&post_id=" + attachment.ID;
 					return s;
 				}
 			});
@@ -880,12 +894,12 @@ var FileGallery = Ractive.extend(
 			post_id: event.context.post_parent,
 			attachment_id: event.context.ID,
 			action: "file_gallery_update_attachment",
-			post_alt: jQuery('#file_gallery_attachment_post_alt_text').val(),
-			post_title: jQuery('#file_gallery_attachment_post_title').val(),
-			post_content: jQuery('#file_gallery_attachment_post_content').val(),
-			post_excerpt: jQuery('#file_gallery_attachment_post_excerpt').val(),
-			tax_input: jQuery('#file_gallery_attachment_tax_input').val(),
-			menu_order: jQuery('#file_gallery_attachment_menu_order').val(),
+			post_alt: jQuery("#file_gallery_attachment_post_alt_text").val(),
+			post_title: jQuery("#file_gallery_attachment_post_title").val(),
+			post_content: jQuery("#file_gallery_attachment_post_content").val(),
+			post_excerpt: jQuery("#file_gallery_attachment_post_excerpt").val(),
+			tax_input: jQuery("#file_gallery_attachment_tax_input").val(),
+			menu_order: jQuery("#file_gallery_attachment_menu_order").val(),
 			custom_fields: this.getAttachmentCustomFields(),
 			_ajax_nonce: this.options.file_gallery_nonce
 		};
@@ -910,18 +924,17 @@ var FileGallery = Ractive.extend(
 
 	displayResponse: function (response, fade)
 	{
-		this.set("responseLoading", false);
+		var div = this.responseDiv.children(".text");
 
+		this.set("responseLoading", false);
 		fade = (fade === void 0) ? 7000 : Number(fade);
+
 		if( isNaN(fade) ) {
 			fade = 0;
 		}
 
-		var div = this.responseDiv.children(".text");
 		div.stop(true, true).css({"opacity": 0, "display": "none"});
-
 		this.set("actionResponse", response);
-
 		div.css({"opacity": 1, "display": "block"});
 
 		if( fade > 0 ) {
@@ -951,7 +964,9 @@ var FileGallery = Ractive.extend(
 
 					if( self.data.galleryAttachments.length === 0 )
 					{
-						self.set("galleryOptions.ids", _.pluck(self.data.attachments, "ID"));
+						var ids = _.pluck(self.data.attachments, "ID");
+
+						self.set("galleryOptions.ids", ids);
 						self.updateShortcode();
 
 						if( editor && self.gallerySelected[editor.id] ) {
@@ -998,7 +1013,7 @@ var FileGallery = Ractive.extend(
 					var attachments = self.deleteDialog.data("attachments");
 
 					self.deleteWhat = "data_only";
-					self.deleteAttachments( attachments, message );
+					self.deleteAttachments(attachments, message);
 					self.deleteDialog.dialog("close");
 				},
 				"Delete attachment data, its copies and the files": function ()
@@ -1007,7 +1022,7 @@ var FileGallery = Ractive.extend(
 					var attachments = self.deleteDialog.data("attachments");
 
 					self.deleteWhat = "all";
-					self.deleteAttachments( attachments, message );
+					self.deleteAttachments(attachments, message);
 					self.deleteDialog.dialog("close");
 				}
 			}
@@ -1068,20 +1083,19 @@ var FileGallery = Ractive.extend(
 	{
 		var self = this;
 		var message = attachments.length === 1 ? this.L10n.detaching_attachment : this.L10n.detaching_attachments;
-
-		this.displayResponse(message);
-
 		var data = {
 			action: "file_gallery_main_detach",
 			attachment_ids: _.pluck(attachments, "ID"),
 			_ajax_nonce: this.options.file_gallery_nonce
 		};
 
+		this.displayResponse(message);
+
 		jQuery.post(ajaxurl, data, function (response)
 		{
 			var message = response.message || response.error;
 
-			self.displayResponse(message, 7000);
+			self.displayResponse(message);
 
 			if( response.success ) {
 				self.removeAttachmentsFromList(data.attachment_ids);
@@ -1098,24 +1112,28 @@ var FileGallery = Ractive.extend(
 	 */
 	deleteAttachments : function( attachments, message )
 	{
-		message = message || false;
-
 		if( ! attachments ) {
 			return false;
 		}
+
+		message = message || false;
 
 		var self = this;
 		var len = attachments.length;
 		var deleteWhat = _.contains(["all", "data_only"], this.deleteWhat);
 
-		if( ! deleteWhat || ! len ) {
+		if( ! deleteWhat ) {
+			return false;
+		}
+
+		if( ! len ) {
 			return false;
 		}
 
 		if( ! message || confirm(message)  )
 		{
-			self.displayResponse(len > 1 ? this.L10n.deleting_attachments : this.L10n.deleting_attachment);
-
+			var text = len > 1 ? 
+				this.L10n.deleting_attachments : this.L10n.deleting_attachment;
 			var data = {
 				action: "file_gallery_main_delete",
 				attachment_ids: _.pluck(attachments, "ID"),
@@ -1123,11 +1141,13 @@ var FileGallery = Ractive.extend(
 				_ajax_nonce: this.options.file_gallery_nonce
 			};
 
+			self.displayResponse(text);
+
 			jQuery.post(ajaxurl, data, function ( response )
 			{
 				var message = response.message || response.error;
 
-				self.displayResponse(message, 7000);
+				self.displayResponse(message);
 
 				if( response.success ) {
 					self.removeAttachmentsFromList(data.attachment_ids);
@@ -1168,7 +1188,7 @@ var FileGallery = Ractive.extend(
 
 jQuery(document).ready(function ()
 {
-	if( window.typenow === "attachment" ) {
+	if( ! wp || ! wp.media ) {
 		return;
 	}
 
@@ -1190,7 +1210,7 @@ jQuery(document).ready(function ()
 		}
 	});
 
-	if( wp.media && wp.media.collection )
+	if( wp.media.collection )
 	{
 		wp.media.file_gallery = new wp.media.collection({
 			tag: 'gallery',
