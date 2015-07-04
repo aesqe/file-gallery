@@ -55,7 +55,7 @@ var FileGallery = Ractive.extend(
 			"orderby", "linkclass", "imageclass",
 			"galleryclass", "mimetype", "limit",
 			"offset", "paginate", "columns"];
-		var wpdefs = wp.media.gallery.defaults || {};
+		var wpdefs = /*wp.media._galleryDefaults || wp.media.gallery.defaults ||*/ {};
 		var cache = this.elementCache;
 		var galleryOptions = {};
 		var len = list.length;
@@ -68,6 +68,7 @@ var FileGallery = Ractive.extend(
 		this.responseDiv = jQuery("#file_gallery_response");
 		this.shortcodeDefaults = {
 			_file_gallery: true,
+			ids: "",
 			linksize: "large",
 			template: "default",
 			linkclass: "",
@@ -155,18 +156,16 @@ var FileGallery = Ractive.extend(
 
 		jQuery.get(ajaxurl, data, function ( data )
 		{
-			console.log(data);
-
 			var singleEditMode = self.data.singleEditMode;
 			var attachments = data["attachments"];
 			var attachmentBeingEdited = null;
 			var len = attachments.length;
-			var atID = 0;
+			var singleID = 0;
 
 			if( singleEditMode )
 			{
-				atID = self.data.attachmentBeingEdited.ID;
-				attachmentBeingEdited = _.findWhere(attachments, {ID: atID});
+				singleID = self.data.attachmentBeingEdited.ID;
+				attachmentBeingEdited = _.findWhere(attachments, {ID: singleID});
 
 				if( attachmentBeingEdited === void 0 )
 				{
@@ -420,6 +419,7 @@ var FileGallery = Ractive.extend(
 	{
 		this.set(event.keypath + ".selected", ! attachment.selected);
 		this.serialize();
+		this.updateShortcodeIds();
 	},
 
 	selectAll: function (event)

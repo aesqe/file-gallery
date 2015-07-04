@@ -1,5 +1,70 @@
 <?php
 
+function file_gallery_debug_print( $panels )
+{
+	class Debug_Bar_File_Gallery extends Debug_Bar_Panel
+	{
+		function init()
+		{
+			$this->title( __('File Gallery', 'debug-bar') );
+		}
+
+		function render()
+		{
+			global $file_gallery;
+			echo $file_gallery->debug_print();
+		}
+	}
+
+	$panels[] = new Debug_Bar_File_Gallery();
+
+	return $panels;
+}
+add_action('debug_bar_panels', 'file_gallery_debug_print');
+
+/**
+ * A slightly modified copy of WordPress' _update_post_term_count function
+ * Updates the number of posts that use a certain media_tag
+ */
+function file_gallery_update_media_tag_term_count( $terms )
+{
+	global $wpdb;
+
+	foreach ( (array) $terms as $term )
+	{
+		$count = $wpdb->get_var(
+					$wpdb->prepare(
+						"SELECT COUNT(*) FROM $wpdb->term_relationships, $wpdb->posts
+						 WHERE $wpdb->posts.ID = $wpdb->term_relationships.object_id
+						 AND post_type = 'attachment'
+						 AND term_taxonomy_id = %d",
+					$term )
+		);
+
+		do_action( 'edit_term_taxonomy', $term );
+
+		$wpdb->update( $wpdb->term_taxonomy, compact( 'count' ), array( 'term_taxonomy_id' => $term ) );
+
+		do_action( 'edited_term_taxonomy', $term );
+	}
+
+	file_gallery_clear_cache('mediatags_all');
+}
+
+function file_gallery_get_intermediate_image_sizes()
+{
+	$sizes = array();
+
+	if( function_exists('get_intermediate_image_sizes') ) {
+		$sizes = get_intermediate_image_sizes();
+	}
+
+	$additional_intermediate_sizes = apply_filters('intermediate_image_sizes', $sizes);
+	array_unshift($additional_intermediate_sizes, 'thumbnail', 'medium', 'large', 'full');
+
+	return array_unique($additional_intermediate_sizes);
+}
+
 /**
  * Checks if wp-admin is in SLL mode and replaces 
  * the protocol in links accordingly

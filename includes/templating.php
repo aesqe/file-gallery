@@ -12,8 +12,9 @@ function file_gallery_get_templates( $where = NULL )
 		$transient = 'filegallery_templates';
 		$cache = get_transient($transient);
 		
-		if( $cache )
+		if( $cache ) {
 			return $cache;
+		}
 	}
 
 	$file_gallery_templates = array();
@@ -29,8 +30,9 @@ function file_gallery_get_templates( $where = NULL )
 			{
 				$tf = FILE_GALLERY_THEME_TEMPLATES_ABSPATH . '/' . $files;
 		
-				if( is_readable($tf . '/gallery.php') && is_readable($tf . '/gallery.css') )
+				if( is_readable($tf . '/gallery.php') && is_readable($tf . '/gallery.css') ) {
 					$file_gallery_templates[] = $files;
+				}
 			}
 		}
 		
@@ -48,8 +50,9 @@ function file_gallery_get_templates( $where = NULL )
 			{
 				$tf = FILE_GALLERY_CONTENT_TEMPLATES_ABSPATH . '/' . $files;
 		
-				if( is_readable($tf . '/gallery.php') && is_readable($tf . '/gallery.css') )
+				if( is_readable($tf . '/gallery.php') && is_readable($tf . '/gallery.css') ) {
 					$file_gallery_templates[] = $files;
+				}
 			}
 		}
 		
@@ -57,7 +60,6 @@ function file_gallery_get_templates( $where = NULL )
 	}
 	
 	$file_gallery_templates = array_unique($file_gallery_templates);
-	
 	$default_templates = unserialize(FILE_GALLERY_DEFAULT_TEMPLATES);
 	
 	foreach( $default_templates as $df )
@@ -65,8 +67,9 @@ function file_gallery_get_templates( $where = NULL )
 		$file_gallery_templates[] = $df;
 	}
 	
-	if( isset($options['cache']) && true == $options['cache'] )
+	if( isset($options['cache']) && true == $options['cache'] ) {
 		set_transient($transient, $file_gallery_templates, $options['cache_time']);
+	}
 
 	return $file_gallery_templates;
 }
@@ -80,8 +83,9 @@ function file_gallery_mobile_css( $stylesheet_url )
 {
 	$options = get_option('file_gallery');
 	
-	if( isset($options['disable_shortcode_handler']) && true == $options['disable_shortcode_handler'] )
+	if( isset($options['disable_shortcode_handler']) && true == $options['disable_shortcode_handler'] ) {
 		return $stylesheet_url;
+	}
 
 	file_gallery_css_front( true );
 	
@@ -107,12 +111,14 @@ function file_gallery_css_front( $mobile = false )
 
 	$options = get_option('file_gallery');
 	
-	if( isset($options['disable_shortcode_handler']) && true == $options['disable_shortcode_handler'] )
+	if( isset($options['disable_shortcode_handler']) && true == $options['disable_shortcode_handler'] ) {
 		return;
+	}
 
 	// if option to show galleries in excerpts is set to false
-	if( ! is_singular() && ( ! isset($options['in_excerpt']) || true != $options['in_excerpt']) && false == $mobile )
+	if( ! is_singular() && ( ! isset($options['in_excerpt']) || true != $options['in_excerpt']) && false == $mobile ) {
 		return;
+	}
 
 	$gallery_matches = 0;
 	$galleries = array();
@@ -1075,7 +1081,7 @@ function file_gallery_do_pagination( $total = 0, $page = 0 )
 			array_push($out, str_replace('<a ', '<a title="' . __('Next page', 'file-gallery') . '" class="page"', _wp_link_page($page+1)) . '&rsaquo;</a>');
 		}
 
-		if( 'rtl' == get_bloginfo('text_direction') )
+		if( is_rtl() )
 			$out = array_reverse($out);
 		
 		return '<div class="wp-pagenavi">' . "\n" . implode("\n", $out) . "\n</div>";

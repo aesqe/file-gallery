@@ -324,13 +324,6 @@ $files_or_tags = 'files';
 							height: {{ thumbHeight + 4}}px;
 						}
 
-						.file_gallery_list .attachment-preview,
-						.file_gallery_list .attachment-preview .thumbnail
-						{
-							/*width: {{thumbWidth}}px;
-							height: {{thumbHeight}}px;*/
-						}
-
 						.file_gallery_list .attachment-preview img
 						{
 							width: auto;

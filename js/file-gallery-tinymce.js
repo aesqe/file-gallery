@@ -104,7 +104,7 @@ tinymce.PluginManager.add("filegallery", function (editor)
 		var attrs = s.attrs.named;
 		var linkValues = ["", "none", "file", "parent_post", "post", void 0];
 
-		console.log(s);
+		console.log(defaults, s);
 
 		if( attrs.link === "attachment" ) {
 			attrs.link = "post";
