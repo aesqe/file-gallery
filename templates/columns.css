@@ -1,62 +1,53 @@
 /* columns */
 
-.gallery.columns_1 .gallery-item,
-#content .gallery.columns_1 .gallery-item
-{
-	width: 100%;
+.gallery-columns-1 .gallery-item {
+	max-width: 100%;
 }
 
-.gallery.columns_2 .gallery-item,
-#content .gallery.columns_2 .gallery-item
-{
-	width: 50%;
+.gallery-columns-2 .gallery-item {
+	max-width: 48%;
+	max-width: -webkit-calc(50% - 4px);
+	max-width:         calc(50% - 4px);
 }
 
-.gallery.columns_3 .gallery-item,
-#content .gallery.columns_3 .gallery-item
-{
-	width: 33.3%;
+.gallery-columns-3 .gallery-item {
+	max-width: 32%;
+	max-width: -webkit-calc(33.3% - 4px);
+	max-width:         calc(33.3% - 4px);
 }
 
-.gallery.columns_4 .gallery-item,
-#content .gallery.columns_4 .gallery-item
-{
-	width: 25%;
+.gallery-columns-4 .gallery-item {
+	max-width: 23%;
+	max-width: -webkit-calc(25% - 4px);
+	max-width:         calc(25% - 4px);
 }
 
-.gallery.columns_5 .gallery-item,
-#content .gallery.columns_5 .gallery-item
-{
-	width: 20%;
+.gallery-columns-5 .gallery-item {
+	max-width: 19%;
+	max-width: -webkit-calc(20% - 4px);
+	max-width:         calc(20% - 4px);
 }
 
-.gallery.columns_6 .gallery-item,
-#content .gallery.columns_6 .gallery-item
-{
-	width: 16.5%;
+.gallery-columns-6 .gallery-item {
+	max-width: 15%;
+	max-width: -webkit-calc(16.7% - 4px);
+	max-width:         calc(16.7% - 4px);
 }
 
-.gallery.columns_7 .gallery-item,
-#content .gallery.columns_7 .gallery-item
-{
-	width: 14.3%;
+.gallery-columns-7 .gallery-item {
+	max-width: 13%;
+	max-width: -webkit-calc(14.28% - 4px);
+	max-width:         calc(14.28% - 4px);
 }
 
-.gallery.columns_8 .gallery-item,
-#content .gallery.columns_8 .gallery-item
-{
-	width: 12.5%;
+.gallery-columns-8 .gallery-item {
+	max-width: 11%;
+	max-width: -webkit-calc(12.5% - 4px);
+	max-width:         calc(12.5% - 4px);
 }
 
-.gallery.columns_9 .gallery-item,
-#content .gallery.columns_9 .gallery-item
-{
-	width: 11.1%;
-}
-
-/* twenty twelve fix */
-
-.entry-content .gallery li.gallery-item
-{
-	margin-left: 0;
+.gallery-columns-9 .gallery-item {
+	max-width: 9%;
+	max-width: -webkit-calc(11.1% - 4px);
+	max-width:         calc(11.1% - 4px);
 }

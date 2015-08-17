@@ -11,8 +11,8 @@ jQuery(document).ready(function()
 		(
 			ajaxurl, 
 			{
-				action: "file_gallery_clear_cache_manual",
-				_ajax_nonce: file_gallery.options.clear_cache_nonce
+				action		: "file_gallery_clear_cache_manual",
+				_ajax_nonce	: file_gallery.options.clear_cache_nonce
 			},
 			function(response)
 			{
@@ -22,7 +22,7 @@ jQuery(document).ready(function()
 		);
 	}
 	
-	jQuery("#file_gallery").on("click", "#file_gallery_clear_cache_manual", function()
+	jQuery("#file_gallery_clear_cache_manual").live("click", function()
 	{
 		file_gallery_clear_cache_manual();
 		

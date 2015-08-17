@@ -12,9 +12,8 @@ function file_gallery_get_templates( $where = NULL )
 		$transient = 'filegallery_templates';
 		$cache = get_transient($transient);
 		
-		if( $cache ) {
+		if( $cache )
 			return $cache;
-		}
 	}
 
 	$file_gallery_templates = array();
@@ -30,9 +29,8 @@ function file_gallery_get_templates( $where = NULL )
 			{
 				$tf = FILE_GALLERY_THEME_TEMPLATES_ABSPATH . '/' . $files;
 		
-				if( is_readable($tf . '/gallery.php') && is_readable($tf . '/gallery.css') ) {
+				if( is_readable($tf . '/gallery.php') && is_readable($tf . '/gallery.css') )
 					$file_gallery_templates[] = $files;
-				}
 			}
 		}
 		
@@ -50,9 +48,8 @@ function file_gallery_get_templates( $where = NULL )
 			{
 				$tf = FILE_GALLERY_CONTENT_TEMPLATES_ABSPATH . '/' . $files;
 		
-				if( is_readable($tf . '/gallery.php') && is_readable($tf . '/gallery.css') ) {
+				if( is_readable($tf . '/gallery.php') && is_readable($tf . '/gallery.css') )
 					$file_gallery_templates[] = $files;
-				}
 			}
 		}
 		
@@ -60,6 +57,7 @@ function file_gallery_get_templates( $where = NULL )
 	}
 	
 	$file_gallery_templates = array_unique($file_gallery_templates);
+	
 	$default_templates = unserialize(FILE_GALLERY_DEFAULT_TEMPLATES);
 	
 	foreach( $default_templates as $df )
@@ -67,9 +65,8 @@ function file_gallery_get_templates( $where = NULL )
 		$file_gallery_templates[] = $df;
 	}
 	
-	if( isset($options['cache']) && true == $options['cache'] ) {
+	if( isset($options['cache']) && true == $options['cache'] )
 		set_transient($transient, $file_gallery_templates, $options['cache_time']);
-	}
 
 	return $file_gallery_templates;
 }
@@ -83,9 +80,8 @@ function file_gallery_mobile_css( $stylesheet_url )
 {
 	$options = get_option('file_gallery');
 	
-	if( isset($options['disable_shortcode_handler']) && true == $options['disable_shortcode_handler'] ) {
+	if( isset($options['disable_shortcode_handler']) && true == $options['disable_shortcode_handler'] )
 		return $stylesheet_url;
-	}
 
 	file_gallery_css_front( true );
 	
@@ -111,14 +107,12 @@ function file_gallery_css_front( $mobile = false )
 
 	$options = get_option('file_gallery');
 	
-	if( isset($options['disable_shortcode_handler']) && true == $options['disable_shortcode_handler'] ) {
+	if( isset($options['disable_shortcode_handler']) && true == $options['disable_shortcode_handler'] )
 		return;
-	}
 
 	// if option to show galleries in excerpts is set to false
-	if( ! is_singular() && ( ! isset($options['in_excerpt']) || true != $options['in_excerpt']) && false == $mobile ) {
+	if( ! is_singular() && ( ! isset($options['in_excerpt']) || true != $options['in_excerpt']) && false == $mobile )
 		return;
-	}
 
 	$gallery_matches = 0;
 	$galleries = array();
@@ -402,7 +396,7 @@ function file_gallery_shortcode( $content = false, $attr = false )
 {
 	global $file_gallery, $wpdb, $post;
 
-	require_once(FILE_GALLERY_ABSPATH . '/lib/html5lib/Parser.php');
+	require_once('html5lib/Parser.php');
 
 	// if the function is called directly, not via shortcode
 	if( false !== $content && false === $attr )
@@ -461,7 +455,6 @@ function file_gallery_shortcode( $content = false, $attr = false )
 		'imageclass'		=> '',
 		'galleryclass'		=> '',
 		'rel'				=> 1,
-		'linkrel'			=> 1,
 		'tags'				=> '',
 		'tags_from'			=> 'current',
 		'output_type'		=> 'html',
@@ -629,8 +622,6 @@ function file_gallery_shortcode( $content = false, $attr = false )
 	}
 	elseif( '' != $attachment_ids )
 	{
-		// convert order by ID to 'orderby' => 'post__in'
-
 		$attachment_ids = explode(',', $attachment_ids);
 		$sql_limit = count($attachment_ids);
 
@@ -725,7 +716,6 @@ function file_gallery_shortcode( $content = false, $attr = false )
 	}
 	
 	$i = 0;
-	$j = 0;
 	$unique_ids = array();
 	$gallery_items = '';
 	
@@ -926,8 +916,9 @@ function file_gallery_shortcode( $content = false, $attr = false )
 			
 			$file_gallery_this_template_counter++;
 			
-			if ( $columns > 0 && ($i+1) % $columns == 0 )
+			if ( $columns > 0 && ($i+1) % $columns === 0 ) {
 				$x .= $cleartag;
+			}
 			
 			$gallery_items .= $x;
 			
@@ -961,6 +952,7 @@ function file_gallery_shortcode( $content = false, $attr = false )
 			$pagination_html = file_gallery_do_pagination( $file_gallery_query->max_num_pages, $page );
 		}
 
+
 		$gallery_classes = array(
 			'gallery',
 			'galleryid-' . $file_gallery->gallery_id,
@@ -973,7 +965,7 @@ function file_gallery_shortcode( $content = false, $attr = false )
 
 		$gallery_class = implode(' ', $gallery_classes);
 		$gallery_class = apply_filters('file_gallery_galleryclass', $gallery_class);
-		
+
 		$output = '<' . $starttag . ' id="gallery-' . $file_gallery->gallery_id . '" class="' . $gallery_class . '">' . "\n" . $gallery_items . "\n" . $pagination_html . "\n</" . $starttag . '>';
 	}
 	

@@ -1,68 +1,19 @@
-.gallery.default,
-#content .gallery.default
-{
+.gallery.default {
 	margin: auto;
 	overflow: hidden;
 }
-
-.gallery.default .gallery-item,
-#content .gallery.default .gallery-item
-{
+.gallery.default .gallery-item {
 	float: left;
+	margin: 0 4px 4px 0;
 	text-align: center;
-	margin: 10px 0 0 0;
-	padding: 0;
+	width: calc(100% - 4px);
 }
-
-.gallery.default .gallery-caption,
-#content .gallery.default .gallery-caption
-{
+.gallery.default .gallery-caption {
 	margin-left: 0;
 }
-
-.gallery.default .gallery-startcol,
-#content .gallery.default .gallery-startcol
-{
-	clear: left;
-}
-
-/* the following styles do not seem to be needed, please let me know if you feel otherwise! */
-/*
-.gallery.default .gallery-item .gallery-icon,
-#content .gallery.default .gallery-item .gallery-icon
-{
-	margin: 0;
-	padding: 0;
-}
-
-.gallery.default img,
-#content .gallery.default img
-{
-	border: 2px solid #cfcfcf;
-	padding: 0;
-	margin: 0;
-}
-
-.gallery.default .gallery-description,
-#content .gallery.default .gallery-description
-{
-	margin-left: 0;
-}
-
-.gallery.default br.clear,
-#content .gallery.default br.clear
-{
+.gallery.default .clear {
 	clear: both;
-	height: 0.001px;
-	visibility: hidden;
 }
-*/
-
-
-
-
-
-
 
 
 

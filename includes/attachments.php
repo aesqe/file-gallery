@@ -1,5 +1,413 @@
 <?php
 
+function file_gallery_check_attachment_originality()
+{
+	global $wp_query, $wpdb;
+	
+	if( 'upload' == get_current_screen()->base && ! empty($wp_query->posts) )
+	{
+		$ids = array();
+		$copies = array();
+		$originals = array();
+
+		foreach( $wp_query->posts as $post )
+		{
+			$ids[] = $post->ID;
+		}
+		
+		if( ! empty($ids) )
+		{
+			$query = "SELECT post_id, meta_key FROM $wpdb->postmeta WHERE meta_key IN ('_has_copies', '_is_copy_of') AND post_id IN ('" . implode("', '", $ids) . "')";
+			$results = $wpdb->get_results($query);
+
+			foreach( (array) $results as $r )
+			{
+				if( '_has_copies' == $r->meta_key ) {
+					$originals[] = $r->post_id;
+				}
+				
+				if( '_is_copy_of' == $r->meta_key ) {
+					$copies[] = $r->post_id;
+				}
+			}
+		}
+		
+		if( ! empty($originals) || ! empty($copies) )
+		{
+			if( ! empty($originals) ) {
+				$originals = '"#post-' . implode(', #post-', $originals) . '"';
+			}
+			else {
+				$originals = 'null';
+			}
+
+			if( ! empty($copies) ) {
+				$copies = '"#post-' . implode(', #post-', $copies) . '"';
+			}
+			else {
+				$copies = 'null';
+			}
+			
+		?>
+			<script type="text/javascript">
+				var file_gallery_originals = <?php echo $originals; ?>,
+					file_gallery_copies = <?php echo $copies; ?>;
+
+				if( null !== file_gallery_originals ) {
+					jQuery(file_gallery_originals).addClass("attachment-original");
+				}
+				
+				if( null !== file_gallery_copies ) {
+					jQuery(file_gallery_copies).addClass("attachment-copy");
+				}
+			</script>
+		<?php
+		}
+	}
+}
+add_action( 'admin_footer', 'file_gallery_check_attachment_originality' );
+
+/**
+ * Prepares attachment data to be sent to the WordPress text editor
+ * 
+ * This function is used via AJAX and works with 
+ * POST data. The only required variable is the ID 
+ * of the attachment(s) ("attachment_id").
+ * 
+ * No parameters
+ * @return echoes attachment data as HTML
+ * with {@link file_gallery_parse_attachment_data()}
+ */
+function file_gallery_get_attachment_data()
+{
+	global $file_gallery;
+
+	check_ajax_referer('file-gallery');
+
+	$attachment   = $_POST['attachment_id'];
+	$size 		  = $_POST['size'];
+	$linkto 	  = $_POST['linkto'];
+	$external_url = $_POST['external_url'];
+	$linkclass 	  = $_POST['linkclass'];
+	$imageclass   = $_POST['imageclass'];
+	$_imageclass = '';
+	$align        = $_POST['align'];
+	$rel          = '';
+	$_caption      = ('true' == $_POST['caption'] || '1' == $_POST['caption']) ? true : false;
+	
+	if( 'external_url' == $linkto ) {
+		$linkto = $external_url;
+	}
+	
+	if( 'undefined' == $linkclass || '' == $linkclass ) {
+		$linkclass = '';
+	}
+		
+	if( 'undefined' == $imageclass || '' == $imageclass ) {
+		$imageclass = '';
+	}
+	
+	if( 'undefined' == $align || '' == $align ) {
+		$align = 'none';
+	}
+
+	$attachments = explode(',', $attachment);
+	
+	if( 1 < count($attachments) && '' != $linkclass && ! in_array($linkto, array('attachment', 'parent_post', 'none')) )
+	{
+		if( ! isset($file_gallery->gallery_id) ) {
+			$file_gallery->gallery_id = 1;
+		}
+		else {
+			$file_gallery->gallery_id++;
+		}
+
+		$rel = ' rel="' . $linkclass . '[' . $file_gallery->gallery_id . ']"';
+	}
+
+	foreach( $attachments as $attachment_id )
+	{
+		$_imageclass = '';
+		$caption = $_caption;
+		$attachment = get_post($attachment_id);
+		$excerpt = trim($attachment->post_excerpt);
+
+		if( true === $caption  ) {
+			$caption = '' != $excerpt ? $excerpt : false;
+		}
+		
+		if( false === $caption ) {
+			$_imageclass = $imageclass . ' align' . $align;
+		}
+
+		$_imageclass .= ' size-' . $size;
+		
+		if( (1 === count($attachments) || (1 < count($attachments) && '' == $linkclass)) && 'attachment' == $linkto ) {
+			$rel = ' rel="attachment wp-att-' . $attachment->ID . '"';
+		}
+
+		echo file_gallery_parse_attachment_data( $attachment, $size, $linkto, $linkclass, $_imageclass, $rel, $caption, $align );
+	}
+	
+	exit();
+}
+add_action('wp_ajax_file_gallery_send_single', 'file_gallery_get_attachment_data');
+
+
+
+/**
+ * Transforms attachment data into HTML
+ * 
+ * @param int $attachment_id ID of the attachment
+ * @return mixed Returns a HTML string, or FALSE if $attachment_id is not a number
+ */
+function file_gallery_parse_attachment_data( $attachment, $size, $linkto, $linkclass, $imageclass, $rel, $caption, $align )
+{
+	global $wpdb;
+	
+	if( ! is_numeric($attachment->ID) ) {
+		return false; // not a number, exiting
+	}
+	
+	$link = '';
+	
+	if( ! $thumb_alt = get_post_meta($attachment->ID, '_wp_attachment_image_alt', true) ) {
+		$thumb_alt = $attachment->post_title;
+	}
+
+	$title = $attachment->post_title;
+	
+	if( file_gallery_file_is_displayable_image( get_attached_file($attachment->ID) ) )
+	{
+		$size_src    = wp_get_attachment_image_src($attachment->ID, $size, false);
+		$width       = $size_src[1];
+		$height      = $size_src[2];
+		$size_src    = $size_src[0];
+		$imageclass .= ' wp-image-' . $attachment->ID;
+	}
+	else
+	{
+		$size_src        = wp_mime_type_icon($attachment->ID);
+		$width           = '';
+		$height          = '';
+		$imageclass     .= ' non-image';
+	}
+	
+	$output = '<img src="' . $size_src . '" alt="' . $thumb_alt . '" title="' . $title . '" width="' . $width . '" height="' . $height . '" class="' . trim($imageclass) . '" />';
+	
+	switch( $linkto )
+	{
+		case 'parent_post' :
+			$link = get_permalink( $wpdb->get_var("SELECT `post_parent` FROM $wpdb->posts WHERE ID = '" . $attachment->ID . "'") );
+			break;
+		case 'file' :
+			$link = wp_get_attachment_url( $attachment->ID );
+			break;
+		case 'attachment' :
+			$link = get_attachment_link( $attachment->ID );
+			break;
+		case 'none' :
+			$link = '';
+			break;
+		default : // external url
+			$link = urldecode($linkto);
+			break;
+	}
+	
+	if( '' != $link )
+	{
+		if( '' != trim($linkclass) ) {
+			$linkclass = ' class="' . trim($linkclass) . '"';
+		}
+
+		$output = '<a href="' . $link . '"' . $linkclass . $rel . '>' . $output . '</a>' . "\n\n";
+	}
+	
+	if( false !== $caption )
+	{
+		$output = '[caption id="attachment_' . $attachment->ID . '" align="align' . $align . '" width="' . $width . '" caption="' . $caption .'"]' . trim($output) . '[/caption]' . "\n\n";
+	}
+
+	return apply_filters('file_gallery_parse_attachment_data', $output, $attachment->ID);
+}
+
+
+/**
+ * Soon...
+ */
+function file_gallery_caption_shortcode( $output = "", $attr, $content = null)
+{
+	extract(
+		shortcode_atts(
+			array(
+				'id'	=> '',
+				'align'	=> 'alignnone',
+				'width'	=> '',
+				'caption' => ''
+	), $attr));
+
+	if ( 1 > (int) $width || empty($caption) )
+		return $content;
+
+	if ( $id )
+		$id = 'id="' . esc_attr($id) . '" ';
+	
+	$caption = urldecode($caption);
+
+	return '<div ' . $id . 'class="wp-caption ' . esc_attr($align) . '" style="width: ' . (10 + (int) $width) . 'px">'
+	. do_shortcode( $content ) . '<p class="wp-caption-text">' . $caption . '</p></div>';
+}
+//add_filter('img_caption_shortcode', 'file_gallery_caption_shortcode', 10, 3);
+
+
+
+/**
+ * This function displays attachment data inside an HTML 
+ * form. It allows attachment data to be viewed as well as edited.
+ */
+function file_gallery_edit_attachment()
+{
+	check_ajax_referer('file-gallery');
+	
+	$type 			= 'image';
+	$media_tags		= array();
+	$options		= get_option('file_gallery');
+	$attachment_id	= (int) $_POST['attachment_id'];
+	$attachment		= get_post( $attachment_id );
+	
+	if( ! $attachment )
+	{
+		printf( __('Attachment with ID <strong>%d</strong> does not exist!', 'file-gallery'), $attachment_id );
+		exit();
+	}
+	
+	if( file_gallery_file_is_displayable_image( get_attached_file($attachment->ID) ) )
+	{
+		$fullsize_src = wp_get_attachment_image_src( $attachment->ID, 'large', false );
+		$fullsize_src = $fullsize_src[0];
+		
+		$size_src = wp_get_attachment_image_src( $attachment->ID, 'medium', false );
+		$size_src = $size_src[0];
+	}
+	else
+	{
+		$fullsize_src = wp_get_attachment_url( $attachment->ID );
+		$size_src     = file_gallery_https( wp_mime_type_icon($attachment->ID) );
+		
+		$type = 'document';
+	}
+	
+	$post_author = get_userdata($attachment->post_author);
+	$post_author = $post_author->user_nicename;
+	
+	$tags = wp_get_object_terms( $attachment->ID, FILE_GALLERY_MEDIA_TAG_NAME );
+	
+	foreach( $tags as $tag )
+	{
+		$media_tags[] = $tag->name;
+	}
+	
+	$media_tags = implode(', ', $media_tags);
+	
+	$has_copies = maybe_unserialize(get_post_meta($attachment->ID, '_has_copies', true));
+	$is_copy = get_post_meta($attachment->ID, '_is_copy_of', true);
+
+	do_action('file_gallery_edit_attachment', $attachment->ID);
+?>
+	<div id="file_gallery_attachment_edit_image">
+		<?php if( 'image' == $type ) : ?>
+		<a href="<?php echo $fullsize_src; ?>" title="" class="attachment_edit_thumb"><img src="<?php echo $size_src; ?>" alt="image" /></a>
+		<p>
+			<a href="#" id="file_gallery_regenerate-<?php echo $attachment->ID; ?>" class="file_gallery_regenerate"><?php _e("Regenerate this image's thumbnails", "file-gallery"); ?></a>
+		</p>
+		<?php else : ?>
+		<img src="<?php echo $size_src; ?>" alt="image" />
+		<?php endif; ?>
+		<br />
+		<div id="attachment_data">
+		<?php
+			$attachment_link = 'post.php?post=' . $attachment->ID . '&action=edit';
+			$original_link = 'post.php?post=' . $attachment->ID . '&action=edit';
+			
+			if( floatval(get_bloginfo('version')) < 3.5 ) {
+				$attachment_link = 'media.php?attachment_id=' . $attachment->ID . '&action=edit';
+			}
+		?>
+			<p><strong><?php _e('ID:', 'file-gallery'); ?></strong> <a href="<?php echo admin_url($attachment_link . '&TB_iframe=1'); ?>" class="thickbox" onclick="return false;"><?php echo $attachment->ID; ?></a></p>
+			<p><strong><?php _e('Date uploaded:', 'file-gallery'); ?></strong><br /><?php echo date(get_option('date_format'), strtotime($attachment->post_date)); ?></p>
+			<p><strong><?php _e('Uploaded by:', 'file-gallery'); ?></strong> <?php echo $post_author; ?></p>
+			<?php if( is_array($has_copies) ) : ?>
+			<p class="attachment_info_has_copies"><?php _e('IDs of copies of this attachment:', 'file-gallery'); ?> <strong><?php foreach( $has_copies as $c){ echo '<a href="' . admin_url('media.php?attachment_id=' . $c . '&action=edit') . '" target="_blank">' . $c . '</a>'; }?></strong></p>
+			<?php endif; ?>
+			<?php if( $is_copy ) : 
+			
+				$original_link = 'post.php?post=' . $is_copy . '&action=edit';
+			
+				if( floatval(get_bloginfo('version')) < 3.5 ) {
+					$original_link = 'media.php?attachment_id=' . $is_copy . '&action=edit';
+				}
+			?>
+			<p class="attachment_info_is_a_copy"><?php _e('This attachment is a copy of attachment ID', 'file-gallery'); ?> <strong><?php echo '<a href="' . admin_url($original_link) . '" target="_blank">' . $is_copy . '</a>'; ?></strong></p>
+			<?php endif; ?>
+
+			
+		</div>
+	</div>
+	
+<?php do_action('file_gallery_pre_edit_attachment_post_form', $attachment->ID); ?>
+	
+	<div id="attachment_data_edit_form">
+	
+		<input type="hidden" name="post_id" id="fgae_post_id" value="<?php echo $_POST['post_id']; ?>" />
+		<input type="hidden" name="attachment_id" id="fgae_attachment_id" value="<?php echo $_POST['attachment_id']; ?>" />
+		<input type="hidden" name="attachment_order" id="fgae_attachment_order" value="<?php echo $_POST['attachment_order']; ?>" />
+		<input type="hidden" name="checked_attachments" id="fgae_checked_attachments" value="<?php echo $_POST['checked_attachments']; ?>" />
+		<input type="hidden" name="action"  id="fgae_action"  value="update" />
+
+		<?php if( file_gallery_file_is_displayable_image(  get_attached_file($attachment->ID) ) ) : ?>
+		<label for="post_alt"><?php _e('Alternate text for this image', 'file-gallery'); ?>: </label>
+		<input type="text" name="post_alt" id="fgae_post_alt" value="<?php echo get_post_meta($attachment->ID, '_wp_attachment_image_alt', true); ?>" class="roundborder"<?php if( ! current_user_can('edit_post', $attachment->ID)){ echo ' readonly="readonly"';} ?> /><br />
+		<?php endif; ?>
+		
+		<label for="post_title"><?php _e('Title', 'file-gallery'); ?>: </label>
+		<input type="text" name="post_title" id="fgae_post_title" value="<?php echo $attachment->post_title; ?>" class="roundborder"<?php if( ! current_user_can('edit_post', $attachment->ID) ){ echo ' readonly="readonly"';} ?> /><br />
+		
+		<label for="post_excerpt"><?php _e('Caption', 'file-gallery'); ?>: </label>
+		<textarea name="post_excerpt" id="fgae_post_excerpt" class="roundborder"<?php if( ! current_user_can('edit_post', $attachment->ID) ){ echo ' readonly="readonly"';} ?>><?php echo $attachment->post_excerpt; ?></textarea><br />
+		
+		<label for="post_content"><?php _e('Description', 'file-gallery'); ?>: </label>
+		<textarea name="post_content" id="fgae_post_content" rows="4" cols="20" class="roundborder"<?php if( ! current_user_can('edit_post', $attachment->ID) ){ echo ' readonly="readonly"';} ?>><?php echo $attachment->post_content; ?></textarea><br />
+		
+		<label for="tax_input"><?php _e('Media tags (separate each tag with a comma)', 'file-gallery'); ?>: </label>
+		<input type="text" name="tax_input" id="fgae_tax_input" value="<?php echo $media_tags; ?>" class="roundborder"<?php if( ! current_user_can('edit_post', $attachment->ID) ){ echo ' readonly="readonly"';} ?> /><br />
+		
+		<label for="menu_order"><?php _e('Menu order', 'file-gallery'); ?>: </label>
+		<input type="text" name="menu_order" id="fgae_menu_order" value="<?php echo $attachment->menu_order; ?>" class="roundborder"<?php if( ! current_user_can('edit_post', $attachment->ID) ){ echo ' readonly="readonly"';} ?> /><br />
+		
+		<label for="attachment_uri"><?php _e('Attachment file URL:', 'file-gallery'); ?></label>
+		<input type="text" name="attachment_uri" id="fgae_attachment_uri" readonly="readonly" value="<?php echo $fullsize_src; ?>" class="roundborder" />
+        
+        <br />
+        <br />
+        
+		<?php
+        	if( isset($options['display_acf']) && true == $options['display_acf'] )
+				file_gallery_attachment_custom_fields_table($attachment->ID);
+		?>
+		
+		<input type="button" id="file_gallery_edit_attachment_save" value="<?php _e('save and return', 'file-gallery'); ?>" class="button-primary" />
+		<input type="button" id="file_gallery_edit_attachment_cancel"value="<?php _e('cancel and return', 'file-gallery'); ?>" class="button-secondary" />
+	
+	</div>	
+<?php
+	do_action('file_gallery_edit_attachment_post_form', $attachment->ID);
+
+	exit();
+}
+add_action('wp_ajax_file_gallery_edit_attachment', 'file_gallery_edit_attachment');
+
+
+
 /**
  * Copies an attachment's data and creates a new attachment
  * for the current post using that data

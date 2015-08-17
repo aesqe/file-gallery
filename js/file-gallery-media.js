@@ -1,14 +1,14 @@
 /*global console _ wp jQuery file_gallery_attach_nonce console file_gallery*/
 
-jQuery(document).ready(function()
+jQuery(document).ready(function ()
 {
-	"use strict";
+    "use strict";
 
-    if( !wp || !wp.media ) {
+    if (!wp || !wp.media) {
         return;
     }
 
-    var menuTitle = (function ()
+    var menuTitle = (function()
     {
         var t = file_gallery.L10n.attach_all_checked_copy.split(" ");
         var len = t.length;
@@ -32,22 +32,58 @@ jQuery(document).ready(function()
     var state;
     var selection;
     var controller;
-    var sel = false;
     var ready = false;
+    var responseContainerAdded = false;
     var $filters = "select.attachment-filters";
-    var ajaxurl = wp.media.model.settings.ajaxurl;
     var $responseContainer = jQuery('<div class="file-gallery-response"></div>');
     var $menuItem = jQuery('<a href="#" class="media-menu-item">' + menuTitle + '</a>');
     
     var wpMediaFramePost = wp.media.view.MediaFrame.Post;
     wp.media.view.MediaFrame.Post = wpMediaFramePost.extend(
     {
-        mainMenu: function ( view )
+        mainMenu: function( view )
         {
             wpMediaFramePost.prototype.mainMenu.call(this, view);
 
-            var $menu = view.$el;
             controller = this;
+
+            var content;
+            var $menu = view.$el;
+            var post_id = parseInt(jQuery("#post_ID").val(), 10);
+
+            var getUnattached = function ( selection )
+            {
+                if( ! selection ) {
+                    return [];
+                }
+
+                return selection.filter(function(attachment) {
+                    return attachment.get("uploadedTo") !== post_id;
+                }).map(function(attachment) {
+                    return attachment.get("id");
+                });
+            };
+
+            var selectionObserver = function ()
+            {
+                if( ready && file_gallery.tinymce_is_active() )
+                {
+                    state = controller.state();
+                    selection = state.get("selection");
+
+                    var sel = selection && selection.length;
+                    var unattached = getUnattached(selection);
+                    var len = unattached.length > 0;
+                    var state = controller._state === "insert";
+                    var allfiles = $filters.val() !== "uploaded";
+
+                    if( len && state && sel && allfiles ) {
+                        $menuItem.show();
+                    } else {
+                        $menuItem.hide();
+                    }
+                }
+            };
 
             if( file_gallery.tinymce_is_active() )
             {
@@ -67,54 +103,69 @@ jQuery(document).ready(function()
                         });
 
                         $responseContainer.hide();
-                        controller.content.get().sidebar.$el.append($responseContainer);
+                        content = controller.content.get();
+
+                        if( content.sidebar )
+                        {
+                            content.sidebar.$el.append($responseContainer);
+                            responseContainerAdded = true;
+                        }
 
                         ready = true;
                     }
                 });
 
-                controller.on("selection:toggle activate", function ()
-                {
-                    if( ready && file_gallery.tinymce_is_active() )
-                    {
-                        state = controller.state();
-                        selection = state.get("selection");
-                        sel = selection && selection.length ? selection.length : 0;
+                controller.on("activate", selectionObserver);
+                controller.on("selection:toggle", selectionObserver);
 
-                        if( controller._state === "insert" && sel > 0 && $filters.val() !== "uploaded" ) {
-                            $menuItem.show();
-                        } else {
-                            $menuItem.hide();
-                        }
-                    }
-                });
+                if( file_gallery.options.wp_version < 4 ) {
+                    jQuery("body").on("click", ".media-frame-content .attachment", selectionObserver);
+                }
 
-                $menuItem.on("click", function () 
+                $menuItem.on("click", function ( event ) 
                 {
                     state = controller.state();
                     selection = state.get("selection");
 
-                    if( selection.length && $filters.val() !== "uploaded" )
+                    if( ! responseContainerAdded )
                     {
-                        $responseContainer.stop().fadeOut(75, function () {
+                        content = controller.content.get();
+
+                        if( content.sidebar )
+                        {
+                            content.sidebar.$el.append($responseContainer);
+                            responseContainerAdded = true;
+                        }
+                    }
+
+                    var unattached = getUnattached(selection);
+                    var data;
+
+                    if( unattached.length > 0 )
+                    {
+                        $responseContainer.stop().fadeOut(75, function() {
                             $responseContainer.html("");
                         });
 
-                        var data = {
+                        data = {
                             action: "file_gallery_copy_attachments_to_post",
                             post_id: wp.media.model.settings.post.id,
-                            ids: _.uniq( _.pluck(selection._byId, "id") ).join(","),
+                            ids: _.uniq( unattached ).join(","),
                             _ajax_nonce: file_gallery_attach_nonce
                         };
 
-                        jQuery.post(ajaxurl, data, function (response)
+                        jQuery.post(wp.media.model.settings.ajaxurl, data, function (response)
                         {
-                        	response = response.split("#").pop();
-                            $responseContainer.html(response).fadeIn(500, function () {
+                            $responseContainer.html( response.split("#").pop() ).fadeIn(500, function () {
                                 $responseContainer.fadeOut(15000);
                             });
+
+                            state.reset();
                         }, "html");
                     }
+
+                    event.preventDefault();
+                    return false;
                 });
 
                 $menuItem.addClass("file-gallery-media-menu-item").hide();
@@ -122,42 +173,15 @@ jQuery(document).ready(function()
             }
         }
     });
-	
-	wp.media.view.Attachment.Library = wp.media.view.Attachment.extend({
-		buttons: {
-			check: true,
-			attach: true
-		}
-	});
 
-	wp.media.view.Attachment.Details.prototype.events['click .detach-attachment'] = 'detachAttachment';
+    wp.media.view.Attachment.Library = wp.media.view.Attachment.extend(
+    {
+        buttons: {
+            check: true,
+            attach: true
+        }
+    });
 
-	wp.media.view.Attachment.Details = wp.media.view.Attachment.Details.extend(
-	{
-		detachAttachment: function ( event )
-		{
-			event.preventDefault();
-
-			if( confirm("Really detach attachment from this post?") )
-			{
-				var attachment = file_gallery.getAttachmentById( this.model.get("id") );
-				this.model.set("uploadedTo", 0);
-
-				file_gallery.detachAttachments([attachment], function (response)
-				{					
-					responseContainer.html( response ).fadeIn(500, function () {
-						responseContainer.fadeOut(15000);
-					});
-				});
-			}
-		}
-	});
-
-	jQuery("#tmpl-attachment").remove();
-	jQuery("#tmpl-attachment-details").remove();
-	jQuery("#tmpl-attachment-details-two-column").remove();
-
-	jQuery("#tmpl-attachment-filegallery").attr("id", "tmpl-attachment");
-	jQuery("#tmpl-attachment-details-filegallery").attr("id", "tmpl-attachment-details");
-	jQuery("#tmpl-attachment-details-two-column-filegallery").attr("id", "tmpl-attachment-details-two-column");
+    jQuery("#tmpl-attachment").attr("id", "tmpl-attachment_original");
+    jQuery("#tmpl-attachment-filegallery").attr("id", "tmpl-attachment");
 });

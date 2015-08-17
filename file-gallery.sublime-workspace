@@ -1,0 +1,1353 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"Java",
+				"javascript"
+			],
+			[
+				"rec",
+				"recaptcha"
+			],
+			[
+				"head",
+				"headers"
+			],
+			[
+				"post",
+				"post_ID"
+			],
+			[
+				"marg",
+				"margin-top"
+			],
+			[
+				"l",
+				"lowercase"
+			],
+			[
+				"text",
+				"text-transform"
+			],
+			[
+				"te",
+				"text-decoration"
+			],
+			[
+				"tax",
+				"taxonomies"
+			],
+			[
+				"print",
+				"print_r"
+			],
+			[
+				"margin",
+				"margin-top"
+			],
+			[
+				"pri",
+				"print_r"
+			],
+			[
+				"pr",
+				"program"
+			],
+			[
+				"categ",
+				"category-novosti"
+			],
+			[
+				"padd",
+				"padding"
+			],
+			[
+				"or",
+				"original_slug"
+			],
+			[
+				"z",
+				"z-index"
+			],
+			[
+				"pos",
+				"position"
+			],
+			[
+				"col",
+				"column--double"
+			],
+			[
+				"atlas_pr",
+				"atlas_print_json"
+			],
+			[
+				"str",
+				"strtolower"
+			],
+			[
+				"is_w",
+				"is_wp_error"
+			],
+			[
+				"pla",
+				"place_hr"
+			],
+			[
+				"term",
+				"term_id"
+			],
+			[
+				"purpo",
+				"purpose_ids"
+			],
+			[
+				"pers",
+				"person_data"
+			],
+			[
+				"__",
+				"__taxterms"
+			],
+			[
+				"globa",
+				"global"
+			],
+			[
+				"ter",
+				"term_id_hr"
+			],
+			[
+				"max",
+				"max-height"
+			],
+			[
+				"Field",
+				"Fieldmanager_Group"
+			],
+			[
+				"font-",
+				"font-size"
+			],
+			[
+				"me",
+				"method	Attr"
+			],
+			[
+				"first",
+				"first-child"
+			],
+			[
+				"url",
+				"urlencode"
+			],
+			[
+				"program",
+				"program_data"
+			],
+			[
+				"add",
+				"add_filter"
+			],
+			[
+				"update",
+				"updateFunc"
+			],
+			[
+				"inline",
+				"inline-block"
+			],
+			[
+				"ba",
+				"background"
+			],
+			[
+				"dr",
+				"drop_zone"
+			],
+			[
+				"p",
+				"propVal (?)"
+			],
+			[
+				"selected",
+				"selectedItemArrays"
+			],
+			[
+				"clean",
+				"cleanContentOnPaste"
+			],
+			[
+				"new",
+				"newValFiltered (?)"
+			],
+			[
+				"arr",
+				"arrChanged"
+			],
+			[
+				"is",
+				"isEqual"
+			],
+			[
+				"for",
+				"forEach"
+			],
+			[
+				"len",
+				"length"
+			],
+			[
+				"app",
+				"appendChild"
+			],
+			[
+				"filter",
+				"filteredPaste"
+			],
+			[
+				"function",
+				"function_exists"
+			],
+			[
+				"border",
+				"border-color"
+			],
+			[
+				"B",
+				"Buttons"
+			],
+			[
+				"margn",
+				"margin-bottom"
+			],
+			[
+				"label",
+				"Label"
+			],
+			[
+				"tea",
+				"text-align"
+			],
+			[
+				"list",
+				"list-style"
+			],
+			[
+				"lin",
+				"line-height"
+			],
+			[
+				"tag",
+				"tagId (num)"
+			],
+			[
+				"item",
+				"itemTags (?)"
+			],
+			[
+				"ge",
+				"geocity"
+			],
+			[
+				"layout",
+				"layoutMenuOptions"
+			],
+			[
+				"upda",
+				"updateOutlinerOrder"
+			],
+			[
+				"target",
+				"targetKeypath (obj)"
+			],
+			[
+				"s",
+				"sourceKeypath (obj)"
+			],
+			[
+				"outli",
+				"outliner"
+			],
+			[
+				"dbsa",
+				"dbSaveToDisk"
+			],
+			[
+				"c",
+				"collection (str)"
+			],
+			[
+				"over",
+				"overflow-y"
+			],
+			[
+				"overf",
+				"overflow"
+			],
+			[
+				"db",
+				"dbReady"
+			],
+			[
+				"preve",
+				"preventDefault"
+			],
+			[
+				"sort",
+				"sortableList"
+			],
+			[
+				"font",
+				"font-family"
+			],
+			[
+				"dbSave",
+				"dbSaveToDisk"
+			],
+			[
+				"outliner",
+				"outlinerAdding"
+			],
+			[
+				"book",
+				"bookImages"
+			],
+			[
+				"load",
+				"loadTemplates"
+			],
+			[
+				"var",
+				"var_dump"
+			],
+			[
+				"stast",
+				"statsText ([])"
+			],
+			[
+				"stas",
+				"statsText ([])"
+			],
+			[
+				"get",
+				"getCollection"
+			],
+			[
+				"chapt",
+				"chapters"
+			],
+			[
+				"start",
+				"startLog"
+			],
+			[
+				"to",
+				"toUpperCase"
+			],
+			[
+				"booknam",
+				"booknames"
+			],
+			[
+				"items",
+				"itemsToUpdate"
+			],
+			[
+				"side",
+				"sidebarItems"
+			],
+			[
+				"pre",
+				"preventDefault"
+			],
+			[
+				"data",
+				"dataInit"
+			],
+			[
+				"fn",
+				"function"
+			],
+			[
+				"set",
+				"setState"
+			],
+			[
+				"bor",
+				"border-bottom"
+			],
+			[
+				"sin",
+				"sinAngle"
+			],
+			[
+				"svgc",
+				"svgcanvas"
+			],
+			[
+				"field",
+				"fieldQuery"
+			],
+			[
+				"index",
+				"indexOf"
+			],
+			[
+				"tr",
+				"true"
+			],
+			[
+				"city",
+				"city_geolocation"
+			],
+			[
+				"min",
+				"min-width"
+			],
+			[
+				"d",
+				"default"
+			],
+			[
+				"found",
+				"foundIn"
+			],
+			[
+				"sa",
+				"shapeId"
+			],
+			[
+				"related",
+				"relatedItemId"
+			],
+			[
+				"svg",
+				"svgcanvas"
+			],
+			[
+				"zoom",
+				"zoomGroup"
+			],
+			[
+				"widt",
+				"width"
+			],
+			[
+				"back",
+				"background"
+			],
+			[
+				"single",
+				"singleOccurence"
+			],
+			[
+				"mar",
+				"markers"
+			],
+			[
+				"ex",
+				"exit"
+			],
+			[
+				"colorbox-",
+				"colorbox-arrow-left.svg"
+			],
+			[
+				"b",
+				"both"
+			],
+			[
+				"in",
+				"infoShown"
+			],
+			[
+				"cache",
+				"cache_key"
+			],
+			[
+				"paddin",
+				"padding-bottom"
+			],
+			[
+				"tra",
+				"transition"
+			],
+			[
+				"fun",
+				"function"
+			],
+			[
+				"_",
+				"_startmonth"
+			],
+			[
+				"end",
+				"endmonth"
+			],
+			[
+				"st",
+				"startmonth"
+			],
+			[
+				"w",
+				"width"
+			],
+			[
+				"q",
+				"query"
+			],
+			[
+				"re",
+				"relationsGrid"
+			],
+			[
+				"remove",
+				"removeHandles"
+			],
+			[
+				"hg",
+				"hgroup"
+			],
+			[
+				"mouse",
+				"mouseUpAdded"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "Packages/Rust/Rust.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					""
+				],
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					"Run"
+				],
+				[
+					"Packages/Rust/Cargo.sublime-build",
+					"Test"
+				],
+				[
+					"Packages/Rust/Rust.sublime-build",
+					""
+				],
+				[
+					"Packages/Rust/Rust.sublime-build",
+					"Run"
+				]
+			],
+			[
+				"Packages/Rust/Rust.sublime-build",
+				"Run"
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 375.0,
+		"last_filter": "pci",
+		"selected_items":
+		[
+			[
+				"pci",
+				"Package Control: Install Package"
+			],
+			[
+				"pcd",
+				"Package Control: Disable Package"
+			],
+			[
+				"pcl",
+				"Package Control: List Packages"
+			],
+			[
+				"pce",
+				"Package Control: Enable Package"
+			],
+			[
+				"synhtml",
+				"Set Syntax: HTML"
+			],
+			[
+				"prefere",
+				"Preferences: Settings - User"
+			],
+			[
+				"pcr",
+				"Package Control: Remove Package"
+			],
+			[
+				"pc",
+				"Package Control: Remove Package"
+			],
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"show",
+				"SublimeLinter: Show Errors on Save"
+			],
+			[
+				"linter",
+				"SublimeLinter: Choose Lint Mode"
+			],
+			[
+				"lint",
+				"SublimeLinter: Enable Linter"
+			],
+			[
+				"markd html",
+				"Markdown Preview: Save to HTML"
+			],
+			[
+				"markd",
+				"Markdown Preview: Save to HTML"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Disable Package"
+			],
+			[
+				"pcil",
+				"Package Control: List Packages"
+			],
+			[
+				"reind",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"rein",
+				"Indentation: Reindent Lines"
+			],
+			[
+				"pretty",
+				"HTMLPrettify"
+			],
+			[
+				"packagecon",
+				"Package Control: Disable Package"
+			],
+			[
+				"format",
+				"CodeFormatter: Format Code"
+			],
+			[
+				"formst",
+				"CodeFormatter: Format as PHP Syntax"
+			],
+			[
+				"fomrat",
+				"CodeFormatter: Format Code"
+			],
+			[
+				"phpfm",
+				"phpfmt: format now"
+			],
+			[
+				"php",
+				"phpfmt: refactor"
+			],
+			[
+				"remove",
+				"Package Control: Remove Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"ena",
+				"Package Control: Enable Package"
+			],
+			[
+				"disa",
+				"Package Control: Disable Package"
+			]
+		],
+		"width": 402.0
+	},
+	"console":
+	{
+		"height": 259.0,
+		"history":
+		[
+			"jscs",
+			"linter",
+			"SublimeLinter",
+			"import urllib.request,os; pr='Preferences.sublime-settings'; ip='ignored_packages'; n='Package Control'; s=sublime.load_settings(pr); ig=s.get(ip); ig.append(n); s.set(ip,ig); sublime.save_settings('Preferences.sublime-settings'); pf=n+'.sublime-package'; urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler())); by=urllib.request.urlopen('https://packagecontrol.io/'+pf.replace(' ','%20')).read(); open(os.path.join(sublime.installed_packages_path(),pf),'wb').write(by); ig.remove(n); s.set(ip,ig); sublime.save_settings(pr); print('Package Control: 3.0.0 upgrade successful!')",
+			"import urllib.request,os,hashlib; h = '7183a2d3e96f11eeadd761d777e62404e330c659d4bb41d3bdf022e94cab3cd0'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://sublime.wbond.net/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by) "
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"file_history":
+	[
+		"/C/VVV/www/wp42/htdocs/wp-config.php",
+		"/C/VVV/www/wp39/htdocs/wp-config.php",
+		"/C/Windows/System32/drivers/etc/hosts",
+		"/C/VVV/www/wordpress-default/wp-content/plugins/file-gallery-trunk/updateremotes.sh",
+		"/C/VVV/www/wordpress-trunk/wp-config.php",
+		"/C/Users/aesqe/Desktop/wandora/bin/Wandora.sh",
+		"/C/Users/aesqe/Desktop/wandora/bin/Wandora.bat",
+		"/C/Users/aesqe/Desktop/wandora/README.md",
+		"/C/VVV/www/wordpress-trunk/wp-content/plugins/file-gallery-trunk/file-gallery.php",
+		"/C/VVV/www/atlasarhitekture/htdocs/wp-content/themes/atlas/style-admin.min.css",
+		"/C/ProgramData/MOTU/Digital Performer/Themes/Nine.bundle/Contents/Info.plist",
+		"/C/ProgramData/MOTU/Digital Performer/Themes/Nine.bundle/Contents/Resources/Glog1028.xml",
+		"/C/ProgramData/MOTU/Digital Performer/Themes/Nine.bundle/Contents/Resources/Style.xml",
+		"/C/ProgramData/MOTU/Demo-DigitalPerformer 9.0",
+		"/C/scotchbox/public/medix/submit_pojedinacno.php",
+		"/C/scotchbox/public/medix/submit_pretplata.php",
+		"/C/scotchbox/public/medix/submit_narudzbenica_knjiga.php",
+		"/C/scotchbox/public/medix/submit_besplatno.php",
+		"/C/scotchbox/public/medix/strucna_edicija.php",
+		"/C/scotchbox/public/medix/pretplata_form.php",
+		"/C/scotchbox/public/medix/pretplata.php",
+		"/C/scotchbox/public/medix/pojedinacno.php",
+		"/C/scotchbox/public/medix/narudzbenica_knjiga.php",
+		"/C/scotchbox/public/medix/naruci.php",
+		"/C/scotchbox/public/medix/besplatno.php",
+		"/C/wamp/www/uoc/wp/wp-content/themes/uoc_light/page-request-download.php",
+		"/C/scotchbox/public/medix/recaptcha.php",
+		"/C/wamp/www/uoc/wp/wp-content/plugins/wp-recaptcha/recaptchalib.php",
+		"/C/scotchbox/public/medix/admin/addbaner_frontpage.php",
+		"/C/scotchbox/public/medix/admin/replacebaner_frontpage.php",
+		"/C/scotchbox/public/medix/admin/addbaner.php",
+		"/C/scotchbox/public/medix/admin/naslovnica.php",
+		"/C/scotchbox/public/medix/admin/addbook.php",
+		"/C/scotchbox/public/medix/db.php",
+		"/C/scotchbox/public/__medix_data/site_original/admin/login.php",
+		"/C/scotchbox/public/medix/admin/error_log",
+		"/C/scotchbox/public/db.php",
+		"/C/scotchbox/public/medix/supplement.php",
+		"/C/scotchbox/public/medix/admin/login.php",
+		"/C/scotchbox/public/medix/admin/logout.php",
+		"/C/wamp/www/medix/db.php",
+		"/C/wamp/www/medix/pretplata_form.php",
+		"/C/Windows/System32/Drivers/etc/hosts",
+		"/C/scotchbox/README.md",
+		"/C/wamp/www/medix/narudzbenica_knjiga.php",
+		"/C/Users/aesqe/Desktop/get-dat-master/terminal.html",
+		"/C/wamp/www/medix/pojedinacno.php",
+		"/C/wamp/www/medix/submit_pojedinacno.php",
+		"/C/VVV/vv/vv",
+		"/C/VVV/Vagrantfile",
+		"/C/scotchbox/public/index.php",
+		"/C/Users/aesqe/Desktop/get-dat-master/collaborators.md",
+		"/C/Users/aesqe/Desktop/get-dat-master/index.html",
+		"/C/Users/aesqe/Desktop/get-dat-master/index.js",
+		"/C/Users/aesqe/Desktop/sounder-master/index.js",
+		"/C/Users/aesqe/Desktop/get-dat-master/markdown/01-init.md",
+		"/C/Users/aesqe/Desktop/get-dat-master/outline.md",
+		"/C/Users/aesqe/Desktop/get-dat-master/readme.md",
+		"/C/wamp/www/medix/izdanje_edicija.php",
+		"/C/wamp/www/medix/kontakt.php",
+		"/C/wamp/www/medix/naruci.php",
+		"/C/wamp/www/medix/pretplata.php",
+		"/C/wamp/www/medix/supplement.php",
+		"/C/wamp/www/medix/admin/addbook.php",
+		"/C/wamp/www/medix/aboutbook.php",
+		"/C/wamp/www/medix/besplatno.php",
+		"/C/wamp/www/medix/admin/validation.php",
+		"/C/wamp/www/medix/admin/strucna_edicija.php",
+		"/C/wamp/www/medix/admin/replacebaner_frontpage.php",
+		"/C/wamp/www/medix/admin/newsletter_editor_2.php",
+		"/C/wamp/www/medix/admin/newsletter_editor.php",
+		"/C/wamp/www/medix/admin/naslovnica.php",
+		"/C/wamp/www/medix/admin/naruci.php",
+		"/C/wamp/www/medix/admin/movebook_edicija.php",
+		"/C/wamp/www/medix/admin/movebook.php",
+		"/C/wamp/www/medix/admin/mainnav.php",
+		"/C/wamp/www/medix/admin/main.php",
+		"/C/wamp/www/medix/admin/logout.php",
+		"/C/wamp/www/medix/admin/login.php",
+		"/C/wamp/www/medix/admin/knjige.php",
+		"/C/wamp/www/medix/admin/index.php",
+		"/C/wamp/www/medix/admin/deletebook_edicija.php",
+		"/C/wamp/www/medix/admin/deletebook.php",
+		"/C/wamp/www/medix/admin/deletebaner_frontpage.php",
+		"/C/wamp/www/medix/admin/deletebaner.php",
+		"/C/wamp/www/medix/admin/delete.php",
+		"/C/wamp/www/medix/admin/addbook_edicija.php",
+		"/C/wamp/www/medix/admin/addform.php",
+		"/C/wamp/www/medix/admin/baner.php",
+		"/C/wamp/www/medix/admin/addbaner.php",
+		"/C/wamp/www/medix/admin/add.php",
+		"/C/projects/electron-api-demos/app/index.html",
+		"/C/projects/electron-api-demos/app/index.js",
+		"/C/projects/electron-api-demos/app/index.shell.js",
+		"/C/projects/electron-api-demos/app/index.screen.js",
+		"/C/projects/electron-api-demos/app/index.menu-context.js",
+		"/C/projects/electron-api-demos/app/index.menu.js",
+		"/C/projects/electron-api-demos/app/index.dialogs.js",
+		"/C/projects/electron-api-demos/app/index.browser-window.js",
+		"/C/projects/electron-api-demos/app/index.app.js",
+		"/C/projects/electron-api-demos/app/modules/dialogs/index.js",
+		"/C/wamp/www/medix/izdanja.php",
+		"/C/wamp/www/medix/izdanje.php",
+		"/C/VVV/www/sutton/htdocs/wp-content/themes/sutton/style.css",
+		"/C/VVV/www/sutton/htdocs/wp-content/themes/sutton/footer.php",
+		"/C/VVV/www/sutton/htdocs/wp-content/themes/sutton/header.php",
+		"/C/VVV/www/sutton/htdocs/wp-content/themes/sutton/functions.php",
+		"/C/VVV/www/atlasarhitekture/htdocs/wp-content/themes/atlas/inc/importers.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/index.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/rewrites.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/index-raspored.php",
+		"/C/VVV/www/atlasarhitekture/htdocs/wp-content/themes/atlas/inc/template-tags.php",
+		"/C/VVV/www/atlasarhitekture/htdocs/wp-content/themes/atlas/inc/rewrites.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/archive.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/functions.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/functions-raspored.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/admin-pages.php",
+		"/C/VVV/www/atlasarhitekture/htdocs/wp-content/themes/atlas/functions.php",
+		"/C/VVV/www/atlasarhitekture/htdocs/wp-content/themes/atlas/header.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/js/common.js",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/content-social.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/footer.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/js/map.js",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/template-tags.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/vendor/ezyang/htmlpurifier/library/HTMLPurifier/AttrDef/HTML/Class.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/plugins/polylang-copy-translation/Polylang_copy_translation.php",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/style.css",
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/content.php"
+	],
+	"find":
+	{
+		"height": 36.0
+	},
+	"find_in_files":
+	{
+		"height": 90.0,
+		"where_history":
+		[
+			"C:\\wamp\\www\\medix\\admin",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\themes\\rendezvous",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-includes",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-admin",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\themes\\rendezvous",
+			"C:\\VVV\\www\\wordpress-default\\wp-admin",
+			"C:\\VVV\\www\\wordpress-default\\wp-includes",
+			"C:\\VVV\\www\\wordpress-default\\wp-admin",
+			"C:\\VVV\\www\\wordpress-default\\wp-content\\plugins\\file-gallery-trunk",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\themes\\rendezvous",
+			"C:\\VVV\\www\\atlasarhitekture\\htdocs\\wp-content\\plugins\\polylang",
+			"C:\\wamp\\www\\uoc",
+			"C:\\wamp\\www\\uoc\\wp\\wp-content",
+			"C:\\wamp\\www\\uoc\\wp\\wp-content\\themes\\uoc_light",
+			"C:\\VVV\\www\\atlasarhitekture\\htdocs\\wp-content\\plugins\\polylang\\include",
+			"C:\\VVV\\www\\atlasarhitekture\\htdocs\\wp-content\\plugins\\wordpress-fieldmanager\\php",
+			"C:\\VVV\\www\\atlasarhitekture\\htdocs\\wp-content\\plugins\\wordpress-fieldmanager",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\themes\\rendezvous",
+			"C:\\VVV\\www\\wordpress-default\\wp-content\\plugins\\file-gallery-trunk",
+			"C:\\VVV\\www\\wordpress-default\\wp-includes\\js",
+			"C:\\projects\\gcontexter\\source\\resources",
+			"C:\\projects\\gcontexter\\source\\resources\\js",
+			"",
+			"C:\\wamp\\www\\uoc\\cs",
+			"C:\\wamp\\www\\medix",
+			"C:\\projects\\gcontexter\\source\\resources\\js",
+			"C:\\wamp\\www\\biz-git\\wp-content\\plugins\\sitepress-multilingual-cms",
+			"C:\\wamp\\www\\biz-git\\wp-content\\themes\\biz-2015",
+			"C:\\wamp\\www\\biz-git\\wp-content\\plugins\\mailchimp",
+			"C:\\wamp\\www\\biz-git\\wp-content\\themes\\biz-2015",
+			"C:\\projects\\gcontexter\\source\\resources\\js",
+			"C:\\wamp\\www\\biz-git\\wp-content\\themes\\biz-2013",
+			"C:\\projects\\gcontexter\\source\\resources",
+			"C:\\wamp\\www\\medix",
+			"C:\\wamp\\www\\medix\\admin",
+			"C:\\wamp\\www\\uoc\\cs",
+			"C:\\wamp\\www\\medix",
+			"C:\\wamp\\www\\medix\\admin",
+			"C:\\wamp\\www\\medix",
+			"C:\\wamp\\www\\uoc\\forums\\styles\\uoc_light_31",
+			"C:\\wamp\\www\\uoc\\forums\\styles\\uoc_light",
+			"C:\\wamp\\www\\uoc\\forums\\styles\\uoc_light\\theme",
+			"C:\\wamp\\www\\biz-git\\wp-content\\themes\\biz-2013",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\plugins\\polylang",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\plugins\\polylang\\include",
+			"C:\\projects\\gcontexter\\source\\resources",
+			"C:\\projects\\gcontexter\\source\\resources\\html",
+			"C:\\projects\\gcontexter\\source\\resources\\js",
+			"C:\\wamp\\www\\uoc\\forums\\styles\\uoc_light",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\themes\\rendezvous",
+			"C:\\projects\\gcontexter\\source\\resources\\js",
+			"I:\\projects\\linearmapper\\source\\resources\\js",
+			"C:\\projects\\gcontexter\\source\\resources\\js",
+			"C:\\projects\\gcontexter\\source\\resources\\js\\",
+			"C:\\projects\\gcontexter\\source\\resources\\html\\",
+			"C:\\projects\\gcontexter\\source\\html\\",
+			"C:\\projects\\gcontexter\\source\\html",
+			"C:\\projects\\gcontexter\\source\\js",
+			"C:\\projects\\gcontexter\\source\\",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\themes\\rendezvous",
+			"C:\\projects\\gcontexter\\source\\resources\\js",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\themes\\rendezvous",
+			"C:\\projects\\gcontexter\\source\\",
+			"<open folders>",
+			"C:\\wamp\\www\\biz-git\\wp-content\\plugins\\sitepress-multilingual-cms",
+			"C:\\wamp\\www\\biz-git\\wp-includes, C:\\wamp\\www\\biz-git\\wp-admin",
+			"C:\\wamp\\www\\biz-git\\wp-includes",
+			"C:\\wamp\\www\\biz-git\\wp-admin",
+			"C:\\wamp\\www\\biz-git\\wp-includes",
+			"C:\\wamp\\www\\biz-git\\wp-admin",
+			"C:\\wamp\\www\\biz-git\\wp-includes",
+			"C:\\wamp\\www\\biz-git\\wp-admin",
+			"C:\\wamp\\www\\biz-git\\wp-content\\plugins\\sitepress-multilingual-cms",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\themes\\rendezvous",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\plugins\\wordpress-fieldmanager",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\themes\\rendezvous",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\plugins\\wordpress-fieldmanager",
+			"C:\\VVV\\www\\wordpress-default\\",
+			"C:\\VVV\\www\\wordpress-default\\wp-content\\plugins\\file-gallery",
+			"C:\\VVV\\www\\wordpress-default\\",
+			"C:\\VVV\\www\\wordpress-default\\wp-admin\\",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\themes\\rendezvous",
+			"C:\\wamp\\www\\oryx\\cars",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-includes",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-admin",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-includes",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-admin",
+			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\plugins\\wordpress-fieldmanager",
+			"C:\\wamp\\www\\oryx\\cars",
+			"*.php",
+			"C:\\projects\\linearmapper\\source",
+			"C:\\projects\\mimica\\source",
+			"C:\\projects\\mimica\\",
+			"C:\\projects\\mimica\\js\\lib\\",
+			"C:\\projects\\mimica\\js\\lib\\jspdf",
+			"C:\\projects\\researcher\\resources",
+			"C:\\projects\\mimica\\js",
+			"C:\\wamp\\www\\uoc\\cs",
+			"C:\\VVV\\www\\wordpress-default\\wp-content\\themes\\liv",
+			"C:\\VVV\\www\\wordpress-default\\wp-includes\\",
+			"C:\\VVV\\www\\wordpress-default\\wp-includes\\js",
+			"C:\\wamp\\www\\oryx\\cars",
+			"C:\\wamp\\www\\oryx\\",
+			"C:\\wamp\\www\\oryx\\cars",
+			"C:\\wamp\\www\\oryx\\",
+			"C:\\wamp\\www\\oryx\\js",
+			"C:\\wamp\\www\\oryx\\, .js",
+			"C:\\wamp\\www\\oryx\\ .js",
+			"C:\\wamp\\www\\oryx\\\\*.js",
+			"C:\\wamp\\www\\oryx\\*.js",
+			"<open folders>\\*.js",
+			"C:\\wamp\\www\\oryx\\*.js",
+			"C:\\wamp\\www\\oryx",
+			"c:\\researcher\\source",
+			"C:\\wamp\\www\\filmskemutacije\\wp-content\\themes\\mutations",
+			"C:\\wamp\\www\\wp40.dev\\wp-content\\themes\\twentyfifteen",
+			"C:\\wamp\\www\\filmskemutacije\\wp-includes",
+			"C:\\wamp\\www\\filmskemutacije\\wp-content\\themes\\mutations",
+			"C:\\wamp\\www\\wp40.dev\\wp-content\\themes\\liv",
+			"C:\\wamp",
+			"C:\\xampplite\\",
+			"C:\\xampplite\\apache",
+			"C:\\wamp\\www\\grandtour\\wp-content\\themes\\grandtour",
+			"",
+			"C:\\wamp\\www\\filmskemutacije\\wp-content\\plugins\\polylang",
+			"C:\\wamp\\www\\filmskemutacije\\wp-content\\plugins\\advanced-custom-fields",
+			"C:\\wamp\\www\\hyper\\",
+			"C:\\wamp\\www\\wp40.dev\\wp-content\\plugins\\file-gallery-trunk"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": true,
+		"find_history":
+		[
+			"recaptcha",
+			"poklon_knjiga",
+			"student",
+			"poklon_knjiga",
+			"\\n\\n",
+			"hea",
+			"replacebaner_frontpage.php",
+			"delete.php",
+			"maxprioritet",
+			"program_data",
+			"_rv_sort_enddate",
+			"sort_enddate",
+			"country",
+			"import_ob",
+			"venue-city",
+			"split(",
+			"isset($polylang->curlang->slug) && ",
+			"rv_lang",
+			"controls",
+			";\n",
+			"rv_list_themes",
+			"Platform",
+			"program-filters",
+			";\n",
+			"</div>",
+			"searc",
+			"search",
+			"site-content",
+			"THÈME",
+			"city",
+			"rv_is_raspored",
+			"galerije",
+			".entry-meta .",
+			"entry-meta",
+			"home",
+			"section-title",
+			"\"place_en\": \"Sisak\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Crikvenica\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Karlovac\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Pula\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Osijek\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Jelsa, Island of Hvar\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Bjelovar\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Dubrovnik\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Rijeka\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Korčula - Island of Korčula\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Trogir\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Split\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"\"place_en\": \"Zagreb\",\n        \"country_hr\": \"\",\n        \"country_en\": \"\"",
+			"gkd_settings_working_hours",
+			"posts_where",
+			"post_class",
+			"rv_print_category_list",
+			"usort",
+			"is_home",
+			"', '",
+			"\"",
+			"atlas_import_purposes()",
+			"atlas_import_objects",
+			"media_upload_library_form",
+			"iframe",
+			"media_upload_library",
+			"media-upload-header",
+			"UploaderInline",
+			"createUploader",
+			"UploaderInline",
+			"uploader-inline",
+			"$_GET['file_gallery']",
+			"$_GET['file_gallery]",
+			"media-upload.php",
+			";post_type",
+			"post_id = ",
+			"file_gallery=true",
+			"media-upload",
+			"wrap",
+			"is_post_thubmnail_fullwidth",
+			"is_post",
+			"events",
+			"aside",
+			"		;",
+			"save_translations",
+			"pll_save_term_translations",
+			"get_translation",
+			"get_term",
+			"function pll_get_term",
+			"change_",
+			"mod_",
+			"cc_Modwheel",
+			"$cc_Modwheel",
+			"200",
+			"print",
+			"polylang",
+			"savegame",
+			"game",
+			"savegame",
+			"wp_insert_post",
+			"pll_",
+			"save_translations",
+			"atlas_extract_year",
+			"profess",
+			"school_department_hr",
+			"'serialize_data' => true,",
+			"'serialize_data' => false,",
+			"ajaxre",
+			"_year",
+			"timeyear",
+			"append_taxonomy",
+			"Fieldmanager_Datasource_Term",
+			"taxonomy",
+			"))\n",
+			"završetka",
+			"1907.",
+			"mathis",
+			"\"location\": [\"\",",
+			"liep",
+			"zgareb",
+			"AGG fakultet u Zagrebu  (AF)",
+			"Tehnička visoka škola u Zagrebu  (AF)",
+			"Filozofsko-teološki studij u Zadru / Studij filozofije i teologije",
+			"Arhitektonski fakultet u Zagrebu  (AF)",
+			"Arhitektonsko - urbanistički fakultet u Sarajevu",
+			"stanis",
+			"Fakultet arhitekture, građevine i geodezije u Ljubljani",
+			"newsletter_broj",
+			"tabbed",
+			") ),",
+			"search",
+			"23px"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": true,
+		"replace_history":
+		[
+			"\\n",
+			"\"place_en\": \"Sisak\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Crikvenica\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Karlovac\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Pula\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Osijek\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Jelsa, Island of Hvar\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Bjelovar\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Dubrovnik\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Rijeka\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Korčula - Island of Korčula\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Trogir\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Split\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"\"place_en\": \"Zagreb\",\n        \"country_hr\": \"Hrvatska\",\n        \"country_en\": \"Croatia\"",
+			"',\\n'",
+			"'",
+			"is_post_thumbnail_fullwidth",
+			"",
+			"'serialize_data' => true,",
+			"years",
+			"_year",
+			"AGG fakultet u Zagrebu (AF)",
+			")),",
+			"\"",
+			"<tr>\n		<td align='left'>\n			<a href='index.php' id=\"logo\" style=\"margin: 0 0 0 25px;\"><img border='0' SRC=\"images/medix-logo.png\" border='0' WIDTH=320 HEIGHT=72></a>\n		</td>\n	</tr>",
+			"<a href='index.php' id=\"logo\" style=\"margin: 0 0 0 25px;\">",
+			"app.loki",
+			"http://bruketa-zinic.com/",
+			"ž",
+			"N",
+			"nj",
+			"H",
+			"P",
+			"h",
+			"č",
+			"L",
+			"p",
+			"I",
+			"D",
+			"k",
+			"ć",
+			"z",
+			"Z",
+			"S",
+			"U",
+			"g",
+			"š",
+			"d",
+			"m",
+			"u",
+			"b",
+			"c",
+			"f",
+			"C",
+			"i",
+			"s",
+			"R",
+			"r",
+			"v",
+			"l",
+			"V",
+			"t",
+			"n",
+			"biz_icl_object_id",
+			".venue-cryer",
+			"",
+			"require(resdir + \"",
+			"require(\"",
+			");",
+			"require(\"./resources/",
+			"require(\".resources/",
+			",",
+			"\"",
+			"<?php } ?>",
+			"<\\?php ",
+			"<?php ",
+			"<php ",
+			"]; ?>",
+			"<?php\\n",
+			"<?php echo",
+			"utf8",
+			"č",
+			"\\n",
+			"\\n\\n",
+			"ć",
+			"đ",
+			"č",
+			"ć",
+			"č",
+			"&ldquo;",
+			"&rdquo;",
+			"&rquo;",
+			"&lquo;",
+			"'",
+			"č",
+			"Ć",
+			"Č",
+			"-",
+			"“",
+			"„",
+			"Š",
+			"Ž",
+			"đ",
+			"ž",
+			"č",
+			"Đ",
+			"š",
+			"ć",
+			"charset=utf-8",
+			"5.6.9",
+			"require_once('../db.php');",
+			";",
+			"mysqli_insert_id",
+			"mysql_insert_id($connection)",
+			";",
+			"mysqli_num_rows",
+			"mysqli_query($connection, ",
+			"require_once('db.php');",
+			"mysqli_fetch_array",
+			".png",
+			"images/",
+			"",
+			"app.config.userdatadir",
+			"app.config.appdir",
+			"biz_icl_object_id",
+			"\\n",
+			"app.setState(\"",
+			" "
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 34.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 270.0
+	},
+	"output.find_results":
+	{
+		"height": 120.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 114.0
+	},
+	"pinned_build_system": "",
+	"project": "file-gallery.sublime-project",
+	"replace":
+	{
+		"height": 64.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\VVV\\www\\sutton\\sutton.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 1064.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 390.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

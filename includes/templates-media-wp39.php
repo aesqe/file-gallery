@@ -1,4 +1,6 @@
+<!-- copied and modified from wp-includes/media-template.php -->
 <script type="text/html" id="tmpl-attachment-filegallery">
+
 	<!-- FILE GALLERY ADDITION -->
 	<div class="{{ <?php echo $post->ID; ?> == data.uploadedTo? 'isattached' : '' }} attachment-preview type-{{ data.type }} subtype-{{ data.subtype }} {{ data.orientation }}">
 	<!-- /FILE GALLERY ADDITION -->
@@ -31,6 +33,7 @@
 			<a class="attach id_{{ data.id }}" title="<?php _e('This file is attached to current post', 'file-gallery'); ?>"><div class="media-modal-icon"></div></a>
 		<# } #>
 		<!-- /FILE GALLERY ADDITION -->
+
 	</div>
 	<#
 	var maybeReadOnly = data.can.save || data.allowLocalEdits ? '' : 'readonly';

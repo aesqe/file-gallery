@@ -170,7 +170,7 @@ function file_gallery_post_upload_ui()
 				jQuery("#media-items").slideDown(300, function ()
 				{
 					jQuery("#media-items").empty();
-					topWin.file_gallery.load();
+					topWin.file_gallery.init( "UploadComplete" );
 				});
 			}
 		</script>

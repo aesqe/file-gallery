@@ -2,9 +2,9 @@
 Contributors: aesqe
 Donate link: http://skyphe.org/donate/
 Tags: attachment, attachments, gallery, galleries, template, templates, shortcode, file, files, attach, detach, unattach, copy, media, tags, library, custom, custom fields, custom fields for attachments, attachment custom fields, drag drop upload
-Requires at least: 4.0
-Tested up to: 4.1
-Stable tag: 2.0-beta5
+Requires at least: 3.9
+Tested up to: 4.2
+Stable tag: 1.8.4
 
 File Gallery extends WordPress media (attachments) capabilities 
 by adding a new gallery shortcode handler with templating support 
@@ -169,17 +169,45 @@ Josh Eaton (https://github.com/jjeaton/)
 
 == Changelog ==
 
-= 2.0-beta5 (github branch only) =
-* December 27th, 2014
-* WordPress 4.0 and above
-* a bunch of changes, don't know where to start o.O
+= 1.8.4 =
+* April 24th, 2015
+* WordPress 4.2 compatibility
 
-= 2.0-beta1 (github branch only) =
-* June 9th, 2014
-* from this version on, File Gallery is for WordPress 3.9 and later only!
-  (sorry, I have no time for backwards compatibility :/)
-* almost complete rewrite of the File Gallery admin interface using
-  ractive.js (http://www.ractivejs.org/)
+= 1.8.3 =
+* January 3rd, 2015
+* textual mode "detach / delete" dialog made visible
+
+= 1.8.2 =
+* January 3rd, 2015
+* "copy attachments to current post" bugfix
+
+= 1.8 =
+* January 1st, 2015
+* "copy attachments to current post" rethink
+  (moved to the left-side menu, works better on smaller screens)
+
+= 1.7.9.8 =
+* November 1st, 2014
+* a few JS bugfixes
+
+= 1.7.9.6 =
+* September 6th, 2014
+* bugfix: updated media templates for WP4.0!
+* jQuery UI CSS included on post edit screens
+* different color for attachment thumbnail in FG list
+  (easier to distinguish)
+
+= 1.7.9.5 =
+* August 28th, 2014
+* two small css fixes (thanks Li-An!)
+
+= 1.7.9.4 =
+* August 25th, 2014
+* gallery with captions output fixed
+
+= 1.7.9.3 =
+* August 23rd, 2014
+* some compatibility bug fixes for WP3.9
 
 = 1.7.9.2 =
 * April 13th, 2014
