@@ -87,6 +87,8 @@ function _file_gallery_activate()
 
 	update_option('file_gallery', $defaults);
 
+	print_r(get_option('file_gallery'));
+
 	// clear any existing cache
 	file_gallery_clear_cache();
 }

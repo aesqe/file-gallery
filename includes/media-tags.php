@@ -93,9 +93,9 @@ function file_gallery_media_tags_get_taxonomy_slug()
 
 	$current_tax_name = $options['media_tag_taxonomy_name'];
 	$current_tax_slug = $options['media_tag_taxonomy_slug'];
-	$tax_name = $current_tax_name;
-	$tax_slug = $current_tax_slug;
-	
+	$tax_name = $current_tax_name ? $current_tax_name : 'media_tag';
+	$tax_slug = $current_tax_slug ? $current_tax_slug : 'media-tag';
+
 	// Media Tags plugin
 	if( isset($mediatags) && is_a($mediatags, 'MediaTags') && defined('MEDIA_TAGS_TAXONOMY') )
 	{

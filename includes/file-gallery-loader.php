@@ -9,14 +9,14 @@
  */
 function file_gallery_plugins_loaded()
 {
-	$file_gallery_abspath = WP_PLUGIN_DIR . '/' . basename(dirname(__FILE__));
+	$file_gallery_abspath = WP_PLUGIN_DIR . '/' . basename(dirname(dirname(__FILE__)));
 	$file_gallery_abspath = str_replace('\\', '/', $file_gallery_abspath);
 	$file_gallery_abspath = preg_replace('#/+#', '/', $file_gallery_abspath);
 
 	if( ! defined('FILE_GALLERY_URL') )
 	{
 		// file gallery directories and template names
-		define('FILE_GALLERY_URL', WP_PLUGIN_URL . '/' . basename( dirname(__FILE__) ));
+		define('FILE_GALLERY_URL', WP_PLUGIN_URL . '/' . basename(dirname( dirname(__FILE__) )));
 		define('FILE_GALLERY_ABSPATH', $file_gallery_abspath);
 	}
 
