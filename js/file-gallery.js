@@ -743,7 +743,7 @@ jQuery(document).ready(function($)
 					width: 600,
 					modal: true,
 					draggable: false,
-					dialogClass: 'wp-dialog',
+					dialogClass: 'wp-dialog file-gallery-dialog',
 					close: function(event, ui)
 					{
 						var id = $("#file_gallery_delete_dialog").data("single_delete_id");
@@ -808,12 +808,11 @@ jQuery(document).ready(function($)
 				{
 					autoOpen: false,
 					closeText: file_gallery.L10n.close,
-					bgiframe: true,
 					resizable: false,
-					position: "center",
-					modal: true,
-					draggable: false,
-					dialogClass: 'wp-dialog'
+					modal: false,
+					draggable: true,
+					dialogClass: "wp-dialog file-gallery-dialog",
+					position: "center"
 				});
 
 				$("#file_gallery_copy_all_dialog").dialog(
@@ -822,11 +821,10 @@ jQuery(document).ready(function($)
 					closeText: file_gallery.L10n.close,
 					bgiframe: true,
 					resizable: false,
-					position: "center",
 					width: 500,
 					modal: true,
 					draggable: false,
-					dialogClass: 'wp-dialog',
+					dialogClass: 'wp-dialog file-gallery-dialog',
 					buttons: {
 						"Cancel": function()
 						{
@@ -1394,7 +1392,10 @@ jQuery(document).ready(function($)
 				
 				$("#file_gallery_image_dialog")
 					.html('<img src="' + src + '" width="' + iw + '" height="' + ih + '" alt="image" />')
-					.dialog( 'option', 'position', 'center');
+					.dialog( 'option', 'width', iw)
+					.dialog( 'option', 'height', ih)
+					.dialog( 'option', 'position', 'center' )
+					.dialog( 'option', 'position', {my: 'center', at: 'center'} );
 			});
 			
 			image.src = $(element).attr("href");

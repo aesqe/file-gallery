@@ -73,7 +73,7 @@ jQuery(document).ready(function()
 		jQuery(".gallery_simple_thumbnails a").attr("rel", "").removeClass(file_gallery_simple_linkclass);
 
 		// bind a function to each thumbnail link to replace the bigger image on the left
-		jQuery(".gallery.simple .gallery-item a").live("click", function(e)
+		jQuery("body").on("click", ".gallery.simple .gallery-item a", function(e)
 		{
 			if( file_gallery_doing_ajax )
 				return false;

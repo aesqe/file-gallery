@@ -14,7 +14,7 @@
 			
 			if( ed.id !== "replycontent" )
 			{
-				ed.onMouseDown.add( function(tinymce_object, mouseEvent)
+				ed.on("mousedown", function(mouseEvent)
 				{
 					wpActiveEditor = ed.id;
 
@@ -47,7 +47,7 @@
 				});
 				
 				
-				ed.onMouseUp.add( function(tinymce_object, mouseEvent)
+				ed.on("mouseup", function(mouseEvent)
 				{
 					if ( tinymce.isIE && ! ed.isHidden() ) {
 						ed.windowManager.insertimagebookmark = ed.selection.getBookmark(1);

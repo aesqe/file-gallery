@@ -21,7 +21,7 @@ jQuery(document).ready(function()
 	});
 
 	// add new custom field
-	jQuery("#new_custom_field_submit").live("click", function(e)
+	jQuery("body").on("click", "#new_custom_field_submit", function(e)
 	{
 		var key = jQuery("#new_custom_field_key").val(),
 			value = jQuery("#new_custom_field_value").val(),
@@ -65,7 +65,7 @@ jQuery(document).ready(function()
 	
 	
 	// delete a custom field
-	jQuery(".file_gallery_acf_delete_custom_field").live("click", function()
+	jQuery("body").on("click", ".file_gallery_acf_delete_custom_field", function()
 	{
 		var that = jQuery(this),
 			row = that.parents("tr"),

@@ -22,7 +22,7 @@ jQuery(document).ready(function()
 		);
 	}
 	
-	jQuery("#file_gallery_clear_cache_manual").live("click", function()
+	jQuery("body").on("click", "#file_gallery_clear_cache_manual", function()
 	{
 		file_gallery_clear_cache_manual();
 		

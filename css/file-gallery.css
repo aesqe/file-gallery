@@ -927,6 +927,9 @@
 	width: 95%;
 	background: url(../images/famfamfam_silk/tag_blue.png) left center no-repeat;
 	padding-left: 20px;
+	display: inline-block;
+	float: none !important;
+	height: auto !important;
 }
 
 #fg_gallery_tags
@@ -1044,6 +1047,11 @@
 	background-color: #FFFFFF;
 }
 
+.file-gallery-dialog
+{
+	z-index: 99999 !important;
+}
+
 #file_gallery_delete_dialog,
 #file_gallery_image_dialog,
 #file_gallery_copy_all_dialog
@@ -1052,6 +1060,7 @@
 	background: #FFF;
 	color: #000000;
 	padding: 0;
+	overflow: hidden;
 }
 
 #file_gallery_image_dialog img

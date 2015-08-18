@@ -169,6 +169,10 @@ Josh Eaton (https://github.com/jjeaton/)
 
 == Changelog ==
 
+= 1.8.5 =
+* August 19th, 2015
+* WordPress 4.3 compatibility
+
 = 1.8.4 =
 * April 24th, 2015
 * WordPress 4.2 compatibility
