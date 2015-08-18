@@ -331,11 +331,7 @@
 		</fieldset>
 		
 	<?php if( 3.3 <= floatval(get_bloginfo('version')) ) : ?>
-		<?php
-			global $type, $tab;
-			$tab = 'library';
-			media_upload_library_form(array());
-		?>
+		<iframe name="file_gallery_upload_iframe" id="file_gallery_upload_area" src="<?php echo admin_url('media-upload.php?file_gallery=true&post_id=' . $post_id); ?>" ondragenter="event.stopPropagation(); event.preventDefault();" ondragover="event.stopPropagation(); event.preventDefault();" ondrop="event.stopPropagation(); event.preventDefault();"></iframe>
 	<?php endif; ?>
 	
 	<?php if( false == $file_gallery_options["display_single_fieldset"] && true == $file_gallery_options['insert_single_button'] ) : ?>

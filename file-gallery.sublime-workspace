@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"file_",
+				"file_gallery"
+			],
+			[
 				"Java",
 				"javascript"
 			],
@@ -510,15 +514,20 @@
 			[
 				"hg",
 				"hgroup"
-			],
-			[
-				"mouse",
-				"mouseUpAdded"
 			]
 		]
 	},
 	"buffers":
 	[
+		{
+			"contents": "// require the core node events module\nvar EventEmitter = require('events').EventEmitter;\n\n//create a new event emitter\nvar emitter = new EventEmitter;\n\n// set up a listener for the event\nemitter.on('pizza', function(message){\n  console.log(message);\n});\n\n// emit an event\nemitter.emit('pizza', 'pizza is extremely yummy');",
+			"settings":
+			{
+				"buffer_size": 323,
+				"line_ending": "Windows",
+				"name": "// require the core node events module"
+			}
+		}
 	],
 	"build_system": "Packages/Rust/Rust.sublime-build",
 	"build_system_choices":
@@ -687,6 +696,7 @@
 		"height": 259.0,
 		"history":
 		[
+			"ls",
 			"jscs",
 			"linter",
 			"SublimeLinter",
@@ -703,10 +713,26 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
+	"expanded_folders":
+	[
+		"/C/VVV/www/wordpress-default/wp-content/plugins/file-gallery-trunk"
+	],
 	"file_history":
 	[
-		"/C/VVV/www/wp42/htdocs/wp-config.php",
+		"/C/projects/koa/program.js",
+		"/C/projects/koa/index.js",
+		"/C/Users/aesqe/Desktop/CodeFlask.js-master/src/codeflask.js",
 		"/C/VVV/www/wp39/htdocs/wp-config.php",
+		"/C/VVV/www/wp40/htdocs/wp-config.php",
+		"/C/VVV/www/wp41/htdocs/wp-config.php",
+		"/C/VVV/www/wp42/htdocs/wp-config.php",
+		"/C/VVV/www/wordpress-default/wp-content/plugins/file-gallery-trunk/file-gallery.php",
+		"/C/VVV/www/wordpress-default/wp-content/plugins/file-gallery/file-gallery.php",
+		"/C/VVV/www/wordpress-default/wp-content/plugins/file-gallery-trunk/includes/templates-main.php",
+		"/C/VVV/www/wordpress-default/wp-content/plugins/file-gallery-trunk/includes/file-gallery-settings.php",
+		"/C/VVV/www/wordpress-default/wp-content/plugins/file-gallery-trunk/includes/file-gallery-activation.php",
+		"/C/VVV/www/wordpress-default/wp-content/plugins/file-gallery-trunk/includes/file-gallery-loader.php",
+		"/C/VVV/www/wordpress-default/wp-content/plugins/file-gallery-trunk/includes/media-tags.php",
 		"/C/Windows/System32/drivers/etc/hosts",
 		"/C/VVV/www/wordpress-default/wp-content/plugins/file-gallery-trunk/updateremotes.sh",
 		"/C/VVV/www/wordpress-trunk/wp-config.php",
@@ -820,19 +846,7 @@
 		"/C/VVV/www/atlasarhitekture/htdocs/wp-content/themes/atlas/inc/rewrites.php",
 		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/archive.php",
 		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/functions.php",
-		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/functions-raspored.php",
-		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/admin-pages.php",
-		"/C/VVV/www/atlasarhitekture/htdocs/wp-content/themes/atlas/functions.php",
-		"/C/VVV/www/atlasarhitekture/htdocs/wp-content/themes/atlas/header.php",
-		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/js/common.js",
-		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/content-social.php",
-		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/footer.php",
-		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/js/map.js",
-		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/template-tags.php",
-		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/vendor/ezyang/htmlpurifier/library/HTMLPurifier/AttrDef/HTML/Class.php",
-		"/C/VVV/www/rendezvous/htdocs/wp-content/plugins/polylang-copy-translation/Polylang_copy_translation.php",
-		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/style.css",
-		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/content.php"
+		"/C/VVV/www/rendezvous/htdocs/wp-content/themes/rendezvous/inc/functions-raspored.php"
 	],
 	"find":
 	{
@@ -843,6 +857,7 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"C:\\VVV\\www\\wordpress-default\\wp-content\\plugins\\file-gallery-trunk",
 			"C:\\wamp\\www\\medix\\admin",
 			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-content\\themes\\rendezvous",
 			"C:\\VVV\\www\\rendezvous\\htdocs\\wp-includes",
@@ -969,8 +984,7 @@
 			"",
 			"C:\\wamp\\www\\filmskemutacije\\wp-content\\plugins\\polylang",
 			"C:\\wamp\\www\\filmskemutacije\\wp-content\\plugins\\advanced-custom-fields",
-			"C:\\wamp\\www\\hyper\\",
-			"C:\\wamp\\www\\wp40.dev\\wp-content\\plugins\\file-gallery-trunk"
+			"C:\\wamp\\www\\hyper\\"
 		]
 	},
 	"find_state":
@@ -978,6 +992,12 @@
 		"case_sensitive": true,
 		"find_history":
 		[
+			"file_gallery_do_settings",
+			"exit",
+			"file_gallery_media_tags_get_taxonomy_slug",
+			"FILE_GALLERY_MEDIA_TAG_NAME",
+			"register_taxonomy",
+			"WP_PLUGIN_URL",
 			"recaptcha",
 			"poklon_knjiga",
 			"student",
@@ -1099,13 +1119,7 @@
 			"Filozofsko-teološki studij u Zadru / Studij filozofije i teologije",
 			"Arhitektonski fakultet u Zagrebu  (AF)",
 			"Arhitektonsko - urbanistički fakultet u Sarajevu",
-			"stanis",
-			"Fakultet arhitekture, građevine i geodezije u Ljubljani",
-			"newsletter_broj",
-			"tabbed",
-			") ),",
-			"search",
-			"23px"
+			"stanis"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -1251,8 +1265,38 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 323,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								323,
+								323
+							]
+						],
+						"settings":
+						{
+							"auto_name": "// require the core node events module",
+							"default_dir": "C:\\VVV\\www\\wordpress-default",
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

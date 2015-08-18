@@ -1357,9 +1357,6 @@ function file_gallery_css_admin()
 				wp_enqueue_style('file_gallery_admin_rtl_buttons', apply_filters('file_gallery_admin_rtl_css_location', file_gallery_https( FILE_GALLERY_URL ) . '/css/file-gallery-pre35-rtl.css'), false, FILE_GALLERY_VERSION );
 			}
 		}
-
-		wp_enqueue_script('plupload-handlers');
-		wp_enqueue_script( 'media-gallery' );
 	}
 }
 add_action('admin_print_styles', 'file_gallery_css_admin');
