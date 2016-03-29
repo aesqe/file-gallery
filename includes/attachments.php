@@ -533,7 +533,7 @@ function file_gallery_copy_attachment_to_post( $aid, $post_id )
 		{
 			foreach( $val as $v )
 			{
-				add_post_meta($attachment_id, $key, $v);
+				add_post_meta($attachment_id, $key, maybe_unserialize($v));
 			}
 		}
 	}
