@@ -169,6 +169,11 @@ Josh Eaton (https://github.com/jjeaton/)
 
 == Changelog ==
 
+= 1.8.5.1 =
+* October 5th, 2015
+* minor: added text domain name into plugin info header for 
+  translate.wordpress.org compatibility
+
 = 1.8.5 =
 * August 19th, 2015
 * WordPress 4.3 compatibility
