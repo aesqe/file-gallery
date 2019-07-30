@@ -552,7 +552,7 @@ function file_gallery_copy_attachment_to_post( $aid, $post_id )
 	update_post_meta($attachment_id, '_is_copy_of', $aid);
 	
 	// meta for the original attachment (array holding ids of its copies)
-	$has_copies = get_post_meta($aid, '_has_copies', true);
+	$has_copies = get_post_meta($aid, '_has_copies');
 	$has_copies[] = $attachment_id;
 	$has_copies = array_unique($has_copies);
 	
