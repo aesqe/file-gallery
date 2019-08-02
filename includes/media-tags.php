@@ -42,14 +42,14 @@ function file_gallery_media_tags_add_permalink_fields()
 	
 	add_settings_field(
 		'media_tag_taxonomy_name', __('Media tags Taxonomy name', 'file-gallery'),
-		create_function('', 'file_gallery_media_tags_permalink_fields("media_tag_taxonomy_name");'),
+		function() { file_gallery_media_tags_permalink_fields("media_tag_taxonomy_name"); },
 		'permalink', 'optional');
 	
 	if( ! (isset($mediatags) && is_a($mediatags, 'MediaTags') && defined('MEDIA_TAGS_TAXONOMY')) )
 	{
 		add_settings_field(
 			'media_tag_taxonomy_slug', __('Media tags URL slug', 'file-gallery'),
-			create_function('', 'file_gallery_media_tags_permalink_fields("media_tag_taxonomy_slug");'),
+			function() { file_gallery_media_tags_permalink_fields("media_tag_taxonomy_slug"); },
 			'permalink', 'optional');
 	}
 }
