@@ -40,7 +40,7 @@ function file_gallery_options_init()
 				$translated_size = ucfirst($size);
 			}
 				
-			add_settings_field("size_" . $size, $translated_size . $size_translated, create_function('', 'echo file_gallery_options_fields( array("name" => "' . $size . '", "type" => "intermediate_image_sizes", "disabled" => 0) );'), 'media', 'intermediate_image_sizes');
+			add_settings_field("size_" . $size, $translated_size . $size_translated, function() { echo file_gallery_options_fields( array("name" => "' . $size . '", "type" => "intermediate_image_sizes", "disabled" => 0) ); }, 'media', 'intermediate_image_sizes');
 			
 			register_setting('media', $size . "_size_w");
 			register_setting('media', $size . "_size_h");
