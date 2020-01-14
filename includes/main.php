@@ -491,7 +491,7 @@ function file_gallery_main( $ajax = true )
 		
 		// media_tag taxonomy - attachment tags
 		$tax_input = "";
-		$old_media_tags = "";
+		$old_media_tags = [];
 		
 		$get_old_media_tags = wp_get_object_terms((int) $_POST['attachment_id'], FILE_GALLERY_MEDIA_TAG_NAME);
 		
